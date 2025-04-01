@@ -247,27 +247,50 @@ like add1_huh, then it can't unify HasType n trnum -> HasType n trnum with HasTy
 (* I think my main question is, shouldn't if be the one generating P/Q -> HasType..., instead of it
     being an input *)
 (* yeah there's a big problem with if ahhhhhhhhh me sad *)
-Program Definition if_TR {A : TRTypes} {P Q : Prop} 
+
+Lemma wtf : forall n s, ~ HasType (Num n) trbool /\ ~ HasType (Str s) trbool.
+Proof.
+  intros.
+  split;
+  intro;
+  inversion H.
+  Qed.
+
+Lemma wtf2 : forall n s, ~ HasType (Pair s n) trbool .
+Proof.
+  intros.
+  intro;
+  inversion H.
+  Qed.
+
+Definition if_TR {A : TRTypes} {P : Prop} 
                           (x : {t : TRValues | (HasType t trbool) /\
                                   (t <> Bool false -> P) /\
-                                  (t = Bool false -> Q)})                        
-                          (y : {t : TRValues | P -> (HasType t A)}) (* P -> HasType ...*)
-                          (z : {t : TRValues | Q -> (HasType t A)}) : (* Q -> HasType ... *)
-                          {t : TRValues | (HasType t A)} :=
+                                  (t = Bool false -> ~P)})                        
+                          (y : P -> {t : TRValues | (HasType t A)}) (* P -> HasType ...*)
+                          (z : ~P -> {t : TRValues | (HasType t A)}) : (* Q -> HasType ... *)
+                          {t : TRValues | (HasType t A)}.
+Proof.
+  destruct x.
+  destruct a as [H0 [H1 H2]].
+  destruct x; try (apply y; apply H1; discriminate).
+  - destruct b.
+    * apply y. apply H1. discriminate.
+    * apply z. apply H2. auto.
+  Defined.
+(*
+        
     match x with 
-    | Bool false => z
+    | (Bool false) => z
     | _ => y
 end.
-
+*)
 (* this is not exactly correct either since it needs to know what the if input is*)
-Program Definition add1_huh (x : {v | HasType v trnum}) : {v | (HasType x trnum) -> (HasType v trnum)} :=
+Program Definition add1_huh (x : {v | HasType v trnum}) : {v | (HasType v trnum)} :=
   add1' x.
-Next Obligation. start_jail. destruct x; simpl; (try constructor); inversion h. Defined.   
 
 Eval compute in add1_huh (getType (Num 5)). 
 
-Eval compute in if_TR (is_number (getType (Num 5))) (add1_huh (getType (Num 5))) (getType (Num 0)).
-Eval compute in if_TR (is_number (getType (Str "hi"))) (add1_huh (getType (Str "hi"))) (getType (Num 0)).
 
 (* ok so i can't do anything like (add1' Str "hi") which almost seems like a problem 
 Eval compute in if_TR (is_number (getType (Str "hello"))) (add1_huh (getType (Num 5))) (getType (Num 0)).
@@ -278,8 +301,12 @@ maybe another function*)
 (* i was thinking maybe i should write an interpreter? so that i can "manually" pass the correct typed value to add1 and such?*)
 
 (* Ok so the problem i noticed earlier is definitely a problem here, doing (add1' x) is not working *)
-Program Definition ex1 {t : TRTypes} (x : {v | HasType v t}) :=
-  if_TR (is_number x) (add1_huh x) (getType (Num 0)).
-  Next Obligation. start_jail. destruct_jail.
-  - constructor.
-  - unfold proj1_sig. 
+Program Definition ex1 {t : TRTypes} (x : {v | HasType v t}) : {v | HasType v trnum}:=
+  if_TR (is_number x) 
+        (fun _ => (add1' x)) 
+        (fun _ => (getType (Num 0))).
+
+Print ex1.
+
+Eval compute in ex1 (getType (Num 5)).
+Eval compute in ex1 (getType (Str "5")).
