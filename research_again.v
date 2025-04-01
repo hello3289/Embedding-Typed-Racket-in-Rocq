@@ -19,7 +19,7 @@ Inductive TRTypes : Type :=
   | trpair : TRTypes -> TRTypes -> TRTypes
   | trunion : TRTypes -> TRTypes -> TRTypes.
 
-  (* Pair and union? *)
+  (* I changed HtUnion so check! *)
 Inductive HasType : TRValues -> TRTypes -> Prop :=
   | HtNum   : forall (n : nat), HasType (Num n) trnum
   | HtBool  : forall (b : bool), HasType (Bool b) trbool
@@ -28,9 +28,10 @@ Inductive HasType : TRValues -> TRTypes -> Prop :=
                 HasType t1 A -> 
                 HasType t2 B -> 
                 HasType (Pair t1 t2) (trpair A B)
-  | HtUnion : forall (t1 : TRValues) (A B : TRTypes),
-                (HasType t1 A) \/ (HasType t1 B) ->
-                HasType t1 (trunion A B).
+  | HtUnion_L : forall (t1 : TRValues) (A B : TRTypes),
+                (HasType t1 A) -> HasType t1 (trunion A B)
+  | HtUnion_R : forall (t1 : TRValues) (A B : TRTypes),
+                (HasType t1 B) -> HasType t1 (trunion A B).
 
 Eval compute in HtPair (Num 5) (Bool true) trnum trbool.
 
@@ -68,6 +69,17 @@ Program Definition getType (v : TRValues) :=
     getType' v (typeCheck v).
 
 Eval compute in getType (Num 5).
+
+(* Maybe i'll make the second type an input? Or maybe it'll make sense when i make the definition that uses union *)
+Program Definition TRUnionL {t1 t2 : TRTypes} (x : {v | HasType v t1}) : {v | HasType v (trunion t1 t2)} :=
+  x.
+  Next Obligation. simpl; intros; destruct x; constructor 5; auto. Defined.
+
+Program Definition TRUnionR {t1 t2 : TRTypes} (x : {v | HasType v t2}) : {v | HasType v (trunion t1 t2)} :=
+  x.
+  Next Obligation. simpl; intros; destruct x; constructor 6; auto. Defined.
+
+Eval compute in TRUnionR (getType (Num 5)).
 
 (* automating proof with lots of helpers *)
 Ltac start_jail :=
@@ -156,6 +168,118 @@ Program Definition is_number {t : TRTypes} (x : {v | HasType v t}) :
   Next Obligation. jail. Defined. 
   Next Obligation. jail. Defined.
 
+Eval compute in is_number (getType (Num 5)).
 
-Program Definition ex1 {t : TRTypes} (x : {v | HasType v t}) : {v | HasType v trnum} :=
-(* use if here *).
+Program Definition is_string {t : TRTypes} (x : {v | HasType v t}) : 
+                  {t : TRValues | (HasType t trbool) /\
+                                  (t <> Bool false -> (HasType x trstr)) /\
+                                  (t = Bool false -> ~(HasType x trstr))} :=
+  match x with
+  | Str s => Bool true
+  | _r => Bool false
+  end.
+  Next Obligation. jail. Defined. 
+  Next Obligation. jail. Defined.
+
+Program Definition is_bool {t : TRTypes} (x : {v | HasType v t}) : 
+                  {t : TRValues | (HasType t trbool) /\
+                                  (t <> Bool false -> (HasType x trbool)) /\
+                                  (t = Bool false -> ~(HasType x trbool))} :=
+  match x with
+  | Bool b => Bool true
+  | _r => Bool false
+  end.
+  Next Obligation. jail. Defined. 
+  Next Obligation. jail. Defined.
+
+(* So this is a littly janky as there's nothing saying that a : A and b : B
+Program Definition is_pair {t A B : TRTypes} (x : {v | HasType v t}) : 
+                  {t : TRValues | (HasType t trbool) /\
+                                  (t <> Bool false -> (HasType x (trpair A B))) /\
+                                  (t = Bool false -> ~(HasType x (trpair A B)))} :=
+  match x with
+  | Pair a b => Bool true
+  | _r => Bool false
+  end.
+  Next Obligation. 
+*)
+
+(* HERE IS WHERE EVERYTHING STARTS FALLING APART *)
+
+(* ok for now i'll dumb it down to only accept bool, though this will probably have to be more complex aka union *)
+(* or maybe make the more complicated one a separate function *)
+Program Definition or_TR {A B : TRTypes} (x : {v | HasType v A}) (y : {v | HasType v B}) : {v | HasType v trbool} :=
+    match x with
+    | Bool false => match y with 
+                    | Bool false => Bool false
+                    | _ => Bool true
+                    end
+    | _ => Bool true
+end.
+Next Obligation. start_jail; constructor. Defined.
+Next Obligation. start_jail; constructor. Defined.
+Next Obligation. start_jail; constructor. Defined.
+
+Eval compute in or_TR (getType (Num 5)) (getType (Bool false)).
+Eval compute in or_TR (getType (Bool false)) (getType (Bool false)).
+
+(* same with and *)
+Program Definition and_TR {A B : TRTypes} (x : {v | HasType v A}) (y : {v | HasType v B}) : {v | HasType v trbool} :=
+    match x with
+    | Bool false => Bool false
+    | _ => match y with 
+            | Bool false => Bool false
+            | _ => Bool true
+            end
+end.
+Next Obligation. start_jail; constructor. Defined.
+Next Obligation. start_jail; constructor. Defined.
+Next Obligation. start_jail; constructor. Defined.
+
+Eval compute in and_TR (getType (Num 5)) (getType (Bool false)).
+Eval compute in and_TR (getType (Bool false)) (getType (Str "hello")).
+Eval compute in or_TR (getType (Bool false)) (getType (Bool false)).
+Eval compute in and_TR (getType (Num 5)) (getType (Str "hello")).
+
+
+(* QUESTIONNNNN : bc if i want to do add1', it has to return P->HasType.. as the type, but if i have something
+like add1_huh, then it can't unify HasType n trnum -> HasType n trnum with HasType (Num 5) trnum -> yeh*)
+(* I think my main question is, shouldn't if be the one generating P/Q -> HasType..., instead of it
+    being an input *)
+(* yeah there's a big problem with if ahhhhhhhhh me sad *)
+Program Definition if_TR {A : TRTypes} {P Q : Prop} 
+                          (x : {t : TRValues | (HasType t trbool) /\
+                                  (t <> Bool false -> P) /\
+                                  (t = Bool false -> Q)})                        
+                          (y : {t : TRValues | P -> (HasType t A)}) (* P -> HasType ...*)
+                          (z : {t : TRValues | Q -> (HasType t A)}) : (* Q -> HasType ... *)
+                          {t : TRValues | (HasType t A)} :=
+    match x with 
+    | Bool false => z
+    | _ => y
+end.
+
+(* this is not exactly correct either since it needs to know what the if input is*)
+Program Definition add1_huh (x : {v | HasType v trnum}) : {v | (HasType x trnum) -> (HasType v trnum)} :=
+  add1' x.
+Next Obligation. start_jail. destruct x; simpl; (try constructor); inversion h. Defined.   
+
+Eval compute in add1_huh (getType (Num 5)). 
+
+Eval compute in if_TR (is_number (getType (Num 5))) (add1_huh (getType (Num 5))) (getType (Num 0)).
+Eval compute in if_TR (is_number (getType (Str "hi"))) (add1_huh (getType (Str "hi"))) (getType (Num 0)).
+
+(* ok so i can't do anything like (add1' Str "hi") which almost seems like a problem 
+Eval compute in if_TR (is_number (getType (Str "hello"))) (add1_huh (getType (Num 5))) (getType (Num 0)).
+*)
+
+(* TOMORROW : if, ex1, ok there might be a big problem with the union type bc how do you generate something of the union type
+maybe another function*)
+(* i was thinking maybe i should write an interpreter? so that i can "manually" pass the correct typed value to add1 and such?*)
+
+(* Ok so the problem i noticed earlier is definitely a problem here, doing (add1' x) is not working *)
+Program Definition ex1 {t : TRTypes} (x : {v | HasType v t}) :=
+  if_TR (is_number x) (add1_huh x) (getType (Num 0)).
+  Next Obligation. start_jail. destruct_jail.
+  - constructor.
+  - unfold proj1_sig. 
