@@ -104,6 +104,3 @@ Program Definition TRUnionR {t1 t2 : TRTypes} (x : {v >> t2}) : {v >> (trunion t
 
 Notation " <[ f e ]> " := 
     (f (giveType e)) (f at level 0, e at next level).
-
-Notation " <[ f e1 e2 ]> " := 
-    ((f (giveType e1)) (giveType e2)) (f at level 0, e1 at next level, e2 at next level).

@@ -1,4 +1,4 @@
-DIGEST 1c6a4b03f1489580a0fc540432e4e810
+DIGEST 5962e7c8c673eceac7e8240f57f058d5
 Fresearch.Definitions
 R15:20 Coq.Strings.String <> <> lib
 R38:41 Coq.Bool.Bool <> <> lib
@@ -369,6 +369,3 @@ R3245:3253 research.Definitions <> HtUnion_R constr
 R3245:3253 research.Definitions <> HtUnion_R constr
 R3458:3465 research.Definitions <> giveType def
 not 3432:3432 <> :::'<['_x_x_']>'
-R3545:3552 research.Definitions <> giveType def
-R3560:3567 research.Definitions <> giveType def
-not 3514:3514 <> :::'<['_x_x_x_']>'

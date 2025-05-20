@@ -162,6 +162,12 @@ Notation " 'ifTR' < P P' > A B C " :=
 (************************************************************************)
 (********************** I HAVE FAILED AHHHHHHHHHHH **********************)
 
+(* Notation " 'orTR_again' A B " :=
+  (ifTR A A B) (at level 0).
+
+  i hate notation errors bc what do you mean 
+Eval compute in orTR_again (is_number (giveType (Num 5))) (is_string (giveType (Num 5))).
+*)
 Program Definition orTR {P Q : Prop} (x : {t >> trbool & P & ~P}) 
                                       (y : {t >> trbool & Q & ~Q}) : 
                               {t >> trbool & (P \/ Q) & ~(P \/ Q)} :=
@@ -189,20 +195,21 @@ Program Definition andTR {P Q : Prop}
   specialize (x2 eq_refl); destruct x2; auto.
   Defined.
 
-(*
-Eval compute in 
-    (let x := (Num 5) in 
-    (let p := (is_number (giveType x)) in 
-          (ifTR < (HasType x trnum) 
-                   (HasType x trnum \/ HasType x trstr)  > 
-                    p 
-                    ([Bool true] : {t >> trbool & (HasType x trnum \/ HasType x trstr) & (~(HasType x trnum \/ HasType x trstr))}) 
-                    (is_string (giveType x))))).
+Notation " 'condTR' [ A B ] [ C D ] [ 'else' E ]" :=
+  (ifTR A B (ifTR C D E)) (A at level 0, C at next level, E at next level).
 
+Program Definition condTest {A B : TRTypes}
+    (x : {v >> A})
+    (y : {v >> B}) :
+    {t >> trnum} :=
+  condTR [ (is_number x) (add1 x) ]
+         [ (is_string y) (strlen y) ]
+         [ else (giveType (Num 0))].
 
-
-(* Notation " 'orTR' A B " :=
-    (@if_TR' _ 1 2 3 4) *) *)
+Eval compute in <[<[condTest (Num 14)]> (Num 4)]>.
+Eval compute in <[<[condTest (Str "hi")]> (Str "four")]>.
+Eval compute in <[<[condTest (Bool true)]> (Bool true)]>.
+    
 
 (************************************************************************)
 (********************** PAIRS AHHHHHHHHHHHHHHHHHHH **********************)

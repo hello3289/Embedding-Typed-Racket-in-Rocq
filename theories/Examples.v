@@ -205,3 +205,24 @@ Program Definition ex12_again {A B : TRTypes} (p : {v >> trpair A B}) :
 
 Eval compute in <[ex12 (Pair (Num 4) (Bool true))]>.
 Eval compute in <[ex12 (Pair (Str "hi") (Num 1))]>.
+
+(************************************************************************)
+(********************** EXAMPLE 13/14 AHHHHHHHHHHH **********************)
+
+Program Definition ex13_14 {A B : TRTypes} 
+    (x : {v >> trunion trnum trstr}) 
+    (y : {v >> trpair trtop trtop}) :
+    {t >> trnum} :=
+  condTR [ (andTR (is_number x) (is_number (car y))) (add x (car y)) ] 
+         [ (is_number (car y)) (add (strlen x) (car y)) ] 
+         [ else (giveType (Num 0))].
+  Next Obligation.
+  intros; simpl. 
+  destruct x as [x0 [x1 [x2 x3]]].
+  destruct y as [y0 [y1 [y2 y3]]].
+  repeat split. simpl in *.
+  inversion x1; subst; auto.
+  destruct n; split; auto.
+  Defined.
+
+  
