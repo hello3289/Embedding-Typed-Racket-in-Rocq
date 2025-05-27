@@ -157,17 +157,63 @@ Notation " 'ifTR' < P P' Q Q' > A B C " :=
 Notation " 'ifTR' < P P' > A B C " := 
   (@if_TR' _ P P' (~P) (~P') A (fun _ => B) (fun _ => C)) 
   (at level 2, P at next level, P' at next level, A at next level, 
-  B at next level, C at next level). 
+  B at next level, C at next level).
+  
+Notation " 'condTR' [ A B ] [ C D ] [ 'else' E ]" :=
+  (ifTR A B (ifTR C D E)) (A at level 0, C at next level, E at next level).
+
+Notation " 'orTR' < P Q > A B " :=
+  (ifTR < P (P \/ Q) > A A B) (at level 10, P at next level, Q at next level, A at next level, B at next level).
+
+Notation " 'andTR' < P Q > A B " :=
+  (ifTR < P (P /\ Q) > A B A) (at level 10, P at next level, Q at next level, A at next level, B at next level).
+
 
 (************************************************************************)
 (********************** I HAVE FAILED AHHHHHHHHHHH **********************)
 
-(* Notation " 'orTR_again' A B " :=
-  (ifTR A A B) (at level 0).
+Program Definition orTest {A : TRTypes} (x : {t >> A}) : 
+    {t >> trbool & ((HasType x trnum) \/ (HasType x trstr)) & ~((HasType x trnum) \/ (HasType x trstr))} :=
+    orTR < (HasType x trnum) (HasType x trstr) > (is_number x) (is_string x).
+  Next Obligation.
+  start_jail; simpl in *; try intro; try constructor.
+  all : intro; destruct H0; try discriminate; try inversion H0.
+  inversion h.
+  Defined. Next Obligation.
+  start_jail; simpl in *; try intro; try intro.
+  - constructor.
+  - left; constructor. (* doing constructor normally can lead to it choosing the wrong side *)
+  - destruct n; constructor.
+  - constructor.
+  - destruct H; auto.
+  - destruct H0; inversion H0.
+  - constructor.
+  - right; constructor.
+  - discriminate.
+  - constructor.
+  - destruct H; auto.
+  - destruct H0; inversion H0.
+  Defined.
 
-  i hate notation errors bc what do you mean 
-Eval compute in orTR_again (is_number (giveType (Num 5))) (is_string (giveType (Num 5))).
-*)
+Program Definition andTest {A B : TRTypes} (x : {t >> A}) (y : {t >> B}) :
+  {t >> trbool & ((HasType x trnum)  /\ (HasType y trstr)) & ~((HasType x trnum)  /\ (HasType y trstr))} :=
+  andTR < (HasType x trnum) (HasType y trstr) > (is_number x) (is_string y).
+  Next Obligation.
+  intros; simpl in *. split; try intros; destruct y as [?H [?H [?H ?H]]].
+  - destruct H; simpl; constructor.
+  - split; intro. 
+    + split; auto.
+      destruct H; simpl in *; try constructor; try destruct H3; auto.
+    + intro. destruct H4. destruct H; simpl in *; try inversion H5.
+      discriminate.
+  Defined. Next Obligation.
+  intros; simpl in *. split; destruct x as [?H [?H [?H ?H]]].
+  - destruct H; simpl; constructor.
+  - split; intro.
+    + destruct n. destruct H; simpl in *; try constructor; try destruct H3; auto.
+    + intro. destruct H4. destruct n; destruct H; simpl in *; try constructor; auto.
+  Defined.
+(*
 Program Definition orTR {P Q : Prop} (x : {t >> trbool & P & ~P}) 
                                       (y : {t >> trbool & Q & ~Q}) : 
                               {t >> trbool & (P \/ Q) & ~(P \/ Q)} :=
@@ -180,8 +226,8 @@ Program Definition orTR {P Q : Prop} (x : {t >> trbool & P & ~P})
   start_jail. simpl; intro. intro. rewrite H in *. destruct H0; 
   specialize (y2 eq_refl); destruct y2; auto.
   Defined.
-
-Program Definition andTR {P Q : Prop} 
+*)
+(* Program Definition andTR {P Q : Prop} 
     (x : {t >> trbool & P & ~P}) 
     (y : {t >> trbool & Q & ~Q}) : 
     {t >> trbool & (P /\ Q) & ~(P /\ Q)} :=
@@ -194,9 +240,7 @@ Program Definition andTR {P Q : Prop}
   start_jail; simpl; intro; intro. rewrite H in *; destruct H0. 
   specialize (x2 eq_refl); destruct x2; auto.
   Defined.
-
-Notation " 'condTR' [ A B ] [ C D ] [ 'else' E ]" :=
-  (ifTR A B (ifTR C D E)) (A at level 0, C at next level, E at next level).
+  *)
 
 Program Definition condTest {A B : TRTypes}
     (x : {v >> A})
