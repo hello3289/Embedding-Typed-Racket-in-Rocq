@@ -132,13 +132,11 @@ Ltac inv_trtype_false  :=
 
 
 Ltac start_jail :=
-   intros; subst;
+   intros; subst; simpl in *;
    repeat 
    (match goal with
    | [ H : {v >> (?t)} |- _ ] => destruct H as [H [?H [?H ?H]]]
    | [ H : {v >> (?t) & ?P & ?Q} |- _ ] => destruct H as [H [?H [?H ?H]]]
-   | [ H := context[proj1_sig _] |- _ ] => simpl in H
-   | [ H : context[proj1_sig _] |- _ ] => simpl in H
    end).
 
 Ltac pls_destruct_correctly := (* add case for filtered_var destruct *)
@@ -155,6 +153,8 @@ Ltac equal_trv :=
   | [ H : (Bool true) = (Bool false) |- _ ] => inversion H
   | [ H : (Bool false) = (Bool true) |- _ ] => inversion H
   end.
+
+
 
 Ltac hypothesis_jail :=
     repeat

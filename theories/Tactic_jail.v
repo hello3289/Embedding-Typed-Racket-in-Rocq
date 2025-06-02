@@ -1,16 +1,8 @@
 From research Require Import Definitions.
+Require Import String.
+Require Import Bool.
 
 (* i'm dying there is still the "trying to automate my life file" *)
-
-Ltac destruct_jail :=
-  repeat (
-    match goal with
-    | n : TRValues |- _ =>
-      match goal with
-      | H : HasType n _ |- _ => destruct n
-      end
-    | |- context [_ /\ _] => split
-    end).
 
 Ltac inv_trnum :=
   match goal with
@@ -37,103 +29,141 @@ Ltac inv_trpair :=
   | H : HasType (Num ?b) (trpair ?x ?y) |- _ => inversion H
   end.
 
+(* looks at hypothesis for a false "HasType" to invert *)
 Ltac inv_trtype_false  :=
  try inv_trbool; try inv_trnum; try inv_trstr; try inv_trpair; fail.
 
+(* starts and simplifies hypotheses that hold the propositions *)
+Ltac start_jail :=
+   intros; subst; simpl in *;
+   repeat 
+   (match goal with
+   | [ H : {v >> (?t)} |- _ ] => destruct H as [H [?H [?H ?H]]]
+   | [ H : {v >> (?t) & ?P & ?Q} |- _ ] => destruct H as [H [?H [?H ?H]]]
+   end); subst.
 
-Ltac destruct_forall_jail :=
+(* i don't know why i can't do subst *? *)
+
+(* destructs HasType with variable ( may need to be more specific ) *)
+Ltac pls_destruct_correctly := (* add case for filtered_var destruct *)
+    repeat
+    (match goal with
+    | [ x : TRValues |- _ ] => 
+      match goal with
+      | [ H : HasType x ?t |- _ ] => destruct x
+      end
+    end; simpl in *; try inv_trtype_false).
+    
+Ltac car_cdr_jail :=
   match goal with
-  | H : forall _ : ?t, _ |- _ => 
+  | [ |- context[[Pair ?a ?b]]] => destruct a; destruct b
+  | [ b : TRValues, H : HasType (Pair ?a ?b) (trpair ?A ?B) |- HasType ?b _ ] => destruct b
+  | [ a : TRValues, H : HasType (Pair ?a ?b) (trpair ?A ?B) |- HasType ?a _ ] => destruct a
+  end.
+
+(* eliminates goals with this specific false equality *)
+Ltac equal_trv :=
+  match goal with
+  | [ H : (Bool true) = (Bool false) |- _ ] => inversion H
+  | [ H : (Bool false) = (Bool true) |- _ ] => inversion H
+  end.
+
+(* runs throuhgh every possible way to generalize a for all hypothesis and tries
+ to solve the goal until it does *)
+Ltac generalize_jail n :=
+  match n with
+      | S ?n' =>
         match goal with
-        | H0 : t |- _ => destruct (H H0)
+          | [ H : forall x : ?t, ?P |- _ ] =>
+          (match goal with
+            | [ y : t |- _ ] => generalize (H y); intro; auto; generalize_jail n'
+            end)
         end
-  | H : forall _ _ : ?t, _ |- _ => 
-        match goal with
-        | H0 : t |- _ => 
-            match goal with
-            | H1 : t |- _ => destruct (H H0 H1) (* is there a way to say that H0 and H1 are not the same? *)
-            end
-        end
+  end.
+
+(* eliminates goals with a false inequality *)
+Ltac unequal_false :=
+  match goal with
+  | [ H : (Bool true) <> (Bool true) |- _ ] => destruct H
+  | [ H : (Bool false) <> (Bool false) |- _ ] => destruct H
   end; auto.
 
-Ltac start_jail :=
-  simpl; intros;
-  repeat (
-    match goal with 
-    | H : {_ >> _} |- _ => destruct H as [?H [?H [?H ?H]]]
-    | H : {_ >> _ & _ & _} |- _ => destruct H as [?H [?H [?H ?H]]]
-    | H : _ = proj1_sig _ |- _ => simpl in H
-    end);
-  destruct_jail; try inv_trtype_false; auto.
-
-Ltac false_jail :=
+Ltac simplify_hypothesis :=
   match goal with
-  | H : HasType (?t ?v) ?tr |- False => inversion H
-  | H : ?b ?x <> ?b ?x |- _ => destruct H; auto
+    | [ H : _ \/ _ |- _ ] => destruct H
+    | [ H : ?a /\ ?b |- _ ] => destruct H
+    end; auto.
+
+Ltac hypothesis_jail :=
+    (match goal with
+    | [ H : HasType _ (trunion _ _) |- _] => inversion H; simpl in *; subst; clear H
+    end); auto.
+
+(* if conclusion is a "properly" formed HasType, call constructor *)
+Ltac ht_good_hehe :=
+  match goal with
+  | [ |- HasType _ trtop ] => constructor
+  | [ |- HasType (Bool _) trbool ] => constructor
+  | [ |- HasType (Num _) trnum ] => constructor
+  | [ |- HasType (Str _) trstr ] => constructor
+  | [ |- HasType (Pair ?a ?b) (trpair ?t1 ?t2) ] => constructor
+  | [ |- HasType _ (trunion _ _) ] => try (apply HtUnion_L; auto; constructor; fail) || apply HtUnion_R; auto; constructor; fail
+  | [ H : HasType (Pair ?a ?b) (trpair ?A ?B) |- HasType ?a ?A ] => inversion H; auto
+  | [ H : HasType (Pair ?a ?b) (trpair ?A ?B) |- HasType ?b ?B ] => inversion H; auto
   end.
 
-Ltac split_jail := 
-  repeat
-    match goal with
-    | |- context [_ /\ _] => split
-    | |- context [HasType (?t ?v) ?tr] => constructor
-    | |- context [_ -> _] => intro
-    | |- context [~ HasType _ _] => intro
-    | H : ?t1 ?v1 = ?t1 ?v2 |- _ => inversion H
-    end.
+(* simplifies the conclusion *)
+Ltac conclusion_jail :=
+  repeat 
+  (match goal with
+  | [ |- _ /\ _ ] => constructor
+  | [ |- _ -> _ ] => intro
+  | [ |- ~_ ] => intro
+  | [ |- _ \/ _ ] => try (left; constructor); try (right; constructor) (* may change *)
+  end).
 
-Ltac destruct_HTContext_jail :=
+(* make tactic that "solves" goals aka it shouldn't make new goals just solve them 
+  ht_good_hehe, generalize_jail, simplify hypothesis?  *)
+
+
+(* then there are tactics that simplify conclusion and hypothesis but doesn't gen 
+more goals like almost conclusion jail ( will make more goals with \/) and simplify_hypothesis? 
+though simplify_hypothesis also solves goals *)
+
+Ltac pair_thing :=
   match goal with 
-  | H : TRValues |- HasType ?r _ => destruct r 
+  | [ H : HasType (Pair ?a ?b) (trpair ?A ?B) |- _ ] => simpl in *; subst; inversion H; clear H
   end.
 
-Ltac rewrite_jail :=
+Ltac eq_refl_special :=
   match goal with
-    | H : ?r = ?b |- _ =>
-      match goal with
-      | H0 : HasType ?r _ |- _ => rewrite H in H0; try inversion H0
-      end
-    end.
+  | [ H : ?a = ?a -> _ |- _ ] => try specialize (H eq_refl)
+  end.
 
-Ltac try_jail_tactics :=
-  repeat (
-    try destruct_forall_jail; 
-    try destruct_HTContext_jail; 
-    try split_jail; 
-    try false_jail; 
-    try rewrite_jail).
+(* this shouldn't change the goal except simplifying it, and the hypothesis should be simplified *)
+Ltac simple_jail :=
+  match goal with 
+  | [ filtered_var := _ |- _ ] => subst filtered_var
+  | _ => idtac
+  end; simpl in *; subst; try (repeat simplify_hypothesis); try pair_thing; try conclusion_jail; try hypothesis_jail; auto.
 
-Ltac jail :=
-  start_jail; destruct_jail; try_jail_tactics.
+Ltac solve_pls :=
+  try (repeat ht_good_hehe); try eq_refl_special; try generalize_jail 3; try (repeat simplify_hypothesis); try inv_trtype_false; try equal_trv; try unequal_false; auto.
 
-Ltac why_jail :=
-  start_jail; destruct_jail; try constructor; try intro H;
-  repeat (
-    match goal with
-    | H : Bool false = Bool true |- _ => inversion H
-    | H : Bool true = Bool false |- _ => inversion H
-    | H : bool |- _ => destruct H; auto
-    | H : {t >> ?P & ?Q & ?R} |- _ => destruct H as [?H [?H ?H]]
-    | H : _ = proj1_sig [?t] |- _ => simpl in H (* how do i say like "in any hypothesis that contains proj1"?*)
-    | H : ?P <> ?P |- _ => destruct H; auto
-    | H : _ = ?x |-_ => rewrite <- H in *; auto
-    | H : _ /\ _ |- _ => destruct H; auto
-    | H : _ \/ _ |- _ => destruct H; auto
-    | |- context [~ ?P] => intro; auto
-    end
-  ); auto.
+Ltac do_it :=
+  simple_jail; solve_pls.
 
-  Ltac specific_jail T :=
-  start_jail; 
-  match goal with
-    | H : TRValues |- _ => destruct H
-  end;
-  match goal with
-    | H : TRValues |- _ => destruct H
-  end;
-  why_jail; 
-  try (inv_trtype_false).
+Ltac hopefully_this_works n :=
+  match n with
+  | S ?n' =>
+      do_it; pls_destruct_correctly; try car_cdr_jail; do_it; 
+      try (match goal with 
+      | [ H : ~ HasType _ _ |- _ ] => destruct H
+      | [ H : ~ (HasType _ _ /\ HasType _ _) |- _ ] => destruct H
+      (* i'm doing this bc match on ~ _ matches to _ <> _ which i don't want (if i remember correctly)*)
+      end); do_it; hopefully_this_works n'
+  | O => idtac
+  end.
 
-Definition eq_type_dec : forall t1 t2 : TRTypes, {t1 = t2} + {t1 <> t2}.
-  decide equality.
-Defined.
+Ltac pls_jail :=
+  start_jail; simpl in *; conclusion_jail; try simplify_hypothesis; hopefully_this_works 2.

@@ -6,6 +6,8 @@ Require Import Bool.
 Require Import Coq.Program.Tactics.
 Require Import JMeq.
 #[local] Obligation Tactic := try now program_simpl.
+#[local] Obligation Tactic := try (program_simpl; easy); try (pls_jail; easy).
+
 
 (* IT LIVES *)
 
@@ -22,10 +24,6 @@ Eval compute in <[ ex1 (Str "5") ]>.
 
 Program Definition ex2 (x : {v >> (trunion trstr trnum)}) : {v >> trnum} :=
   ifTR (is_number x) (add1 x) (strlen x).
-  Next Obligation.
-  start_jail; simpl; try constructor; inversion x0; try inv_trtype_false.
-  - destruct n; auto. 
-  Defined.
 
 Eval compute in ex2 <[TRUnionL (Str "hi")]>.
 Eval compute in ex2 <[TRUnionR (Num 9)]>.
@@ -38,36 +36,6 @@ Program Definition ex4 {t : TRTypes} (x : {v >> t}) : {v >> trnum} :=
           (is_number x) (is_string x))
         (ex2 x)
         (Num 0).
-  Next Obligation.
-  start_jail; simpl; try constructor; intro; intro.
-  discriminate.
-  all : destruct H0; inversion H0. inversion h.
-  Defined.
-  Next Obligation.
-  start_jail; simpl in *; try intro; try intro.
-  - constructor.
-  - left; constructor.
-  - destruct n; constructor.
-  - constructor.
-  - destruct H; auto.
-  - destruct H0; inversion H0.
-  - constructor.
-  - right; constructor.
-  - discriminate.
-  - constructor.
-  - destruct H; auto. 
-  - destruct H0; inversion H0.
-  Defined.
-  Next Obligation.
-  start_jail; simpl in *.
-  - apply HtUnion_R; constructor.
-  - destruct o; inversion H.
-  - apply HtUnion_L; constructor.
-  - destruct o; inversion H.
-  Defined.
-  Next Obligation.
-  start_jail; simpl in *; constructor.
-  Defined.
   
 Eval compute in <[ex4 (Num 9)]>.
 Eval compute in <[ex4 (Str "hi")]>.
@@ -80,21 +48,6 @@ Program Definition ex5 {t r : TRTypes} (x : {v >> t}) (y : {w >> r}) : {v >> trn
   ifTR  (andTR < (HasType x trnum) (HasType y trstr) > (is_number x) (is_string y))
         (add x (strlen y)) (* i need addition *)
         (Num 0).
-   Next Obligation.
-   intros; simpl. repeat split; destruct y as [?H [?H [?H ?H]]].
-   - destruct H; simpl in *; constructor.
-   - auto.
-   - destruct H0; try constructor; try destruct H; auto.
-   - intro; intro. destruct H4. destruct H; simpl in *; try inversion H5. discriminate.
-   Defined. Next Obligation.
-   intros; simpl in *; repeat split; destruct x as [?H [?H [?H ?H]]].
-   - destruct H; simpl in *; constructor.
-   - destruct H0; simpl in *;  try constructor; try destruct H; auto.
-   - destruct n. destruct H0; simpl in *; try constructor; try destruct H; auto.
-   - intro; intro. destruct H4. destruct H; try inversion H4. simpl in H3; discriminate.
-   Defined. Next Obligation.
-   intros; simpl in *. repeat split; constructor.
-   Defined.
 
 Eval compute in <[<[ex5 (Num 5)]> (Str "hi")]>.
 Eval compute in <[<[ex5 (Num 5)]> (Num 8)]>.
@@ -112,21 +65,6 @@ Program Definition ex7 {t r : TRTypes} (x : {v >> t}) (y : {w >> r}) : {v >> trn
       (Bool false))
     (add x (strlen y))
     (giveType (Num 0))).
-Next Obligation.
-intros t r x y. simpl. split. 
-- destruct y. unfold is_string. simpl. destruct x0. all: constructor.
-- split; intros; try split; auto.  destruct y. simpl. destruct x0.
-   + unfold is_string;simpl.  all: simpl in H. destruct H. auto.
-   + unfold is_string;simpl.  all: simpl in H. destruct H. auto.
-   + apply HtStr.
-   + unfold is_string;simpl.  all: simpl in H. destruct H. auto.
-   + intro. destruct H0. destruct y. simpl in H; destruct x0; unfold is_string;simpl in H.  all: simpl in H1. all: inversion H1. inversion H.
-Defined.
-Next Obligation.
-intros t r x y. simpl. split; try constructor; intros.
-  - destruct H; auto.
-  - intro. destruct H0. destruct n. auto.
-Defined.
 
 Eval compute in <[<[ex7 (Num 6)]> (Str "hello")]>.
 
@@ -138,11 +76,6 @@ Program Definition ex8 {t : TRTypes} (x : {v >> t}) :=
 
 Program Definition ex8_test {t : TRTypes} (x : {v >> t}) : {v >> trnum} :=
   (ifTR (ex8 x) (ex2 x) (giveType (Num 0))).
-Next Obligation.
-intros. simpl in *. split.
-  - destruct o. apply HtUnion_R; auto. apply HtUnion_L; auto.
-  - split; destruct x; auto.
-Defined.
 
 Eval compute in <[ex8 (Num 6)]>.
 Eval compute in <[ex8_test (Num 6)]>.
@@ -165,30 +98,6 @@ Program Definition ex9 {t : TRTypes} (x : {v >> t}) : {v >> trnum} :=
                     (is_string x)))
          (ex2 x) 
          (giveType (Num 0))).
-Next Obligation.
-  start_jail; try constructor; intros; intro; simpl in H; 
-  destruct H0; 
-  try inversion H; try inversion h; try inversion H0.
-Defined.
-
-Next Obligation.
-(* this case is ~(HasType x trnum) -> (fun _ => t >> trbool & P' & Q') *)
-(* turns out my tactics where creating impossible goals *)
-  intros; simpl. destruct_jail.
-  - destruct x; simpl. destruct x; try constructor.
-  - intro. right. destruct x; destruct x; try constructor; simpl in H; destruct H; auto.
-  - intro. intro. destruct H0.
-    + destruct x; destruct x; try inversion H0. destruct n; auto.
-    + destruct x; destruct x; try inversion H0. simpl in H. inversion H.
-Defined.
-
-Next Obligation.
-  start_jail.
-  - apply HtUnion_R; constructor.
-  - destruct o; inversion H.
-  - apply HtUnion_L; constructor.
-  - destruct o; inversion H.
-Defined.
 
 Eval compute in <[ex9 (Num 2)]>.
 
@@ -212,36 +121,63 @@ Eval compute in <[g (Pair (Num 4) (Num 5))]>.
 (* instead of returning 'no, i'll return 0 *)
 Program Definition ex11 {A B : TRTypes} (p : {v >> trpair A B}) : {t >> trnum} :=
   ifTR (andTR < (HasType (car p) trnum) (HasType (cdr p) trnum) > (is_number (car p)) (is_number (cdr p))) (g p) (giveType (Num 0)).
-  Next Obligation.
-  start_jail; simpl in *.
-  - destruct p4; simpl in *; constructor.
-  - destruct p4; simpl in *; try constructor; try destruct H; auto.
-  - intro; intro. destruct H0; destruct p4; simpl in *; try discriminate; try inversion H1.
-  Defined. Next Obligation.
-  start_jail; simpl in *.
-  - destruct p3; simpl in *; constructor.
-  - destruct p3; simpl in *; try constructor; try destruct H; auto.
-  - destruct n. destruct p3; simpl in *; try constructor; try destruct H; auto.
-  - intro; intro. destruct H0. destruct p3; simpl in *; try discriminate; try inversion H0.
-  Defined. Next Obligation.
-  start_jail; simpl in *; destruct a; constructor; auto.
-  Defined.
-
+  
 Eval compute in <[ex11 (Pair (Num 4) (Num 12))]>.
 Eval compute in <[ex11 (Pair (Num 3) (Bool false))]>.
 
 (************************************************************************)
 (********************** EXAMPLE 12 AHHHHHHHHHHHHHH **********************)
 
+Lemma ok : True.
+Proof. auto. Qed.
+
+Lemma wtf2 : HasType (Num 5) trnum.
+Proof. constructor. Qed.
+
+Program Definition what {p3 p4 : TRValues} {A B : TRTypes} : HasType (Pair p3 p4) (trpair A B) /\ ((Pair p3 p4) <> Bool false -> True) /\
+  ((Pair p3 p4) = Bool false -> True).
+Proof. repeat split; auto. Admitted. (* i don't think we can prove this? *)
+
+Program Definition what2 {t1 : TRValues} {A : TRTypes} : HasType t1 A /\ (t1 <> Bool false -> True) /\
+  (t1 = Bool false -> True).
+Proof. repeat split; auto. Admitted. (* same with this *)
+
+Check what.
+
+(* Disable Notation "[ e ]" := (exist _ e _). *)
+
 Program Definition ex12 {A B : TRTypes} (p : {v >> trpair A B}) : 
   {t >> trbool & (HasType p (trpair trnum B)) & (~ (HasType p (trpair trnum B)))} :=
   (is_number (car p)).
-Next Obligation.
-  start_jail; try intros; inversion p0; unfold car in *; simpl in *.
-  - destruct p3; simpl; constructor.
-  - destruct p3; simpl in H; constructor; auto; try constructor; try destruct H; auto.
-  - intro. destruct p3; simpl in H; inversion H6; try inv_trtype_false. discriminate.
-Defined.
+  (* start_jail; conclusion_jail.
+  - destruct p; try inversion p0. subst *. Search exist.
+  assert (proj1_sig (exist (fun _ => True) p3 ok) = p3).
+    + simpl; auto.
+    + assert 
+    (proj1_sig (car (exist 
+          (fun x => (HasType x (trpair A B)) /\ 
+                    (x <> Bool false -> True) /\
+                    (x = Bool false -> True)) 
+          (Pair p3 p4) 
+          what)) = 
+          p3).
+      ++ unfold car; simpl; auto. (* this does work, but i don't know if it's useful *)
+          (* but this doesn't work when we don't have proj1_sig like [p3] = [p3] 
+          bc they have different proofs that can't compute to the same thing*)
+      ++ assert 
+        ((car (exist 
+          (fun v => (HasType v (trpair A B)) /\ 
+                    (v <> Bool false -> True) /\
+                    (v = Bool false -> True)) 
+          (Pair p3 p4) 
+          what)) = 
+          (exist (fun x => (HasType x A) /\ (x <> Bool false -> True) /\ (x = Bool false -> True))
+                 p3
+                 what2)).
+          +++ give_up.
+          +++ Check what. (* i think the implicit parameters of what are causing a problem, which is not surprising i guess *)
+*)
+  
 
 Program Definition ex12_again {A B : TRTypes} (p : {v >> trpair A B}) : 
 {t >> trbool & (HasType (car p) trnum) & (~ (HasType (car p) trnum))} :=
@@ -260,29 +196,5 @@ Program Definition ex13_14 {A B : TRTypes}
   condTR [ (andTR < (HasType x trnum) (HasType (car y) trnum) > (is_number x) (is_number (car y))) (add x (car y)) ] 
          [ (is_number (car y)) (add (strlen x) (car y)) ] 
          [ else (giveType (Num 0))].
-  Next Obligation.
-  intros; simpl. 
-  destruct x as [x0 [x1 [x2 x3]]].
-  destruct y as [y0 [y1 [y2 y3]]].
-  repeat split; simpl in *; auto; destruct y0; try inversion y1. 
-  - destruct y0_1; simpl in *; try constructor.
-  - destruct y0_1; simpl in *; try constructor; try destruct H; auto.
-  - intro; intro. destruct H6. destruct y0_1; simpl in *; try discriminate; try inversion H7.
-  Defined. Next Obligation.
-  intros; simpl in *.
-  destruct x as [x0 [x1 [x2 x3]]].
-  destruct y as [y0 [y1 [y2 y3]]].
-  repeat split; simpl in *.
-  - destruct x0; simpl in *; constructor.
-  - destruct x0; simpl in *; try destruct H; auto; destruct n; constructor.
-  - destruct n; destruct x0; simpl in *; try constructor; try destruct H; auto.
-  - intro; intro. destruct H0. destruct x0; simpl in *; try discriminate; try inversion H0.
-  Defined. Next Obligation.
-  intros; simpl in *. 
-  destruct x as [x0 [x1 [x2 x3]]].
-  destruct y as [y0 [y1 [y2 y3]]].
-  repeat split. inversion x1; subst; auto.
-  destruct n. split; auto.
-  Defined.
-
+  
   
