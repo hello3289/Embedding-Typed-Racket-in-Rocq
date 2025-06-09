@@ -18,7 +18,7 @@ Program Definition add (n : {v >> trnum}) (m : {v >> trnum}) : {v >> trnum} :=
   | _r, _q => False_rec _ _
   end.
 
-Program Definition is_number {t : TRTypes} (x : {v >> t}) : 
+Program Definition is_number {P Q} {t : TRTypes} (x : {v >> t & P & Q}) : 
                   {t >> trbool & (HasType x trnum) & ~(HasType x trnum)} :=
   match x with
   | Num n => Bool true
@@ -134,15 +134,15 @@ Program Definition condTest {A B : TRTypes}
          [ (is_string y) (strlen y) ]
          [ else (giveType (Num 0))].
 
-Eval compute in <[<[condTest (Num 14)]> (Num 4)]>.
-Eval compute in <[<[condTest (Str "hi")]> (Str "four")]>.
-Eval compute in <[<[condTest (Bool true)]> (Bool true)]>.
+Eval compute in condTest <[(Num 14)]> <[(Num 4)]>.
+Eval compute in condTest <[(Str "hi")]> <[(Str "four")]>.
+Eval compute in condTest <[(Bool true)]> <[(Bool true)]>.
     
 
 (************************************************************************)
 (********************** PAIRS AHHHHHHHHHHHHHHHHHHH **********************)
 
-Program Definition car {A B : TRTypes} (l : {v >> (trpair A B)}) : {t >> A} :=
+Program Definition car {X Y : Prop} {A B : TRTypes} (l : {v >> (trpair A B) & X & Y}) : {t >> A} :=
   match l with
   | Pair a b => a
   | _r => False_rec _ _
@@ -150,7 +150,7 @@ Program Definition car {A B : TRTypes} (l : {v >> (trpair A B)}) : {t >> A} :=
 
   Print car.
 
-Program Definition cdr {A B : TRTypes} (l : {v >> (trpair A B)}) : {t >> B} :=
+Program Definition cdr {X Y : Prop} {A B : TRTypes} (l : {v >> (trpair A B) & X & Y}) : {t >> B} :=
   match l with
   | Pair a b => b
   | _r => False_rec _ _

@@ -92,6 +92,9 @@ Ltac simplify_hypothesis :=
   match goal with
     | [ H : _ \/ _ |- _ ] => destruct H
     | [ H : ?a /\ ?b |- _ ] => destruct H
+    (*| [ H : (get_true_prop _) |- _ ] => idtac 13; unfold get_true_prop in *; simpl in *
+    | |- context[ (get_true_prop _) ] => idtac 14; unfold get_true_prop in *; simpl in * 
+    decided not to do this as there are too many ways that get_true_prop come up *)
     end; auto.
 
 Ltac hypothesis_jail :=
@@ -161,9 +164,13 @@ Ltac hopefully_this_works n :=
       | [ H : ~ HasType _ _ |- _ ] => destruct H
       | [ H : ~ (HasType _ _ /\ HasType _ _) |- _ ] => destruct H
       (* i'm doing this bc match on ~ _ matches to _ <> _ which i don't want (if i remember correctly)*)
+      (* if there's a way to not match to that, i'll do it but i tired *)
       end); do_it; hopefully_this_works n'
   | O => idtac
   end.
 
+Ltac unfold_jail := (* maybe if we add more definitions that need to be unfolded *)
+  unfold get_true_prop in *; simpl in *.
+
 Ltac pls_jail :=
-  start_jail; simpl in *; conclusion_jail; try simplify_hypothesis; hopefully_this_works 2.
+  start_jail; simpl in *; conclusion_jail; try simplify_hypothesis; try unfold_jail; hopefully_this_works 2.

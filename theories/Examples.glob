@@ -1,4 +1,4 @@
-DIGEST 93b8d39b586e2a96a13751e6e0613945
+DIGEST 3da896c047ea3c6080ec3f36647069c4
 Fresearch.Examples
 R29:37 research.Functions <> <> lib
 R69:79 research.Tactic_jail <> <> lib
@@ -43,16 +43,14 @@ R616:619 research.Functions <> add1 def
 R621:621 research.Examples <> x:9 var
 R625:632 research.Definitions <> giveType def
 R635:637 research.Definitions <> Num constr
-R661:663 research.Definitions <> :::'<['_x_x_']>' not
-R667:668 research.Definitions <> :::'<['_x_x_']>' not
-R674:677 research.Definitions <> :::'<['_x_x_']>' not
+R661:663 research.Examples <> ex1 def
+R665:668 research.Definitions <> :::'<['_x_']>' not
+R674:677 research.Definitions <> :::'<['_x_']>' not
 R669:671 research.Definitions <> Num constr
-R664:666 research.Examples <> ex1 def
-R696:698 research.Definitions <> :::'<['_x_x_']>' not
-R702:703 research.Definitions <> :::'<['_x_x_']>' not
-R711:714 research.Definitions <> :::'<['_x_x_']>' not
+R696:698 research.Examples <> ex1 def
+R700:703 research.Definitions <> :::'<['_x_']>' not
+R711:714 research.Definitions <> :::'<['_x_']>' not
 R704:706 research.Definitions <> Str constr
-R699:701 research.Examples <> ex1 def
 def 888:890 <> ex2
 R897:897 research.Definitions <> :::'{'_x_'>>'_x_'}' not
 R899:903 research.Definitions <> :::'{'_x_'>>'_x_'}' not
@@ -90,933 +88,1072 @@ R972:972 research.Examples <> x:24 var
 R976:981 research.Functions <> strlen def
 R983:983 research.Examples <> x:24 var
 R1004:1006 research.Examples <> ex2 def
-R1008:1009 research.Definitions <> :::'<['_x_x_']>' not
-R1018:1019 research.Definitions <> :::'<['_x_x_']>' not
-R1028:1030 research.Definitions <> :::'<['_x_x_']>' not
-R1020:1022 research.Definitions <> Str constr
-R1010:1017 research.Definitions <> TRUnionL def
-R1049:1051 research.Examples <> ex2 def
-R1053:1054 research.Definitions <> :::'<['_x_x_']>' not
-R1063:1064 research.Definitions <> :::'<['_x_x_']>' not
-R1070:1072 research.Definitions <> :::'<['_x_x_']>' not
-R1065:1067 research.Definitions <> Num constr
-R1055:1062 research.Definitions <> TRUnionR def
-def 1246:1248 <> ex4
-R1255:1261 research.Definitions <> TRTypes ind
-binder 1251:1251 <> t:32
-R1269:1269 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R1271:1274 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R1276:1276 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 1270:1270 <> v:33
-binder 1270:1270 <> v:34
-binder 1270:1270 <> v:35
-R1275:1275 research.Examples <> t:32 var
-binder 1270:1270 <> v:36
-binder 1270:1270 <> v:37
-binder 1270:1270 <> v:38
-binder 1270:1270 <> v:39
-binder 1265:1265 <> x:40
-R1281:1281 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R1283:1286 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R1292:1292 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 1282:1282 <> v:41
-binder 1282:1282 <> v:42
-binder 1282:1282 <> v:43
-R1287:1291 research.Definitions <> trnum constr
-binder 1282:1282 <> v:44
-binder 1282:1282 <> v:45
-binder 1282:1282 <> v:46
-binder 1282:1282 <> v:47
-R1299:1304 research.Functions <> :::'ifTR'_x_x_x not
-R1388:1398 research.Functions <> :::'ifTR'_x_x_x not
-R1404:1414 research.Functions <> :::'ifTR'_x_x_x not
-R1420:1420 research.Functions <> :::'ifTR'_x_x_x not
-R1305:1312 research.Functions <> :::'orTR'_'<'_x_x_'>'_x_x not
-R1328:1330 research.Functions <> :::'orTR'_'<'_x_x_'>'_x_x not
-R1346:1361 research.Functions <> :::'orTR'_'<'_x_x_'>'_x_x not
-R1373:1375 research.Functions <> :::'orTR'_'<'_x_x_'>'_x_x not
-R1387:1387 research.Functions <> :::'orTR'_'<'_x_x_'>'_x_x not
-R1313:1319 research.Definitions <> HasType ind
-R1321:1321 research.Examples <> x:40 var
-R1323:1327 research.Definitions <> trnum constr
-R1313:1319 research.Definitions <> HasType ind
-R1321:1321 research.Examples <> x:40 var
-R1323:1327 research.Definitions <> trnum constr
-R1331:1337 research.Definitions <> HasType ind
-R1339:1339 research.Examples <> x:40 var
-R1341:1345 research.Definitions <> trstr constr
-R1313:1319 research.Definitions <> HasType ind
-R1321:1321 research.Examples <> x:40 var
-R1323:1327 research.Definitions <> trnum constr
-R1313:1319 research.Definitions <> HasType ind
-R1321:1321 research.Examples <> x:40 var
-R1323:1327 research.Definitions <> trnum constr
-R1331:1337 research.Definitions <> HasType ind
-R1339:1339 research.Examples <> x:40 var
-R1341:1345 research.Definitions <> trstr constr
-R1362:1370 research.Functions <> is_number def
-R1372:1372 research.Examples <> x:40 var
-R1362:1370 research.Functions <> is_number def
-R1372:1372 research.Examples <> x:40 var
-R1376:1384 research.Functions <> is_string def
-R1386:1386 research.Examples <> x:40 var
-R1399:1401 research.Examples <> ex2 def
-R1403:1403 research.Examples <> x:40 var
-R1415:1417 research.Definitions <> Num constr
-R1442:1443 research.Definitions <> :::'<['_x_x_']>' not
-R1447:1448 research.Definitions <> :::'<['_x_x_']>' not
-R1454:1456 research.Definitions <> :::'<['_x_x_']>' not
-R1449:1451 research.Definitions <> Num constr
-R1444:1446 research.Examples <> ex4 def
-R1475:1476 research.Definitions <> :::'<['_x_x_']>' not
-R1480:1481 research.Definitions <> :::'<['_x_x_']>' not
-R1490:1492 research.Definitions <> :::'<['_x_x_']>' not
-R1482:1484 research.Definitions <> Str constr
-R1477:1479 research.Examples <> ex4 def
-R1511:1512 research.Definitions <> :::'<['_x_x_']>' not
-R1516:1517 research.Definitions <> :::'<['_x_x_']>' not
-R1527:1529 research.Definitions <> :::'<['_x_x_']>' not
-R1518:1521 research.Definitions <> Bool constr
-R1523:1526 Coq.Init.Datatypes <> true constr
-R1513:1515 research.Examples <> ex4 def
-def 1703:1705 <> ex5
-R1714:1720 research.Definitions <> TRTypes ind
-binder 1708:1708 <> t:48
-binder 1710:1710 <> r:49
-R1728:1728 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R1730:1733 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R1735:1735 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 1729:1729 <> v:50
-binder 1729:1729 <> v:51
-binder 1729:1729 <> v:52
-R1734:1734 research.Examples <> t:48 var
-binder 1729:1729 <> v:53
-binder 1729:1729 <> v:54
-binder 1729:1729 <> v:55
-binder 1729:1729 <> v:56
-binder 1724:1724 <> x:57
-R1743:1743 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R1745:1748 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R1750:1750 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 1744:1744 <> w:58
-binder 1744:1744 <> w:59
-binder 1744:1744 <> w:60
-R1749:1749 research.Examples <> r:49 var
-binder 1744:1744 <> w:61
-binder 1744:1744 <> w:62
-binder 1744:1744 <> w:63
-binder 1744:1744 <> w:64
-binder 1739:1739 <> y:65
-R1755:1755 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R1757:1760 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R1766:1766 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 1756:1756 <> v:66
-binder 1756:1756 <> v:67
-binder 1756:1756 <> v:68
-R1761:1765 research.Definitions <> trnum constr
-binder 1756:1756 <> v:69
-binder 1756:1756 <> v:70
-binder 1756:1756 <> v:71
-binder 1756:1756 <> v:72
-R1773:1779 research.Functions <> :::'ifTR'_x_x_x not
-R1853:1863 research.Functions <> :::'ifTR'_x_x_x not
-R1880:1912 research.Functions <> :::'ifTR'_x_x_x not
-R1918:1918 research.Functions <> :::'ifTR'_x_x_x not
-R1780:1788 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
-R1804:1806 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
-R1822:1826 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
-R1838:1840 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
-R1852:1852 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
-R1789:1795 research.Definitions <> HasType ind
-R1797:1797 research.Examples <> x:57 var
-R1799:1803 research.Definitions <> trnum constr
-R1789:1795 research.Definitions <> HasType ind
-R1797:1797 research.Examples <> x:57 var
-R1799:1803 research.Definitions <> trnum constr
-R1807:1813 research.Definitions <> HasType ind
-R1815:1815 research.Examples <> y:65 var
-R1817:1821 research.Definitions <> trstr constr
-R1789:1795 research.Definitions <> HasType ind
-R1797:1797 research.Examples <> x:57 var
-R1799:1803 research.Definitions <> trnum constr
-R1789:1795 research.Definitions <> HasType ind
-R1797:1797 research.Examples <> x:57 var
-R1799:1803 research.Definitions <> trnum constr
-R1807:1813 research.Definitions <> HasType ind
-R1815:1815 research.Examples <> y:65 var
-R1817:1821 research.Definitions <> trstr constr
-R1827:1835 research.Functions <> is_number def
-R1837:1837 research.Examples <> x:57 var
-R1841:1849 research.Functions <> is_string def
-R1851:1851 research.Examples <> y:65 var
-R1827:1835 research.Functions <> is_number def
-R1837:1837 research.Examples <> x:57 var
-R1864:1866 research.Functions <> add def
-R1868:1868 research.Examples <> x:57 var
-R1871:1876 research.Functions <> strlen def
-R1878:1878 research.Examples <> y:65 var
-R1913:1915 research.Definitions <> Num constr
-R1938:1939 research.Definitions <> :::'<['_x_x_']>' not
-R1955:1956 research.Definitions <> :::'<['_x_x_']>' not
-R1965:1967 research.Definitions <> :::'<['_x_x_']>' not
-R1957:1959 research.Definitions <> Str constr
-R1940:1941 research.Definitions <> :::'<['_x_x_']>' not
-R1945:1946 research.Definitions <> :::'<['_x_x_']>' not
-R1952:1954 research.Definitions <> :::'<['_x_x_']>' not
-R1947:1949 research.Definitions <> Num constr
+R1009:1016 research.Definitions <> TRUnionL def
+R1018:1020 research.Definitions <> :::'<['_x_']>' not
+R1029:1031 research.Definitions <> :::'<['_x_']>' not
+R1021:1023 research.Definitions <> Str constr
+R1051:1053 research.Examples <> ex2 def
+R1056:1063 research.Definitions <> TRUnionR def
+R1065:1067 research.Definitions <> :::'<['_x_']>' not
+R1073:1075 research.Definitions <> :::'<['_x_']>' not
+R1068:1070 research.Definitions <> Num constr
+def 1250:1252 <> ex4
+R1259:1265 research.Definitions <> TRTypes ind
+binder 1255:1255 <> t:32
+R1273:1273 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R1275:1278 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R1280:1280 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 1274:1274 <> v:33
+binder 1274:1274 <> v:34
+binder 1274:1274 <> v:35
+R1279:1279 research.Examples <> t:32 var
+binder 1274:1274 <> v:36
+binder 1274:1274 <> v:37
+binder 1274:1274 <> v:38
+binder 1274:1274 <> v:39
+binder 1269:1269 <> x:40
+R1285:1285 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R1287:1290 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R1296:1296 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 1286:1286 <> v:41
+binder 1286:1286 <> v:42
+binder 1286:1286 <> v:43
+R1291:1295 research.Definitions <> trnum constr
+binder 1286:1286 <> v:44
+binder 1286:1286 <> v:45
+binder 1286:1286 <> v:46
+binder 1286:1286 <> v:47
+R1303:1308 research.Functions <> :::'ifTR'_x_x_x not
+R1392:1402 research.Functions <> :::'ifTR'_x_x_x not
+R1408:1418 research.Functions <> :::'ifTR'_x_x_x not
+R1424:1424 research.Functions <> :::'ifTR'_x_x_x not
+R1309:1316 research.Functions <> :::'orTR'_'<'_x_x_'>'_x_x not
+R1332:1334 research.Functions <> :::'orTR'_'<'_x_x_'>'_x_x not
+R1350:1365 research.Functions <> :::'orTR'_'<'_x_x_'>'_x_x not
+R1377:1379 research.Functions <> :::'orTR'_'<'_x_x_'>'_x_x not
+R1391:1391 research.Functions <> :::'orTR'_'<'_x_x_'>'_x_x not
+R1317:1323 research.Definitions <> HasType ind
+R1325:1325 research.Examples <> x:40 var
+R1327:1331 research.Definitions <> trnum constr
+R1317:1323 research.Definitions <> HasType ind
+R1325:1325 research.Examples <> x:40 var
+R1327:1331 research.Definitions <> trnum constr
+R1335:1341 research.Definitions <> HasType ind
+R1343:1343 research.Examples <> x:40 var
+R1345:1349 research.Definitions <> trstr constr
+R1317:1323 research.Definitions <> HasType ind
+R1325:1325 research.Examples <> x:40 var
+R1327:1331 research.Definitions <> trnum constr
+R1317:1323 research.Definitions <> HasType ind
+R1325:1325 research.Examples <> x:40 var
+R1327:1331 research.Definitions <> trnum constr
+R1335:1341 research.Definitions <> HasType ind
+R1343:1343 research.Examples <> x:40 var
+R1345:1349 research.Definitions <> trstr constr
+R1366:1374 research.Functions <> is_number def
+R1376:1376 research.Examples <> x:40 var
+R1366:1374 research.Functions <> is_number def
+R1376:1376 research.Examples <> x:40 var
+R1380:1388 research.Functions <> is_string def
+R1390:1390 research.Examples <> x:40 var
+R1403:1405 research.Examples <> ex2 def
+R1407:1407 research.Examples <> x:40 var
+R1419:1421 research.Definitions <> Num constr
+R1446:1448 research.Examples <> ex4 def
+R1450:1452 research.Definitions <> :::'<['_x_']>' not
+R1458:1460 research.Definitions <> :::'<['_x_']>' not
+R1453:1455 research.Definitions <> Num constr
+R1479:1481 research.Examples <> ex4 def
+R1483:1485 research.Definitions <> :::'<['_x_']>' not
+R1494:1496 research.Definitions <> :::'<['_x_']>' not
+R1486:1488 research.Definitions <> Str constr
+R1515:1517 research.Examples <> ex4 def
+R1519:1521 research.Definitions <> :::'<['_x_']>' not
+R1531:1533 research.Definitions <> :::'<['_x_']>' not
+R1522:1525 research.Definitions <> Bool constr
+R1527:1530 Coq.Init.Datatypes <> true constr
+def 1707:1709 <> ex5
+R1718:1724 research.Definitions <> TRTypes ind
+binder 1712:1712 <> t:48
+binder 1714:1714 <> r:49
+R1732:1732 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R1734:1737 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R1739:1739 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 1733:1733 <> v:50
+binder 1733:1733 <> v:51
+binder 1733:1733 <> v:52
+R1738:1738 research.Examples <> t:48 var
+binder 1733:1733 <> v:53
+binder 1733:1733 <> v:54
+binder 1733:1733 <> v:55
+binder 1733:1733 <> v:56
+binder 1728:1728 <> x:57
+R1747:1747 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R1749:1752 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R1754:1754 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 1748:1748 <> w:58
+binder 1748:1748 <> w:59
+binder 1748:1748 <> w:60
+R1753:1753 research.Examples <> r:49 var
+binder 1748:1748 <> w:61
+binder 1748:1748 <> w:62
+binder 1748:1748 <> w:63
+binder 1748:1748 <> w:64
+binder 1743:1743 <> y:65
+R1759:1759 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R1761:1764 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R1770:1770 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 1760:1760 <> v:66
+binder 1760:1760 <> v:67
+binder 1760:1760 <> v:68
+R1765:1769 research.Definitions <> trnum constr
+binder 1760:1760 <> v:69
+binder 1760:1760 <> v:70
+binder 1760:1760 <> v:71
+binder 1760:1760 <> v:72
+R1777:1783 research.Functions <> :::'ifTR'_x_x_x not
+R1857:1867 research.Functions <> :::'ifTR'_x_x_x not
+R1884:1916 research.Functions <> :::'ifTR'_x_x_x not
+R1922:1922 research.Functions <> :::'ifTR'_x_x_x not
+R1784:1792 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
+R1808:1810 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
+R1826:1830 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
+R1842:1844 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
+R1856:1856 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
+R1793:1799 research.Definitions <> HasType ind
+R1801:1801 research.Examples <> x:57 var
+R1803:1807 research.Definitions <> trnum constr
+R1793:1799 research.Definitions <> HasType ind
+R1801:1801 research.Examples <> x:57 var
+R1803:1807 research.Definitions <> trnum constr
+R1811:1817 research.Definitions <> HasType ind
+R1819:1819 research.Examples <> y:65 var
+R1821:1825 research.Definitions <> trstr constr
+R1793:1799 research.Definitions <> HasType ind
+R1801:1801 research.Examples <> x:57 var
+R1803:1807 research.Definitions <> trnum constr
+R1793:1799 research.Definitions <> HasType ind
+R1801:1801 research.Examples <> x:57 var
+R1803:1807 research.Definitions <> trnum constr
+R1811:1817 research.Definitions <> HasType ind
+R1819:1819 research.Examples <> y:65 var
+R1821:1825 research.Definitions <> trstr constr
+R1831:1839 research.Functions <> is_number def
+R1841:1841 research.Examples <> x:57 var
+R1845:1853 research.Functions <> is_string def
+R1855:1855 research.Examples <> y:65 var
+R1831:1839 research.Functions <> is_number def
+R1841:1841 research.Examples <> x:57 var
+R1868:1870 research.Functions <> add def
+R1872:1872 research.Examples <> x:57 var
+R1875:1880 research.Functions <> strlen def
+R1882:1882 research.Examples <> y:65 var
+R1917:1919 research.Definitions <> Num constr
 R1942:1944 research.Examples <> ex5 def
-R1986:1987 research.Definitions <> :::'<['_x_x_']>' not
-R2003:2004 research.Definitions <> :::'<['_x_x_']>' not
-R2010:2012 research.Definitions <> :::'<['_x_x_']>' not
-R2005:2007 research.Definitions <> Num constr
-R1988:1989 research.Definitions <> :::'<['_x_x_']>' not
-R1993:1994 research.Definitions <> :::'<['_x_x_']>' not
-R2000:2002 research.Definitions <> :::'<['_x_x_']>' not
-R1995:1997 research.Definitions <> Num constr
+R1958:1960 research.Definitions <> :::'<['_x_']>' not
+R1969:1971 research.Definitions <> :::'<['_x_']>' not
+R1961:1963 research.Definitions <> Str constr
+R1946:1948 research.Definitions <> :::'<['_x_']>' not
+R1954:1956 research.Definitions <> :::'<['_x_']>' not
+R1949:1951 research.Definitions <> Num constr
 R1990:1992 research.Examples <> ex5 def
-R2031:2032 research.Definitions <> :::'<['_x_x_']>' not
-R2054:2055 research.Definitions <> :::'<['_x_x_']>' not
-R2062:2064 research.Definitions <> :::'<['_x_x_']>' not
-R2056:2058 research.Definitions <> Num constr
-R2033:2034 research.Definitions <> :::'<['_x_x_']>' not
-R2038:2039 research.Definitions <> :::'<['_x_x_']>' not
-R2051:2053 research.Definitions <> :::'<['_x_x_']>' not
-R2040:2042 research.Definitions <> Str constr
+R2006:2008 research.Definitions <> :::'<['_x_']>' not
+R2014:2016 research.Definitions <> :::'<['_x_']>' not
+R2009:2011 research.Definitions <> Num constr
+R1994:1996 research.Definitions <> :::'<['_x_']>' not
+R2002:2004 research.Definitions <> :::'<['_x_']>' not
+R1997:1999 research.Definitions <> Num constr
 R2035:2037 research.Examples <> ex5 def
-R2083:2084 research.Definitions <> :::'<['_x_x_']>' not
-R2104:2105 research.Definitions <> :::'<['_x_x_']>' not
-R2116:2118 research.Definitions <> :::'<['_x_x_']>' not
-R2106:2109 research.Definitions <> Bool constr
-R2111:2115 Coq.Init.Datatypes <> false constr
-R2085:2086 research.Definitions <> :::'<['_x_x_']>' not
-R2090:2091 research.Definitions <> :::'<['_x_x_']>' not
-R2101:2103 research.Definitions <> :::'<['_x_x_']>' not
-R2092:2095 research.Definitions <> Bool constr
-R2097:2100 Coq.Init.Datatypes <> true constr
+R2057:2059 research.Definitions <> :::'<['_x_']>' not
+R2066:2068 research.Definitions <> :::'<['_x_']>' not
+R2060:2062 research.Definitions <> Num constr
+R2039:2041 research.Definitions <> :::'<['_x_']>' not
+R2053:2055 research.Definitions <> :::'<['_x_']>' not
+R2042:2044 research.Definitions <> Str constr
 R2087:2089 research.Examples <> ex5 def
-def 2292:2294 <> ex7
-R2303:2309 research.Definitions <> TRTypes ind
-binder 2297:2297 <> t:73
-binder 2299:2299 <> r:74
-R2317:2317 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R2319:2322 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R2324:2324 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 2318:2318 <> v:75
-binder 2318:2318 <> v:76
-binder 2318:2318 <> v:77
-R2323:2323 research.Examples <> t:73 var
-binder 2318:2318 <> v:78
-binder 2318:2318 <> v:79
-binder 2318:2318 <> v:80
-binder 2318:2318 <> v:81
-binder 2313:2313 <> x:82
-R2332:2332 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R2334:2337 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R2339:2339 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 2333:2333 <> w:83
-binder 2333:2333 <> w:84
-binder 2333:2333 <> w:85
-R2338:2338 research.Examples <> r:74 var
-binder 2333:2333 <> w:86
-binder 2333:2333 <> w:87
-binder 2333:2333 <> w:88
-binder 2333:2333 <> w:89
-binder 2328:2328 <> y:90
-R2344:2344 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R2346:2349 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R2355:2355 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 2345:2345 <> v:91
-binder 2345:2345 <> v:92
-binder 2345:2345 <> v:93
-R2350:2354 research.Definitions <> trnum constr
-binder 2345:2345 <> v:94
-binder 2345:2345 <> v:95
-binder 2345:2345 <> v:96
-binder 2345:2345 <> v:97
-R2363:2370 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
-R2405:2406 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
-R2411:2412 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
-R2450:2451 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
-R2456:2463 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
-R2586:2592 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
-R2609:2615 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
-R2632:2632 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
-R2386:2389 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R2371:2377 research.Definitions <> HasType ind
-R2379:2379 research.Examples <> x:82 var
-R2381:2385 research.Definitions <> trnum constr
-R2390:2396 research.Definitions <> HasType ind
-R2398:2398 research.Examples <> y:90 var
-R2400:2404 research.Definitions <> trstr constr
-R2407:2410 Coq.Init.Logic <> True ind
-R2413:2414 Coq.Init.Logic <> ::type_scope:'~'_x not
-R2449:2449 Coq.Init.Logic <> ::type_scope:'~'_x not
-R2430:2433 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R2415:2421 research.Definitions <> HasType ind
-R2423:2423 research.Examples <> x:82 var
-R2425:2429 research.Definitions <> trnum constr
-R2434:2440 research.Definitions <> HasType ind
-R2442:2442 research.Examples <> y:90 var
-R2444:2448 research.Definitions <> trstr constr
-R2452:2455 Coq.Init.Logic <> True ind
-R2464:2471 research.Functions <> :::'ifTR'_'<'_x_x_'>'_x_x_x not
-R2487:2490 research.Functions <> :::'ifTR'_'<'_x_x_'>'_x_x_x not
-R2525:2534 research.Functions <> :::'ifTR'_'<'_x_x_'>'_x_x_x not
-R2546:2554 research.Functions <> :::'ifTR'_'<'_x_x_'>'_x_x_x not
-R2566:2574 research.Functions <> :::'ifTR'_'<'_x_x_'>'_x_x_x not
-R2585:2585 research.Functions <> :::'ifTR'_'<'_x_x_'>'_x_x_x not
-R2472:2478 research.Definitions <> HasType ind
-R2480:2480 research.Examples <> x:82 var
-R2482:2486 research.Definitions <> trnum constr
-R2506:2509 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R2491:2497 research.Definitions <> HasType ind
-R2499:2499 research.Examples <> x:82 var
-R2501:2505 research.Definitions <> trnum constr
-R2510:2516 research.Definitions <> HasType ind
-R2518:2518 research.Examples <> y:90 var
-R2520:2524 research.Definitions <> trstr constr
-R2472:2478 research.Definitions <> HasType ind
-R2480:2480 research.Examples <> x:82 var
-R2482:2486 research.Definitions <> trnum constr
-R2506:2509 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R2491:2497 research.Definitions <> HasType ind
-R2499:2499 research.Examples <> x:82 var
-R2501:2505 research.Definitions <> trnum constr
-R2510:2516 research.Definitions <> HasType ind
-R2518:2518 research.Examples <> y:90 var
-R2520:2524 research.Definitions <> trstr constr
-R2535:2543 research.Functions <> is_number def
-R2545:2545 research.Examples <> x:82 var
-R2555:2563 research.Functions <> is_string def
-R2565:2565 research.Examples <> y:90 var
-R2575:2578 research.Definitions <> Bool constr
-R2580:2584 Coq.Init.Datatypes <> false constr
-R2593:2595 research.Functions <> add def
-R2597:2597 research.Examples <> x:82 var
-R2600:2605 research.Functions <> strlen def
-R2607:2607 research.Examples <> y:90 var
-R2616:2623 research.Definitions <> giveType def
-R2626:2628 research.Definitions <> Num constr
-R2653:2654 research.Definitions <> :::'<['_x_x_']>' not
-R2670:2671 research.Definitions <> :::'<['_x_x_']>' not
-R2683:2685 research.Definitions <> :::'<['_x_x_']>' not
-R2672:2674 research.Definitions <> Str constr
-R2655:2656 research.Definitions <> :::'<['_x_x_']>' not
-R2660:2661 research.Definitions <> :::'<['_x_x_']>' not
-R2667:2669 research.Definitions <> :::'<['_x_x_']>' not
-R2662:2664 research.Definitions <> Num constr
+R2107:2109 research.Definitions <> :::'<['_x_']>' not
+R2120:2122 research.Definitions <> :::'<['_x_']>' not
+R2110:2113 research.Definitions <> Bool constr
+R2115:2119 Coq.Init.Datatypes <> false constr
+R2091:2093 research.Definitions <> :::'<['_x_']>' not
+R2103:2105 research.Definitions <> :::'<['_x_']>' not
+R2094:2097 research.Definitions <> Bool constr
+R2099:2102 Coq.Init.Datatypes <> true constr
+def 2296:2298 <> ex7
+R2307:2313 research.Definitions <> TRTypes ind
+binder 2301:2301 <> t:73
+binder 2303:2303 <> r:74
+R2321:2321 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R2323:2326 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R2328:2328 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 2322:2322 <> v:75
+binder 2322:2322 <> v:76
+binder 2322:2322 <> v:77
+R2327:2327 research.Examples <> t:73 var
+binder 2322:2322 <> v:78
+binder 2322:2322 <> v:79
+binder 2322:2322 <> v:80
+binder 2322:2322 <> v:81
+binder 2317:2317 <> x:82
+R2336:2336 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R2338:2341 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R2343:2343 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 2337:2337 <> w:83
+binder 2337:2337 <> w:84
+binder 2337:2337 <> w:85
+R2342:2342 research.Examples <> r:74 var
+binder 2337:2337 <> w:86
+binder 2337:2337 <> w:87
+binder 2337:2337 <> w:88
+binder 2337:2337 <> w:89
+binder 2332:2332 <> y:90
+R2348:2348 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R2350:2353 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R2359:2359 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 2349:2349 <> v:91
+binder 2349:2349 <> v:92
+binder 2349:2349 <> v:93
+R2354:2358 research.Definitions <> trnum constr
+binder 2349:2349 <> v:94
+binder 2349:2349 <> v:95
+binder 2349:2349 <> v:96
+binder 2349:2349 <> v:97
+R2367:2374 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
+R2409:2410 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
+R2415:2416 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
+R2454:2455 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
+R2460:2467 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
+R2590:2596 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
+R2613:2619 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
+R2636:2636 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
+R2390:2393 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R2375:2381 research.Definitions <> HasType ind
+R2383:2383 research.Examples <> x:82 var
+R2385:2389 research.Definitions <> trnum constr
+R2394:2400 research.Definitions <> HasType ind
+R2402:2402 research.Examples <> y:90 var
+R2404:2408 research.Definitions <> trstr constr
+R2411:2414 Coq.Init.Logic <> True ind
+R2417:2418 Coq.Init.Logic <> ::type_scope:'~'_x not
+R2453:2453 Coq.Init.Logic <> ::type_scope:'~'_x not
+R2434:2437 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R2419:2425 research.Definitions <> HasType ind
+R2427:2427 research.Examples <> x:82 var
+R2429:2433 research.Definitions <> trnum constr
+R2438:2444 research.Definitions <> HasType ind
+R2446:2446 research.Examples <> y:90 var
+R2448:2452 research.Definitions <> trstr constr
+R2456:2459 Coq.Init.Logic <> True ind
+R2468:2475 research.Functions <> :::'ifTR'_'<'_x_x_'>'_x_x_x not
+R2491:2494 research.Functions <> :::'ifTR'_'<'_x_x_'>'_x_x_x not
+R2529:2538 research.Functions <> :::'ifTR'_'<'_x_x_'>'_x_x_x not
+R2550:2558 research.Functions <> :::'ifTR'_'<'_x_x_'>'_x_x_x not
+R2570:2578 research.Functions <> :::'ifTR'_'<'_x_x_'>'_x_x_x not
+R2589:2589 research.Functions <> :::'ifTR'_'<'_x_x_'>'_x_x_x not
+R2476:2482 research.Definitions <> HasType ind
+R2484:2484 research.Examples <> x:82 var
+R2486:2490 research.Definitions <> trnum constr
+R2510:2513 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R2495:2501 research.Definitions <> HasType ind
+R2503:2503 research.Examples <> x:82 var
+R2505:2509 research.Definitions <> trnum constr
+R2514:2520 research.Definitions <> HasType ind
+R2522:2522 research.Examples <> y:90 var
+R2524:2528 research.Definitions <> trstr constr
+R2476:2482 research.Definitions <> HasType ind
+R2484:2484 research.Examples <> x:82 var
+R2486:2490 research.Definitions <> trnum constr
+R2510:2513 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R2495:2501 research.Definitions <> HasType ind
+R2503:2503 research.Examples <> x:82 var
+R2505:2509 research.Definitions <> trnum constr
+R2514:2520 research.Definitions <> HasType ind
+R2522:2522 research.Examples <> y:90 var
+R2524:2528 research.Definitions <> trstr constr
+R2539:2547 research.Functions <> is_number def
+R2549:2549 research.Examples <> x:82 var
+R2559:2567 research.Functions <> is_string def
+R2569:2569 research.Examples <> y:90 var
+R2579:2582 research.Definitions <> Bool constr
+R2584:2588 Coq.Init.Datatypes <> false constr
+R2597:2599 research.Functions <> add def
+R2601:2601 research.Examples <> x:82 var
+R2604:2609 research.Functions <> strlen def
+R2611:2611 research.Examples <> y:90 var
+R2620:2627 research.Definitions <> giveType def
+R2630:2632 research.Definitions <> Num constr
 R2657:2659 research.Examples <> ex7 def
-def 2859:2861 <> ex8
-R2868:2874 research.Definitions <> TRTypes ind
-binder 2864:2864 <> t:98
-R2882:2882 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R2884:2887 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R2889:2889 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 2883:2883 <> v:99
-binder 2883:2883 <> v:100
-binder 2883:2883 <> v:101
-R2888:2888 research.Examples <> t:98 var
-binder 2883:2883 <> v:102
-binder 2883:2883 <> v:103
-binder 2883:2883 <> v:104
-binder 2883:2883 <> v:105
-binder 2878:2878 <> x:106
-R2897:2902 research.Functions <> orTest def
-R2904:2904 research.Examples <> x:106 var
-def 2927:2934 <> ex8_test
-R2941:2947 research.Definitions <> TRTypes ind
-binder 2937:2937 <> t:107
-R2955:2955 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R2957:2960 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R2962:2962 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 2956:2956 <> v:108
-binder 2956:2956 <> v:109
-binder 2956:2956 <> v:110
-R2961:2961 research.Examples <> t:107 var
-binder 2956:2956 <> v:111
-binder 2956:2956 <> v:112
-binder 2956:2956 <> v:113
-binder 2956:2956 <> v:114
-binder 2951:2951 <> x:115
-R2967:2967 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R2969:2972 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R2978:2978 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 2968:2968 <> v:116
-binder 2968:2968 <> v:117
-binder 2968:2968 <> v:118
-R2973:2977 research.Definitions <> trnum constr
-binder 2968:2968 <> v:119
-binder 2968:2968 <> v:120
-binder 2968:2968 <> v:121
-binder 2968:2968 <> v:122
-R2986:2991 research.Functions <> :::'ifTR'_x_x_x not
-R2997:2999 research.Functions <> :::'ifTR'_x_x_x not
-R3005:3007 research.Functions <> :::'ifTR'_x_x_x not
-R3024:3024 research.Functions <> :::'ifTR'_x_x_x not
-R2992:2994 research.Examples <> ex8 def
-R2996:2996 research.Examples <> x:115 var
-R3000:3002 research.Examples <> ex2 def
-R3004:3004 research.Examples <> x:115 var
-R3008:3015 research.Definitions <> giveType def
-R3018:3020 research.Definitions <> Num constr
-R3045:3046 research.Definitions <> :::'<['_x_x_']>' not
-R3050:3051 research.Definitions <> :::'<['_x_x_']>' not
-R3057:3059 research.Definitions <> :::'<['_x_x_']>' not
-R3052:3054 research.Definitions <> Num constr
-R3047:3049 research.Examples <> ex8 def
-R3078:3079 research.Definitions <> :::'<['_x_x_']>' not
-R3088:3089 research.Definitions <> :::'<['_x_x_']>' not
-R3095:3097 research.Definitions <> :::'<['_x_x_']>' not
-R3090:3092 research.Definitions <> Num constr
-R3080:3087 research.Examples <> ex8_test def
-R3116:3117 research.Definitions <> :::'<['_x_x_']>' not
-R3121:3122 research.Definitions <> :::'<['_x_x_']>' not
-R3137:3139 research.Definitions <> :::'<['_x_x_']>' not
-R3123:3125 research.Definitions <> Str constr
-R3118:3120 research.Examples <> ex8 def
-R3158:3159 research.Definitions <> :::'<['_x_x_']>' not
-R3168:3169 research.Definitions <> :::'<['_x_x_']>' not
-R3184:3186 research.Definitions <> :::'<['_x_x_']>' not
-R3170:3172 research.Definitions <> Str constr
-R3160:3167 research.Examples <> ex8_test def
-R3205:3206 research.Definitions <> :::'<['_x_x_']>' not
-R3210:3211 research.Definitions <> :::'<['_x_x_']>' not
-R3221:3223 research.Definitions <> :::'<['_x_x_']>' not
-R3212:3215 research.Definitions <> Bool constr
-R3217:3220 Coq.Init.Datatypes <> true constr
-R3207:3209 research.Examples <> ex8 def
-R3242:3243 research.Definitions <> :::'<['_x_x_']>' not
-R3252:3253 research.Definitions <> :::'<['_x_x_']>' not
-R3263:3265 research.Definitions <> :::'<['_x_x_']>' not
-R3254:3257 research.Definitions <> Bool constr
-R3259:3262 Coq.Init.Datatypes <> true constr
-R3244:3251 research.Examples <> ex8_test def
-def 3439:3441 <> ex9
-R3448:3454 research.Definitions <> TRTypes ind
-binder 3444:3444 <> t:123
-R3462:3462 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R3464:3467 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R3469:3469 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 3463:3463 <> v:124
-binder 3463:3463 <> v:125
-binder 3463:3463 <> v:126
-R3468:3468 research.Examples <> t:123 var
-binder 3463:3463 <> v:127
-binder 3463:3463 <> v:128
-binder 3463:3463 <> v:129
-binder 3463:3463 <> v:130
-binder 3458:3458 <> x:131
-R3474:3474 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R3476:3479 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R3485:3485 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 3475:3475 <> v:132
-binder 3475:3475 <> v:133
-binder 3475:3475 <> v:134
-R3480:3484 research.Definitions <> trnum constr
-binder 3475:3475 <> v:135
-binder 3475:3475 <> v:136
-binder 3475:3475 <> v:137
-binder 3475:3475 <> v:138
-R3493:3498 research.Functions <> :::'ifTR'_x_x_x not
-R3809:3820 research.Functions <> :::'ifTR'_x_x_x not
-R3826:3838 research.Functions <> :::'ifTR'_x_x_x not
-R3855:3855 research.Functions <> :::'ifTR'_x_x_x not
-R3509:3517 research.Functions <> is_number def
-R3519:3519 research.Examples <> x:131 var
-binder 3503:3503 <> p:139
-R3537:3544 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
-R3560:3584 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
-R3619:3643 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
-R3662:3686 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
-R3724:3748 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
-R3750:3771 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
-R3773:3795 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
-R3807:3807 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
-R3545:3551 research.Definitions <> HasType ind
-R3553:3553 research.Examples <> x:131 var
-R3555:3559 research.Definitions <> trnum constr
-R3600:3603 Coq.Init.Logic <> ::type_scope:x_'\/'_x not
-R3585:3591 research.Definitions <> HasType ind
-R3593:3593 research.Examples <> x:131 var
-R3595:3599 research.Definitions <> trnum constr
-R3604:3610 research.Definitions <> HasType ind
-R3612:3612 research.Examples <> x:131 var
-R3614:3618 research.Definitions <> trstr constr
-R3644:3645 Coq.Init.Logic <> ::type_scope:'~'_x not
-R3661:3661 Coq.Init.Logic <> ::type_scope:'~'_x not
-R3646:3652 research.Definitions <> HasType ind
-R3654:3654 research.Examples <> x:131 var
-R3656:3660 research.Definitions <> trnum constr
-R3687:3688 Coq.Init.Logic <> ::type_scope:'~'_x not
-R3723:3723 Coq.Init.Logic <> ::type_scope:'~'_x not
-R3704:3707 Coq.Init.Logic <> ::type_scope:x_'\/'_x not
-R3689:3695 research.Definitions <> HasType ind
-R3697:3697 research.Examples <> x:131 var
-R3699:3703 research.Definitions <> trnum constr
-R3708:3714 research.Definitions <> HasType ind
-R3716:3716 research.Examples <> x:131 var
-R3718:3722 research.Definitions <> trstr constr
-R3749:3749 research.Examples <> p:139 var
-R3772:3772 research.Examples <> p:139 var
-R3796:3804 research.Functions <> is_string def
-R3806:3806 research.Examples <> x:131 var
-R3821:3823 research.Examples <> ex2 def
-R3825:3825 research.Examples <> x:131 var
-R3839:3846 research.Definitions <> giveType def
-R3849:3851 research.Definitions <> Num constr
-R3876:3877 research.Definitions <> :::'<['_x_x_']>' not
-R3881:3882 research.Definitions <> :::'<['_x_x_']>' not
-R3888:3890 research.Definitions <> :::'<['_x_x_']>' not
-R3883:3885 research.Definitions <> Num constr
-R3878:3880 research.Examples <> ex9 def
-def 4064:4067 <> ex10
-R4076:4082 research.Definitions <> TRTypes ind
-binder 4070:4070 <> A:140
-binder 4072:4072 <> B:141
-R4090:4090 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R4092:4096 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R4107:4108 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 4091:4091 <> v:142
-binder 4091:4091 <> v:143
-binder 4091:4091 <> v:144
-R4097:4102 research.Definitions <> trpair constr
-R4104:4104 research.Examples <> A:140 var
-R4106:4106 research.Examples <> B:141 var
-binder 4091:4091 <> v:145
-binder 4091:4091 <> v:146
-binder 4091:4091 <> v:147
-binder 4091:4091 <> v:148
-binder 4086:4086 <> p:149
-R4113:4113 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R4115:4118 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R4124:4124 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 4114:4114 <> t:150
-binder 4114:4114 <> t:151
-binder 4114:4114 <> t:152
-R4119:4123 research.Definitions <> trnum constr
-binder 4114:4114 <> t:153
-binder 4114:4114 <> t:154
-binder 4114:4114 <> t:155
-binder 4114:4114 <> t:156
-R4131:4136 research.Functions <> :::'ifTR'_x_x_x not
-R4154:4156 research.Functions <> :::'ifTR'_x_x_x not
-R4169:4171 research.Functions <> :::'ifTR'_x_x_x not
-R4188:4188 research.Functions <> :::'ifTR'_x_x_x not
-R4137:4145 research.Functions <> is_number def
-R4148:4150 research.Functions <> car def
-R4152:4152 research.Examples <> p:149 var
-R4157:4160 research.Functions <> add1 def
-R4163:4165 research.Functions <> car def
-R4167:4167 research.Examples <> p:149 var
-R4172:4179 research.Definitions <> giveType def
-R4182:4184 research.Definitions <> Num constr
-R4208:4209 research.Definitions <> :::'<['_x_x_']>' not
-R4214:4215 research.Definitions <> :::'<['_x_x_']>' not
-R4240:4242 research.Definitions <> :::'<['_x_x_']>' not
-R4216:4219 research.Definitions <> Pair constr
-R4222:4224 research.Definitions <> Num constr
-R4230:4232 research.Definitions <> Str constr
-R4210:4213 research.Examples <> ex10 def
-R4261:4262 research.Definitions <> :::'<['_x_x_']>' not
-R4267:4268 research.Definitions <> :::'<['_x_x_']>' not
-R4295:4297 research.Definitions <> :::'<['_x_x_']>' not
-R4269:4272 research.Definitions <> Pair constr
-R4275:4278 research.Definitions <> Bool constr
-R4280:4284 Coq.Init.Datatypes <> false constr
-R4288:4290 research.Definitions <> Num constr
-R4263:4266 research.Examples <> ex10 def
-def 4471:4471 <> g
-R4478:4478 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R4480:4483 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R4502:4502 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 4479:4479 <> v:157
-binder 4479:4479 <> v:158
-binder 4479:4479 <> v:159
-R4484:4489 research.Definitions <> trpair constr
-R4491:4495 research.Definitions <> trnum constr
-R4497:4501 research.Definitions <> trnum constr
-binder 4479:4479 <> v:160
-binder 4479:4479 <> v:161
-binder 4479:4479 <> v:162
-binder 4479:4479 <> v:163
-binder 4474:4474 <> p:164
-R4507:4507 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R4509:4512 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R4518:4518 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 4508:4508 <> t:165
-binder 4508:4508 <> t:166
-binder 4508:4508 <> t:167
-R4513:4517 research.Definitions <> trnum constr
-binder 4508:4508 <> t:168
-binder 4508:4508 <> t:169
-binder 4508:4508 <> t:170
-binder 4508:4508 <> t:171
-R4526:4528 research.Functions <> add def
-R4531:4533 research.Functions <> car def
-R4535:4535 research.Examples <> p:164 var
-R4539:4541 research.Functions <> cdr def
-R4543:4543 research.Examples <> p:164 var
-R4565:4566 research.Definitions <> :::'<['_x_x_']>' not
-R4568:4569 research.Definitions <> :::'<['_x_x_']>' not
-R4590:4592 research.Definitions <> :::'<['_x_x_']>' not
-R4570:4573 research.Definitions <> Pair constr
-R4576:4578 research.Definitions <> Num constr
-R4584:4586 research.Definitions <> Num constr
-R4567:4567 research.Examples <> g def
-def 4662:4665 <> ex11
-R4674:4680 research.Definitions <> TRTypes ind
-binder 4668:4668 <> A:172
-binder 4670:4670 <> B:173
-R4688:4688 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R4690:4693 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R4704:4704 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 4689:4689 <> v:174
-binder 4689:4689 <> v:175
-binder 4689:4689 <> v:176
-R4694:4699 research.Definitions <> trpair constr
-R4701:4701 research.Examples <> A:172 var
-R4703:4703 research.Examples <> B:173 var
-binder 4689:4689 <> v:177
-binder 4689:4689 <> v:178
-binder 4689:4689 <> v:179
-binder 4689:4689 <> v:180
-binder 4684:4684 <> p:181
-R4709:4709 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R4711:4714 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R4720:4720 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 4710:4710 <> t:182
-binder 4710:4710 <> t:183
-binder 4710:4710 <> t:184
-R4715:4719 research.Definitions <> trnum constr
-binder 4710:4710 <> t:185
-binder 4710:4710 <> t:186
-binder 4710:4710 <> t:187
-binder 4710:4710 <> t:188
-R4727:4732 research.Functions <> :::'ifTR'_x_x_x not
-R4830:4832 research.Functions <> :::'ifTR'_x_x_x not
-R4836:4838 research.Functions <> :::'ifTR'_x_x_x not
-R4855:4855 research.Functions <> :::'ifTR'_x_x_x not
-R4733:4741 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
-R4763:4765 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
-R4787:4791 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
-R4809:4811 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
-R4829:4829 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
-R4742:4748 research.Definitions <> HasType ind
-R4751:4753 research.Functions <> car def
-R4755:4755 research.Examples <> p:181 var
-R4758:4762 research.Definitions <> trnum constr
-R4742:4748 research.Definitions <> HasType ind
-R4751:4753 research.Functions <> car def
-R4755:4755 research.Examples <> p:181 var
-R4758:4762 research.Definitions <> trnum constr
-R4766:4772 research.Definitions <> HasType ind
-R4775:4777 research.Functions <> cdr def
-R4779:4779 research.Examples <> p:181 var
-R4782:4786 research.Definitions <> trnum constr
-R4742:4748 research.Definitions <> HasType ind
-R4751:4753 research.Functions <> car def
-R4755:4755 research.Examples <> p:181 var
-R4758:4762 research.Definitions <> trnum constr
-R4742:4748 research.Definitions <> HasType ind
-R4751:4753 research.Functions <> car def
-R4755:4755 research.Examples <> p:181 var
-R4758:4762 research.Definitions <> trnum constr
-R4766:4772 research.Definitions <> HasType ind
-R4775:4777 research.Functions <> cdr def
-R4779:4779 research.Examples <> p:181 var
-R4782:4786 research.Definitions <> trnum constr
-R4792:4800 research.Functions <> is_number def
-R4803:4805 research.Functions <> car def
-R4807:4807 research.Examples <> p:181 var
-R4812:4820 research.Functions <> is_number def
-R4823:4825 research.Functions <> cdr def
-R4827:4827 research.Examples <> p:181 var
-R4792:4800 research.Functions <> is_number def
-R4803:4805 research.Functions <> car def
-R4807:4807 research.Examples <> p:181 var
-R4833:4833 research.Examples <> g def
-R4835:4835 research.Examples <> p:181 var
-R4839:4846 research.Definitions <> giveType def
-R4849:4851 research.Definitions <> Num constr
-R4877:4878 research.Definitions <> :::'<['_x_x_']>' not
-R4883:4884 research.Definitions <> :::'<['_x_x_']>' not
-R4906:4908 research.Definitions <> :::'<['_x_x_']>' not
-R4885:4888 research.Definitions <> Pair constr
-R4891:4893 research.Definitions <> Num constr
-R4899:4901 research.Definitions <> Num constr
-R4879:4882 research.Examples <> ex11 def
-R4927:4928 research.Definitions <> :::'<['_x_x_']>' not
-R4933:4934 research.Definitions <> :::'<['_x_x_']>' not
-R4960:4962 research.Definitions <> :::'<['_x_x_']>' not
-R4935:4938 research.Definitions <> Pair constr
-R4941:4943 research.Definitions <> Num constr
-R4949:4952 research.Definitions <> Bool constr
-R4954:4958 Coq.Init.Datatypes <> false constr
-R4929:4932 research.Examples <> ex11 def
-prf 5123:5124 <> ok
-R5128:5131 Coq.Init.Logic <> True ind
-prf 5159:5162 <> wtf2
-R5166:5172 research.Definitions <> HasType ind
-R5175:5177 research.Definitions <> Num constr
-R5182:5186 research.Definitions <> trnum constr
-def 5234:5237 <> what
-R5248:5255 research.Definitions <> TRValues ind
-binder 5240:5241 <> p3:189
-binder 5243:5244 <> p4:190
-R5265:5271 research.Definitions <> TRTypes ind
-binder 5259:5259 <> A:191
-binder 5261:5261 <> B:192
-R5309:5312 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R5276:5282 research.Definitions <> HasType ind
-R5285:5288 research.Definitions <> Pair constr
-R5290:5291 research.Examples <> p3:189 var
-R5293:5294 research.Examples <> p4:190 var
-R5298:5303 research.Definitions <> trpair constr
-R5305:5305 research.Examples <> A:191 var
-R5307:5307 research.Examples <> B:192 var
-R5313:5313 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R5348:5355 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R5389:5389 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R5340:5343 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R5314:5314 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
-R5325:5329 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
-R5315:5318 research.Definitions <> Pair constr
-R5320:5321 research.Examples <> p3:189 var
-R5323:5324 research.Examples <> p4:190 var
-R5330:5333 research.Definitions <> Bool constr
-R5335:5339 Coq.Init.Datatypes <> false constr
-R5344:5347 Coq.Init.Logic <> True ind
-R5381:5384 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R5356:5356 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R5367:5370 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R5357:5360 research.Definitions <> Pair constr
-R5362:5363 research.Examples <> p3:189 var
-R5365:5366 research.Examples <> p4:190 var
-R5371:5374 research.Definitions <> Bool constr
-R5376:5380 Coq.Init.Datatypes <> false constr
-R5385:5388 Coq.Init.Logic <> True ind
-def 5488:5492 <> what2
-R5500:5507 research.Definitions <> TRValues ind
-binder 5495:5496 <> t1:193
-R5515:5521 research.Definitions <> TRTypes ind
-binder 5511:5511 <> A:194
-R5538:5541 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R5526:5532 research.Definitions <> HasType ind
-R5534:5535 research.Examples <> t1:193 var
-R5537:5537 research.Examples <> A:194 var
-R5542:5542 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R5567:5574 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R5598:5598 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R5559:5562 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R5545:5548 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
-R5543:5544 research.Examples <> t1:193 var
-R5549:5552 research.Definitions <> Bool constr
-R5554:5558 Coq.Init.Datatypes <> false constr
-R5563:5566 Coq.Init.Logic <> True ind
-R5590:5593 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R5577:5579 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R5575:5576 research.Examples <> t1:193 var
-R5580:5583 research.Definitions <> Bool constr
-R5585:5589 Coq.Init.Datatypes <> false constr
-R5594:5597 Coq.Init.Logic <> True ind
-R5666:5669 research.Examples <> what prfax
-def 5742:5745 <> ex12
-R5754:5760 research.Definitions <> TRTypes ind
-binder 5748:5748 <> A:195
-binder 5750:5750 <> B:196
-R5768:5768 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R5770:5773 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R5784:5784 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 5769:5769 <> v:197
-binder 5769:5769 <> v:198
-binder 5769:5769 <> v:199
-R5774:5779 research.Definitions <> trpair constr
-R5781:5781 research.Examples <> A:195 var
-R5783:5783 research.Examples <> B:196 var
-binder 5769:5769 <> v:200
-binder 5769:5769 <> v:201
-binder 5769:5769 <> v:202
-binder 5769:5769 <> v:203
-binder 5764:5764 <> p:204
-R5792:5792 research.Definitions <> :::'{'_x_'>>'_x_'&'_x_'&'_x_'}' not
-R5794:5797 research.Definitions <> :::'{'_x_'>>'_x_'&'_x_'&'_x_'}' not
-R5804:5807 research.Definitions <> :::'{'_x_'>>'_x_'&'_x_'&'_x_'}' not
-R5834:5838 research.Definitions <> :::'{'_x_'>>'_x_'&'_x_'&'_x_'}' not
-R5869:5870 research.Definitions <> :::'{'_x_'>>'_x_'&'_x_'&'_x_'}' not
-binder 5793:5793 <> t:205
-binder 5793:5793 <> t:206
-binder 5793:5793 <> t:207
-R5798:5803 research.Definitions <> trbool constr
-binder 5793:5793 <> t:208
-binder 5793:5793 <> t:209
-R5808:5814 research.Definitions <> HasType ind
-R5816:5816 research.Examples <> p:204 var
-R5819:5824 research.Definitions <> trpair constr
-R5826:5830 research.Definitions <> trnum constr
-R5832:5832 research.Examples <> B:196 var
-binder 5793:5793 <> t:210
-binder 5793:5793 <> t:211
-R5839:5841 Coq.Init.Logic <> ::type_scope:'~'_x not
-R5868:5868 Coq.Init.Logic <> ::type_scope:'~'_x not
-R5842:5848 research.Definitions <> HasType ind
-R5850:5850 research.Examples <> p:204 var
-R5853:5858 research.Definitions <> trpair constr
-R5860:5864 research.Definitions <> trnum constr
-R5866:5866 research.Examples <> B:196 var
-R5878:5886 research.Functions <> is_number def
-R5889:5891 research.Functions <> car def
-R5893:5893 research.Examples <> p:204 var
-def 7109:7118 <> ex12_again
-R7127:7133 research.Definitions <> TRTypes ind
-binder 7121:7121 <> A:212
-binder 7123:7123 <> B:213
-R7141:7141 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R7143:7146 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R7157:7157 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 7142:7142 <> v:214
-binder 7142:7142 <> v:215
-binder 7142:7142 <> v:216
-R7147:7152 research.Definitions <> trpair constr
-R7154:7154 research.Examples <> A:212 var
-R7156:7156 research.Examples <> B:213 var
-binder 7142:7142 <> v:217
-binder 7142:7142 <> v:218
-binder 7142:7142 <> v:219
-binder 7142:7142 <> v:220
-binder 7137:7137 <> p:221
-R7163:7163 research.Definitions <> :::'{'_x_'>>'_x_'&'_x_'&'_x_'}' not
-R7165:7168 research.Definitions <> :::'{'_x_'>>'_x_'&'_x_'&'_x_'}' not
-R7175:7178 research.Definitions <> :::'{'_x_'>>'_x_'&'_x_'&'_x_'}' not
-R7200:7204 research.Definitions <> :::'{'_x_'>>'_x_'&'_x_'&'_x_'}' not
-R7230:7231 research.Definitions <> :::'{'_x_'>>'_x_'&'_x_'&'_x_'}' not
-binder 7164:7164 <> t:222
-binder 7164:7164 <> t:223
-binder 7164:7164 <> t:224
-R7169:7174 research.Definitions <> trbool constr
-binder 7164:7164 <> t:225
-binder 7164:7164 <> t:226
-R7179:7185 research.Definitions <> HasType ind
-R7188:7190 research.Functions <> car def
-R7192:7192 research.Examples <> p:221 var
-R7195:7199 research.Definitions <> trnum constr
-binder 7164:7164 <> t:227
-binder 7164:7164 <> t:228
-R7205:7207 Coq.Init.Logic <> ::type_scope:'~'_x not
-R7229:7229 Coq.Init.Logic <> ::type_scope:'~'_x not
-R7208:7214 research.Definitions <> HasType ind
-R7217:7219 research.Functions <> car def
-R7221:7221 research.Examples <> p:221 var
-R7224:7228 research.Definitions <> trnum constr
-R7239:7247 research.Functions <> is_number def
-R7250:7252 research.Functions <> car def
-R7254:7254 research.Examples <> p:221 var
-R7276:7277 research.Definitions <> :::'<['_x_x_']>' not
-R7282:7283 research.Definitions <> :::'<['_x_x_']>' not
-R7308:7310 research.Definitions <> :::'<['_x_x_']>' not
-R7284:7287 research.Definitions <> Pair constr
-R7290:7292 research.Definitions <> Num constr
-R7298:7301 research.Definitions <> Bool constr
-R7303:7306 Coq.Init.Datatypes <> true constr
-R7278:7281 research.Examples <> ex12 def
-R7329:7330 research.Definitions <> :::'<['_x_x_']>' not
-R7335:7336 research.Definitions <> :::'<['_x_x_']>' not
-R7360:7362 research.Definitions <> :::'<['_x_x_']>' not
-R7337:7340 research.Definitions <> Pair constr
-R7343:7345 research.Definitions <> Str constr
-R7354:7356 research.Definitions <> Num constr
-R7331:7334 research.Examples <> ex12 def
-def 7536:7542 <> ex13_14
-R7551:7557 research.Definitions <> TRTypes ind
-binder 7545:7545 <> A:229
-binder 7547:7547 <> B:230
-R7570:7570 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R7572:7575 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R7595:7595 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 7571:7571 <> v:231
-binder 7571:7571 <> v:232
-binder 7571:7571 <> v:233
-R7576:7582 research.Definitions <> trunion constr
-R7584:7588 research.Definitions <> trnum constr
-R7590:7594 research.Definitions <> trstr constr
-binder 7571:7571 <> v:234
-binder 7571:7571 <> v:235
-binder 7571:7571 <> v:236
-binder 7571:7571 <> v:237
-binder 7566:7566 <> x:238
-R7608:7608 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R7610:7613 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R7632:7632 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 7609:7609 <> v:239
-binder 7609:7609 <> v:240
-binder 7609:7609 <> v:241
-R7614:7619 research.Definitions <> trpair constr
-R7621:7625 research.Definitions <> trtop constr
-R7627:7631 research.Definitions <> trtop constr
-binder 7609:7609 <> v:242
-binder 7609:7609 <> v:243
-binder 7609:7609 <> v:244
-binder 7609:7609 <> v:245
-binder 7604:7604 <> y:246
-R7641:7641 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R7643:7646 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R7652:7652 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 7642:7642 <> t:247
-binder 7642:7642 <> t:248
-binder 7642:7642 <> t:249
-R7647:7651 research.Definitions <> trnum constr
-binder 7642:7642 <> t:250
-binder 7642:7642 <> t:251
-binder 7642:7642 <> t:252
-binder 7642:7642 <> t:253
-R7659:7668 research.Functions <> :::'condTR'_'['_x_x_']'_'['_x_x_']'_'['_'else'_x_']' not
-R7754:7756 research.Functions <> :::'condTR'_'['_x_x_']'_'['_x_x_']'_'['_'else'_x_']' not
-R7770:7786 research.Functions <> :::'condTR'_'['_x_x_']'_'['_x_x_']'_'['_'else'_x_']' not
-R7804:7806 research.Functions <> :::'condTR'_'['_x_x_']'_'['_x_x_']'_'['_'else'_x_']' not
-R7829:7850 research.Functions <> :::'condTR'_'['_x_x_']'_'['_x_x_']'_'['_'else'_x_']' not
-R7867:7868 research.Functions <> :::'condTR'_'['_x_x_']'_'['_x_x_']'_'['_'else'_x_']' not
-R7669:7677 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
-R7693:7695 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
-R7717:7721 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
-R7733:7735 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
-R7753:7753 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
-R7678:7684 research.Definitions <> HasType ind
-R7686:7686 research.Examples <> x:238 var
-R7688:7692 research.Definitions <> trnum constr
-R7678:7684 research.Definitions <> HasType ind
-R7686:7686 research.Examples <> x:238 var
-R7688:7692 research.Definitions <> trnum constr
-R7696:7702 research.Definitions <> HasType ind
-R7705:7707 research.Functions <> car def
-R7709:7709 research.Examples <> y:246 var
-R7712:7716 research.Definitions <> trnum constr
-R7678:7684 research.Definitions <> HasType ind
-R7686:7686 research.Examples <> x:238 var
-R7688:7692 research.Definitions <> trnum constr
-R7678:7684 research.Definitions <> HasType ind
-R7686:7686 research.Examples <> x:238 var
-R7688:7692 research.Definitions <> trnum constr
-R7696:7702 research.Definitions <> HasType ind
-R7705:7707 research.Functions <> car def
-R7709:7709 research.Examples <> y:246 var
-R7712:7716 research.Definitions <> trnum constr
-R7722:7730 research.Functions <> is_number def
-R7732:7732 research.Examples <> x:238 var
-R7736:7744 research.Functions <> is_number def
-R7747:7749 research.Functions <> car def
-R7751:7751 research.Examples <> y:246 var
-R7722:7730 research.Functions <> is_number def
-R7732:7732 research.Examples <> x:238 var
-R7757:7759 research.Functions <> add def
-R7761:7761 research.Examples <> x:238 var
-R7764:7766 research.Functions <> car def
-R7768:7768 research.Examples <> y:246 var
-R7787:7795 research.Functions <> is_number def
-R7798:7800 research.Functions <> car def
-R7802:7802 research.Examples <> y:246 var
-R7807:7809 research.Functions <> add def
-R7812:7817 research.Functions <> strlen def
-R7819:7819 research.Examples <> x:238 var
-R7823:7825 research.Functions <> car def
-R7827:7827 research.Examples <> y:246 var
-R7851:7858 research.Definitions <> giveType def
-R7861:7863 research.Definitions <> Num constr
+R2673:2675 research.Definitions <> :::'<['_x_']>' not
+R2687:2689 research.Definitions <> :::'<['_x_']>' not
+R2676:2678 research.Definitions <> Str constr
+R2661:2663 research.Definitions <> :::'<['_x_']>' not
+R2669:2671 research.Definitions <> :::'<['_x_']>' not
+R2664:2666 research.Definitions <> Num constr
+def 2863:2865 <> ex8
+R2872:2878 research.Definitions <> TRTypes ind
+binder 2868:2868 <> t:98
+R2886:2886 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R2888:2891 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R2893:2893 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 2887:2887 <> v:99
+binder 2887:2887 <> v:100
+binder 2887:2887 <> v:101
+R2892:2892 research.Examples <> t:98 var
+binder 2887:2887 <> v:102
+binder 2887:2887 <> v:103
+binder 2887:2887 <> v:104
+binder 2887:2887 <> v:105
+binder 2882:2882 <> x:106
+R2901:2906 research.Functions <> orTest def
+R2908:2908 research.Examples <> x:106 var
+def 2931:2938 <> ex8_test
+R2945:2951 research.Definitions <> TRTypes ind
+binder 2941:2941 <> t:107
+R2959:2959 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R2961:2964 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R2966:2966 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 2960:2960 <> v:108
+binder 2960:2960 <> v:109
+binder 2960:2960 <> v:110
+R2965:2965 research.Examples <> t:107 var
+binder 2960:2960 <> v:111
+binder 2960:2960 <> v:112
+binder 2960:2960 <> v:113
+binder 2960:2960 <> v:114
+binder 2955:2955 <> x:115
+R2971:2971 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R2973:2976 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R2982:2982 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 2972:2972 <> v:116
+binder 2972:2972 <> v:117
+binder 2972:2972 <> v:118
+R2977:2981 research.Definitions <> trnum constr
+binder 2972:2972 <> v:119
+binder 2972:2972 <> v:120
+binder 2972:2972 <> v:121
+binder 2972:2972 <> v:122
+R2990:2995 research.Functions <> :::'ifTR'_x_x_x not
+R3001:3003 research.Functions <> :::'ifTR'_x_x_x not
+R3009:3011 research.Functions <> :::'ifTR'_x_x_x not
+R3028:3028 research.Functions <> :::'ifTR'_x_x_x not
+R2996:2998 research.Examples <> ex8 def
+R3000:3000 research.Examples <> x:115 var
+R3004:3006 research.Examples <> ex2 def
+R3008:3008 research.Examples <> x:115 var
+R3012:3019 research.Definitions <> giveType def
+R3022:3024 research.Definitions <> Num constr
+R3049:3051 research.Examples <> ex8 def
+R3053:3055 research.Definitions <> :::'<['_x_']>' not
+R3061:3063 research.Definitions <> :::'<['_x_']>' not
+R3056:3058 research.Definitions <> Num constr
+R3082:3089 research.Examples <> ex8_test def
+R3091:3093 research.Definitions <> :::'<['_x_']>' not
+R3099:3101 research.Definitions <> :::'<['_x_']>' not
+R3094:3096 research.Definitions <> Num constr
+R3120:3122 research.Examples <> ex8 def
+R3124:3126 research.Definitions <> :::'<['_x_']>' not
+R3141:3143 research.Definitions <> :::'<['_x_']>' not
+R3127:3129 research.Definitions <> Str constr
+R3162:3169 research.Examples <> ex8_test def
+R3171:3173 research.Definitions <> :::'<['_x_']>' not
+R3188:3190 research.Definitions <> :::'<['_x_']>' not
+R3174:3176 research.Definitions <> Str constr
+R3209:3211 research.Examples <> ex8 def
+R3213:3215 research.Definitions <> :::'<['_x_']>' not
+R3225:3227 research.Definitions <> :::'<['_x_']>' not
+R3216:3219 research.Definitions <> Bool constr
+R3221:3224 Coq.Init.Datatypes <> true constr
+R3246:3253 research.Examples <> ex8_test def
+R3255:3257 research.Definitions <> :::'<['_x_']>' not
+R3267:3269 research.Definitions <> :::'<['_x_']>' not
+R3258:3261 research.Definitions <> Bool constr
+R3263:3266 Coq.Init.Datatypes <> true constr
+def 3443:3445 <> ex9
+R3452:3458 research.Definitions <> TRTypes ind
+binder 3448:3448 <> t:123
+R3466:3466 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R3468:3471 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R3473:3473 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 3467:3467 <> v:124
+binder 3467:3467 <> v:125
+binder 3467:3467 <> v:126
+R3472:3472 research.Examples <> t:123 var
+binder 3467:3467 <> v:127
+binder 3467:3467 <> v:128
+binder 3467:3467 <> v:129
+binder 3467:3467 <> v:130
+binder 3462:3462 <> x:131
+R3478:3478 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R3480:3483 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R3489:3489 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 3479:3479 <> v:132
+binder 3479:3479 <> v:133
+binder 3479:3479 <> v:134
+R3484:3488 research.Definitions <> trnum constr
+binder 3479:3479 <> v:135
+binder 3479:3479 <> v:136
+binder 3479:3479 <> v:137
+binder 3479:3479 <> v:138
+R3497:3502 research.Functions <> :::'ifTR'_x_x_x not
+R3813:3824 research.Functions <> :::'ifTR'_x_x_x not
+R3830:3842 research.Functions <> :::'ifTR'_x_x_x not
+R3859:3859 research.Functions <> :::'ifTR'_x_x_x not
+R3513:3521 research.Functions <> is_number def
+R3523:3523 research.Examples <> x:131 var
+binder 3507:3507 <> p:139
+R3541:3548 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
+R3564:3588 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
+R3623:3647 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
+R3666:3690 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
+R3728:3752 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
+R3754:3775 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
+R3777:3799 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
+R3811:3811 research.Functions <> :::'ifTR'_'<'_x_x_x_x_'>'_x_x_x not
+R3549:3555 research.Definitions <> HasType ind
+R3557:3557 research.Examples <> x:131 var
+R3559:3563 research.Definitions <> trnum constr
+R3604:3607 Coq.Init.Logic <> ::type_scope:x_'\/'_x not
+R3589:3595 research.Definitions <> HasType ind
+R3597:3597 research.Examples <> x:131 var
+R3599:3603 research.Definitions <> trnum constr
+R3608:3614 research.Definitions <> HasType ind
+R3616:3616 research.Examples <> x:131 var
+R3618:3622 research.Definitions <> trstr constr
+R3648:3649 Coq.Init.Logic <> ::type_scope:'~'_x not
+R3665:3665 Coq.Init.Logic <> ::type_scope:'~'_x not
+R3650:3656 research.Definitions <> HasType ind
+R3658:3658 research.Examples <> x:131 var
+R3660:3664 research.Definitions <> trnum constr
+R3691:3692 Coq.Init.Logic <> ::type_scope:'~'_x not
+R3727:3727 Coq.Init.Logic <> ::type_scope:'~'_x not
+R3708:3711 Coq.Init.Logic <> ::type_scope:x_'\/'_x not
+R3693:3699 research.Definitions <> HasType ind
+R3701:3701 research.Examples <> x:131 var
+R3703:3707 research.Definitions <> trnum constr
+R3712:3718 research.Definitions <> HasType ind
+R3720:3720 research.Examples <> x:131 var
+R3722:3726 research.Definitions <> trstr constr
+R3753:3753 research.Examples <> p:139 var
+R3776:3776 research.Examples <> p:139 var
+R3800:3808 research.Functions <> is_string def
+R3810:3810 research.Examples <> x:131 var
+R3825:3827 research.Examples <> ex2 def
+R3829:3829 research.Examples <> x:131 var
+R3843:3850 research.Definitions <> giveType def
+R3853:3855 research.Definitions <> Num constr
+R3880:3882 research.Examples <> ex9 def
+R3884:3886 research.Definitions <> :::'<['_x_']>' not
+R3892:3894 research.Definitions <> :::'<['_x_']>' not
+R3887:3889 research.Definitions <> Num constr
+def 4068:4071 <> ex10
+R4080:4086 research.Definitions <> TRTypes ind
+binder 4074:4074 <> A:140
+binder 4076:4076 <> B:141
+R4094:4094 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R4096:4100 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R4111:4112 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 4095:4095 <> v:142
+binder 4095:4095 <> v:143
+binder 4095:4095 <> v:144
+R4101:4106 research.Definitions <> trpair constr
+R4108:4108 research.Examples <> A:140 var
+R4110:4110 research.Examples <> B:141 var
+binder 4095:4095 <> v:145
+binder 4095:4095 <> v:146
+binder 4095:4095 <> v:147
+binder 4095:4095 <> v:148
+binder 4090:4090 <> p:149
+R4117:4117 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R4119:4122 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R4128:4128 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 4118:4118 <> t:150
+binder 4118:4118 <> t:151
+binder 4118:4118 <> t:152
+R4123:4127 research.Definitions <> trnum constr
+binder 4118:4118 <> t:153
+binder 4118:4118 <> t:154
+binder 4118:4118 <> t:155
+binder 4118:4118 <> t:156
+R4135:4140 research.Functions <> :::'ifTR'_x_x_x not
+R4158:4160 research.Functions <> :::'ifTR'_x_x_x not
+R4173:4175 research.Functions <> :::'ifTR'_x_x_x not
+R4192:4192 research.Functions <> :::'ifTR'_x_x_x not
+R4141:4149 research.Functions <> is_number def
+R4152:4154 research.Functions <> car def
+R4156:4156 research.Examples <> p:149 var
+R4161:4164 research.Functions <> add1 def
+R4167:4169 research.Functions <> car def
+R4171:4171 research.Examples <> p:149 var
+R4176:4183 research.Definitions <> giveType def
+R4186:4188 research.Definitions <> Num constr
+R4212:4215 research.Examples <> ex10 def
+R4217:4219 research.Definitions <> :::'<['_x_']>' not
+R4244:4246 research.Definitions <> :::'<['_x_']>' not
+R4220:4223 research.Definitions <> Pair constr
+R4226:4228 research.Definitions <> Num constr
+R4234:4236 research.Definitions <> Str constr
+R4265:4268 research.Examples <> ex10 def
+R4270:4272 research.Definitions <> :::'<['_x_']>' not
+R4299:4301 research.Definitions <> :::'<['_x_']>' not
+R4273:4276 research.Definitions <> Pair constr
+R4279:4282 research.Definitions <> Bool constr
+R4284:4288 Coq.Init.Datatypes <> false constr
+R4292:4294 research.Definitions <> Num constr
+def 4475:4475 <> g
+R4482:4482 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R4484:4487 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R4506:4506 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 4483:4483 <> v:157
+binder 4483:4483 <> v:158
+binder 4483:4483 <> v:159
+R4488:4493 research.Definitions <> trpair constr
+R4495:4499 research.Definitions <> trnum constr
+R4501:4505 research.Definitions <> trnum constr
+binder 4483:4483 <> v:160
+binder 4483:4483 <> v:161
+binder 4483:4483 <> v:162
+binder 4483:4483 <> v:163
+binder 4478:4478 <> p:164
+R4511:4511 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R4513:4516 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R4522:4522 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 4512:4512 <> t:165
+binder 4512:4512 <> t:166
+binder 4512:4512 <> t:167
+R4517:4521 research.Definitions <> trnum constr
+binder 4512:4512 <> t:168
+binder 4512:4512 <> t:169
+binder 4512:4512 <> t:170
+binder 4512:4512 <> t:171
+R4530:4532 research.Functions <> add def
+R4535:4537 research.Functions <> car def
+R4539:4539 research.Examples <> p:164 var
+R4543:4545 research.Functions <> cdr def
+R4547:4547 research.Examples <> p:164 var
+R4569:4569 research.Examples <> g def
+R4571:4573 research.Definitions <> :::'<['_x_']>' not
+R4594:4596 research.Definitions <> :::'<['_x_']>' not
+R4574:4577 research.Definitions <> Pair constr
+R4580:4582 research.Definitions <> Num constr
+R4588:4590 research.Definitions <> Num constr
+def 4666:4669 <> ex11
+R4678:4684 research.Definitions <> TRTypes ind
+binder 4672:4672 <> A:172
+binder 4674:4674 <> B:173
+R4692:4692 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R4694:4697 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R4708:4708 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 4693:4693 <> v:174
+binder 4693:4693 <> v:175
+binder 4693:4693 <> v:176
+R4698:4703 research.Definitions <> trpair constr
+R4705:4705 research.Examples <> A:172 var
+R4707:4707 research.Examples <> B:173 var
+binder 4693:4693 <> v:177
+binder 4693:4693 <> v:178
+binder 4693:4693 <> v:179
+binder 4693:4693 <> v:180
+binder 4688:4688 <> p:181
+R4713:4713 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R4715:4718 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R4724:4724 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 4714:4714 <> t:182
+binder 4714:4714 <> t:183
+binder 4714:4714 <> t:184
+R4719:4723 research.Definitions <> trnum constr
+binder 4714:4714 <> t:185
+binder 4714:4714 <> t:186
+binder 4714:4714 <> t:187
+binder 4714:4714 <> t:188
+R4731:4736 research.Functions <> :::'ifTR'_x_x_x not
+R4834:4836 research.Functions <> :::'ifTR'_x_x_x not
+R4840:4842 research.Functions <> :::'ifTR'_x_x_x not
+R4859:4859 research.Functions <> :::'ifTR'_x_x_x not
+R4737:4745 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
+R4767:4769 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
+R4791:4795 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
+R4813:4815 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
+R4833:4833 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
+R4746:4752 research.Definitions <> HasType ind
+R4755:4757 research.Functions <> car def
+R4759:4759 research.Examples <> p:181 var
+R4762:4766 research.Definitions <> trnum constr
+R4746:4752 research.Definitions <> HasType ind
+R4755:4757 research.Functions <> car def
+R4759:4759 research.Examples <> p:181 var
+R4762:4766 research.Definitions <> trnum constr
+R4770:4776 research.Definitions <> HasType ind
+R4779:4781 research.Functions <> cdr def
+R4783:4783 research.Examples <> p:181 var
+R4786:4790 research.Definitions <> trnum constr
+R4746:4752 research.Definitions <> HasType ind
+R4755:4757 research.Functions <> car def
+R4759:4759 research.Examples <> p:181 var
+R4762:4766 research.Definitions <> trnum constr
+R4746:4752 research.Definitions <> HasType ind
+R4755:4757 research.Functions <> car def
+R4759:4759 research.Examples <> p:181 var
+R4762:4766 research.Definitions <> trnum constr
+R4770:4776 research.Definitions <> HasType ind
+R4779:4781 research.Functions <> cdr def
+R4783:4783 research.Examples <> p:181 var
+R4786:4790 research.Definitions <> trnum constr
+R4796:4804 research.Functions <> is_number def
+R4807:4809 research.Functions <> car def
+R4811:4811 research.Examples <> p:181 var
+R4816:4824 research.Functions <> is_number def
+R4827:4829 research.Functions <> cdr def
+R4831:4831 research.Examples <> p:181 var
+R4796:4804 research.Functions <> is_number def
+R4807:4809 research.Functions <> car def
+R4811:4811 research.Examples <> p:181 var
+R4837:4837 research.Examples <> g def
+R4839:4839 research.Examples <> p:181 var
+R4843:4850 research.Definitions <> giveType def
+R4853:4855 research.Definitions <> Num constr
+R4881:4884 research.Examples <> ex11 def
+R4886:4888 research.Definitions <> :::'<['_x_']>' not
+R4910:4912 research.Definitions <> :::'<['_x_']>' not
+R4889:4892 research.Definitions <> Pair constr
+R4895:4897 research.Definitions <> Num constr
+R4903:4905 research.Definitions <> Num constr
+R4931:4934 research.Examples <> ex11 def
+R4936:4938 research.Definitions <> :::'<['_x_']>' not
+R4964:4966 research.Definitions <> :::'<['_x_']>' not
+R4939:4942 research.Definitions <> Pair constr
+R4945:4947 research.Definitions <> Num constr
+R4953:4956 research.Definitions <> Bool constr
+R4958:4962 Coq.Init.Datatypes <> false constr
+def 5180:5183 <> ex12
+R5192:5198 research.Definitions <> TRTypes ind
+binder 5186:5186 <> A:189
+binder 5188:5188 <> B:190
+R5206:5206 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R5208:5211 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R5222:5222 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 5207:5207 <> v:191
+binder 5207:5207 <> v:192
+binder 5207:5207 <> v:193
+R5212:5217 research.Definitions <> trpair constr
+R5219:5219 research.Examples <> A:189 var
+R5221:5221 research.Examples <> B:190 var
+binder 5207:5207 <> v:194
+binder 5207:5207 <> v:195
+binder 5207:5207 <> v:196
+binder 5207:5207 <> v:197
+binder 5202:5202 <> p:198
+R5230:5230 research.Definitions <> :::'{'_x_'>>'_x_'&'_x_'&'_x_'}' not
+R5232:5235 research.Definitions <> :::'{'_x_'>>'_x_'&'_x_'&'_x_'}' not
+R5242:5245 research.Definitions <> :::'{'_x_'>>'_x_'&'_x_'&'_x_'}' not
+R5272:5276 research.Definitions <> :::'{'_x_'>>'_x_'&'_x_'&'_x_'}' not
+R5307:5308 research.Definitions <> :::'{'_x_'>>'_x_'&'_x_'&'_x_'}' not
+binder 5231:5231 <> t:199
+binder 5231:5231 <> t:200
+binder 5231:5231 <> t:201
+R5236:5241 research.Definitions <> trbool constr
+binder 5231:5231 <> t:202
+binder 5231:5231 <> t:203
+R5246:5252 research.Definitions <> HasType ind
+R5254:5254 research.Examples <> p:198 var
+R5257:5262 research.Definitions <> trpair constr
+R5264:5268 research.Definitions <> trnum constr
+R5270:5270 research.Examples <> B:190 var
+binder 5231:5231 <> t:204
+binder 5231:5231 <> t:205
+R5277:5279 Coq.Init.Logic <> ::type_scope:'~'_x not
+R5306:5306 Coq.Init.Logic <> ::type_scope:'~'_x not
+R5280:5286 research.Definitions <> HasType ind
+R5288:5288 research.Examples <> p:198 var
+R5291:5296 research.Definitions <> trpair constr
+R5298:5302 research.Definitions <> trnum constr
+R5304:5304 research.Examples <> B:190 var
+R5316:5324 research.Functions <> is_number def
+R5327:5329 research.Functions <> car def
+R5331:5331 research.Examples <> p:198 var
+def 5362:5371 <> ex12_again
+R5380:5386 research.Definitions <> TRTypes ind
+binder 5374:5374 <> A:206
+binder 5376:5376 <> B:207
+R5394:5394 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R5396:5399 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R5410:5410 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 5395:5395 <> v:208
+binder 5395:5395 <> v:209
+binder 5395:5395 <> v:210
+R5400:5405 research.Definitions <> trpair constr
+R5407:5407 research.Examples <> A:206 var
+R5409:5409 research.Examples <> B:207 var
+binder 5395:5395 <> v:211
+binder 5395:5395 <> v:212
+binder 5395:5395 <> v:213
+binder 5395:5395 <> v:214
+binder 5390:5390 <> p:215
+R5416:5416 research.Definitions <> :::'{'_x_'>>'_x_'&'_x_'&'_x_'}' not
+R5418:5421 research.Definitions <> :::'{'_x_'>>'_x_'&'_x_'&'_x_'}' not
+R5428:5431 research.Definitions <> :::'{'_x_'>>'_x_'&'_x_'&'_x_'}' not
+R5453:5457 research.Definitions <> :::'{'_x_'>>'_x_'&'_x_'&'_x_'}' not
+R5483:5484 research.Definitions <> :::'{'_x_'>>'_x_'&'_x_'&'_x_'}' not
+binder 5417:5417 <> t:216
+binder 5417:5417 <> t:217
+binder 5417:5417 <> t:218
+R5422:5427 research.Definitions <> trbool constr
+binder 5417:5417 <> t:219
+binder 5417:5417 <> t:220
+R5432:5438 research.Definitions <> HasType ind
+R5441:5443 research.Functions <> car def
+R5445:5445 research.Examples <> p:215 var
+R5448:5452 research.Definitions <> trnum constr
+binder 5417:5417 <> t:221
+binder 5417:5417 <> t:222
+R5458:5460 Coq.Init.Logic <> ::type_scope:'~'_x not
+R5482:5482 Coq.Init.Logic <> ::type_scope:'~'_x not
+R5461:5467 research.Definitions <> HasType ind
+R5470:5472 research.Functions <> car def
+R5474:5474 research.Examples <> p:215 var
+R5477:5481 research.Definitions <> trnum constr
+R5492:5500 research.Functions <> is_number def
+R5503:5505 research.Functions <> car def
+R5507:5507 research.Examples <> p:215 var
+R5529:5532 research.Examples <> ex12 def
+R5534:5536 research.Definitions <> :::'<['_x_']>' not
+R5561:5563 research.Definitions <> :::'<['_x_']>' not
+R5537:5540 research.Definitions <> Pair constr
+R5543:5545 research.Definitions <> Num constr
+R5551:5554 research.Definitions <> Bool constr
+R5556:5559 Coq.Init.Datatypes <> true constr
+R5582:5585 research.Examples <> ex12 def
+R5587:5589 research.Definitions <> :::'<['_x_']>' not
+R5613:5615 research.Definitions <> :::'<['_x_']>' not
+R5590:5593 research.Definitions <> Pair constr
+R5596:5598 research.Definitions <> Str constr
+R5607:5609 research.Definitions <> Num constr
+def 5789:5795 <> ex13_14
+R5804:5810 research.Definitions <> TRTypes ind
+binder 5798:5798 <> A:223
+binder 5800:5800 <> B:224
+R5823:5823 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R5825:5828 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R5848:5848 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 5824:5824 <> v:225
+binder 5824:5824 <> v:226
+binder 5824:5824 <> v:227
+R5829:5835 research.Definitions <> trunion constr
+R5837:5841 research.Definitions <> trnum constr
+R5843:5847 research.Definitions <> trstr constr
+binder 5824:5824 <> v:228
+binder 5824:5824 <> v:229
+binder 5824:5824 <> v:230
+binder 5824:5824 <> v:231
+binder 5819:5819 <> x:232
+R5861:5861 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R5863:5866 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R5885:5885 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 5862:5862 <> v:233
+binder 5862:5862 <> v:234
+binder 5862:5862 <> v:235
+R5867:5872 research.Definitions <> trpair constr
+R5874:5878 research.Definitions <> trtop constr
+R5880:5884 research.Definitions <> trtop constr
+binder 5862:5862 <> v:236
+binder 5862:5862 <> v:237
+binder 5862:5862 <> v:238
+binder 5862:5862 <> v:239
+binder 5857:5857 <> y:240
+R5894:5894 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R5896:5899 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R5905:5905 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 5895:5895 <> t:241
+binder 5895:5895 <> t:242
+binder 5895:5895 <> t:243
+R5900:5904 research.Definitions <> trnum constr
+binder 5895:5895 <> t:244
+binder 5895:5895 <> t:245
+binder 5895:5895 <> t:246
+binder 5895:5895 <> t:247
+R5912:5921 research.Functions <> :::'condTR'_'['_x_x_']'_'['_x_x_']'_'['_'else'_x_']' not
+R6031:6033 research.Functions <> :::'condTR'_'['_x_x_']'_'['_x_x_']'_'['_'else'_x_']' not
+R6047:6063 research.Functions <> :::'condTR'_'['_x_x_']'_'['_x_x_']'_'['_'else'_x_']' not
+R6081:6083 research.Functions <> :::'condTR'_'['_x_x_']'_'['_x_x_']'_'['_'else'_x_']' not
+R6106:6127 research.Functions <> :::'condTR'_'['_x_x_']'_'['_x_x_']'_'['_'else'_x_']' not
+R6144:6145 research.Functions <> :::'condTR'_'['_x_x_']'_'['_x_x_']'_'['_'else'_x_']' not
+R5922:5930 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
+R5958:5960 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
+R5994:5998 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
+R6010:6012 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
+R6030:6030 research.Functions <> :::'andTR'_'<'_x_x_'>'_x_x not
+R5931:5943 research.Definitions <> get_true_prop def
+R5946:5954 research.Functions <> is_number def
+R5956:5956 research.Examples <> x:232 var
+R5931:5943 research.Definitions <> get_true_prop def
+R5946:5954 research.Functions <> is_number def
+R5956:5956 research.Examples <> x:232 var
+R5961:5973 research.Definitions <> get_true_prop def
+R5976:5984 research.Functions <> is_number def
+R5987:5989 research.Functions <> car def
+R5991:5991 research.Examples <> y:240 var
+R5931:5943 research.Definitions <> get_true_prop def
+R5946:5954 research.Functions <> is_number def
+R5956:5956 research.Examples <> x:232 var
+R5931:5943 research.Definitions <> get_true_prop def
+R5946:5954 research.Functions <> is_number def
+R5956:5956 research.Examples <> x:232 var
+R5961:5973 research.Definitions <> get_true_prop def
+R5976:5984 research.Functions <> is_number def
+R5987:5989 research.Functions <> car def
+R5991:5991 research.Examples <> y:240 var
+R5999:6007 research.Functions <> is_number def
+R6009:6009 research.Examples <> x:232 var
+R6013:6021 research.Functions <> is_number def
+R6024:6026 research.Functions <> car def
+R6028:6028 research.Examples <> y:240 var
+R5999:6007 research.Functions <> is_number def
+R6009:6009 research.Examples <> x:232 var
+R6034:6036 research.Functions <> add def
+R6038:6038 research.Examples <> x:232 var
+R6041:6043 research.Functions <> car def
+R6045:6045 research.Examples <> y:240 var
+R6064:6072 research.Functions <> is_number def
+R6075:6077 research.Functions <> car def
+R6079:6079 research.Examples <> y:240 var
+R6084:6086 research.Functions <> add def
+R6089:6094 research.Functions <> strlen def
+R6096:6096 research.Examples <> x:232 var
+R6100:6102 research.Functions <> car def
+R6104:6104 research.Examples <> y:240 var
+R6128:6135 research.Definitions <> giveType def
+R6138:6140 research.Definitions <> Num constr
+R6266:6272 research.Examples <> ex13_14 def
+R6299:6306 research.Definitions <> top_pair def
+R6308:6310 research.Definitions <> :::'<['_x_']>' not
+R6338:6340 research.Definitions <> :::'<['_x_']>' not
+R6311:6314 research.Definitions <> Pair constr
+R6317:6319 research.Definitions <> Num constr
+R6326:6328 research.Definitions <> Str constr
+R6275:6282 research.Definitions <> TRUnionL def
+R6284:6286 research.Definitions <> :::'<['_x_']>' not
+R6293:6295 research.Definitions <> :::'<['_x_']>' not
+R6287:6289 research.Definitions <> Num constr
+prf 6559:6560 <> ok
+R6564:6567 Coq.Init.Logic <> True ind
+prf 6595:6598 <> wtf2
+R6602:6608 research.Definitions <> HasType ind
+R6611:6613 research.Definitions <> Num constr
+R6618:6622 research.Definitions <> trnum constr
+def 6670:6673 <> what
+R6684:6691 research.Definitions <> TRValues ind
+binder 6676:6677 <> p3:248
+binder 6679:6680 <> p4:249
+R6701:6707 research.Definitions <> TRTypes ind
+binder 6695:6695 <> A:250
+binder 6697:6697 <> B:251
+R6745:6748 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R6712:6718 research.Definitions <> HasType ind
+R6721:6724 research.Definitions <> Pair constr
+R6726:6727 research.Examples <> p3:248 var
+R6729:6730 research.Examples <> p4:249 var
+R6734:6739 research.Definitions <> trpair constr
+R6741:6741 research.Examples <> A:250 var
+R6743:6743 research.Examples <> B:251 var
+R6749:6749 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R6784:6791 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R6825:6825 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R6776:6779 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6750:6750 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R6761:6765 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R6751:6754 research.Definitions <> Pair constr
+R6756:6757 research.Examples <> p3:248 var
+R6759:6760 research.Examples <> p4:249 var
+R6766:6769 research.Definitions <> Bool constr
+R6771:6775 Coq.Init.Datatypes <> false constr
+R6780:6783 Coq.Init.Logic <> True ind
+R6817:6820 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6792:6792 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R6803:6806 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R6793:6796 research.Definitions <> Pair constr
+R6798:6799 research.Examples <> p3:248 var
+R6801:6802 research.Examples <> p4:249 var
+R6807:6810 research.Definitions <> Bool constr
+R6812:6816 Coq.Init.Datatypes <> false constr
+R6821:6824 Coq.Init.Logic <> True ind
+def 6924:6928 <> what2
+R6936:6943 research.Definitions <> TRValues ind
+binder 6931:6932 <> t1:252
+R6951:6957 research.Definitions <> TRTypes ind
+binder 6947:6947 <> A:253
+R6974:6977 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R6962:6968 research.Definitions <> HasType ind
+R6970:6971 research.Examples <> t1:252 var
+R6973:6973 research.Examples <> A:253 var
+R6978:6978 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R7003:7010 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R7034:7034 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R6995:6998 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6981:6984 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R6979:6980 research.Examples <> t1:252 var
+R6985:6988 research.Definitions <> Bool constr
+R6990:6994 Coq.Init.Datatypes <> false constr
+R6999:7002 Coq.Init.Logic <> True ind
+R7026:7029 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7013:7015 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R7011:7012 research.Examples <> t1:252 var
+R7016:7019 research.Definitions <> Bool constr
+R7021:7025 Coq.Init.Datatypes <> false constr
+R7030:7033 Coq.Init.Logic <> True ind
+R7152:7155 research.Examples <> what prfax
+prf 7165:7178 <> trying_prequel
+R7195:7202 research.Definitions <> TRValues ind
+binder 7190:7191 <> p3:254
+R7248:7250 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R7209:7217 Coq.Init.Specif <> proj1_sig def
+R7220:7224 Coq.Init.Specif <> exist constr
+R7245:7246 research.Examples <> ok thm
+R7242:7243 research.Examples <> p3:254 var
+R7236:7239 Coq.Init.Logic <> True ind
+R7251:7252 research.Examples <> p3:254 var
+prf 7301:7306 <> trying
+R7326:7333 research.Definitions <> TRValues ind
+binder 7318:7319 <> p1:255
+binder 7321:7322 <> p2:256
+R7343:7349 research.Definitions <> TRTypes ind
+binder 7337:7337 <> A:257
+binder 7339:7339 <> B:258
+R7368:7371 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7356:7362 research.Definitions <> HasType ind
+R7364:7365 research.Examples <> p1:255 var
+R7367:7367 research.Examples <> A:257 var
+R7384:7390 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7372:7378 research.Definitions <> HasType ind
+R7380:7381 research.Examples <> p2:256 var
+R7383:7383 research.Examples <> B:258 var
+R7588:7601 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R7391:7399 Coq.Init.Specif <> proj1_sig def
+R7402:7404 research.Functions <> car def
+R7407:7411 Coq.Init.Specif <> exist constr
+R7582:7585 research.Examples <> what prfax
+R7559:7562 research.Definitions <> Pair constr
+R7564:7565 research.Examples <> p1:255 var
+R7567:7568 research.Examples <> p2:256 var
+binder 7418:7418 <> x:259
+R7423:7423 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R7446:7471 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R7424:7430 research.Definitions <> HasType ind
+R7432:7432 research.Examples <> x:259 var
+R7435:7440 research.Definitions <> trpair constr
+R7442:7442 research.Examples <> A:257 var
+R7444:7444 research.Examples <> B:258 var
+R7472:7472 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R7496:7521 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R7544:7544 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R7488:7491 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7474:7477 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R7473:7473 research.Examples <> x:259 var
+R7478:7481 research.Definitions <> Bool constr
+R7483:7487 Coq.Init.Datatypes <> false constr
+R7492:7495 Coq.Init.Logic <> True ind
+R7536:7539 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7523:7525 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R7522:7522 research.Examples <> x:259 var
+R7526:7529 research.Definitions <> Bool constr
+R7531:7535 Coq.Init.Datatypes <> false constr
+R7540:7543 Coq.Init.Logic <> True ind
+R7602:7603 research.Examples <> p1:255 var
+R7847:7849 research.Functions <> car def
+prf 7859:7868 <> trying_pt2
+binder 7880:7880 <> P:260
+binder 7882:7882 <> Q:261
+R7901:7908 research.Definitions <> TRValues ind
+binder 7893:7894 <> p1:262
+binder 7896:7897 <> p2:263
+R7918:7924 research.Definitions <> TRTypes ind
+binder 7912:7912 <> A:264
+binder 7914:7914 <> B:265
+binder 7927:7927 <> Z:266
+binder 7929:7929 <> W:267
+R7947:7950 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7935:7941 research.Definitions <> HasType ind
+R7943:7944 research.Examples <> p1:262 var
+R7946:7946 research.Examples <> A:264 var
+R7963:7968 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7951:7957 research.Definitions <> HasType ind
+R7959:7960 research.Examples <> p2:263 var
+R7962:7962 research.Examples <> B:265 var
+R8119:8128 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R7969:7977 Coq.Init.Specif <> proj1_sig def
+R7980:7982 research.Functions <> car def
+R7985:7989 Coq.Init.Specif <> exist constr
+R8116:8116 research.Examples <> Z:266 var
+R8090:8093 research.Definitions <> Pair constr
+R8095:8096 research.Examples <> p1:262 var
+R8098:8099 research.Examples <> p2:263 var
+binder 7996:7996 <> x:268
+R8001:8001 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R8024:8028 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R8002:8008 research.Definitions <> HasType ind
+R8010:8010 research.Examples <> x:268 var
+R8013:8018 research.Definitions <> trpair constr
+R8020:8020 research.Examples <> A:264 var
+R8022:8022 research.Examples <> B:265 var
+R8029:8029 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R8050:8055 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R8075:8075 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R8045:8048 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8031:8034 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R8030:8030 research.Examples <> x:268 var
+R8035:8038 research.Definitions <> Bool constr
+R8040:8044 Coq.Init.Datatypes <> false constr
+R8049:8049 research.Examples <> P:260 var
+R8070:8073 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8057:8059 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R8056:8056 research.Examples <> x:268 var
+R8060:8063 research.Definitions <> Bool constr
+R8065:8069 Coq.Init.Datatypes <> false constr
+R8074:8074 research.Examples <> Q:261 var
+R8129:8137 Coq.Init.Specif <> proj1_sig def
+R8140:8144 Coq.Init.Specif <> exist constr
+R8254:8254 research.Examples <> W:267 var
+R8238:8239 research.Examples <> p1:262 var
+binder 8151:8151 <> x:269
+R8168:8170 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R8157:8163 research.Definitions <> HasType ind
+R8165:8165 research.Examples <> x:269 var
+R8167:8167 research.Examples <> A:264 var
+R8171:8171 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R8195:8200 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R8223:8223 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R8187:8190 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8173:8176 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R8172:8172 research.Examples <> x:269 var
+R8177:8180 research.Definitions <> Bool constr
+R8182:8186 Coq.Init.Datatypes <> false constr
+R8191:8194 Coq.Init.Logic <> True ind
+R8215:8218 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8202:8204 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R8201:8201 research.Examples <> x:269 var
+R8205:8208 research.Definitions <> Bool constr
+R8210:8214 Coq.Init.Datatypes <> false constr
+R8219:8222 Coq.Init.Logic <> True ind
+R8282:8284 research.Functions <> car def
+prf 8695:8698 <> want
+binder 8709:8709 <> T:270
+binder 8711:8711 <> A:271
+binder 8713:8713 <> B:272
+R8724:8724 research.Examples <> T:270 var
+binder 8717:8717 <> p:273
+binder 8720:8720 <> q:274
+binder 8727:8727 <> P:275
+binder 8729:8729 <> Q:276
+R8737:8741 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8733:8735 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R8732:8732 research.Examples <> p:273 var
+R8736:8736 research.Examples <> q:274 var
+R8765:8767 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R8742:8750 Coq.Init.Specif <> proj1_sig def
+R8753:8757 Coq.Init.Specif <> exist constr
+R8763:8763 research.Examples <> P:275 var
+R8761:8761 research.Examples <> p:273 var
+R8759:8759 research.Examples <> A:271 var
+R8768:8776 Coq.Init.Specif <> proj1_sig def
+R8779:8783 Coq.Init.Specif <> exist constr
+R8789:8789 research.Examples <> Q:276 var
+R8787:8787 research.Examples <> q:274 var
+R8785:8785 research.Examples <> B:272 var

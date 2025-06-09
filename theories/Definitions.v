@@ -99,8 +99,22 @@ Program Definition TRUnionR {t1 t2 : TRTypes} (x : {v >> t2}) : {v >> (trunion t
     destruct a as [?H [?H ?H]].
     split; try apply HtUnion_R; auto. Defined.
 
-(************************************************************************)
-(************************ ONE MORE NOTATION AHHH ************************)
+Definition get_true_prop {T} {P Q : Prop} (v : {v : TRValues | (HasType v T) /\ (v <> Bool false -> P) /\ (v = Bool false -> Q)}) : Prop.
+Proof.
+  exact P.
+Defined.
 
-Notation " <[ f e ]> " := 
-    (f (giveType e)) (f at level 0, e at next level).
+(************************************************************************)
+(*********************** TWO MORE NOTATIONS AHHH ************************)
+
+Program Definition top_pair { S T : TRTypes } (v : { t >> (trpair S T) }) : { t >> (trpair trtop trtop) } :=
+  v.
+  Next Obligation.
+  intros; simpl.
+  repeat split. destruct v. destruct a. destruct a.
+  destruct x; try inversion h.
+  constructor; constructor.
+  Defined. 
+
+Notation " <[ e ]> " :=
+    (giveType e) (e at level 0).
