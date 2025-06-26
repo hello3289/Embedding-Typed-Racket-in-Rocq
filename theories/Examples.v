@@ -9,15 +9,26 @@ Require Import JMeq.
 #[local] Obligation Tactic := try (program_simpl; easy); try (pls_jail; easy).
 
 
+Coercion Num : nat >-> TRValues.
+Coercion Str : string >-> TRValues.
+Coercion Bool : bool >-> TRValues.
+(* not sure if you want a coercion to pair, it seems a little weird to do so *)
+
+Open Scope string_scope.
+
 (* IT LIVES *)
 
 (************************************************************************)
 (********************** EXAMPLE 1 AHHHHHHHHHHHHHHH **********************)
 Program Definition ex1 {t : TRTypes} (x : {v >> t}) : {v >> trnum}:=
-  ifTR (is_number x) (add1 x) (giveType (Num 0)).
+  ifTR (is_number x) (add1 x) <[0]>.
+  (* Num 0 is required as ifTR needs type {v >> t} so the coercion will not work *)
+  (* since it only does so when it see the specific type TRVales, not the subtype *)
+  (* maybe another coercion? *)
+  (* so <[0]> works since <[]> is expecting a TRValue, but this doesn't seem like what we want *)
 
-Eval compute in ex1 <[ (Num 5) ]>.
-Eval compute in ex1 <[ (Str "5") ]>.
+Eval compute in ex1 <[ 5 ]>.
+Eval compute in ex1 <[ "5" ]>.
 
 (************************************************************************)
 (********************** EXAMPLE 2 AHHHHHHHHHHHHHHH **********************)
@@ -25,34 +36,36 @@ Eval compute in ex1 <[ (Str "5") ]>.
 Program Definition ex2 (x : {v >> (trunion trstr trnum)}) : {v >> trnum} :=
   ifTR (is_number x) (add1 x) (strlen x).
 
-Eval compute in ex2 (TRUnionL <[(Str "hi")]>).
-Eval compute in ex2 (TRUnionR <[(Num 9)]>).
+Program Definition ex2_test1 := ex2 <["hi"]>.
+Program Definition ex2_test2 := ex2 <[9]>.
+
+Eval compute in ex2_test1.
+Eval compute in ex2_test2.
 
 (************************************************************************)
 (********************** EXAMPLE 4 AHHHHHHHHHHHHHHH **********************)
 
 Program Definition ex4 {t : TRTypes} (x : {v >> t}) : {v >> trnum} :=
-  ifTR (orTR < (HasType x trnum) (HasType x trstr) > 
-          (is_number x) (is_string x))
+  ifTR (orTR (is_number x) (is_string x))
         (ex2 x)
-        (Num 0).
+        <[0]>.
   
-Eval compute in ex4 <[(Num 9)]>.
-Eval compute in ex4 <[(Str "hi")]>.
-Eval compute in ex4 <[(Bool true)]>.
+Eval compute in ex4 <[9]>.
+Eval compute in ex4 <["hi"]>.
+Eval compute in ex4 <[true]>.
 
 (************************************************************************)
 (********************** EXAMPLE 5 AHHHHHHHHHHHHHHH **********************)
 
 Program Definition ex5 {t r : TRTypes} (x : {v >> t}) (y : {w >> r}) : {v >> trnum} :=
-  ifTR  (andTR < (HasType x trnum) (HasType y trstr) > (is_number x) (is_string y))
+  ifTR  (andTR (is_number x) (is_string y))
         (add x (strlen y)) (* i need addition *)
-        (Num 0).
+        <[0]>.
 
-Eval compute in ex5 <[(Num 5)]> <[(Str "hi")]>.
-Eval compute in ex5 <[(Num 5)]> <[(Num 8)]>.
-Eval compute in ex5 <[(Str "hello")]> <[(Num 10)]>.
-Eval compute in ex5 <[(Bool true)]> <[(Bool false)]>.
+Eval compute in ex5 <[5]> <["hi"]>.
+Eval compute in ex5 <[5]> <[8]>.
+Eval compute in ex5 <["hello"]> <[10]>.
+Eval compute in ex5 <[true]> <[false]>.
 
 (************************************************************************)
 (********************** EXAMPLE 7 AHHHHHHHHHHHHHHH **********************)
@@ -64,9 +77,9 @@ Program Definition ex7 {t r : TRTypes} (x : {v >> t}) (y : {w >> r}) : {v >> trn
       (is_string y)
       (Bool false))
     (add x (strlen y))
-    (giveType (Num 0))).
+    <[0]>).
 
-Eval compute in ex7 <[(Num 6)]> <[(Str "hello")]>.
+Eval compute in ex7 <[6]> <["hello"]>.
 
 (************************************************************************)
 (********************** EXAMPLE 8 AHHHHHHHHHHHHHHH **********************)
@@ -75,14 +88,14 @@ Program Definition ex8 {t : TRTypes} (x : {v >> t}) :=
   orTest x.
 
 Program Definition ex8_test {t : TRTypes} (x : {v >> t}) : {v >> trnum} :=
-  (ifTR (ex8 x) (ex2 x) (giveType (Num 0))).
+  (ifTR (ex8 x) (ex2 x) <[0]>).
 
-Eval compute in ex8 <[(Num 6)]>.
-Eval compute in ex8_test <[(Num 6)]>.
-Eval compute in ex8 <[(Str "potatoes")]>.
-Eval compute in ex8_test <[(Str "potatoes")]>.
-Eval compute in ex8 <[(Bool true)]>.
-Eval compute in ex8_test <[(Bool true)]>.
+Eval compute in ex8 <[6]>.
+Eval compute in ex8_test <[6]>.
+Eval compute in ex8 <["potatoes"]>.
+Eval compute in ex8_test <["potatoes"]>.
+Eval compute in ex8 <[true]>.
+Eval compute in ex8_test <[true]>.
 
 (************************************************************************)
 (********************** EXAMPLE 9 AHHHHHHHHHHHHHHH **********************)
@@ -97,18 +110,18 @@ Program Definition ex9 {t : TRTypes} (x : {v >> t}) : {v >> trnum} :=
                     p 
                     (is_string x)))
          (ex2 x) 
-         (giveType (Num 0))).
+         <[0]>).
 
-Eval compute in ex9 <[(Num 2)]>.
+Eval compute in ex9 <[2]>.
 
 (************************************************************************)
 (********************** EXAMPLE 10 AHHHHHHHHHHHHHH **********************)
 
 Program Definition ex10 {A B : TRTypes} (p : {v >> (trpair A B)}) : {t >> trnum} :=
-  ifTR (is_number (car p)) (add1 (car p)) (giveType (Num 7)).
+  ifTR (is_number (car p)) (add1 (car p)) <[7]>.
 
-Eval compute in ex10 <[(Pair (Num 5) (Str "bye"))]>.
-Eval compute in ex10 <[(Pair (Bool false) (Num 10))]>.
+Eval compute in ex10 <[(Pair 5 "bye")]>.
+Eval compute in ex10 <[(Pair false 10)]>.
 
 (************************************************************************)
 (********************** EXAMPLE 11 AHHHHHHHHHHHHHH **********************)
@@ -116,14 +129,14 @@ Eval compute in ex10 <[(Pair (Bool false) (Num 10))]>.
 Program Definition g (p : {v >> trpair trnum trnum}) : {t >> trnum} :=
   (add (car p) (cdr p)).
 
-Eval compute in g <[(Pair (Num 4) (Num 5))]>. 
+Eval compute in g <[(Pair 4 5)]>. 
 
 (* instead of returning 'no, i'll return 0 *)
 Program Definition ex11 {A B : TRTypes} (p : {v >> trpair A B}) : {t >> trnum} :=
-  ifTR (andTR < (HasType (car p) trnum) (HasType (cdr p) trnum) > (is_number (car p)) (is_number (cdr p))) (g p) (giveType (Num 0)).
+  ifTR (andTR (is_number (car p)) (is_number (cdr p))) (g p) <[0]>.
   
-Eval compute in ex11 <[(Pair (Num 4) (Num 12))]>.
-Eval compute in ex11 <[(Pair (Num 3) (Bool false))]>.
+Eval compute in ex11 <[(Pair 4 12)]>.
+Eval compute in ex11 <[(Pair 3 false)]>.
 
 (************************************************************************)
 (********************** EXAMPLE 12 AHHHHHHHHHHHHHH **********************)
@@ -139,23 +152,29 @@ Program Definition ex12_again {A B : TRTypes} (p : {v >> trpair A B}) :
 {t >> trbool & (HasType (car p) trnum) & (~ (HasType (car p) trnum))} :=
   (is_number (car p)).
 
-Eval compute in ex12 <[(Pair (Num 4) (Bool true))]>.
-Eval compute in ex12 <[(Pair (Str "hi") (Num 1))]>.
+Eval compute in ex12 <[(Pair 4 true)]>.
+Eval compute in ex12 <[(Pair "hi" 1)]>.
 
 (************************************************************************)
 (********************** EXAMPLE 13/14 AHHHHHHHHHHH **********************)
 
-Program Definition ex13_14 {A B : TRTypes} 
+Program Definition ex13_14 
     (x : {v >> trunion trnum trstr}) 
     (y : {v >> trpair trtop trtop}) :
     {t >> trnum} :=
-  condTR [ (andTR < (get_true_prop (is_number x)) (get_true_prop (is_number (car y))) > (is_number x) (is_number (car y))) (add x (car y)) ] 
+  condTR [ (andTR (is_number x) (is_number (car y))) (add x (car y)) ] 
          [ (is_number (car y)) (add (strlen x) (car y)) ] 
-         [ else (giveType (Num 0))].
+         [ else <[0]>].
+
+Check Num.
+
+Program Definition ex_13_14_use := ex13_14 <[14]> <[Pair 14 "hello"]>.
+
+Eval compute in ex_13_14_use.
+
 
 (* though I don't know if this is the best solution for trpair trtop trtop, it probably isn't lol *)
-Eval compute in ex13_14 (TRUnionL <[(Num 14)]>) (top_pair <[(Pair (Num 14) (Str "hello"))]>).
-  
+ 
 (************************************************************************)
 (******************* RANDOM STUFF WE HAVE TRIED TO DO *******************)
 
@@ -227,8 +246,15 @@ Lemma want : forall T A B  (p  q : T) P Q, p = q ->
  auto.
 Qed.
 
-(* Lemma is_num_type: (forall T  P Q W (xx : {v >> T & P & Q}) (pf : W = xx), HasType (@proj1_sig TRValues (fun t : TRValues =>
+(* i forgot what we wanted to do with this *)
+
+Lemma is_num_type: (forall T P Q (W : {v >> T & P & Q}), HasType (@proj1_sig TRValues (fun t : TRValues =>
 HasType t trbool /\
 (t <> Bool false -> (HasType (proj1_sig W) trnum)) /\
-(t = Bool false -> ~(HasType (proj1_sig W) trnum))) (@is_number _ _ _  xx)) trbool).
-*)
+(t = Bool false -> ~(HasType (proj1_sig W) trnum))) (@is_number _ _ _  W)) trbool).
+Proof. intros. destruct W; destruct x; simpl; constructor. Qed.
+
+Lemma test : forall T P Q (x : { v >> T & P & Q }), HasType (proj1_sig (is_number x)) trbool.
+Proof. apply is_num_type. Defined.
+
+(* hehe *)

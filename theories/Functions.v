@@ -106,11 +106,17 @@ Notation " 'ifTR' < P P' > A B C " :=
 Notation " 'condTR' [ A B ] [ C D ] [ 'else' E ]" :=
   (ifTR A B (ifTR C D E)) (A at level 0, C at next level, E at next level).
 
-Notation " 'orTR' < P Q > A B " :=
-  (ifTR < P (P \/ Q) > A A B) (at level 10, P at next level, Q at next level, A at next level, B at next level).
+Notation " 'orTR' A B " :=
+  (let P := (get_true_prop A) in 
+    (let Q := (get_true_prop B) in
+      (ifTR < P (P \/ Q) > A A B))) 
+  (at level 10, A at next level, B at next level).
 
-Notation " 'andTR' < P Q > A B " :=
-  (ifTR < P (P /\ Q) > A B A) (at level 10, P at next level, Q at next level, A at next level, B at next level).
+Notation " 'andTR' A B " :=
+  (let P := (get_true_prop A) in 
+    (let Q := (get_true_prop B) in
+      (ifTR < P (P /\ Q) > A B A))) 
+  (at level 10, A at next level, B at next level).
 
 
 (************************************************************************)
@@ -118,12 +124,12 @@ Notation " 'andTR' < P Q > A B " :=
 
 Program Definition orTest {A : TRTypes} (x : {t >> A}) : 
     {t >> trbool & ((HasType x trnum) \/ (HasType x trstr)) & ~((HasType x trnum) \/ (HasType x trstr))} :=
-    orTR < (HasType x trnum) (HasType x trstr) > (is_number x) (is_string x).
+    orTR (is_number x) (is_string x).
 
 
 Program Definition andTest {A B : TRTypes} (x : {t >> A}) (y : {t >> B}) :
   {t >> trbool & ((HasType x trnum)  /\ (HasType y trstr)) & ~((HasType x trnum)  /\ (HasType y trstr))} :=
-  andTR < (HasType x trnum) (HasType y trstr) > (is_number x) (is_string y).
+  andTR (is_number x) (is_string y).
   
 
 Program Definition condTest {A B : TRTypes}
