@@ -115,16 +115,6 @@ Ltac ht_good_hehe :=
   | [ H : HasType (Pair ?a ?b) (trpair ?A ?B) |- HasType ?b ?B ] => inversion H; auto
   end.
 
-(* simplifies the conclusion *)
-Ltac conclusion_jail :=
-  repeat 
-  (match goal with
-  | [ |- _ /\ _ ] => constructor
-  | [ |- _ -> _ ] => intro
-  | [ |- ~_ ] => intro
-  | [ |- _ \/ _ ] => try (left; constructor); try (right; constructor) (* may change *)
-  end).
-
 (* make tactic that "solves" goals aka it shouldn't make new goals just solve them 
   ht_good_hehe, generalize_jail, simplify hypothesis?  *)
 
@@ -143,15 +133,28 @@ Ltac eq_refl_special :=
   | [ H : ?a = ?a -> _ |- _ ] => try specialize (H eq_refl)
   end.
 
+Ltac solve_pls :=
+  try (repeat ht_good_hehe); try eq_refl_special; try generalize_jail 3; try (repeat simplify_hypothesis); try inv_trtype_false; try equal_trv; try unequal_false; auto.
+
+  (* simplifies the conclusion *)
+Ltac conclusion_jail :=
+  repeat 
+  (match goal with
+  | [ |- _ /\ _ ] => constructor
+  | [ |- _ -> _ ] => intro
+  | [ |- ~_ ] => intro
+  | [ |- _ \/ _ ] => try (left; constructor); try (right; constructor) 
+  (* i think this needs to be it's own tactic so that I can fail out of one of the branches*)
+  
+  (* try (left; pls_destruct_correctly; solve_pls; try constructor); try (right; try constructor; pls_destruct_correctly; solve_pls; try constructor) (* may change *) *)
+  end).
+  
 (* this shouldn't change the goal except simplifying it, and the hypothesis should be simplified *)
 Ltac simple_jail :=
   match goal with 
   | [ filtered_var := _ |- _ ] => subst filtered_var
   | _ => idtac
   end; simpl in *; subst; try (repeat simplify_hypothesis); try pair_thing; try conclusion_jail; try hypothesis_jail; auto.
-
-Ltac solve_pls :=
-  try (repeat ht_good_hehe); try eq_refl_special; try generalize_jail 3; try (repeat simplify_hypothesis); try inv_trtype_false; try equal_trv; try unequal_false; auto.
 
 Ltac do_it :=
   simple_jail; solve_pls.
@@ -170,7 +173,7 @@ Ltac hopefully_this_works n :=
   end.
 
 Ltac unfold_jail := (* maybe if we add more definitions that need to be unfolded *)
-  unfold get_true_prop in *; simpl in *.
+  unfold get_true_prop in *; unfold get_false_prop in *; simpl in *.
 
 Ltac pls_jail :=
   start_jail; simpl in *; conclusion_jail; try simplify_hypothesis; try unfold_jail; hopefully_this_works 2.

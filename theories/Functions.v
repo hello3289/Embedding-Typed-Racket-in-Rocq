@@ -77,45 +77,127 @@ Definition if_TR' {A : TRTypes} {P P' Q Q' : Prop}
                           (x : {t >> trbool & P & Q})                        
                           (y : P -> {t >> A & P' & Q'})
                           (z : Q -> {t >> A & P' & Q'}) : 
-                          {t >> A & P' & Q'}.
+                          {t >> A & P' & Q'}. (* A union B *)
 Proof. 
   start_jail.
   destruct x; 
   try destruct b;
-  try (apply subsume with P' Q'; auto); 
-  try (apply y; apply x1; discriminate). 
+  try (apply y; apply x1; discriminate).
+  auto. 
 Defined.
+
+
+Lemma hehe : forall A B (P Q : Prop), {t >> A & P & Q} -> {t >> (trunion A B) & P & Q}.
+Proof.
+  intros.
+  destruct H.
+  assert (HasType x (trunion A B) /\ (x <> Bool false -> P) /\ (x = Bool false -> Q)).
+  - destruct a as [?H [?H ?H]].
+    repeat split; auto.
+    apply HtUnion_L; auto.
+  - exact (exist (fun t : TRValues => 
+                    HasType t (trunion A B) /\ 
+                    (t <> Bool false -> P) /\ 
+                    (t = Bool false -> Q))
+                 x
+                 H).
+Defined.
+
+Lemma hehe2 : forall A B (P Q : Prop), {t >> B & P & Q} -> {t >> (trunion A B) & P & Q}.
+Proof.
+  intros.
+  destruct H.
+  assert (HasType x (trunion A B) /\ (x <> Bool false -> P) /\ (x = Bool false -> Q)).
+  - destruct a as [?H [?H ?H]].
+    repeat split; auto.
+    apply HtUnion_R; auto.
+  - exact (exist (fun t : TRValues => 
+                    HasType t (trunion A B) /\ 
+                    (t <> Bool false -> P) /\ 
+                    (t = Bool false -> Q))
+                 x
+                 H).
+Defined.
+
+Definition if_TR'_v2 {A B : TRTypes} {P P' Q Q' : Prop} 
+                          (x : {t >> trbool & P & Q})                        
+                          (y : P -> {t >> A & P' & Q'})
+                          (z : Q -> {t >> B & P' & Q'}) : 
+                          {t >> (trunion A B) & P' & Q'}.
+Proof.
+  start_jail.
+  destruct x; 
+  try destruct b; 
+  try (apply hehe; apply y; apply x1; discriminate; fail);
+  try (apply hehe2; apply z; apply x2; auto).
+  Defined.
+
 
 (************************************************************************)
 (********************** MORE NOTATIONS FOR IF AHHH **********************)
+
+(* this works, but it causes a lot of computations since it takes longer to do the stuff LOL what's it called *)
 Notation " 'ifTR' A B C " := 
-  (if_TR' A (fun _ => B) (fun _ => C)) 
+  (if_TR' A (fun _ => B) (fun _ => giveType C)) 
+  (at level 0, A at next level, B at next level, C at next level). 
+  
+Notation " 'ifTR' < 'second' > A B C " := 
+  (let P := (get_true_prop A) in
+    (let P' := (get_true_prop B) in
+      (@if_TR' _ P 
+              (P /\ P') 
+              (~P) 
+              (~(P /\ P')) 
+              A (fun _ => B) (fun _ => giveType C)))) 
+  (at level 2, A at next level, 
+  B at next level, C at next level).
+
+Notation " 'ifTR' < 'third' > A B C " := 
+  (let P := (get_true_prop A) in
+    (let P' := (get_true_prop C) in 
+      (@if_TR' _ P 
+             (P \/ P') 
+             (~P) 
+             (~(P \/ P')) 
+             A (fun _ => B) (fun _ => giveType C)))) 
+  (at level 2, A at next level, 
+  B at next level, C at next level).
+
+Notation " 'ifTR' < 'all' > A B C " := 
+  (let P := (get_true_prop A) in
+    (let Q := (get_true_prop B) in
+      (let R := (get_true_prop C) in 
+        (@if_TR' trbool P (* hmm *)
+              ((P /\ Q) \/ R) 
+              (~P) 
+              (~((P /\ Q) \/ R)) 
+              A (fun _ => B) (fun _ => giveType C))))) 
+  (at level 2, A at next level, B at next level, C at next level).  
+
+Notation " 'ifTR_v2' A B C " := 
+  (if_TR'_v2 A (fun _ => B) (fun _ => giveType C)) 
   (at level 0, A at next level, B at next level, C at next level). 
 
-Notation " 'ifTR' < P P' Q Q' > A B C " := 
-  (@if_TR' _ P P' Q Q' A (fun _ => B) (fun _ => C)) 
-  (at level 2, P at next level, P' at next level,
-  Q at next level, Q' at next level, A at next level, 
-  B at next level, C at next level). 
+Notation " 'ifTR_v2' < 'all' > A B C " := 
+  (let P := (get_true_prop A) in
+    (let Q := (get_true_prop B) in
+      (let R := (get_true_prop C) in 
+        (@if_TR'_v2 trbool trbool P
+              ((P /\ Q) \/ R) 
+              (~P) 
+              (~((P /\ Q) \/ R)) 
+              A (fun _ => B) (fun _ => giveType C))))) 
+  (at level 2, A at next level, B at next level, C at next level).  
 
-Notation " 'ifTR' < P P' > A B C " := 
-  (@if_TR' _ P P' (~P) (~P') A (fun _ => B) (fun _ => C)) 
-  (at level 2, P at next level, P' at next level, A at next level, 
-  B at next level, C at next level).
-  
 Notation " 'condTR' [ A B ] [ C D ] [ 'else' E ]" :=
   (ifTR A B (ifTR C D E)) (A at level 0, C at next level, E at next level).
 
 Notation " 'orTR' A B " :=
-  (let P := (get_true_prop A) in 
-    (let Q := (get_true_prop B) in
-      (ifTR < P (P \/ Q) > A A B))) 
+  (ifTR < third > A A B)
   (at level 10, A at next level, B at next level).
 
 Notation " 'andTR' A B " :=
-  (let P := (get_true_prop A) in 
-    (let Q := (get_true_prop B) in
-      (ifTR < P (P /\ Q) > A B A))) 
+  (ifTR < second > A B A) 
   (at level 10, A at next level, B at next level).
 
 
@@ -125,7 +207,6 @@ Notation " 'andTR' A B " :=
 Program Definition orTest {A : TRTypes} (x : {t >> A}) : 
     {t >> trbool & ((HasType x trnum) \/ (HasType x trstr)) & ~((HasType x trnum) \/ (HasType x trstr))} :=
     orTR (is_number x) (is_string x).
-
 
 Program Definition andTest {A B : TRTypes} (x : {t >> A}) (y : {t >> B}) :
   {t >> trbool & ((HasType x trnum)  /\ (HasType y trstr)) & ~((HasType x trnum)  /\ (HasType y trstr))} :=

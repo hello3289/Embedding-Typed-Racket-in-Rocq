@@ -21,11 +21,7 @@ Open Scope string_scope.
 (************************************************************************)
 (********************** EXAMPLE 1 AHHHHHHHHHHHHHHH **********************)
 Program Definition ex1 {t : TRTypes} (x : {v >> t}) : {v >> trnum}:=
-  ifTR (is_number x) (add1 x) <[0]>.
-  (* Num 0 is required as ifTR needs type {v >> t} so the coercion will not work *)
-  (* since it only does so when it see the specific type TRVales, not the subtype *)
-  (* maybe another coercion? *)
-  (* so <[0]> works since <[]> is expecting a TRValue, but this doesn't seem like what we want *)
+  ifTR (is_number x) (add1 x) 0.
 
 Eval compute in ex1 <[ 5 ]>.
 Eval compute in ex1 <[ "5" ]>.
@@ -41,14 +37,16 @@ Program Definition ex2_test2 := ex2 <[9]>.
 
 Eval compute in ex2_test1.
 Eval compute in ex2_test2.
+(* ok so this doesn't work, but the notation works? i'm not sure what's happening lol *)
+(* Eval compute in (giveType (strlen <["hi"]>)). *)
 
 (************************************************************************)
 (********************** EXAMPLE 4 AHHHHHHHHHHHHHHH **********************)
 
 Program Definition ex4 {t : TRTypes} (x : {v >> t}) : {v >> trnum} :=
   ifTR (orTR (is_number x) (is_string x))
-        (ex2 x)
-        <[0]>.
+       (ex2 x)
+       0.
   
 Eval compute in ex4 <[9]>.
 Eval compute in ex4 <["hi"]>.
@@ -59,8 +57,8 @@ Eval compute in ex4 <[true]>.
 
 Program Definition ex5 {t r : TRTypes} (x : {v >> t}) (y : {w >> r}) : {v >> trnum} :=
   ifTR  (andTR (is_number x) (is_string y))
-        (add x (strlen y)) (* i need addition *)
-        <[0]>.
+           (add x (strlen y))
+           0.
 
 Eval compute in ex5 <[5]> <["hi"]>.
 Eval compute in ex5 <[5]> <[8]>.
@@ -71,13 +69,10 @@ Eval compute in ex5 <[true]> <[false]>.
 (********************** EXAMPLE 7 AHHHHHHHHHHHHHHH **********************)
 
 Program Definition ex7 {t r : TRTypes} (x : {v >> t}) (y : {w >> r}) : {v >> trnum} :=
-  (ifTR < (HasType x trnum /\ HasType y trstr) True (~(HasType x trnum /\ HasType y trstr)) True >
-    (ifTR < (HasType x trnum)  (HasType x trnum /\ HasType y trstr)>
-      (is_number x)
-      (is_string y)
-      (Bool false))
+  (ifTR 
+    (ifTR < second > (is_number x) (is_string y) false)
     (add x (strlen y))
-    <[0]>).
+    0).
 
 Eval compute in ex7 <[6]> <["hello"]>.
 
@@ -88,7 +83,7 @@ Program Definition ex8 {t : TRTypes} (x : {v >> t}) :=
   orTest x.
 
 Program Definition ex8_test {t : TRTypes} (x : {v >> t}) : {v >> trnum} :=
-  (ifTR (ex8 x) (ex2 x) <[0]>).
+  (ifTR (ex8 x) (ex2 x) 0).
 
 Eval compute in ex8 <[6]>.
 Eval compute in ex8_test <[6]>.
@@ -101,16 +96,11 @@ Eval compute in ex8_test <[true]>.
 (********************** EXAMPLE 9 AHHHHHHHHHHHHHHH **********************)
 
 Program Definition ex9 {t : TRTypes} (x : {v >> t}) : {v >> trnum} :=
-  (ifTR (let p := (is_number x) in 
-          (ifTR < (HasType x trnum) 
-                     (HasType x trnum \/ HasType x trstr) 
-                     (~(HasType x trnum)) 
-                     (~(HasType x trnum \/ HasType x trstr)) > 
-                    p 
-                    p 
-                    (is_string x)))
-         (ex2 x) 
-         <[0]>).
+  (ifTR 
+    (let p := (is_number x) in 
+      (ifTR < third > p p (is_string x)))
+    (ex2 x) 
+    0).
 
 Eval compute in ex9 <[2]>.
 
@@ -118,7 +108,7 @@ Eval compute in ex9 <[2]>.
 (********************** EXAMPLE 10 AHHHHHHHHHHHHHH **********************)
 
 Program Definition ex10 {A B : TRTypes} (p : {v >> (trpair A B)}) : {t >> trnum} :=
-  ifTR (is_number (car p)) (add1 (car p)) <[7]>.
+  ifTR (is_number (car p)) (add1 (car p)) 7.
 
 Eval compute in ex10 <[(Pair 5 "bye")]>.
 Eval compute in ex10 <[(Pair false 10)]>.
@@ -133,7 +123,7 @@ Eval compute in g <[(Pair 4 5)]>.
 
 (* instead of returning 'no, i'll return 0 *)
 Program Definition ex11 {A B : TRTypes} (p : {v >> trpair A B}) : {t >> trnum} :=
-  ifTR (andTR (is_number (car p)) (is_number (cdr p))) (g p) <[0]>.
+  ifTR (andTR (is_number (car p)) (is_number (cdr p))) (g p) 0.
   
 Eval compute in ex11 <[(Pair 4 12)]>.
 Eval compute in ex11 <[(Pair 3 false)]>.
@@ -164,7 +154,7 @@ Program Definition ex13_14
     {t >> trnum} :=
   condTR [ (andTR (is_number x) (is_number (car y))) (add x (car y)) ] 
          [ (is_number (car y)) (add (strlen x) (car y)) ] 
-         [ else <[0]>].
+         [ else 0].
 
 Check Num.
 
@@ -172,9 +162,115 @@ Program Definition ex_13_14_use := ex13_14 <[14]> <[Pair 14 "hello"]>.
 
 Eval compute in ex_13_14_use.
 
+(************************************************************************)
+(********************** MORE EXAMPLES AHHHHHHHHHHH **********************)
 
-(* though I don't know if this is the best solution for trpair trtop trtop, it probably isn't lol *)
- 
+Program Definition more_ex1 {t r : TRTypes} (x : {v >> t}) (y : {w >> r}) 
+         : {v >> trbool & 
+                 ((HasType x trnum) /\ (HasType y trstr) \/ (HasType x trstr)) & 
+                 (~(((HasType x trnum) /\ (HasType y trstr) \/ (HasType x trstr))))} :=
+  (ifTR < all > (is_number x) (is_string y) (is_string x)).
+Next Obligation. 
+(* the problem with the tactic is conclusion_jail with how i'm dealing with \/ *)
+  start_jail; repeat split; try intro.
+  - pls_jail.
+  - right. pls_destruct_correctly; solve_pls; try constructor. 
+  - pls_jail.
+  Defined.
+
+  Program Definition more_ex1_use := more_ex1 <[ 5 ]> <[ "hello" ]>.
+  Eval compute in more_ex1_use. 
+
+Program Definition more_ex2 {t r : TRTypes} (x : {v >> t}) (y : {w >> r}) : {v >> trnum} :=
+  (ifTR (more_ex1 x y) 
+    (ifTR (is_string x) (strlen x) (add x (strlen y)))
+    42). 
+
+Program Definition more_ex3_part1 {t : TRTypes} (x : {v >> t}) : {v >> trnum} :=
+  ifTR (is_number x) x 54
+  (* @if_TR' trnum _ _ _ _ (is_number x) (fun _ => x) (fun _ => <[54]>) *). 
+
+
+Program Definition more_ex3 {t r : TRTypes} (x : {v >> t}) (y : {w >> r}) : {v >> trnum} :=
+  (ifTR (more_ex1 x y) 
+    (ifTR (is_string x) (strlen x) (add x (strlen y)))
+    (ifTR (is_number x) (add1 x) 54)). (* so this will work, but having just x won't bc of above *) 
+
+(************************************************************************)
+(********************** IF AGAIN AHHHHHHHHHHHHHHHH **********************)
+
+Program Definition if_ex1 {t : TRTypes} (x : {v >> t}) : {v >> trnum}:=
+  ifTR_v2 (is_number x) (add1 x) 0.
+
+Eval compute in if_ex1 <[ 5 ]>.
+Eval compute in if_ex1 <[ "5" ]>.
+
+Program Definition if_ex2 (x : {v >> (trunion trstr trnum)}) : {v >> trnum} :=
+  @if_TR'_v2 trnum trnum (HasType x trnum) True (~(HasType x trnum)) True
+  (is_number x) (fun _ => (add1 x)) (fun _ => (strlen x)). 
+
+
+Next Obligation. (* this takes SO long, ok i found the problem lol it's destructing too much *)
+  
+  start_jail; simpl in *; conclusion_jail; try simplify_hypothesis; try unfold_jail; auto.
+  do_it; pls_destruct_correctly.
+  destruct x; simpl in *; try constructor.
+  - inversion x0; try inv_trtype_false.
+  - inversion x0; try inv_trtype_false.
+Defined.
+
+(* after simplifying the start, have a tactic that solves easy goals with auto, constructor, inversion *)
+  Set Printing Implicit.
+  Set Printing Depth 10000000000000.
+  Print if_ex2.
+
+
+Program Definition if_exWhat (x : {v >> (trunion trstr trnum)}) : {v >> trnum} :=
+  ifTR_v2 (is_number x) (add1 x) 4. 
+
+(* Program Definition ex2_test1 := ex2 <["hi"]>.
+Program Definition ex2_test2 := ex2 <[9]>.
+
+Eval compute in ex2_test1.
+Eval compute in ex2_test2. *)
+
+Program Definition if_ex4 {t : TRTypes} (x : {v >> t}) : {v >> trnum} :=
+  ifTR_v2 (orTR (is_number x) (is_string x))
+       (if_exWhat x)
+       0.
+  
+Eval compute in ex4 <[9]>.
+Eval compute in ex4 <["hi"]>.
+Eval compute in ex4 <[true]>.
+
+Program Definition if_ex5 {t r : TRTypes} (x : {v >> t}) (y : {w >> r}) : {v >> trnum} :=
+  ifTR_v2  (andTR (is_number x) (is_string y))
+           (add x (strlen y))
+           0.
+
+Eval compute in ex5 <[5]> <["hi"]>.
+Eval compute in ex5 <[5]> <[8]>.
+Eval compute in ex5 <["hello"]> <[10]>.
+Eval compute in ex5 <[true]> <[false]>.
+
+
+(* Program Definition if_ex7 {t r : TRTypes} (x : {v >> t}) (y : {w >> r}) : {v >> trnum} :=
+  (ifTR 
+    (ifTR < second > (is_number x) (is_string y) false)
+    (add x (strlen y))
+    0).
+
+Eval compute in ex7 <[6]> <["hello"]>.
+*)
+
+Program Definition if_ex10 {A B : TRTypes} (p : {v >> (trpair A B)}) : {t >> trnum} :=
+  ifTR_v2 (is_number (car p)) (add1 (car p)) 7.
+
+Eval compute in ex10 <[(Pair 5 "bye")]>.
+Eval compute in ex10 <[(Pair false 10)]>.
+
+(* examples with different types for the different branches *)
+
 (************************************************************************)
 (******************* RANDOM STUFF WE HAVE TRIED TO DO *******************)
 

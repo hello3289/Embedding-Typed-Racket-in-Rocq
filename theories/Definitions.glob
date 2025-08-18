@@ -1,4 +1,4 @@
-DIGEST 0f326a04e3a8ca25a1ceeda91209d812
+DIGEST 2b450ebce1f64a47f1715d7595f1f28e
 Fresearch.Definitions
 R15:20 Coq.Strings.String <> <> lib
 R38:41 Coq.Bool.Bool <> <> lib
@@ -398,37 +398,68 @@ R3383:3386 research.Definitions <> Bool constr
 R3388:3392 Coq.Init.Datatypes <> false constr
 R3397:3397 research.Definitions <> Q:88 var
 binder 3315:3315 <> v:90
-def 3608:3615 <> top_pair
-R3625:3631 research.Definitions <> TRTypes ind
-binder 3619:3619 <> S:91
-binder 3621:3621 <> T:92
-R3640:3641 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R3643:3647 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R3658:3660 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 3642:3642 <> t:93
-binder 3642:3642 <> t:94
-binder 3642:3642 <> t:95
-R3648:3653 research.Definitions <> trpair constr
-R3655:3655 research.Definitions <> S:91 var
-R3657:3657 research.Definitions <> T:92 var
-binder 3642:3642 <> t:96
-binder 3642:3642 <> t:97
-binder 3642:3642 <> t:98
-binder 3642:3642 <> t:99
-binder 3636:3636 <> v:100
-R3665:3666 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R3668:3672 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-R3691:3693 research.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 3667:3667 <> t:101
-binder 3667:3667 <> t:102
-binder 3667:3667 <> t:103
-R3673:3678 research.Definitions <> trpair constr
-R3680:3684 research.Definitions <> trtop constr
-R3686:3690 research.Definitions <> trtop constr
-binder 3667:3667 <> t:104
-binder 3667:3667 <> t:105
-binder 3667:3667 <> t:106
-binder 3667:3667 <> t:107
-R3700:3700 research.Definitions <> v:100 var
-R3892:3899 research.Definitions <> giveType def
-not 3872:3872 <> :::'<['_x_']>'
+def 3449:3462 <> get_false_prop
+binder 3465:3465 <> T:91
+binder 3469:3469 <> P:92
+binder 3471:3471 <> Q:93
+R3486:3486 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R3488:3490 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R3499:3501 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R3566:3566 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R3491:3498 research.Definitions <> TRValues ind
+binder 3487:3487 <> v:94
+R3502:3502 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R3514:3518 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R3503:3509 research.Definitions <> HasType ind
+R3511:3511 research.Definitions <> v:94 var
+R3513:3513 research.Definitions <> T:91 var
+R3519:3519 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R3540:3545 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R3565:3565 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R3535:3538 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3521:3524 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R3520:3520 research.Definitions <> v:94 var
+R3525:3528 research.Definitions <> Bool constr
+R3530:3534 Coq.Init.Datatypes <> false constr
+R3539:3539 research.Definitions <> P:92 var
+R3560:3563 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3547:3549 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3546:3546 research.Definitions <> v:94 var
+R3550:3553 research.Definitions <> Bool constr
+R3555:3559 Coq.Init.Datatypes <> false constr
+R3564:3564 research.Definitions <> Q:93 var
+binder 3482:3482 <> v:95
+def 3776:3783 <> top_pair
+R3793:3799 research.Definitions <> TRTypes ind
+binder 3787:3787 <> S:96
+binder 3789:3789 <> T:97
+R3808:3809 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R3811:3815 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R3826:3828 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 3810:3810 <> t:98
+binder 3810:3810 <> t:99
+binder 3810:3810 <> t:100
+R3816:3821 research.Definitions <> trpair constr
+R3823:3823 research.Definitions <> S:96 var
+R3825:3825 research.Definitions <> T:97 var
+binder 3810:3810 <> t:101
+binder 3810:3810 <> t:102
+binder 3810:3810 <> t:103
+binder 3810:3810 <> t:104
+binder 3804:3804 <> v:105
+R3833:3834 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R3836:3840 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+R3859:3861 research.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 3835:3835 <> t:106
+binder 3835:3835 <> t:107
+binder 3835:3835 <> t:108
+R3841:3846 research.Definitions <> trpair constr
+R3848:3852 research.Definitions <> trtop constr
+R3854:3858 research.Definitions <> trtop constr
+binder 3835:3835 <> t:109
+binder 3835:3835 <> t:110
+binder 3835:3835 <> t:111
+binder 3835:3835 <> t:112
+R3868:3868 research.Definitions <> v:105 var
+R4060:4067 research.Definitions <> giveType def
+not 4040:4040 <> :::'<['_x_']>'

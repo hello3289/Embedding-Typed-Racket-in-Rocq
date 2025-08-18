@@ -104,6 +104,11 @@ Proof.
   exact P.
 Defined.
 
+Definition get_false_prop {T} {P Q : Prop} (v : {v : TRValues | (HasType v T) /\ (v <> Bool false -> P) /\ (v = Bool false -> Q)}) : Prop.
+Proof. 
+  exact Q.
+Defined.
+
 (************************************************************************)
 (*********************** TWO MORE NOTATIONS AHHH ************************)
 
