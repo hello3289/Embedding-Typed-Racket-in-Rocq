@@ -175,7 +175,7 @@ Notation " 'ifTR' < 'all' > A B C " :=
   (at level 2, A at next level, B at next level, C at next level).  
 
 Notation " 'ifTR_v2' A B C " := 
-  (if_TR'_v2 A (fun _ => B) (fun _ => giveType C)) 
+  (if_TR'_v2 A (fun _ => B) (fun _ => C)) (* i have no idea why giveType here doesn't work *)
   (at level 0, A at next level, B at next level, C at next level). 
 
 Notation " 'ifTR_v2' < 'all' > A B C " := 
@@ -186,7 +186,7 @@ Notation " 'ifTR_v2' < 'all' > A B C " :=
               ((P /\ Q) \/ R) 
               (~P) 
               (~((P /\ Q) \/ R)) 
-              A (fun _ => B) (fun _ => giveType C))))) 
+              A (fun _ => B) (fun _ => C))))) 
   (at level 2, A at next level, B at next level, C at next level).  
 
 Notation " 'condTR' [ A B ] [ C D ] [ 'else' E ]" :=
