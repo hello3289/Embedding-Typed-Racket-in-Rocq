@@ -1,10 +1,9 @@
-From research Require Import Functions.
-From research Require Import Tactic_jail.
-From research Require Import Definitions.
-Require Import String.
-Require Import Bool.
-Require Import Coq.Program.Tactics.
-Require Import JMeq.
+From TRresearch Require Import Functions.
+From TRresearch Require Import Tactic_jail.
+From TRresearch Require Import Definitions.
+From Stdlib Require Import String.
+From Stdlib Require Import Bool.
+From Stdlib Require Import Program.Tactics.
 #[local] Obligation Tactic := try now program_simpl.
 #[local] Obligation Tactic := try (program_simpl; easy); try (pls_jail; easy).
 
@@ -13,9 +12,9 @@ Coercion Num : nat >-> TRValues.
 Coercion Str : string >-> TRValues.
 Coercion Bool : bool >-> TRValues.
 
-Coercion giveTypeNat (n : nat) : {v >> trnum} := giveType (Num n).
-
-(* not sure if you want a coercion to pair, it seems a little weird to do so *)
+Coercion giveTypeNat (n : nat) : {v >> trnum} := giveType n.
+Coercion giveTypeString (s : string) : {v >> trstr} := giveType s.
+Coercion giveTypeBool (b : bool) : {v >> trbool} := giveType b.
 
 Open Scope string_scope.
 
@@ -27,7 +26,7 @@ Program Definition ex1 {t : TRTypes} (x : {v >> t}) : {v >> trnum}:=
   ifTR (is_number x) (add1 x) 0.
 
 Eval compute in ex1 5.
-Eval compute in ex1 <[ "5" ]>.
+Eval compute in ex1 "5".
 
 (************************************************************************)
 (********************** EXAMPLE 2 AHHHHHHHHHHHHHHH **********************)
@@ -189,10 +188,10 @@ Program Definition more_ex2 {t r : TRTypes} (x : {v >> t}) (y : {w >> r}) : {v >
     (ifTR (is_string x) (strlen x) (add x (strlen y)))
     42). 
 
-Program Definition more_ex3_part1 {t : TRTypes} (x : {v >> t}) : {v >> trnum} :=
+(* Program Definition more_ex3_part1 {t : TRTypes} (x : {v >> t}) : {v >> trnum} :=
   ifTR (is_number x) x 54
   (* @if_TR' trnum _ _ _ _ (is_number x) (fun _ => x) (fun _ => <[54]>) *). 
-
+*)
 
 Program Definition more_ex3 {t r : TRTypes} (x : {v >> t}) (y : {w >> r}) : {v >> trnum} :=
   (ifTR (more_ex1 x y) 

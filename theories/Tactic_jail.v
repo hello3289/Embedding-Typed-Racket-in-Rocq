@@ -1,6 +1,6 @@
-From research Require Import Definitions.
-Require Import String.
-Require Import Bool.
+From TRresearch Require Import Definitions.
+From Stdlib Require Import String.
+From Stdlib Require Import Bool.
 
 (* i'm dying there is still the "trying to automate my life file" *)
 
