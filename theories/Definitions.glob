@@ -1,4 +1,4 @@
-DIGEST 6de2b3e86d5738d901d3a5b3691166a4
+DIGEST 94143d711ebf86f7d02bcad90d1f7b69
 FTRresearch.Definitions
 R27:40 Stdlib.Strings.String <> <> lib
 R70:73 Stdlib.Bool.Bool <> <> lib
@@ -428,37 +428,69 @@ R3569:3572 TRresearch.Definitions <> Bool constr
 R3574:3578 Corelib.Init.Datatypes <> false constr
 R3583:3583 TRresearch.Definitions <> Q:93 var
 binder 3501:3501 <> v:95
-def 3795:3802 <> top_pair
-R3812:3818 TRresearch.Definitions <> TRTypes ind
-binder 3806:3806 <> S:96
-binder 3808:3808 <> T:97
-R3827:3828 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
-R3830:3834 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
-R3845:3847 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 3829:3829 <> t:98
-binder 3829:3829 <> t:99
-binder 3829:3829 <> t:100
-R3835:3840 TRresearch.Definitions <> trpair constr
-R3842:3842 TRresearch.Definitions <> S:96 var
-R3844:3844 TRresearch.Definitions <> T:97 var
-binder 3829:3829 <> t:101
-binder 3829:3829 <> t:102
-binder 3829:3829 <> t:103
-binder 3829:3829 <> t:104
-binder 3823:3823 <> v:105
-R3852:3853 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
-R3855:3859 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
-R3878:3880 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 3854:3854 <> t:106
-binder 3854:3854 <> t:107
-binder 3854:3854 <> t:108
-R3860:3865 TRresearch.Definitions <> trpair constr
-R3867:3871 TRresearch.Definitions <> trtop constr
-R3873:3877 TRresearch.Definitions <> trtop constr
-binder 3854:3854 <> t:109
-binder 3854:3854 <> t:110
-binder 3854:3854 <> t:111
-binder 3854:3854 <> t:112
-R3887:3887 TRresearch.Definitions <> v:105 var
-R4079:4086 TRresearch.Definitions <> giveType def
-not 4059:4059 <> :::'<['_x_']>'
+def 3636:3643 <> get_type
+binder 3646:3646 <> T:96
+binder 3650:3650 <> P:97
+binder 3652:3652 <> Q:98
+R3667:3667 Corelib.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R3669:3671 Corelib.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R3680:3682 Corelib.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R3747:3747 Corelib.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R3672:3679 TRresearch.Definitions <> TRValues ind
+binder 3668:3668 <> v:99
+R3683:3683 Corelib.Init.Logic <> ::type_scope:x_'/\'_x not
+R3695:3699 Corelib.Init.Logic <> ::type_scope:x_'/\'_x not
+R3684:3690 TRresearch.Definitions <> HasType ind
+R3692:3692 TRresearch.Definitions <> v:99 var
+R3694:3694 TRresearch.Definitions <> T:96 var
+R3700:3700 Corelib.Init.Logic <> ::type_scope:x_'/\'_x not
+R3721:3726 Corelib.Init.Logic <> ::type_scope:x_'/\'_x not
+R3746:3746 Corelib.Init.Logic <> ::type_scope:x_'/\'_x not
+R3716:3719 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R3702:3705 Corelib.Init.Logic <> ::type_scope:x_'<>'_x not
+R3701:3701 TRresearch.Definitions <> v:99 var
+R3706:3709 TRresearch.Definitions <> Bool constr
+R3711:3715 Corelib.Init.Datatypes <> false constr
+R3720:3720 TRresearch.Definitions <> P:97 var
+R3741:3744 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R3728:3730 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R3727:3727 TRresearch.Definitions <> v:99 var
+R3731:3734 TRresearch.Definitions <> Bool constr
+R3736:3740 Corelib.Init.Datatypes <> false constr
+R3745:3745 TRresearch.Definitions <> Q:98 var
+binder 3663:3663 <> v:100
+R3752:3758 TRresearch.Definitions <> TRTypes ind
+def 3962:3969 <> top_pair
+R3979:3985 TRresearch.Definitions <> TRTypes ind
+binder 3973:3973 <> S:101
+binder 3975:3975 <> T:102
+R3994:3995 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
+R3997:4001 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
+R4012:4014 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 3996:3996 <> t:103
+binder 3996:3996 <> t:104
+binder 3996:3996 <> t:105
+R4002:4007 TRresearch.Definitions <> trpair constr
+R4009:4009 TRresearch.Definitions <> S:101 var
+R4011:4011 TRresearch.Definitions <> T:102 var
+binder 3996:3996 <> t:106
+binder 3996:3996 <> t:107
+binder 3996:3996 <> t:108
+binder 3996:3996 <> t:109
+binder 3990:3990 <> v:110
+R4019:4020 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
+R4022:4026 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
+R4045:4047 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 4021:4021 <> t:111
+binder 4021:4021 <> t:112
+binder 4021:4021 <> t:113
+R4027:4032 TRresearch.Definitions <> trpair constr
+R4034:4038 TRresearch.Definitions <> trtop constr
+R4040:4044 TRresearch.Definitions <> trtop constr
+binder 4021:4021 <> t:114
+binder 4021:4021 <> t:115
+binder 4021:4021 <> t:116
+binder 4021:4021 <> t:117
+R4054:4054 TRresearch.Definitions <> v:110 var
+R4246:4253 TRresearch.Definitions <> giveType def
+not 4226:4226 <> :::'<['_x_']>'

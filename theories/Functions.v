@@ -177,6 +177,28 @@ Notation " 'ifTR_v2' A B C " :=
   (if_TR'_v2 A (fun _ => B) (fun _ => C))
   (at level 0, A at next level, B at next level, C at next level). 
 
+Notation " 'ifTR_v2' < 'second' > A B C " := 
+  (let P := (get_true_prop A) in
+    (let P' := (get_true_prop B) in
+      (@if_TR'_v2 _ _ P 
+              (P /\ P') 
+              (~P) 
+              (~(P /\ P')) 
+              A (fun _ => B) (fun _ => C)))) 
+  (at level 0, A at next level, 
+  B at next level, C at next level).
+
+Notation " 'ifTR_v2' < 'third' > A B C " := 
+  (let P := (get_true_prop A) in
+    (let P' := (get_true_prop C) in 
+      (@if_TR'_v2 (get_type B) (get_type C) P 
+             (P \/ P') 
+             (~P) 
+             (~(P \/ P')) 
+             A (fun _ => B) (fun _ => C)))) 
+  (at level 0, A at next level, 
+  B at next level, C at next level).
+
 Notation " 'ifTR_v2' < 'all' > A B C " := 
   (let P := (get_true_prop A) in
     (let Q := (get_true_prop B) in
@@ -198,6 +220,15 @@ Notation " 'orTR' A B " :=
 Notation " 'andTR' A B " :=
   (ifTR < second > A B A) 
   (at level 10, A at next level, B at next level).
+
+Notation " 'orTR_v2' A B " :=
+  (ifTR_v2 < third > A A B)
+  (at level 10, A at next level, B at next level).
+
+Notation " 'andTR_v2' A B " :=
+  (ifTR_v2 < second > A B A) 
+  (at level 10, A at next level, B at next level).
+
 
 
 (************************************************************************)

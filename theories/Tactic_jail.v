@@ -4,6 +4,10 @@ From Stdlib Require Import Bool.
 
 (* i'm dying there is still the "trying to automate my life file" *)
 
+(************************************************************************)
+(********************** HasType FALSE INVERSIONS AH *********************)
+(* looks at hypothesis for a false "HasType" to invert *)
+
 Ltac inv_trnum :=
   match goal with
   | H : HasType (Bool ?b) trnum |- _ => inversion H
@@ -29,20 +33,79 @@ Ltac inv_trpair :=
   | H : HasType (Num ?b) (trpair ?x ?y) |- _ => inversion H
   end.
 
-(* looks at hypothesis for a false "HasType" to invert *)
 Ltac inv_trtype_false  :=
  try inv_trbool; try inv_trnum; try inv_trstr; try inv_trpair; fail.
 
-(* starts and simplifies hypotheses that hold the propositions *)
-Ltac start_jail :=
+
+(************************************************************************)
+(********************** START_JAIL AHHHHHHHHHHHHHH **********************)
+ (* starts and simplifies hypotheses that hold the propositions *)
+
+ Ltac start_jail :=
    intros; subst; simpl in *;
    repeat 
    (match goal with
    | [ H : {v >> (?t)} |- _ ] => destruct H as [H [?H [?H ?H]]]
    | [ H : {v >> (?t) & ?P & ?Q} |- _ ] => destruct H as [H [?H [?H ?H]]]
-   end); subst.
+   end); subst; simpl in *.
 
 (* i don't know why i can't do subst *? *)
+
+(************************************************************************)
+(********************** CONCLUSION_JAIL AHHHHHHHHHHHHHH *****************)
+(* simplifies the conclusion, leaves \/ alone *)
+Ltac conclusion_jail :=
+  repeat 
+  (match goal with
+  | [ |- _ /\ _ ] => constructor
+  | [ |- _ -> _ ] => intro
+  | [ |- ~_ ] => intro
+  (*| [ |- _ \/ _ ] => try (left; constructor); try (right; constructor) *)
+  (* i think this needs to be it's own tactic so that I can fail out of one of the branches*)
+  (* try (left; pls_destruct_correctly; solve_pls; try constructor); try (right; try constructor; pls_destruct_correctly; solve_pls; try constructor) (* may change *) *)
+  end); auto.
+
+(************************************************************************)
+(********************** TEMP \/ SOLUTION AHHHHHHHHHHHHH *****************)
+(* temporarily solves \/  *)
+
+Ltac temp_or_jail :=
+  repeat
+  (match goal with
+  | [ |- _ \/ _ ] => try (left; constructor); try (right; constructor)
+  end).
+
+(************************************************************************)
+(********************** SIMPLIFY_HYPOTHESIS AHHHHHHHHHH *****************)
+(* destructs combined hypotheses  *)
+
+Ltac simplify_hypothesis :=
+  repeat
+  (match goal with
+    | [ H : _ \/ _ |- _ ] => destruct H
+    | [ H : ?a /\ ?b |- _ ] => destruct H
+    end); auto.
+
+(************************************************************************)
+(********************** UNFOLD_JAIL AHHHHHHHHHHHHHHHHHH *****************)
+(* unfolds definitions  *)
+
+Ltac unfold_jail := (* maybe if we add more definitions that need to be unfolded *)
+  unfold get_true_prop in *; 
+  unfold get_false_prop in *; 
+  unfold get_type in *;
+  simpl in *.
+  
+(************************************************************************)
+(********************** TRUNION_JAIL AHHHHHHHHHHHHHHHHH *****************)
+(* separates trunion hypotheses, may need to change? if trunion doesn't need to be separated and can
+be solved with the false tactics, then I might change either the order or how the tactic works in general  *)
+
+Ltac trunion_jail :=
+    (match goal with
+    | [ H : HasType _ (trunion _ _) |- _ ] => inversion H; simpl in *; subst (*; clear H *)
+    end); auto.
+
 
 (* destructs HasType with variable ( may need to be more specific ) *)
 Ltac pls_destruct_correctly := (* add case for filtered_var destruct *)
@@ -88,20 +151,6 @@ Ltac unequal_false :=
   | [ H : (Bool false) <> (Bool false) |- _ ] => destruct H
   end; auto.
 
-Ltac simplify_hypothesis :=
-  match goal with
-    | [ H : _ \/ _ |- _ ] => destruct H
-    | [ H : ?a /\ ?b |- _ ] => destruct H
-    (*| [ H : (get_true_prop _) |- _ ] => idtac 13; unfold get_true_prop in *; simpl in *
-    | |- context[ (get_true_prop _) ] => idtac 14; unfold get_true_prop in *; simpl in * 
-    decided not to do this as there are too many ways that get_true_prop come up *)
-    end; auto.
-
-Ltac hypothesis_jail :=
-    (match goal with
-    | [ H : HasType _ (trunion _ _) |- _] => inversion H; simpl in *; subst; clear H
-    end); auto.
-
 (* if conclusion is a "properly" formed HasType, call constructor *)
 Ltac ht_good_hehe :=
   match goal with
@@ -134,27 +183,19 @@ Ltac eq_refl_special :=
   end.
 
 Ltac solve_pls :=
-  try (repeat ht_good_hehe); try eq_refl_special; try generalize_jail 3; try (repeat simplify_hypothesis); try inv_trtype_false; try equal_trv; try unequal_false; auto.
+  try (repeat ht_good_hehe); try eq_refl_special; try generalize_jail 3; 
+  simplify_hypothesis; try inv_trtype_false; try equal_trv; try unequal_false; auto.
 
-  (* simplifies the conclusion *)
-Ltac conclusion_jail :=
-  repeat 
-  (match goal with
-  | [ |- _ /\ _ ] => constructor
-  | [ |- _ -> _ ] => intro
-  | [ |- ~_ ] => intro
-  | [ |- _ \/ _ ] => try (left; constructor); try (right; constructor) 
-  (* i think this needs to be it's own tactic so that I can fail out of one of the branches*)
-  
-  (* try (left; pls_destruct_correctly; solve_pls; try constructor); try (right; try constructor; pls_destruct_correctly; solve_pls; try constructor) (* may change *) *)
-  end).
   
 (* this shouldn't change the goal except simplifying it, and the hypothesis should be simplified *)
 Ltac simple_jail :=
   match goal with 
   | [ filtered_var := _ |- _ ] => subst filtered_var
   | _ => idtac
-  end; simpl in *; subst; try (repeat simplify_hypothesis); try pair_thing; try conclusion_jail; try hypothesis_jail; auto.
+  end; 
+  simpl in *; subst; simplify_hypothesis; try pair_thing; 
+  conclusion_jail; try (temp_or_jail; fail); 
+  try trunion_jail; auto.
 
 Ltac do_it :=
   simple_jail; solve_pls.
@@ -172,8 +213,39 @@ Ltac hopefully_this_works n :=
   | O => idtac
   end.
 
-Ltac unfold_jail := (* maybe if we add more definitions that need to be unfolded *)
-  unfold get_true_prop in *; unfold get_false_prop in *; simpl in *.
-
 Ltac pls_jail :=
-  start_jail; simpl in *; conclusion_jail; try simplify_hypothesis; try unfold_jail; hopefully_this_works 2.
+  start_jail; simpl in *; conclusion_jail; temp_or_jail; try simplify_hypothesis; try unfold_jail; hopefully_this_works 2.
+
+
+(* ************************************************************* *)
+(* ***************** NEW STUFF ********************************* *)
+
+Ltac break_jail n :=
+  match n with
+  | S ?n' =>
+    do_it; try (
+      match goal with
+      | [ H : ~ HasType _ _ |- _ ] => destruct H
+      | [ H : ~ (HasType _ _ /\ HasType _ _) |- _ ] => destruct H
+      end
+    ); pls_destruct_correctly; do_it; try car_cdr_jail; try (
+      match goal with
+      | [ |- _ \/ _ ] => try (left; break_jail 1; fail); try (right; break_jail 1; fail)
+      end
+    );
+    break_jail n'
+  | 0 => idtac
+  end.
+
+(* when should a tactic have try inside of the tactic and when should it be used with try instead?
+like should unfold_jail be defined with try or should i use it with try as i did below? *)
+Ltac new_jail :=
+  start_jail; conclusion_jail; simplify_hypothesis; try unfold_jail; auto;
+  (* this first part is definitely a "solve the trivial goals" part *)
+  repeat (
+    match goal with
+    | [ |- _ \/ _ ] => try (left; break_jail 1; fail); try (right; break_jail 1; fail)
+    end
+  );
+  break_jail 3. 
+

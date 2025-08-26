@@ -5,7 +5,7 @@ From Stdlib Require Import String.
 From Stdlib Require Import Bool.
 From Stdlib Require Import Program.Tactics.
 #[local] Obligation Tactic := try now program_simpl.
-#[local] Obligation Tactic := try (program_simpl; easy); try (pls_jail; easy).
+#[local] Obligation Tactic := try (program_simpl; easy). (*; try (pls_jail; easy).*)
 
 
 Coercion Num : nat >-> TRValues.
@@ -21,6 +21,111 @@ Open Scope string_scope.
 (* IT LIVES *)
 
 (************************************************************************)
+(********************** IF AGAIN AHHHHHHHHHHHHHHHH **********************)
+
+Program Definition if_ex1 {t : TRTypes} (x : {v >> t}) : {v >> trnum}:=
+  ifTR_v2 (is_number x) (add1 x) 0.
+Next Obligation. new_jail. Defined.
+
+Eval compute in if_ex1 5.
+Eval compute in if_ex1 "5".
+
+Program Definition if_ex2 (x : {v >> (trunion trstr trnum)}) : {v >> trnum} :=
+  ifTR_v2 (is_number x) (add1 x) (strlen x). 
+
+Next Obligation. new_jail. Defined.
+Next Obligation. new_jail. Defined.
+
+ (* Set Printing Implicit.
+  Set Printing Depth 100.
+  Print if_ex2. *)
+
+(* has to use <[]> here since the coercion is only for trstr:( *)
+Program Definition if_ex2_test1 := if_ex2 <[ "hi" ]>. 
+Next Obligation. new_jail. Defined.
+Program Definition if_ex2_test2 := if_ex2 <[ 9 ]>.
+Next Obligation. new_jail. Defined.
+
+Eval compute in if_ex2_test1.
+Eval compute in if_ex2_test2.
+
+Program Definition if_exWhat (x : {v >> (trunion trstr trnum)}) : {v >> trnum} :=
+  ifTR_v2 (is_number x) (add1 x) 4.
+Next Obligation. new_jail. Defined. 
+
+
+Program Definition if_orTest2 {t : TRTypes} (x : {v >> t}) :=
+  (orTR_v2 (is_number x) (is_string x)). 
+Next Obligation. new_jail. Defined.
+Next Obligation. new_jail. Defined.
+
+Eval compute in if_orTest2 5.
+
+(* 
+Program Definition if_ex4 {t : TRTypes} (x : {v >> t}) : {v >> trnum} :=
+  ifTR_v2 
+       (orTR(is_number x) (is_string x))
+       (if_exWhat x)
+       0. (* ok so this can determine the implicit parameter P but the next one can't *)
+*)
+
+Program Definition if_ex4 {t : TRTypes} (x : {v >> t}) : {v >> trnum} :=
+  (let J := (get_true_prop (if_orTest2 x)) in
+  @if_TR'_v2 _ _ J _ (~ J) _ (* i sad bc what is going on why ahhhh i mean i can just use these functions to give implicit parameters in the notation *)
+       (if_orTest2 x)
+       (fun _ => (if_exWhat x))
+       (fun _ => 0)).
+Next Obligation. new_jail. Defined.
+Next Obligation. new_jail. Defined. (* i have no idea why defining the obligation takes so long? *)
+Next Obligation. new_jail. Defined.
+  
+Eval compute in if_ex4 9.
+Eval compute in if_ex4 "hi".
+Eval compute in if_ex4 true.
+
+Program Definition if_ex5 {t r : TRTypes} (x : {v >> t}) (y : {w >> r}) : {v >> trnum} :=
+  ifTR_v2  (andTR (is_number x) (is_string y))
+           (add x (strlen y))
+           0.
+Next Obligation. new_jail. Defined.
+Next Obligation. new_jail. Defined.
+Next Obligation. new_jail. Defined.
+
+Eval compute in if_ex5 5 "hi".
+Eval compute in if_ex5 5 8.
+Eval compute in if_ex5 "hello" 10.
+Eval compute in if_ex5 true false.
+
+Program Definition if_ex10 {A B : TRTypes} (p : {v >> (trpair A B)}) : {t >> trnum} :=
+  ifTR_v2 (is_number (car p)) (add1 (car p)) <[ 7 ]>.
+Next Obligation. new_jail. Defined.
+
+Eval compute in if_ex10 <[(Pair 5 "bye")]>. (* hmmmmmmmmmmmmmmm *)
+Eval compute in if_ex10 <[(Pair false 10)]>.
+
+Program Definition if_more_ex3_1 {t : TRTypes} (x : {v >> t}) : {v >> trnum} :=
+  ifTR_v2 (is_number x) x 54. (* it's working for this LOL yayay it's broken in a lot of other ways  *)
+Next Obligation. new_jail. Defined.
+
+Program Definition if_more_ex1 {t r : TRTypes} (x : {v >> t}) (y : {w >> r}) 
+         : {v >> trbool & 
+                 ((HasType x trnum) /\ (HasType y trstr) \/ (HasType x trstr)) & 
+                 (~(((HasType x trnum) /\ (HasType y trstr) \/ (HasType x trstr))))} :=
+  (ifTR_v2 < all > (is_number x) (is_string y) (is_string x)).
+Next Obligation. new_jail. Defined.
+Next Obligation. new_jail. Defined.
+Next Obligation. new_jail. Defined.  
+
+Program Definition if_more_ex3 {t r : TRTypes} (x : {v >> t}) (y : {w >> r}) : {v >> trnum} :=
+(ifTR_v2 (if_more_ex1 x y) 
+  (ifTR_v2 (is_string x) (strlen x) (add x (strlen y)))
+  (ifTR_v2 (is_number x) x 54)). (* yayayya so many problems but at least this worked *)
+Next Obligation. new_jail. Defined.
+Next Obligation. new_jail. Defined.
+Next Obligation. new_jail. Defined.
+
+
+(************************************************************************)
 (********************** EXAMPLE 1 AHHHHHHHHHHHHHHH **********************)
 Program Definition ex1 {t : TRTypes} (x : {v >> t}) : {v >> trnum}:=
   ifTR (is_number x) (add1 x) 0.
@@ -33,9 +138,10 @@ Eval compute in ex1 "5".
 
 Program Definition ex2 (x : {v >> (trunion trstr trnum)}) : {v >> trnum} :=
   ifTR (is_number x) (add1 x) (strlen x).
+Next Obligation. new_jail. Defined.
 
-Program Definition ex2_test1 := ex2 <["hi"]>.
-Program Definition ex2_test2 := ex2 <[9]>.
+Program Definition ex2_test1 := ex2 <["hi"]>. Next Obligation. new_jail. Defined.
+Program Definition ex2_test2 := ex2 <[9]>. Next Obligation. new_jail. Defined.
 
 Eval compute in ex2_test1.
 Eval compute in ex2_test2.
@@ -49,10 +155,13 @@ Program Definition ex4 {t : TRTypes} (x : {v >> t}) : {v >> trnum} :=
   ifTR (orTR (is_number x) (is_string x))
        (ex2 x)
        0.
+Next Obligation. new_jail. Defined.
+Next Obligation. new_jail. Defined.
+Next Obligation. new_jail. Defined.
   
-Eval compute in ex4 <[9]>.
-Eval compute in ex4 <["hi"]>.
-Eval compute in ex4 <[true]>.
+Eval compute in ex4 9.
+Eval compute in ex4 "hi".
+Eval compute in ex4 true.
 
 (************************************************************************)
 (********************** EXAMPLE 5 AHHHHHHHHHHHHHHH **********************)
@@ -61,11 +170,13 @@ Program Definition ex5 {t r : TRTypes} (x : {v >> t}) (y : {w >> r}) : {v >> trn
   ifTR  (andTR (is_number x) (is_string y))
            (add x (strlen y))
            0.
+Next Obligation. new_jail. Defined.
+Next Obligation. new_jail. Defined.
 
-Eval compute in ex5 <[5]> <["hi"]>.
-Eval compute in ex5 <[5]> <[8]>.
-Eval compute in ex5 <["hello"]> <[10]>.
-Eval compute in ex5 <[true]> <[false]>.
+Eval compute in ex5 5 "hi".
+Eval compute in ex5 5 8.
+Eval compute in ex5 "hello" 10.
+Eval compute in ex5 true false.
 
 (************************************************************************)
 (********************** EXAMPLE 7 AHHHHHHHHHHHHHHH **********************)
@@ -75,8 +186,10 @@ Program Definition ex7 {t r : TRTypes} (x : {v >> t}) (y : {w >> r}) : {v >> trn
     (ifTR < second > (is_number x) (is_string y) false)
     (add x (strlen y))
     0).
+Next Obligation. new_jail. Defined.
+Next Obligation. new_jail. Defined.
 
-Eval compute in ex7 <[6]> <["hello"]>.
+Eval compute in ex7 6 "hello".
 
 (************************************************************************)
 (********************** EXAMPLE 8 AHHHHHHHHHHHHHHH **********************)
@@ -86,13 +199,14 @@ Program Definition ex8 {t : TRTypes} (x : {v >> t}) :=
 
 Program Definition ex8_test {t : TRTypes} (x : {v >> t}) : {v >> trnum} :=
   (ifTR (ex8 x) (ex2 x) 0).
+Next Obligation. new_jail. Defined.
 
-Eval compute in ex8 <[6]>.
-Eval compute in ex8_test <[6]>.
-Eval compute in ex8 <["potatoes"]>.
-Eval compute in ex8_test <["potatoes"]>.
-Eval compute in ex8 <[true]>.
-Eval compute in ex8_test <[true]>.
+Eval compute in ex8 6.
+Eval compute in ex8_test 6.
+Eval compute in ex8 "potatoes".
+Eval compute in ex8_test "potatoes".
+Eval compute in ex8 true.
+Eval compute in ex8_test true.
 
 (************************************************************************)
 (********************** EXAMPLE 9 AHHHHHHHHHHHHHHH **********************)
@@ -103,8 +217,11 @@ Program Definition ex9 {t : TRTypes} (x : {v >> t}) : {v >> trnum} :=
       (ifTR < third > p p (is_string x)))
     (ex2 x) 
     0).
+Next Obligation. new_jail. Defined.
+Next Obligation. new_jail. Defined.
+Next Obligation. new_jail. Defined.
 
-Eval compute in ex9 <[2]>.
+Eval compute in ex9 2.
 
 (************************************************************************)
 (********************** EXAMPLE 10 AHHHHHHHHHHHHHH **********************)
@@ -126,6 +243,9 @@ Eval compute in g <[(Pair 4 5)]>.
 (* instead of returning 'no, i'll return 0 *)
 Program Definition ex11 {A B : TRTypes} (p : {v >> trpair A B}) : {t >> trnum} :=
   ifTR (andTR (is_number (car p)) (is_number (cdr p))) (g p) 0.
+Next Obligation. new_jail. Defined.
+Next Obligation. new_jail. Defined.
+Next Obligation. new_jail. Defined.
   
 Eval compute in ex11 <[(Pair 4 12)]>.
 Eval compute in ex11 <[(Pair 3 false)]>.
@@ -137,9 +257,9 @@ Eval compute in ex11 <[(Pair 3 false)]>.
 Program Definition ex12 {A B : TRTypes} (p : {v >> trpair A B}) : 
   {t >> trbool & (HasType p (trpair trnum B)) & (~ (HasType p (trpair trnum B)))} :=
   (is_number (car p)).
+Next Obligation. new_jail. Defined.
   
   
-
 Program Definition ex12_again {A B : TRTypes} (p : {v >> trpair A B}) : 
 {t >> trbool & (HasType (car p) trnum) & (~ (HasType (car p) trnum))} :=
   (is_number (car p)).
@@ -157,10 +277,13 @@ Program Definition ex13_14
   condTR [ (andTR (is_number x) (is_number (car y))) (add x (car y)) ] 
          [ (is_number (car y)) (add (strlen x) (car y)) ] 
          [ else 0].
-
-Check Num.
+Next Obligation. new_jail. Defined.
+Next Obligation. new_jail. Defined.
+Next Obligation. new_jail. Defined.
 
 Program Definition ex_13_14_use := ex13_14 <[14]> <[Pair 14 "hello"]>.
+Next Obligation. new_jail. Defined.
+Next Obligation. new_jail. Defined.
 
 Eval compute in ex_13_14_use.
 
@@ -172,122 +295,33 @@ Program Definition more_ex1 {t r : TRTypes} (x : {v >> t}) (y : {w >> r})
                  ((HasType x trnum) /\ (HasType y trstr) \/ (HasType x trstr)) & 
                  (~(((HasType x trnum) /\ (HasType y trstr) \/ (HasType x trstr))))} :=
   (ifTR < all > (is_number x) (is_string y) (is_string x)).
-Next Obligation. 
-(* the problem with the tactic is conclusion_jail with how i'm dealing with \/ *)
-  start_jail; repeat split; try intro.
-  - pls_jail.
-  - right. pls_destruct_correctly; solve_pls; try constructor. 
-  - pls_jail.
-  Defined.
+Next Obligation. new_jail. Defined.
+Next Obligation. new_jail. Defined.
 
-  Program Definition more_ex1_use := more_ex1 <[ 5 ]> <[ "hello" ]>.
-  Eval compute in more_ex1_use. 
+Program Definition more_ex1_use := more_ex1 5 "hello".
+Eval compute in more_ex1_use. 
 
 Program Definition more_ex2 {t r : TRTypes} (x : {v >> t}) (y : {w >> r}) : {v >> trnum} :=
   (ifTR (more_ex1 x y) 
     (ifTR (is_string x) (strlen x) (add x (strlen y)))
-    42). 
-
-(* Program Definition more_ex3_part1 {t : TRTypes} (x : {v >> t}) : {v >> trnum} :=
-  ifTR (is_number x) x 54
-  (* @if_TR' trnum _ _ _ _ (is_number x) (fun _ => x) (fun _ => <[54]>) *). 
-*)
+    42).
+Next Obligation. new_jail. Defined.
+Next Obligation. new_jail. Defined. 
 
 Program Definition more_ex3 {t r : TRTypes} (x : {v >> t}) (y : {w >> r}) : {v >> trnum} :=
   (ifTR (more_ex1 x y) 
     (ifTR (is_string x) (strlen x) (add x (strlen y)))
     (ifTR (is_number x) (add1 x) 54)). (* so this will work, but having just x won't bc of above *) 
+Next Obligation. new_jail. Defined.
+Next Obligation. new_jail. Defined.
 
 (************************************************************************)
 (********************** IF AGAIN AHHHHHHHHHHHHHHHH **********************)
 
-Program Definition if_ex1 {t : TRTypes} (x : {v >> t}) : {v >> trnum}:=
-  ifTR_v2 (is_number x) (add1 x) <[ 0 ]>.
 
-Eval compute in if_ex1 <[ 5 ]>.
-Eval compute in if_ex1 <[ "5" ]>.
+(* MOVED ABOVE AH *)
 
-Program Definition if_ex2 (x : {v >> (trunion trstr trnum)}) : {v >> trnum} :=
-  ifTR_v2 (is_number x) (add1 x) (strlen x). 
-
-Next Obligation. (* this takes SO long, ok i found the problem lol it's destructing too much *)
-  start_jail; simpl in *; conclusion_jail; try simplify_hypothesis; try unfold_jail; auto.
-  do_it; pls_destruct_correctly; simpl in *; try constructor;
-  inversion x0; try inv_trtype_false.
-Defined.
-
- (* Set Printing Implicit.
-  Set Printing Depth 100.
-  Print if_ex2. *)
-
-Program Definition if_exWhat (x : {v >> (trunion trstr trnum)}) : {v >> trnum} :=
-  ifTR_v2 (is_number x) (add1 x) <[ 4 ]>. 
-
-(* Program Definition ex2_test1 := ex2 <["hi"]>.
-Program Definition ex2_test2 := ex2 <[9]>.
-
-Eval compute in ex2_test1.
-Eval compute in ex2_test2. *)
-
-Program Definition if_ex4 {t : TRTypes} (x : {v >> t}) : {v >> trnum} :=
-  ifTR_v2 (orTR (is_number x) (is_string x))
-       (if_exWhat x)
-       <[ 0 ]>.
-  
-Eval compute in ex4 <[9]>.
-Eval compute in ex4 <["hi"]>.
-Eval compute in ex4 <[true]>.
-
-Program Definition if_ex5 {t r : TRTypes} (x : {v >> t}) (y : {w >> r}) : {v >> trnum} :=
-  ifTR_v2  (andTR (is_number x) (is_string y))
-           (add x (strlen y))
-           <[ 0 ]>.
-
-Eval compute in ex5 <[5]> <["hi"]>.
-Eval compute in ex5 <[5]> <[8]>.
-Eval compute in ex5 <["hello"]> <[10]>.
-Eval compute in ex5 <[true]> <[false]>.
-
-Program Definition if_ex10 {A B : TRTypes} (p : {v >> (trpair A B)}) : {t >> trnum} :=
-  ifTR_v2 (is_number (car p)) (add1 (car p)) <[ 7 ]>.
-
-Eval compute in ex10 <[(Pair 5 "bye")]>.
-Eval compute in ex10 <[(Pair false 10)]>.
-
-Program Definition if_more_ex3_1 {t : TRTypes} (x : {v >> t}) : {v >> trnum} :=
-  ifTR_v2 (is_number x) x <[ 54 ]>. (* it's working for this LOL yayay it's broken in a lot of other ways  *)
-
-Program Definition if_more_ex1 {t r : TRTypes} (x : {v >> t}) (y : {w >> r}) 
-         : {v >> trbool & 
-                 ((HasType x trnum) /\ (HasType y trstr) \/ (HasType x trstr)) & 
-                 (~(((HasType x trnum) /\ (HasType y trstr) \/ (HasType x trstr))))} :=
-  (ifTR_v2 < all > (is_number x) (is_string y) (is_string x)).
-Next Obligation. 
-  start_jail; repeat split; try intro.
-  - pls_jail.
-  - right. pls_destruct_correctly; solve_pls; try constructor. 
-  - pls_jail.
-Defined.
-Next Obligation.
-  start_jail; repeat split; try intro; simpl in *.
-  - pls_jail.
-  - destruct x; simpl in *; try (destruct H; auto; fail).
-    + destruct y; simpl in *; try (left; split; constructor); destruct H; auto.
-    + right; constructor.
-  - pls_jail.
-Defined.
-
-Program Definition if_more_ex3 {t r : TRTypes} (x : {v >> t}) (y : {w >> r}) : {v >> trnum} :=
-(ifTR_v2 (more_ex1 x y) 
-  (ifTR_v2 (is_string x) (strlen x) (add x (strlen y)))
-  (ifTR_v2 (is_number x) x <[ 54 ]>)). (* yayayya so many problems but at least this worked *)
-
-
-
-
-
-
-(* examples with different types for the different branches *)
+(* examples with different types for the different branches? *)
 
 (************************************************************************)
 (******************* RANDOM STUFF WE HAVE TRIED TO DO *******************)

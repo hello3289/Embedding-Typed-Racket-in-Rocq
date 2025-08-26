@@ -108,6 +108,11 @@ Proof.
   exact Q.
 Defined.
 
+Definition get_type {T} {P Q : Prop} (v : {v : TRValues | (HasType v T) /\ (v <> Bool false -> P) /\ (v = Bool false -> Q)}) : TRTypes.
+Proof. 
+    exact T.
+Defined.
+
 (************************************************************************)
 (*********************** TWO MORE NOTATIONS AHHH ************************)
 
