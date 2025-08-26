@@ -1,9 +1,8 @@
-From research Require Import Tactic_jail.
-From research Require Import Definitions.
-Require Import String.
-Require Import Bool.
-Require Import Coq.Program.Tactics.
-Require Import JMeq.
+From TRresearch Require Import Tactic_jail.
+From TRresearch Require Import Definitions.
+From Stdlib Require Import String.
+From Stdlib Require Import Bool.
+From Stdlib Require Import Program.Tactics.
 #[local] Obligation Tactic := try (program_simpl; easy); try (pls_jail; easy).
 
 Program Definition add1 (n : {t >> trnum}) : {t >> trnum} :=
@@ -138,7 +137,7 @@ Proof.
 
 (* this works, but it causes a lot of computations since it takes longer to do the stuff LOL what's it called *)
 Notation " 'ifTR' A B C " := 
-  (if_TR' A (fun _ => B) (fun _ => giveType C)) 
+  (if_TR' A (fun _ => B) (fun _ => C)) 
   (at level 0, A at next level, B at next level, C at next level). 
   
 Notation " 'ifTR' < 'second' > A B C " := 
@@ -149,7 +148,7 @@ Notation " 'ifTR' < 'second' > A B C " :=
               (~P) 
               (~(P /\ P')) 
               A (fun _ => B) (fun _ => giveType C)))) 
-  (at level 2, A at next level, 
+  (at level 0, A at next level, 
   B at next level, C at next level).
 
 Notation " 'ifTR' < 'third' > A B C " := 
@@ -159,8 +158,8 @@ Notation " 'ifTR' < 'third' > A B C " :=
              (P \/ P') 
              (~P) 
              (~(P \/ P')) 
-             A (fun _ => B) (fun _ => giveType C)))) 
-  (at level 2, A at next level, 
+             A (fun _ => B) (fun _ => C)))) 
+  (at level 0, A at next level, 
   B at next level, C at next level).
 
 Notation " 'ifTR' < 'all' > A B C " := 
@@ -171,12 +170,34 @@ Notation " 'ifTR' < 'all' > A B C " :=
               ((P /\ Q) \/ R) 
               (~P) 
               (~((P /\ Q) \/ R)) 
-              A (fun _ => B) (fun _ => giveType C))))) 
-  (at level 2, A at next level, B at next level, C at next level).  
+              A (fun _ => B) (fun _ => C))))) 
+  (at level 0, A at next level, B at next level, C at next level).  
 
 Notation " 'ifTR_v2' A B C " := 
-  (if_TR'_v2 A (fun _ => B) (fun _ => giveType C)) 
+  (if_TR'_v2 A (fun _ => B) (fun _ => C))
   (at level 0, A at next level, B at next level, C at next level). 
+
+Notation " 'ifTR_v2' < 'second' > A B C " := 
+  (let P := (get_true_prop A) in
+    (let P' := (get_true_prop B) in
+      (@if_TR'_v2 _ _ P 
+              (P /\ P') 
+              (~P) 
+              (~(P /\ P')) 
+              A (fun _ => B) (fun _ => C)))) 
+  (at level 0, A at next level, 
+  B at next level, C at next level).
+
+Notation " 'ifTR_v2' < 'third' > A B C " := 
+  (let P := (get_true_prop A) in
+    (let P' := (get_true_prop C) in 
+      (@if_TR'_v2 (get_type B) (get_type C) P 
+             (P \/ P') 
+             (~P) 
+             (~(P \/ P')) 
+             A (fun _ => B) (fun _ => C)))) 
+  (at level 0, A at next level, 
+  B at next level, C at next level).
 
 Notation " 'ifTR_v2' < 'all' > A B C " := 
   (let P := (get_true_prop A) in
@@ -186,8 +207,8 @@ Notation " 'ifTR_v2' < 'all' > A B C " :=
               ((P /\ Q) \/ R) 
               (~P) 
               (~((P /\ Q) \/ R)) 
-              A (fun _ => B) (fun _ => giveType C))))) 
-  (at level 2, A at next level, B at next level, C at next level).  
+              A (fun _ => B) (fun _ => C))))) 
+  (at level 0, A at next level, B at next level, C at next level).  
 
 Notation " 'condTR' [ A B ] [ C D ] [ 'else' E ]" :=
   (ifTR A B (ifTR C D E)) (A at level 0, C at next level, E at next level).
@@ -199,6 +220,15 @@ Notation " 'orTR' A B " :=
 Notation " 'andTR' A B " :=
   (ifTR < second > A B A) 
   (at level 10, A at next level, B at next level).
+
+Notation " 'orTR_v2' A B " :=
+  (ifTR_v2 < third > A A B)
+  (at level 10, A at next level, B at next level).
+
+Notation " 'andTR_v2' A B " :=
+  (ifTR_v2 < second > A B A) 
+  (at level 10, A at next level, B at next level).
+
 
 
 (************************************************************************)

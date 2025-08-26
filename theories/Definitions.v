@@ -1,7 +1,6 @@
-Require Import String.
-Require Import Bool.
-Require Import Coq.Program.Tactics.
-Require Import JMeq.
+From Stdlib Require Import Strings.String.
+From Stdlib Require Import Bool.
+From Stdlib Require Import Program.Tactics.
 #[local] Obligation Tactic := try now program_simpl.
 
 (************************************************************************)
@@ -107,6 +106,11 @@ Defined.
 Definition get_false_prop {T} {P Q : Prop} (v : {v : TRValues | (HasType v T) /\ (v <> Bool false -> P) /\ (v = Bool false -> Q)}) : Prop.
 Proof. 
   exact Q.
+Defined.
+
+Definition get_type {T} {P Q : Prop} (v : {v : TRValues | (HasType v T) /\ (v <> Bool false -> P) /\ (v = Bool false -> Q)}) : TRTypes.
+Proof. 
+    exact T.
 Defined.
 
 (************************************************************************)
