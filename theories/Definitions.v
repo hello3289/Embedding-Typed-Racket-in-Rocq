@@ -1,16 +1,31 @@
-From Stdlib Require Import Strings.String.
-From Stdlib Require Import Bool.
-From Stdlib Require Import Program.Tactics.
+Require Import Strings.String.
+Require Import Bool.
+Require Import Program.Tactics.
 #[local] Obligation Tactic := try now program_simpl.
 
 (************************************************************************)
 (**************** OUR VALUE AND TYPE DEFINITIONS AHHHHHH ****************)
 
+Inductive TRList : Type :=
+  | empty
+  | some (a : nat) (b : TRList). (* lol *)
+
+Inductive nat_vec : nat -> Type :=
+  | nil : nat_vec O
+  | cons : forall {n : nat} , nat -> (nat_vec n) -> nat_vec (S n).
+
 Inductive TRValues : Type := 
   | Num (n : nat)
   | Bool (b : bool)
   | Str (s : string)
-  | Pair  (a : TRValues) (b : TRValues).
+  | Pair  (a : TRValues) (b : TRValues)
+  | List (l : TRList)
+  | Vec : forall (n : nat),  ( nat_vec n) -> TRValues.
+
+Check (cons 5 (cons 7 nil)).
+Definition len {n} (v : nat_vec n): nat := n.
+Eval compute in (len (cons 5 (cons 7 nil))).
+Check (some 5 (some 7 empty)).
 
 
 Inductive TRTypes : Type := 
@@ -18,19 +33,23 @@ Inductive TRTypes : Type :=
   | trbool : TRTypes
   | trstr : TRTypes
   | trpair : TRTypes -> TRTypes -> TRTypes
+  | trvec : nat -> TRTypes
+  | trlist : TRTypes
   | trunion : TRTypes -> TRTypes -> TRTypes
   | trtop : TRTypes.
 
 
 Inductive HasType : TRValues -> TRTypes -> Prop :=
-  | HtTop :forall (v : TRValues), HasType v trtop
-  | HtNum   : forall (n : nat), HasType (Num n) trnum
-  | HtBool  : forall (b : bool), HasType (Bool b) trbool
-  | HtStr   : forall (s : string), HasType (Str s) trstr
-  | HtPair : forall (t1 t2 : TRValues) (A B : TRTypes) ,  
-                HasType t1 A -> 
-                HasType t2 B -> 
-                HasType (Pair t1 t2) (trpair A B)
+  | HtTop     :forall (v : TRValues), HasType v trtop
+  | HtNum     : forall (n : nat), HasType (Num n) trnum
+  | HtBool    : forall (b : bool), HasType (Bool b) trbool
+  | HtStr     : forall (s : string), HasType (Str s) trstr
+  | HtPair    : forall (t1 t2 : TRValues) (A B : TRTypes) ,  
+                  HasType t1 A -> 
+                  HasType t2 B -> 
+                  HasType (Pair t1 t2) (trpair A B)
+  | HtList    : forall (l : TRList), HasType (List l) trlist
+  | HtVec     : forall (n : nat) (nv : nat_vec n), HasType (Vec n nv) (trvec n)
   | HtUnion_L : forall (t1 : TRValues) (A B : TRTypes),
                 (HasType t1 A) -> HasType t1 (trunion A B)
   | HtUnion_R : forall (t1 : TRValues) (A B : TRTypes),
@@ -63,6 +82,8 @@ refine
     | Num n => [trnum]
     | Bool b => [trbool]
     | Str s => [trstr]
+    | Vec n v => [trvec n]
+    | List l => [trlist]
     | Pair a b => 
         match (F a) with
         | [A] => match (F b) with
@@ -79,6 +100,9 @@ Program Definition getType' (v : TRValues) (t : {t | HasType v t}) :=
 
 Program Definition giveType (v : TRValues) :=
     getType' v (typeCheck v).
+
+Eval compute in typeCheck (Vec _ (cons 5 (cons 8 nil))).
+
 
 Program Definition TRUnionL {t1 t2 : TRTypes} (x : {v >> t1}) : {v >> (trunion t1 t2)} :=
   x.
@@ -127,3 +151,4 @@ Program Definition top_pair { S T : TRTypes } (v : { t >> (trpair S T) }) : { t 
 
 Notation " <[ e ]> " :=
     (giveType e) (e at level 0).
+Notation "( a , b )" := (Pair a b).

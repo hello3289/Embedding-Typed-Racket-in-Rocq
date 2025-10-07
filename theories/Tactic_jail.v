@@ -1,6 +1,6 @@
 From TRresearch Require Import Definitions.
-From Stdlib Require Import String.
-From Stdlib Require Import Bool.
+Require Import String.
+Require Import Bool.
 
 (* i'm dying there is still the "trying to automate my life file" *)
 
@@ -13,28 +13,52 @@ Ltac inv_trnum :=
   | H : HasType (Bool ?b) trnum |- _ => inversion H
   | H : HasType (Str ?b) trnum |- _ => inversion H
   | H : HasType (Pair ?b ?p) trnum |- _ => inversion H
+  | H : HasType (Vec _ ?b) trnum |- _ => inversion H
+  | H : HasType (List ?l) trnum |- _ => inversion H
   end.
 Ltac inv_trbool :=
   match goal with
   | H : HasType (Num ?b) trbool |- _ => inversion H
   | H : HasType (Str ?b) trbool |- _ => inversion H
   | H : HasType (Pair ?b ?p) trbool |- _ => inversion H
+  | H : HasType (Vec _ ?b) trbool |- _ => inversion H
+  | H : HasType (List ?l) trbool |- _ => inversion H
   end.
 Ltac inv_trstr :=
   match goal with
   | H : HasType (Bool ?b) trstr |- _ => inversion H
   | H : HasType (Num ?b) trstr |- _ => inversion H
   | H : HasType (Pair ?b ?p) trstr |- _ => inversion H
+  | H : HasType (Vec _ ?b) trstr |- _ => inversion H
+  | H : HasType (List ?l) trstr |- _ => inversion H
+  end.
+Ltac inv_trlist :=
+  match goal with
+  | H : HasType (Bool ?b) trlist |- _ => inversion H
+  | H : HasType (Num ?b) trlist |- _ => inversion H
+  | H : HasType (Str ?b) trlist |- _ => inversion H
+  | H : HasType (Pair ?b ?p) trlist |- _ => inversion H
+  | H : HasType (Vec _ ?b) trlist |- _ => inversion H
+  end.
+Ltac inv_trvec :=
+  match goal with
+  | H : HasType (Bool ?b) (trvec _) |- _ => inversion H
+  | H : HasType (Num ?b) (trvec _) |- _ => inversion H
+  | H : HasType (Str ?b) (trvec _) |- _ => inversion H
+  | H : HasType (Pair ?b ?p) (trvec _) |- _ => inversion H
+  | H : HasType (List ?l) (trvec _) |- _ => inversion H
   end.
 Ltac inv_trpair :=
   match goal with
   | H : HasType (Bool ?b) (trpair ?x ?y) |- _ => inversion H
   | H : HasType (Str ?b) (trpair ?x ?y) |- _ => inversion H
   | H : HasType (Num ?b) (trpair ?x ?y) |- _ => inversion H
+  | H : HasType (Vec _ ?b) (trpair ?x ?y) |- _ => inversion H
+  | H : HasType (List ?l) (trpair ?x ?y) |- _ => inversion H
   end.
 
 Ltac inv_trtype_false  :=
- try inv_trbool; try inv_trnum; try inv_trstr; try inv_trpair; fail.
+ try inv_trbool; try inv_trnum; try inv_trstr; try inv_trpair; try inv_trvec; try inv_trlist; fail.
 
 
 (************************************************************************)
@@ -42,12 +66,12 @@ Ltac inv_trtype_false  :=
  (* starts and simplifies hypotheses that hold the propositions *)
 
  Ltac start_jail :=
-   intros; subst; simpl in *;
+   intros;
    repeat 
    (match goal with
    | [ H : {v >> (?t)} |- _ ] => destruct H as [H [?H [?H ?H]]]
    | [ H : {v >> (?t) & ?P & ?Q} |- _ ] => destruct H as [H [?H [?H ?H]]]
-   end); subst; simpl in *.
+   end); subst.
 
 (* i don't know why i can't do subst *? *)
 
@@ -60,9 +84,6 @@ Ltac conclusion_jail :=
   | [ |- _ /\ _ ] => constructor
   | [ |- _ -> _ ] => intro
   | [ |- ~_ ] => intro
-  (*| [ |- _ \/ _ ] => try (left; constructor); try (right; constructor) *)
-  (* i think this needs to be it's own tactic so that I can fail out of one of the branches*)
-  (* try (left; pls_destruct_correctly; solve_pls; try constructor); try (right; try constructor; pls_destruct_correctly; solve_pls; try constructor) (* may change *) *)
   end); auto.
 
 (************************************************************************)
@@ -93,8 +114,7 @@ Ltac simplify_hypothesis :=
 Ltac unfold_jail := (* maybe if we add more definitions that need to be unfolded *)
   unfold get_true_prop in *; 
   unfold get_false_prop in *; 
-  unfold get_type in *;
-  simpl in *.
+  unfold get_type in *.
   
 (************************************************************************)
 (********************** TRUNION_JAIL AHHHHHHHHHHHHHHHHH *****************)
@@ -103,7 +123,7 @@ be solved with the false tactics, then I might change either the order or how th
 
 Ltac trunion_jail :=
     (match goal with
-    | [ H : HasType _ (trunion _ _) |- _ ] => inversion H; simpl in *; subst (*; clear H *)
+    | [ H : HasType _ (trunion _ _) |- _ ] => inversion H; subst
     end); auto.
 
 
@@ -113,9 +133,9 @@ Ltac pls_destruct_correctly := (* add case for filtered_var destruct *)
     (match goal with
     | [ x : TRValues |- _ ] => 
       match goal with
-      | [ H : HasType x ?t |- _ ] => destruct x
+      | [ H : HasType x ?t |- _ ] => (* idtac x H; *) destruct x
       end
-    end; simpl in *; try inv_trtype_false).
+    end; try inv_trtype_false).
     
 Ltac car_cdr_jail :=
   match goal with
@@ -159,7 +179,7 @@ Ltac ht_good_hehe :=
   | [ |- HasType (Num _) trnum ] => constructor
   | [ |- HasType (Str _) trstr ] => constructor
   | [ |- HasType (Pair ?a ?b) (trpair ?t1 ?t2) ] => constructor
-  | [ |- HasType _ (trunion _ _) ] => try (apply HtUnion_L; auto; constructor; fail) || apply HtUnion_R; auto; constructor; fail
+  | [ |- HasType _ (trunion _ _) ] => try (apply HtUnion_L; auto; constructor; ht_good_hehe; fail) || apply HtUnion_R; auto; constructor; ht_good_hehe; fail
   | [ H : HasType (Pair ?a ?b) (trpair ?A ?B) |- HasType ?a ?A ] => inversion H; auto
   | [ H : HasType (Pair ?a ?b) (trpair ?A ?B) |- HasType ?b ?B ] => inversion H; auto
   end.
@@ -174,7 +194,7 @@ though simplify_hypothesis also solves goals *)
 
 Ltac pair_thing :=
   match goal with 
-  | [ H : HasType (Pair ?a ?b) (trpair ?A ?B) |- _ ] => simpl in *; subst; inversion H; clear H
+  | [ H : HasType (Pair ?a ?b) (trpair ?A ?B) |- _ ] => inversion H; clear H
   end.
 
 Ltac eq_refl_special :=
@@ -213,6 +233,7 @@ Ltac hopefully_this_works n :=
   | O => idtac
   end.
 
+(* old tactic *)
 Ltac pls_jail :=
   start_jail; simpl in *; conclusion_jail; temp_or_jail; try simplify_hypothesis; try unfold_jail; hopefully_this_works 2.
 
@@ -236,6 +257,9 @@ Ltac break_jail n :=
     break_jail n'
   | 0 => idtac
   end.
+
+Ltac small_jail :=
+  start_jail; conclusion_jail; simplify_hypothesis; try unfold_jail; auto.
 
 (* when should a tactic have try inside of the tactic and when should it be used with try instead?
 like should unfold_jail be defined with try or should i use it with try as i did below? *)

@@ -1,9 +1,9 @@
 From TRresearch Require Import Tactic_jail.
 From TRresearch Require Import Definitions.
-From Stdlib Require Import String.
-From Stdlib Require Import Bool.
-From Stdlib Require Import Program.Tactics.
-#[local] Obligation Tactic := try (program_simpl; easy); try (pls_jail; easy).
+Require Import String.
+Require Import Bool.
+Require Import Program.Tactics.
+#[local] Obligation Tactic := try (program_simpl; easy); try new_jail; try discriminate.
 
 Program Definition add1 (n : {t >> trnum}) : {t >> trnum} :=
    match n with
@@ -15,7 +15,7 @@ Program Definition add (n : {v >> trnum}) (m : {v >> trnum}) : {v >> trnum} :=
   match n, m with
   | Num x, Num y => giveType (Num (x + y))
   | _r, _q => False_rec _ _
-  end.
+  end. (* why does this take so long with just new_jail? *)
 
 Program Definition is_number {P Q} {t : TRTypes} (x : {v >> t & P & Q}) : 
                   {t >> trbool & (HasType x trnum) & ~(HasType x trnum)} :=
@@ -131,6 +131,20 @@ Proof.
   try (apply hehe2; apply z; apply x2; auto).
   Defined.
 
+Eval compute in is_string <[(Str "hi")]>.
+
+ (*  #[local] Obligation Tactic := try fail. *)
+Program Definition notTR {P Q : Prop}
+                  (x : {t >>trbool & P & Q}) :
+                  {t >> trbool & Q & P} :=
+  match x with
+  | Bool false => Bool true
+  | _r => Bool false
+  end.
+
+Eval compute in (notTR (is_string <[(Str "hi")]>)).
+
+
 
 (************************************************************************)
 (********************** MORE NOTATIONS FOR IF AHHH **********************)
@@ -177,27 +191,6 @@ Notation " 'ifTR_v2' A B C " :=
   (if_TR'_v2 A (fun _ => B) (fun _ => C))
   (at level 0, A at next level, B at next level, C at next level). 
 
-Notation " 'ifTR_v2' < 'second' > A B C " := 
-  (let P := (get_true_prop A) in
-    (let P' := (get_true_prop B) in
-      (@if_TR'_v2 _ _ P 
-              (P /\ P') 
-              (~P) 
-              (~(P /\ P')) 
-              A (fun _ => B) (fun _ => C)))) 
-  (at level 0, A at next level, 
-  B at next level, C at next level).
-
-Notation " 'ifTR_v2' < 'third' > A B C " := 
-  (let P := (get_true_prop A) in
-    (let P' := (get_true_prop C) in 
-      (@if_TR'_v2 (get_type B) (get_type C) P 
-             (P \/ P') 
-             (~P) 
-             (~(P \/ P')) 
-             A (fun _ => B) (fun _ => C)))) 
-  (at level 0, A at next level, 
-  B at next level, C at next level).
 
 Notation " 'ifTR_v2' < 'all' > A B C " := 
   (let P := (get_true_prop A) in
@@ -222,11 +215,23 @@ Notation " 'andTR' A B " :=
   (at level 10, A at next level, B at next level).
 
 Notation " 'orTR_v2' A B " :=
-  (ifTR_v2 < third > A A B)
+  (let P := (get_true_prop A) in
+    (let P' := (get_true_prop B) in 
+      (@if_TR'_v2 trbool trbool P 
+             (P \/ P') 
+             (~P) 
+             (~(P \/ P')) 
+             A (fun _ => A) (fun _ => B))))
   (at level 10, A at next level, B at next level).
 
 Notation " 'andTR_v2' A B " :=
-  (ifTR_v2 < second > A B A) 
+  (let P := (get_true_prop A) in
+    (let P' := (get_true_prop B) in 
+      (@if_TR'_v2 trbool trbool P 
+             (P /\ P') 
+             (~P) 
+             (~(P /\ P')) 
+             A (fun _ => B) (fun _ => A)))) 
   (at level 10, A at next level, B at next level).
 
 
@@ -238,10 +243,28 @@ Program Definition orTest {A : TRTypes} (x : {t >> A}) :
     {t >> trbool & ((HasType x trnum) \/ (HasType x trstr)) & ~((HasType x trnum) \/ (HasType x trstr))} :=
     orTR (is_number x) (is_string x).
 
+Program Definition orTest_v2 {A : TRTypes} (x : {t >> A}) : 
+    {t >> trbool & ((HasType x trnum) \/ (HasType x trstr)) & ~((HasType x trnum) \/ (HasType x trstr))} :=
+  orTR_v2 (is_number x) (is_string x).
+
 Program Definition andTest {A B : TRTypes} (x : {t >> A}) (y : {t >> B}) :
   {t >> trbool & ((HasType x trnum)  /\ (HasType y trstr)) & ~((HasType x trnum)  /\ (HasType y trstr))} :=
   andTR (is_number x) (is_string y).
+
+Program Definition andTest_v2 {A B : TRTypes} (x : {t >> A}) (y : {t >> B}) :
+  {t >> trbool & ((HasType x trnum)  /\ (HasType y trstr)) & ~((HasType x trnum)  /\ (HasType y trstr))} :=
+  andTR_v2 (is_number x) (is_string y).
   
+Program Definition orWhat {H K : Prop} (A : {t >> trbool & H & (~H)}) (B : {t >> trbool & K & (~K)}) :=
+(let P := H in
+    (let P' := (get_true_prop B) in 
+      (@if_TR'_v2 trbool trbool P 
+             (P \/ P') 
+             (~P) 
+             (~(P \/ P')) 
+             A (fun _ => A) (fun _ => B)))).
+             
+Eval compute in orWhat (is_number <[(Num 5)]>) (is_string <[(Num 5)]>).
 
 Program Definition condTest {A B : TRTypes}
     (x : {v >> A})
