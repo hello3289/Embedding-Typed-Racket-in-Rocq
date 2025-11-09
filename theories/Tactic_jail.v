@@ -290,3 +290,6 @@ Ltac new_jail :=
   );
   break_jail 3. 
 
+  Ltac destruct2 x :=
+  destruct x as [?x [?x ?x]].
+
