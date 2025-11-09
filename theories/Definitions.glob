@@ -1,605 +1,631 @@
-DIGEST ddf57af722fccc9d6bf0bdb6dab52666
+DIGEST f55f854f5e05b3ace5204506c6e01099
 FTRresearch.Definitions
 R15:28 Coq.Strings.String <> <> lib
 R46:49 Coq.Bool.Bool <> <> lib
 R67:81 Coq.Program.Tactics <> <> lib
-ind 299:304 <> TRList
-constr 320:324 <> empty
-constr 330:333 <> some
-R340:342 Coq.Init.Datatypes <> nat ind
-binder 336:336 <> a:3
-R350:355 TRresearch.Definitions <> TRList:1 ind
-binder 346:346 <> b:4
-scheme 299:304 <> TRList_rect
-scheme 299:304 <> TRList_ind
-scheme 299:304 <> TRList_rec
-scheme 299:304 <> TRList_sind
-ind 380:386 <> nat_vec
-constr 409:411 <> nil
-constr 429:432 <> cons
-R393:396 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R390:392 Coq.Init.Datatypes <> nat ind
-R415:421 TRresearch.Definitions <> nat_vec:5 ind
-R423:423 Coq.Init.Datatypes <> O constr
-R448:450 Coq.Init.Datatypes <> nat ind
-binder 444:444 <> n:7
-R458:461 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R455:457 Coq.Init.Datatypes <> nat ind
-R462:462 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R472:476 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R463:469 TRresearch.Definitions <> nat_vec:5 ind
-R471:471 TRresearch.Definitions <> n:7 var
-R477:483 TRresearch.Definitions <> nat_vec:5 ind
-R486:486 Coq.Init.Datatypes <> S constr
-R488:488 TRresearch.Definitions <> n:7 var
-scheme 380:386 <> nat_vec_rect
-scheme 380:386 <> nat_vec_ind
-scheme 380:386 <> nat_vec_rec
-scheme 380:386 <> nat_vec_sind
-ind 503:510 <> TRValues
-constr 527:529 <> Num
-constr 545:548 <> Bool
-constr 565:567 <> Str
-constr 586:589 <> Pair
-constr 626:629 <> List
-constr 648:650 <> Vec
-R536:538 Coq.Init.Datatypes <> nat ind
-binder 532:532 <> n:10
-R555:558 Coq.Init.Datatypes <> bool ind
-binder 551:551 <> b:11
-R574:579 Coq.Strings.String <> string ind
-binder 570:570 <> s:12
-R597:604 TRresearch.Definitions <> TRValues:8 ind
-binder 593:593 <> a:13
-R612:619 TRresearch.Definitions <> TRValues:8 ind
-binder 608:608 <> b:14
-R636:641 TRresearch.Definitions <> TRList ind
-binder 632:632 <> l:15
-R666:668 Coq.Init.Datatypes <> nat ind
-binder 662:662 <> n:16
-R673:674 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R684:688 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R675:681 TRresearch.Definitions <> nat_vec ind
-R683:683 TRresearch.Definitions <> n:16 var
-R689:696 TRresearch.Definitions <> TRValues:8 ind
-scheme 503:510 <> TRValues_rect
-scheme 503:510 <> TRValues_ind
-scheme 503:510 <> TRValues_rec
-scheme 503:510 <> TRValues_sind
-R707:710 TRresearch.Definitions <> cons constr
-R715:718 TRresearch.Definitions <> cons constr
-R722:724 TRresearch.Definitions <> nil constr
-def 740:742 <> len
-binder 745:745 <> n:17
-R753:759 TRresearch.Definitions <> nat_vec ind
-R761:761 TRresearch.Definitions <> n:17 var
-binder 749:749 <> v:18
-R765:767 Coq.Init.Datatypes <> nat ind
-R772:772 TRresearch.Definitions <> n:17 var
-R792:794 TRresearch.Definitions <> len def
-R797:800 TRresearch.Definitions <> cons constr
-R805:808 TRresearch.Definitions <> cons constr
-R812:814 TRresearch.Definitions <> nil constr
-R827:830 TRresearch.Definitions <> some constr
-R835:838 TRresearch.Definitions <> some constr
-R842:846 TRresearch.Definitions <> empty constr
-ind 863:869 <> TRTypes
-constr 886:890 <> trnum
-constr 906:911 <> trbool
-constr 927:931 <> trstr
-constr 947:952 <> trpair
-constr 990:994 <> trvec
-constr 1017:1022 <> trlist
-constr 1038:1044 <> trunion
-constr 1082:1086 <> trtop
-R894:900 TRresearch.Definitions <> TRTypes:19 ind
-R915:921 TRresearch.Definitions <> TRTypes:19 ind
-R935:941 TRresearch.Definitions <> TRTypes:19 ind
-R963:966 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R956:962 TRresearch.Definitions <> TRTypes:19 ind
-R974:977 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R967:973 TRresearch.Definitions <> TRTypes:19 ind
-R978:984 TRresearch.Definitions <> TRTypes:19 ind
-R1001:1004 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R998:1000 Coq.Init.Datatypes <> nat ind
-R1005:1011 TRresearch.Definitions <> TRTypes:19 ind
-R1026:1032 TRresearch.Definitions <> TRTypes:19 ind
-R1055:1058 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1048:1054 TRresearch.Definitions <> TRTypes:19 ind
-R1066:1069 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1059:1065 TRresearch.Definitions <> TRTypes:19 ind
-R1070:1076 TRresearch.Definitions <> TRTypes:19 ind
-R1090:1096 TRresearch.Definitions <> TRTypes:19 ind
-scheme 863:869 <> TRTypes_rect
-scheme 863:869 <> TRTypes_ind
-scheme 863:869 <> TRTypes_rec
-scheme 863:869 <> TRTypes_sind
-ind 1111:1117 <> HasType
-constr 1156:1160 <> HtTop
-constr 1210:1214 <> HtNum
-constr 1266:1271 <> HtBool
-constr 1325:1329 <> HtStr
-constr 1384:1389 <> HtPair
-constr 1568:1573 <> HtList
-constr 1629:1633 <> HtVec
-constr 1709:1717 <> HtUnion_L
-constr 1824:1832 <> HtUnion_R
-R1129:1132 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1121:1128 TRresearch.Definitions <> TRValues ind
-R1140:1143 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1133:1139 TRresearch.Definitions <> TRTypes ind
-R1179:1186 TRresearch.Definitions <> TRValues ind
-binder 1175:1175 <> v:23
-R1190:1196 TRresearch.Definitions <> HasType:21 ind
-R1200:1204 TRresearch.Definitions <> trtop constr
-R1198:1198 TRresearch.Definitions <> v:23 var
-R1234:1236 Coq.Init.Datatypes <> nat ind
-binder 1230:1230 <> n:24
-R1240:1246 TRresearch.Definitions <> HasType:21 ind
-R1256:1260 TRresearch.Definitions <> trnum constr
-R1249:1251 TRresearch.Definitions <> Num constr
-R1253:1253 TRresearch.Definitions <> n:24 var
-R1290:1293 Coq.Init.Datatypes <> bool ind
-binder 1286:1286 <> b:25
-R1297:1303 TRresearch.Definitions <> HasType:21 ind
-R1314:1319 TRresearch.Definitions <> trbool constr
-R1306:1309 TRresearch.Definitions <> Bool constr
-R1311:1311 TRresearch.Definitions <> b:25 var
-R1349:1354 Coq.Strings.String <> string ind
-binder 1345:1345 <> s:26
-R1358:1364 TRresearch.Definitions <> HasType:21 ind
-R1374:1378 TRresearch.Definitions <> trstr constr
-R1367:1369 TRresearch.Definitions <> Str constr
-R1371:1371 TRresearch.Definitions <> s:26 var
-R1412:1419 TRresearch.Definitions <> TRValues ind
-binder 1404:1405 <> t1:27
-binder 1407:1408 <> t2:28
-R1429:1435 TRresearch.Definitions <> TRTypes ind
-binder 1423:1423 <> A:29
-binder 1425:1425 <> B:30
-R1472:1494 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1460:1466 TRresearch.Definitions <> HasType:21 ind
-R1471:1471 TRresearch.Definitions <> A:29 var
-R1468:1469 TRresearch.Definitions <> t1:27 var
-R1507:1529 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1495:1501 TRresearch.Definitions <> HasType:21 ind
-R1506:1506 TRresearch.Definitions <> B:30 var
-R1503:1504 TRresearch.Definitions <> t2:28 var
-R1530:1536 TRresearch.Definitions <> HasType:21 ind
-R1552:1557 TRresearch.Definitions <> trpair constr
-R1559:1559 TRresearch.Definitions <> A:29 var
-R1561:1561 TRresearch.Definitions <> B:30 var
-R1539:1542 TRresearch.Definitions <> Pair constr
-R1544:1545 TRresearch.Definitions <> t1:27 var
-R1547:1548 TRresearch.Definitions <> t2:28 var
-R1592:1597 TRresearch.Definitions <> TRList ind
-binder 1588:1588 <> l:31
-R1601:1607 TRresearch.Definitions <> HasType:21 ind
-R1618:1623 TRresearch.Definitions <> trlist constr
-R1610:1613 TRresearch.Definitions <> List constr
-R1615:1615 TRresearch.Definitions <> l:31 var
-R1653:1655 Coq.Init.Datatypes <> nat ind
-binder 1649:1649 <> n:32
-R1664:1670 TRresearch.Definitions <> nat_vec ind
-R1672:1672 TRresearch.Definitions <> n:32 var
-binder 1659:1660 <> nv:33
-R1676:1682 TRresearch.Definitions <> HasType:21 ind
-R1696:1700 TRresearch.Definitions <> trvec constr
-R1702:1702 TRresearch.Definitions <> n:32 var
-R1685:1687 TRresearch.Definitions <> Vec constr
-R1689:1689 TRresearch.Definitions <> n:32 var
-R1691:1692 TRresearch.Definitions <> nv:33 var
-R1734:1741 TRresearch.Definitions <> TRValues ind
-binder 1729:1730 <> t1:34
-R1751:1757 TRresearch.Definitions <> TRTypes ind
-binder 1745:1745 <> A:35
-binder 1747:1747 <> B:36
-R1777:1777 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1790:1794 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1778:1784 TRresearch.Definitions <> HasType:21 ind
-R1789:1789 TRresearch.Definitions <> A:35 var
-R1786:1787 TRresearch.Definitions <> t1:34 var
-R1795:1801 TRresearch.Definitions <> HasType:21 ind
-R1807:1813 TRresearch.Definitions <> trunion constr
-R1815:1815 TRresearch.Definitions <> A:35 var
-R1817:1817 TRresearch.Definitions <> B:36 var
-R1803:1804 TRresearch.Definitions <> t1:34 var
-R1849:1856 TRresearch.Definitions <> TRValues ind
-binder 1844:1845 <> t1:37
-R1866:1872 TRresearch.Definitions <> TRTypes ind
-binder 1860:1860 <> A:38
-binder 1862:1862 <> B:39
-R1892:1892 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1905:1909 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1893:1899 TRresearch.Definitions <> HasType:21 ind
-R1904:1904 TRresearch.Definitions <> B:39 var
-R1901:1902 TRresearch.Definitions <> t1:37 var
-R1910:1916 TRresearch.Definitions <> HasType:21 ind
-R1922:1928 TRresearch.Definitions <> trunion constr
-R1930:1930 TRresearch.Definitions <> A:38 var
-R1932:1932 TRresearch.Definitions <> B:39 var
-R1918:1919 TRresearch.Definitions <> t1:37 var
-scheme 1111:1117 <> HasType_ind
-scheme 1111:1117 <> HasType_sind
-R2109:2113 Coq.Init.Specif <> exist constr
-not 2097:2097 <> :::'['_x_']'
-R2155:2157 Coq.Init.Specif <> sig ind
-R2168:2175 TRresearch.Definitions <> TRValues ind
-binder 2164:2164 <> t:40
-R2180:2180 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R2192:2228 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R2181:2187 TRresearch.Definitions <> HasType ind
-R2229:2229 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R2253:2290 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R2313:2313 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R2245:2248 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R2231:2234 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
-R2235:2238 TRresearch.Definitions <> Bool constr
-R2240:2244 Coq.Init.Datatypes <> false constr
-R2249:2252 Coq.Init.Logic <> True ind
-R2305:2308 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R2292:2294 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R2295:2298 TRresearch.Definitions <> Bool constr
-R2300:2304 Coq.Init.Datatypes <> false constr
-R2309:2312 Coq.Init.Logic <> True ind
-not 2133:2133 <> :::'{'_x_'>>'_x_'}'
-R2411:2413 Coq.Init.Specif <> sig ind
-R2424:2431 TRresearch.Definitions <> TRValues ind
-binder 2420:2420 <> t:41
-R2436:2436 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R2448:2483 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R2437:2443 TRresearch.Definitions <> HasType ind
-R2484:2484 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R2505:2541 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R2561:2561 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R2500:2503 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R2486:2489 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
-R2490:2493 TRresearch.Definitions <> Bool constr
-R2495:2499 Coq.Init.Datatypes <> false constr
-R2556:2559 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R2543:2545 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R2546:2549 TRresearch.Definitions <> Bool constr
-R2551:2555 Coq.Init.Datatypes <> false constr
-not 2381:2381 <> :::'{'_x_'>>'_x_'&'_x_'&'_x_'}'
-def 2778:2786 <> typeCheck
-R2802:2809 TRresearch.Definitions <> TRValues ind
-binder 2798:2798 <> v:42
-R2813:2813 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R2815:2817 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R2825:2827 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R2839:2839 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R2818:2824 TRresearch.Definitions <> TRTypes ind
-binder 2814:2814 <> t:43
-R2828:2834 TRresearch.Definitions <> HasType ind
-R2836:2836 TRresearch.Definitions <> v:42 var
-R2838:2838 TRresearch.Definitions <> t:43 var
-R2862:2869 TRresearch.Definitions <> TRValues ind
-binder 2858:2858 <> v:44
-R2874:2874 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R2876:2878 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R2886:2888 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R2900:2900 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R2879:2885 TRresearch.Definitions <> TRTypes ind
-binder 2875:2875 <> t:45
-R2889:2895 TRresearch.Definitions <> HasType ind
-R2897:2897 TRresearch.Definitions <> v:44 var
-R2899:2899 TRresearch.Definitions <> t:45 var
-R2915:2915 TRresearch.Definitions <> v:44 var
-R2924:2924 Coq.Init.Specif <> ::type_scope:'{'_x_'|'_x_'}' not
-R2926:2928 Coq.Init.Specif <> ::type_scope:'{'_x_'|'_x_'}' not
-R2940:2940 Coq.Init.Specif <> ::type_scope:'{'_x_'|'_x_'}' not
-binder 2925:2925 <> t:48
-R2929:2935 TRresearch.Definitions <> HasType ind
-R2937:2937 TRresearch.Definitions <> v:47 var
-R2939:2939 TRresearch.Definitions <> t:48 var
-R2953:2955 TRresearch.Definitions <> Num constr
-R2962:2962 TRresearch.Definitions <> :::'['_x_']' not
-R2968:2968 TRresearch.Definitions <> :::'['_x_']' not
-R2963:2967 TRresearch.Definitions <> trnum constr
-R2976:2979 TRresearch.Definitions <> Bool constr
-R2986:2986 TRresearch.Definitions <> :::'['_x_']' not
-R2993:2993 TRresearch.Definitions <> :::'['_x_']' not
-R2987:2992 TRresearch.Definitions <> trbool constr
-R3001:3003 TRresearch.Definitions <> Str constr
-R3010:3010 TRresearch.Definitions <> :::'['_x_']' not
-R3016:3016 TRresearch.Definitions <> :::'['_x_']' not
-R3011:3015 TRresearch.Definitions <> trstr constr
-R3024:3026 TRresearch.Definitions <> Vec constr
-R3035:3035 TRresearch.Definitions <> :::'['_x_']' not
-R3043:3043 TRresearch.Definitions <> :::'['_x_']' not
-R3036:3040 TRresearch.Definitions <> trvec constr
-R3051:3054 TRresearch.Definitions <> List constr
-R3061:3061 TRresearch.Definitions <> :::'['_x_']' not
-R3068:3068 TRresearch.Definitions <> :::'['_x_']' not
-R3062:3067 TRresearch.Definitions <> trlist constr
-R3076:3079 TRresearch.Definitions <> Pair constr
-R3104:3104 TRresearch.Definitions <> F:46 var
-R3124:3124 TRresearch.Definitions <> :::'['_x_']' not
-R3126:3126 TRresearch.Definitions <> :::'['_x_']' not
-R3138:3138 TRresearch.Definitions <> F:46 var
-R3165:3165 TRresearch.Definitions <> :::'['_x_']' not
-R3167:3167 TRresearch.Definitions <> :::'['_x_']' not
-R3172:3172 TRresearch.Definitions <> :::'['_x_']' not
-R3183:3183 TRresearch.Definitions <> :::'['_x_']' not
-R3173:3178 TRresearch.Definitions <> trpair constr
-R2862:2869 TRresearch.Definitions <> TRValues ind
-binder 2858:2858 <> v:49
-R2874:2874 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R2876:2878 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R2886:2888 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R2900:2900 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R2879:2885 TRresearch.Definitions <> TRTypes ind
-binder 2875:2875 <> t:50
-R2889:2895 TRresearch.Definitions <> HasType ind
-R2897:2897 TRresearch.Definitions <> v:49 var
-R2899:2899 TRresearch.Definitions <> t:50 var
-R2915:2915 TRresearch.Definitions <> v:49 var
-R2924:2924 Coq.Init.Specif <> ::type_scope:'{'_x_'|'_x_'}' not
-R2926:2928 Coq.Init.Specif <> ::type_scope:'{'_x_'|'_x_'}' not
-R2940:2940 Coq.Init.Specif <> ::type_scope:'{'_x_'|'_x_'}' not
-binder 2925:2925 <> t:53
-R2929:2935 TRresearch.Definitions <> HasType ind
-R2937:2937 TRresearch.Definitions <> v:52 var
-R2939:2939 TRresearch.Definitions <> t:53 var
-R2953:2955 TRresearch.Definitions <> Num constr
-R2962:2962 TRresearch.Definitions <> :::'['_x_']' not
-R2968:2968 TRresearch.Definitions <> :::'['_x_']' not
-R2963:2967 TRresearch.Definitions <> trnum constr
-R2976:2979 TRresearch.Definitions <> Bool constr
-R2986:2986 TRresearch.Definitions <> :::'['_x_']' not
-R2993:2993 TRresearch.Definitions <> :::'['_x_']' not
-R2987:2992 TRresearch.Definitions <> trbool constr
-R3001:3003 TRresearch.Definitions <> Str constr
-R3010:3010 TRresearch.Definitions <> :::'['_x_']' not
-R3016:3016 TRresearch.Definitions <> :::'['_x_']' not
-R3011:3015 TRresearch.Definitions <> trstr constr
-R3024:3026 TRresearch.Definitions <> Vec constr
-R3035:3035 TRresearch.Definitions <> :::'['_x_']' not
-R3043:3043 TRresearch.Definitions <> :::'['_x_']' not
-R3036:3040 TRresearch.Definitions <> trvec constr
-R3051:3054 TRresearch.Definitions <> List constr
-R3061:3061 TRresearch.Definitions <> :::'['_x_']' not
-R3068:3068 TRresearch.Definitions <> :::'['_x_']' not
-R3062:3067 TRresearch.Definitions <> trlist constr
-R3076:3079 TRresearch.Definitions <> Pair constr
-R3104:3104 TRresearch.Definitions <> F:51 var
-R3124:3124 TRresearch.Definitions <> :::'['_x_']' not
-R3126:3126 TRresearch.Definitions <> :::'['_x_']' not
-R3138:3138 TRresearch.Definitions <> F:51 var
-R3165:3165 TRresearch.Definitions <> :::'['_x_']' not
-R3167:3167 TRresearch.Definitions <> :::'['_x_']' not
-R3172:3172 TRresearch.Definitions <> :::'['_x_']' not
-R3183:3183 TRresearch.Definitions <> :::'['_x_']' not
-R3173:3178 TRresearch.Definitions <> trpair constr
-def 3274:3281 <> getType'
-R3288:3295 TRresearch.Definitions <> TRValues ind
-binder 3284:3284 <> v:54
-R3303:3303 Coq.Init.Specif <> ::type_scope:'{'_x_'|'_x_'}' not
-R3305:3307 Coq.Init.Specif <> ::type_scope:'{'_x_'|'_x_'}' not
-R3319:3319 Coq.Init.Specif <> ::type_scope:'{'_x_'|'_x_'}' not
-binder 3304:3304 <> t:55
-R3308:3314 TRresearch.Definitions <> HasType ind
-R3316:3316 TRresearch.Definitions <> v:54 var
-R3318:3318 TRresearch.Definitions <> t:55 var
-binder 3299:3299 <> t:56
-R3335:3335 TRresearch.Definitions <> t:56 var
-R3344:3344 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
-R3346:3349 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
-R3351:3351 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 3345:3345 <> v:58
-binder 3345:3345 <> v:59
-binder 3345:3345 <> v:60
-R3350:3350 TRresearch.Definitions <> t:57 var
-binder 3345:3345 <> v:61
-binder 3345:3345 <> v:62
-binder 3345:3345 <> v:63
-binder 3345:3345 <> v:64
-R3370:3370 TRresearch.Definitions <> v:54 var
-def 3401:3408 <> giveType
-R3415:3422 TRresearch.Definitions <> TRValues ind
-binder 3411:3411 <> v:65
-R3432:3439 TRresearch.Definitions <> getType' def
-R3441:3441 TRresearch.Definitions <> v:65 var
-R3444:3452 TRresearch.Definitions <> typeCheck def
-R3454:3454 TRresearch.Definitions <> v:65 var
-R3475:3483 TRresearch.Definitions <> typeCheck def
-R3486:3488 TRresearch.Definitions <> Vec constr
-R3493:3496 TRresearch.Definitions <> cons constr
-R3501:3504 TRresearch.Definitions <> cons constr
-R3508:3510 TRresearch.Definitions <> nil constr
-def 3537:3544 <> TRUnionL
-R3555:3561 TRresearch.Definitions <> TRTypes ind
-binder 3547:3548 <> t1:66
-binder 3550:3551 <> t2:67
-R3569:3569 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
-R3571:3574 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
-R3577:3577 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 3570:3570 <> v:68
-binder 3570:3570 <> v:69
-binder 3570:3570 <> v:70
-R3575:3576 TRresearch.Definitions <> t1:66 var
-binder 3570:3570 <> v:71
-binder 3570:3570 <> v:72
-binder 3570:3570 <> v:73
-binder 3570:3570 <> v:74
-binder 3565:3565 <> x:75
-R3582:3582 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
-R3584:3588 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
-R3602:3603 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 3583:3583 <> v:76
-binder 3583:3583 <> v:77
-binder 3583:3583 <> v:78
-R3589:3595 TRresearch.Definitions <> trunion constr
-R3597:3598 TRresearch.Definitions <> t1:66 var
-R3600:3601 TRresearch.Definitions <> t2:67 var
-binder 3583:3583 <> v:79
-binder 3583:3583 <> v:80
-binder 3583:3583 <> v:81
-binder 3583:3583 <> v:82
-R3610:3610 TRresearch.Definitions <> x:75 var
-R3735:3743 TRresearch.Definitions <> HtUnion_L constr
-R3735:3743 TRresearch.Definitions <> HtUnion_L constr
-R3735:3743 TRresearch.Definitions <> HtUnion_L constr
-def 3781:3788 <> TRUnionR
-R3799:3805 TRresearch.Definitions <> TRTypes ind
-binder 3791:3792 <> t1:83
-binder 3794:3795 <> t2:84
-R3813:3813 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
-R3815:3818 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
-R3821:3821 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 3814:3814 <> v:85
-binder 3814:3814 <> v:86
-binder 3814:3814 <> v:87
-R3819:3820 TRresearch.Definitions <> t2:84 var
-binder 3814:3814 <> v:88
-binder 3814:3814 <> v:89
-binder 3814:3814 <> v:90
-binder 3814:3814 <> v:91
-binder 3809:3809 <> x:92
-R3826:3826 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
-R3828:3832 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
-R3846:3847 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 3827:3827 <> v:93
-binder 3827:3827 <> v:94
-binder 3827:3827 <> v:95
-R3833:3839 TRresearch.Definitions <> trunion constr
-R3841:3842 TRresearch.Definitions <> t1:83 var
-R3844:3845 TRresearch.Definitions <> t2:84 var
-binder 3827:3827 <> v:96
-binder 3827:3827 <> v:97
-binder 3827:3827 <> v:98
-binder 3827:3827 <> v:99
-R3854:3854 TRresearch.Definitions <> x:92 var
-R3979:3987 TRresearch.Definitions <> HtUnion_R constr
-R3979:3987 TRresearch.Definitions <> HtUnion_R constr
-R3979:3987 TRresearch.Definitions <> HtUnion_R constr
-def 4017:4029 <> get_true_prop
-binder 4032:4032 <> T:100
-binder 4036:4036 <> P:101
-binder 4038:4038 <> Q:102
-R4053:4053 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R4055:4057 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R4066:4068 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R4133:4133 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R4058:4065 TRresearch.Definitions <> TRValues ind
-binder 4054:4054 <> v:103
-R4069:4069 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R4081:4085 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R4070:4076 TRresearch.Definitions <> HasType ind
-R4078:4078 TRresearch.Definitions <> v:103 var
-R4080:4080 TRresearch.Definitions <> T:100 var
-R4086:4086 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R4107:4112 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R4132:4132 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R4102:4105 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R4088:4091 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
-R4087:4087 TRresearch.Definitions <> v:103 var
-R4092:4095 TRresearch.Definitions <> Bool constr
-R4097:4101 Coq.Init.Datatypes <> false constr
-R4106:4106 TRresearch.Definitions <> P:101 var
-R4127:4130 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R4114:4116 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R4113:4113 TRresearch.Definitions <> v:103 var
-R4117:4120 TRresearch.Definitions <> Bool constr
-R4122:4126 Coq.Init.Datatypes <> false constr
-R4131:4131 TRresearch.Definitions <> Q:102 var
-binder 4049:4049 <> v:104
-def 4183:4196 <> get_false_prop
-binder 4199:4199 <> T:105
-binder 4203:4203 <> P:106
-binder 4205:4205 <> Q:107
-R4220:4220 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R4222:4224 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R4233:4235 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R4300:4300 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R4225:4232 TRresearch.Definitions <> TRValues ind
-binder 4221:4221 <> v:108
-R4236:4236 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R4248:4252 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R4237:4243 TRresearch.Definitions <> HasType ind
-R4245:4245 TRresearch.Definitions <> v:108 var
-R4247:4247 TRresearch.Definitions <> T:105 var
-R4253:4253 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R4274:4279 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R4299:4299 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R4269:4272 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R4255:4258 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
-R4254:4254 TRresearch.Definitions <> v:108 var
-R4259:4262 TRresearch.Definitions <> Bool constr
-R4264:4268 Coq.Init.Datatypes <> false constr
-R4273:4273 TRresearch.Definitions <> P:106 var
-R4294:4297 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R4281:4283 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R4280:4280 TRresearch.Definitions <> v:108 var
-R4284:4287 TRresearch.Definitions <> Bool constr
-R4289:4293 Coq.Init.Datatypes <> false constr
-R4298:4298 TRresearch.Definitions <> Q:107 var
-binder 4216:4216 <> v:109
-def 4351:4358 <> get_type
-binder 4361:4361 <> T:110
-binder 4365:4365 <> P:111
-binder 4367:4367 <> Q:112
-R4382:4382 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R4384:4386 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R4395:4397 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R4462:4462 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R4387:4394 TRresearch.Definitions <> TRValues ind
-binder 4383:4383 <> v:113
-R4398:4398 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R4410:4414 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R4399:4405 TRresearch.Definitions <> HasType ind
-R4407:4407 TRresearch.Definitions <> v:113 var
-R4409:4409 TRresearch.Definitions <> T:110 var
-R4415:4415 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R4436:4441 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R4461:4461 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R4431:4434 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R4417:4420 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
-R4416:4416 TRresearch.Definitions <> v:113 var
-R4421:4424 TRresearch.Definitions <> Bool constr
-R4426:4430 Coq.Init.Datatypes <> false constr
-R4435:4435 TRresearch.Definitions <> P:111 var
-R4456:4459 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R4443:4445 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R4442:4442 TRresearch.Definitions <> v:113 var
-R4446:4449 TRresearch.Definitions <> Bool constr
-R4451:4455 Coq.Init.Datatypes <> false constr
-R4460:4460 TRresearch.Definitions <> Q:112 var
-binder 4378:4378 <> v:114
-R4467:4473 TRresearch.Definitions <> TRTypes ind
-def 4677:4684 <> top_pair
-R4694:4700 TRresearch.Definitions <> TRTypes ind
-binder 4688:4688 <> S:115
-binder 4690:4690 <> T:116
-R4709:4710 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
-R4712:4716 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
-R4727:4729 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 4711:4711 <> t:117
-binder 4711:4711 <> t:118
-binder 4711:4711 <> t:119
-R4717:4722 TRresearch.Definitions <> trpair constr
-R4724:4724 TRresearch.Definitions <> S:115 var
-R4726:4726 TRresearch.Definitions <> T:116 var
-binder 4711:4711 <> t:120
-binder 4711:4711 <> t:121
-binder 4711:4711 <> t:122
-binder 4711:4711 <> t:123
-binder 4705:4705 <> v:124
-R4734:4735 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
-R4737:4741 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
-R4760:4762 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
-binder 4736:4736 <> t:125
-binder 4736:4736 <> t:126
-binder 4736:4736 <> t:127
-R4742:4747 TRresearch.Definitions <> trpair constr
-R4749:4753 TRresearch.Definitions <> trtop constr
-R4755:4759 TRresearch.Definitions <> trtop constr
-binder 4736:4736 <> t:128
-binder 4736:4736 <> t:129
-binder 4736:4736 <> t:130
-binder 4736:4736 <> t:131
-R4769:4769 TRresearch.Definitions <> v:124 var
-R4961:4968 TRresearch.Definitions <> giveType def
-not 4941:4941 <> :::'<['_x_']>'
-R5014:5017 TRresearch.Definitions <> Pair constr
-not 4998:4998 <> :::'('_x_','_x_')'
+ind 299:303 <> Void_
+constr 308:311 <> void
+scheme 299:303 <> Void__rect
+scheme 299:303 <> Void__ind
+scheme 299:303 <> Void__rec
+scheme 299:303 <> Void__sind
+ind 325:330 <> TRList
+constr 346:350 <> empty
+constr 356:359 <> some
+R366:368 Coq.Init.Datatypes <> nat ind
+binder 362:362 <> a:5
+R376:381 TRresearch.Definitions <> TRList:3 ind
+binder 372:372 <> b:6
+scheme 325:330 <> TRList_rect
+scheme 325:330 <> TRList_ind
+scheme 325:330 <> TRList_rec
+scheme 325:330 <> TRList_sind
+ind 406:412 <> nat_vec
+constr 435:437 <> nil
+constr 455:458 <> cons
+R419:422 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R416:418 Coq.Init.Datatypes <> nat ind
+R441:447 TRresearch.Definitions <> nat_vec:7 ind
+R449:449 Coq.Init.Datatypes <> O constr
+R474:476 Coq.Init.Datatypes <> nat ind
+binder 470:470 <> n:9
+R484:487 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R481:483 Coq.Init.Datatypes <> nat ind
+R488:488 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R498:502 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R489:495 TRresearch.Definitions <> nat_vec:7 ind
+R497:497 TRresearch.Definitions <> n:9 var
+R503:509 TRresearch.Definitions <> nat_vec:7 ind
+R512:512 Coq.Init.Datatypes <> S constr
+R514:514 TRresearch.Definitions <> n:9 var
+scheme 406:412 <> nat_vec_rect
+scheme 406:412 <> nat_vec_ind
+scheme 406:412 <> nat_vec_rec
+scheme 406:412 <> nat_vec_sind
+ind 529:536 <> TRValues
+constr 553:555 <> Num
+constr 571:574 <> Bool
+constr 591:593 <> Str
+constr 612:615 <> Pair
+constr 652:655 <> List
+constr 674:676 <> Vec
+constr 727:730 <> Void
+R562:564 Coq.Init.Datatypes <> nat ind
+binder 558:558 <> n:12
+R581:584 Coq.Init.Datatypes <> bool ind
+binder 577:577 <> b:13
+R600:605 Coq.Strings.String <> string ind
+binder 596:596 <> s:14
+R623:630 TRresearch.Definitions <> TRValues:10 ind
+binder 619:619 <> a:15
+R638:645 TRresearch.Definitions <> TRValues:10 ind
+binder 634:634 <> b:16
+R662:667 TRresearch.Definitions <> TRList ind
+binder 658:658 <> l:17
+R692:694 Coq.Init.Datatypes <> nat ind
+binder 688:688 <> n:18
+R699:699 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R709:713 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R700:706 TRresearch.Definitions <> nat_vec ind
+R708:708 TRresearch.Definitions <> n:18 var
+R714:721 TRresearch.Definitions <> TRValues:10 ind
+R737:741 TRresearch.Definitions <> Void_ ind
+binder 733:733 <> v:19
+scheme 529:536 <> TRValues_rect
+scheme 529:536 <> TRValues_ind
+scheme 529:536 <> TRValues_rec
+scheme 529:536 <> TRValues_sind
+R753:756 TRresearch.Definitions <> cons constr
+R761:764 TRresearch.Definitions <> cons constr
+R768:770 TRresearch.Definitions <> nil constr
+def 786:788 <> len
+binder 791:791 <> n:20
+R799:805 TRresearch.Definitions <> nat_vec ind
+R807:807 TRresearch.Definitions <> n:20 var
+binder 795:795 <> v:21
+R811:813 Coq.Init.Datatypes <> nat ind
+R818:818 TRresearch.Definitions <> n:20 var
+R838:840 TRresearch.Definitions <> len def
+R843:846 TRresearch.Definitions <> cons constr
+R851:854 TRresearch.Definitions <> cons constr
+R858:860 TRresearch.Definitions <> nil constr
+R873:876 TRresearch.Definitions <> some constr
+R881:884 TRresearch.Definitions <> some constr
+R888:892 TRresearch.Definitions <> empty constr
+ind 909:915 <> TRTypes
+constr 932:936 <> trnum
+constr 952:957 <> trbool
+constr 973:977 <> trstr
+constr 993:998 <> trvoid
+constr 1014:1019 <> trpair
+constr 1057:1061 <> trvec
+constr 1084:1089 <> trlist
+constr 1105:1111 <> trunion
+constr 1149:1153 <> trtop
+R940:946 TRresearch.Definitions <> TRTypes:22 ind
+R961:967 TRresearch.Definitions <> TRTypes:22 ind
+R981:987 TRresearch.Definitions <> TRTypes:22 ind
+R1002:1008 TRresearch.Definitions <> TRTypes:22 ind
+R1030:1033 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1023:1029 TRresearch.Definitions <> TRTypes:22 ind
+R1041:1044 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1034:1040 TRresearch.Definitions <> TRTypes:22 ind
+R1045:1051 TRresearch.Definitions <> TRTypes:22 ind
+R1068:1071 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1065:1067 Coq.Init.Datatypes <> nat ind
+R1072:1078 TRresearch.Definitions <> TRTypes:22 ind
+R1093:1099 TRresearch.Definitions <> TRTypes:22 ind
+R1122:1125 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1115:1121 TRresearch.Definitions <> TRTypes:22 ind
+R1133:1136 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1126:1132 TRresearch.Definitions <> TRTypes:22 ind
+R1137:1143 TRresearch.Definitions <> TRTypes:22 ind
+R1157:1163 TRresearch.Definitions <> TRTypes:22 ind
+scheme 909:915 <> TRTypes_rect
+scheme 909:915 <> TRTypes_ind
+scheme 909:915 <> TRTypes_rec
+scheme 909:915 <> TRTypes_sind
+ind 1178:1184 <> HasType
+constr 1223:1227 <> HtTop
+constr 1278:1282 <> HtNum
+constr 1334:1339 <> HtBool
+constr 1393:1397 <> HtStr
+constr 1452:1457 <> HtVoid
+constr 1512:1517 <> HtPair
+constr 1696:1701 <> HtList
+constr 1757:1761 <> HtVec
+constr 1837:1845 <> HtUnion_L
+constr 1952:1960 <> HtUnion_R
+R1196:1199 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1188:1195 TRresearch.Definitions <> TRValues ind
+R1207:1210 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1200:1206 TRresearch.Definitions <> TRTypes ind
+R1247:1254 TRresearch.Definitions <> TRValues ind
+binder 1243:1243 <> v:26
+R1258:1264 TRresearch.Definitions <> HasType:24 ind
+R1268:1272 TRresearch.Definitions <> trtop constr
+R1266:1266 TRresearch.Definitions <> v:26 var
+R1302:1304 Coq.Init.Datatypes <> nat ind
+binder 1298:1298 <> n:27
+R1308:1314 TRresearch.Definitions <> HasType:24 ind
+R1324:1328 TRresearch.Definitions <> trnum constr
+R1317:1319 TRresearch.Definitions <> Num constr
+R1321:1321 TRresearch.Definitions <> n:27 var
+R1358:1361 Coq.Init.Datatypes <> bool ind
+binder 1354:1354 <> b:28
+R1365:1371 TRresearch.Definitions <> HasType:24 ind
+R1382:1387 TRresearch.Definitions <> trbool constr
+R1374:1377 TRresearch.Definitions <> Bool constr
+R1379:1379 TRresearch.Definitions <> b:28 var
+R1417:1422 Coq.Strings.String <> string ind
+binder 1413:1413 <> s:29
+R1426:1432 TRresearch.Definitions <> HasType:24 ind
+R1442:1446 TRresearch.Definitions <> trstr constr
+R1435:1437 TRresearch.Definitions <> Str constr
+R1439:1439 TRresearch.Definitions <> s:29 var
+R1476:1480 TRresearch.Definitions <> Void_ ind
+binder 1472:1472 <> v:30
+R1484:1490 TRresearch.Definitions <> HasType:24 ind
+R1501:1506 TRresearch.Definitions <> trvoid constr
+R1493:1496 TRresearch.Definitions <> Void constr
+R1498:1498 TRresearch.Definitions <> v:30 var
+R1540:1547 TRresearch.Definitions <> TRValues ind
+binder 1532:1533 <> t1:31
+binder 1535:1536 <> t2:32
+R1557:1563 TRresearch.Definitions <> TRTypes ind
+binder 1551:1551 <> A:33
+binder 1553:1553 <> B:34
+R1600:1622 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1588:1594 TRresearch.Definitions <> HasType:24 ind
+R1599:1599 TRresearch.Definitions <> A:33 var
+R1596:1597 TRresearch.Definitions <> t1:31 var
+R1635:1657 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1623:1629 TRresearch.Definitions <> HasType:24 ind
+R1634:1634 TRresearch.Definitions <> B:34 var
+R1631:1632 TRresearch.Definitions <> t2:32 var
+R1658:1664 TRresearch.Definitions <> HasType:24 ind
+R1680:1685 TRresearch.Definitions <> trpair constr
+R1687:1687 TRresearch.Definitions <> A:33 var
+R1689:1689 TRresearch.Definitions <> B:34 var
+R1667:1670 TRresearch.Definitions <> Pair constr
+R1672:1673 TRresearch.Definitions <> t1:31 var
+R1675:1676 TRresearch.Definitions <> t2:32 var
+R1720:1725 TRresearch.Definitions <> TRList ind
+binder 1716:1716 <> l:35
+R1729:1735 TRresearch.Definitions <> HasType:24 ind
+R1746:1751 TRresearch.Definitions <> trlist constr
+R1738:1741 TRresearch.Definitions <> List constr
+R1743:1743 TRresearch.Definitions <> l:35 var
+R1781:1783 Coq.Init.Datatypes <> nat ind
+binder 1777:1777 <> n:36
+R1792:1798 TRresearch.Definitions <> nat_vec ind
+R1800:1800 TRresearch.Definitions <> n:36 var
+binder 1787:1788 <> nv:37
+R1804:1810 TRresearch.Definitions <> HasType:24 ind
+R1824:1828 TRresearch.Definitions <> trvec constr
+R1830:1830 TRresearch.Definitions <> n:36 var
+R1813:1815 TRresearch.Definitions <> Vec constr
+R1817:1817 TRresearch.Definitions <> n:36 var
+R1819:1820 TRresearch.Definitions <> nv:37 var
+R1862:1869 TRresearch.Definitions <> TRValues ind
+binder 1857:1858 <> t1:38
+R1879:1885 TRresearch.Definitions <> TRTypes ind
+binder 1873:1873 <> A:39
+binder 1875:1875 <> B:40
+R1905:1905 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1918:1922 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1906:1912 TRresearch.Definitions <> HasType:24 ind
+R1917:1917 TRresearch.Definitions <> A:39 var
+R1914:1915 TRresearch.Definitions <> t1:38 var
+R1923:1929 TRresearch.Definitions <> HasType:24 ind
+R1935:1941 TRresearch.Definitions <> trunion constr
+R1943:1943 TRresearch.Definitions <> A:39 var
+R1945:1945 TRresearch.Definitions <> B:40 var
+R1931:1932 TRresearch.Definitions <> t1:38 var
+R1977:1984 TRresearch.Definitions <> TRValues ind
+binder 1972:1973 <> t1:41
+R1994:2000 TRresearch.Definitions <> TRTypes ind
+binder 1988:1988 <> A:42
+binder 1990:1990 <> B:43
+R2020:2020 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2033:2037 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2021:2027 TRresearch.Definitions <> HasType:24 ind
+R2032:2032 TRresearch.Definitions <> B:43 var
+R2029:2030 TRresearch.Definitions <> t1:41 var
+R2038:2044 TRresearch.Definitions <> HasType:24 ind
+R2050:2056 TRresearch.Definitions <> trunion constr
+R2058:2058 TRresearch.Definitions <> A:42 var
+R2060:2060 TRresearch.Definitions <> B:43 var
+R2046:2047 TRresearch.Definitions <> t1:41 var
+scheme 1178:1184 <> HasType_ind
+scheme 1178:1184 <> HasType_sind
+R2237:2241 Coq.Init.Specif <> exist constr
+not 2225:2225 <> :::'['_x_']'
+R2283:2285 Coq.Init.Specif <> sig ind
+R2296:2303 TRresearch.Definitions <> TRValues ind
+binder 2292:2292 <> t:44
+R2308:2308 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R2320:2356 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R2309:2315 TRresearch.Definitions <> HasType ind
+R2357:2357 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R2381:2418 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R2441:2441 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R2373:2376 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2359:2362 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R2363:2366 TRresearch.Definitions <> Bool constr
+R2368:2372 Coq.Init.Datatypes <> false constr
+R2377:2380 Coq.Init.Logic <> True ind
+R2433:2436 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2420:2422 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2423:2426 TRresearch.Definitions <> Bool constr
+R2428:2432 Coq.Init.Datatypes <> false constr
+R2437:2440 Coq.Init.Logic <> True ind
+not 2261:2261 <> :::'{'_x_'>>'_x_'}'
+R2539:2541 Coq.Init.Specif <> sig ind
+R2552:2559 TRresearch.Definitions <> TRValues ind
+binder 2548:2548 <> t:45
+R2564:2564 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R2576:2611 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R2565:2571 TRresearch.Definitions <> HasType ind
+R2612:2612 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R2633:2669 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R2689:2689 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R2628:2631 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2614:2617 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R2618:2621 TRresearch.Definitions <> Bool constr
+R2623:2627 Coq.Init.Datatypes <> false constr
+R2684:2687 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2671:2673 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2674:2677 TRresearch.Definitions <> Bool constr
+R2679:2683 Coq.Init.Datatypes <> false constr
+not 2509:2509 <> :::'{'_x_'>>'_x_'&'_x_'&'_x_'}'
+def 2906:2914 <> typeCheck
+R2930:2937 TRresearch.Definitions <> TRValues ind
+binder 2926:2926 <> v:46
+R2941:2941 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R2943:2945 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R2953:2955 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R2967:2967 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R2946:2952 TRresearch.Definitions <> TRTypes ind
+binder 2942:2942 <> t:47
+R2956:2962 TRresearch.Definitions <> HasType ind
+R2964:2964 TRresearch.Definitions <> v:46 var
+R2966:2966 TRresearch.Definitions <> t:47 var
+R2990:2997 TRresearch.Definitions <> TRValues ind
+binder 2986:2986 <> v:48
+R3002:3002 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R3004:3006 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R3014:3016 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R3028:3028 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R3007:3013 TRresearch.Definitions <> TRTypes ind
+binder 3003:3003 <> t:49
+R3017:3023 TRresearch.Definitions <> HasType ind
+R3025:3025 TRresearch.Definitions <> v:48 var
+R3027:3027 TRresearch.Definitions <> t:49 var
+R3043:3043 TRresearch.Definitions <> v:48 var
+R3052:3052 Coq.Init.Specif <> ::type_scope:'{'_x_'|'_x_'}' not
+R3054:3056 Coq.Init.Specif <> ::type_scope:'{'_x_'|'_x_'}' not
+R3068:3068 Coq.Init.Specif <> ::type_scope:'{'_x_'|'_x_'}' not
+binder 3053:3053 <> t:52
+R3057:3063 TRresearch.Definitions <> HasType ind
+R3065:3065 TRresearch.Definitions <> v:51 var
+R3067:3067 TRresearch.Definitions <> t:52 var
+R3081:3084 TRresearch.Definitions <> Void constr
+R3091:3091 TRresearch.Definitions <> :::'['_x_']' not
+R3098:3098 TRresearch.Definitions <> :::'['_x_']' not
+R3092:3097 TRresearch.Definitions <> trvoid constr
+R3106:3108 TRresearch.Definitions <> Num constr
+R3115:3115 TRresearch.Definitions <> :::'['_x_']' not
+R3121:3121 TRresearch.Definitions <> :::'['_x_']' not
+R3116:3120 TRresearch.Definitions <> trnum constr
+R3129:3132 TRresearch.Definitions <> Bool constr
+R3139:3139 TRresearch.Definitions <> :::'['_x_']' not
+R3146:3146 TRresearch.Definitions <> :::'['_x_']' not
+R3140:3145 TRresearch.Definitions <> trbool constr
+R3154:3156 TRresearch.Definitions <> Str constr
+R3163:3163 TRresearch.Definitions <> :::'['_x_']' not
+R3169:3169 TRresearch.Definitions <> :::'['_x_']' not
+R3164:3168 TRresearch.Definitions <> trstr constr
+R3177:3179 TRresearch.Definitions <> Vec constr
+R3188:3188 TRresearch.Definitions <> :::'['_x_']' not
+R3196:3196 TRresearch.Definitions <> :::'['_x_']' not
+R3189:3193 TRresearch.Definitions <> trvec constr
+R3204:3207 TRresearch.Definitions <> List constr
+R3214:3214 TRresearch.Definitions <> :::'['_x_']' not
+R3221:3221 TRresearch.Definitions <> :::'['_x_']' not
+R3215:3220 TRresearch.Definitions <> trlist constr
+R3229:3232 TRresearch.Definitions <> Pair constr
+R3257:3257 TRresearch.Definitions <> F:50 var
+R3277:3277 TRresearch.Definitions <> :::'['_x_']' not
+R3279:3279 TRresearch.Definitions <> :::'['_x_']' not
+R3291:3291 TRresearch.Definitions <> F:50 var
+R3318:3318 TRresearch.Definitions <> :::'['_x_']' not
+R3320:3320 TRresearch.Definitions <> :::'['_x_']' not
+R3325:3325 TRresearch.Definitions <> :::'['_x_']' not
+R3336:3336 TRresearch.Definitions <> :::'['_x_']' not
+R3326:3331 TRresearch.Definitions <> trpair constr
+R2990:2997 TRresearch.Definitions <> TRValues ind
+binder 2986:2986 <> v:53
+R3002:3002 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R3004:3006 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R3014:3016 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R3028:3028 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R3007:3013 TRresearch.Definitions <> TRTypes ind
+binder 3003:3003 <> t:54
+R3017:3023 TRresearch.Definitions <> HasType ind
+R3025:3025 TRresearch.Definitions <> v:53 var
+R3027:3027 TRresearch.Definitions <> t:54 var
+R3043:3043 TRresearch.Definitions <> v:53 var
+R3052:3052 Coq.Init.Specif <> ::type_scope:'{'_x_'|'_x_'}' not
+R3054:3056 Coq.Init.Specif <> ::type_scope:'{'_x_'|'_x_'}' not
+R3068:3068 Coq.Init.Specif <> ::type_scope:'{'_x_'|'_x_'}' not
+binder 3053:3053 <> t:57
+R3057:3063 TRresearch.Definitions <> HasType ind
+R3065:3065 TRresearch.Definitions <> v:56 var
+R3067:3067 TRresearch.Definitions <> t:57 var
+R3081:3084 TRresearch.Definitions <> Void constr
+R3091:3091 TRresearch.Definitions <> :::'['_x_']' not
+R3098:3098 TRresearch.Definitions <> :::'['_x_']' not
+R3092:3097 TRresearch.Definitions <> trvoid constr
+R3106:3108 TRresearch.Definitions <> Num constr
+R3115:3115 TRresearch.Definitions <> :::'['_x_']' not
+R3121:3121 TRresearch.Definitions <> :::'['_x_']' not
+R3116:3120 TRresearch.Definitions <> trnum constr
+R3129:3132 TRresearch.Definitions <> Bool constr
+R3139:3139 TRresearch.Definitions <> :::'['_x_']' not
+R3146:3146 TRresearch.Definitions <> :::'['_x_']' not
+R3140:3145 TRresearch.Definitions <> trbool constr
+R3154:3156 TRresearch.Definitions <> Str constr
+R3163:3163 TRresearch.Definitions <> :::'['_x_']' not
+R3169:3169 TRresearch.Definitions <> :::'['_x_']' not
+R3164:3168 TRresearch.Definitions <> trstr constr
+R3177:3179 TRresearch.Definitions <> Vec constr
+R3188:3188 TRresearch.Definitions <> :::'['_x_']' not
+R3196:3196 TRresearch.Definitions <> :::'['_x_']' not
+R3189:3193 TRresearch.Definitions <> trvec constr
+R3204:3207 TRresearch.Definitions <> List constr
+R3214:3214 TRresearch.Definitions <> :::'['_x_']' not
+R3221:3221 TRresearch.Definitions <> :::'['_x_']' not
+R3215:3220 TRresearch.Definitions <> trlist constr
+R3229:3232 TRresearch.Definitions <> Pair constr
+R3257:3257 TRresearch.Definitions <> F:55 var
+R3277:3277 TRresearch.Definitions <> :::'['_x_']' not
+R3279:3279 TRresearch.Definitions <> :::'['_x_']' not
+R3291:3291 TRresearch.Definitions <> F:55 var
+R3318:3318 TRresearch.Definitions <> :::'['_x_']' not
+R3320:3320 TRresearch.Definitions <> :::'['_x_']' not
+R3325:3325 TRresearch.Definitions <> :::'['_x_']' not
+R3336:3336 TRresearch.Definitions <> :::'['_x_']' not
+R3326:3331 TRresearch.Definitions <> trpair constr
+def 3427:3434 <> getType'
+R3441:3448 TRresearch.Definitions <> TRValues ind
+binder 3437:3437 <> v:58
+R3456:3456 Coq.Init.Specif <> ::type_scope:'{'_x_'|'_x_'}' not
+R3458:3460 Coq.Init.Specif <> ::type_scope:'{'_x_'|'_x_'}' not
+R3472:3472 Coq.Init.Specif <> ::type_scope:'{'_x_'|'_x_'}' not
+binder 3457:3457 <> t:59
+R3461:3467 TRresearch.Definitions <> HasType ind
+R3469:3469 TRresearch.Definitions <> v:58 var
+R3471:3471 TRresearch.Definitions <> t:59 var
+binder 3452:3452 <> t:60
+R3488:3488 TRresearch.Definitions <> t:60 var
+R3497:3497 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
+R3499:3502 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
+R3504:3504 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 3498:3498 <> v:62
+binder 3498:3498 <> v:63
+binder 3498:3498 <> v:64
+R3503:3503 TRresearch.Definitions <> t:61 var
+binder 3498:3498 <> v:65
+binder 3498:3498 <> v:66
+binder 3498:3498 <> v:67
+binder 3498:3498 <> v:68
+R3523:3523 TRresearch.Definitions <> v:58 var
+def 3554:3561 <> giveType
+R3568:3575 TRresearch.Definitions <> TRValues ind
+binder 3564:3564 <> v:69
+R3585:3592 TRresearch.Definitions <> getType' def
+R3594:3594 TRresearch.Definitions <> v:69 var
+R3597:3605 TRresearch.Definitions <> typeCheck def
+R3607:3607 TRresearch.Definitions <> v:69 var
+R3628:3636 TRresearch.Definitions <> typeCheck def
+R3639:3641 TRresearch.Definitions <> Vec constr
+R3646:3649 TRresearch.Definitions <> cons constr
+R3654:3657 TRresearch.Definitions <> cons constr
+R3661:3663 TRresearch.Definitions <> nil constr
+def 3690:3697 <> TRUnionL
+R3708:3714 TRresearch.Definitions <> TRTypes ind
+binder 3700:3701 <> t1:70
+binder 3703:3704 <> t2:71
+R3722:3722 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
+R3724:3727 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
+R3730:3730 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 3723:3723 <> v:72
+binder 3723:3723 <> v:73
+binder 3723:3723 <> v:74
+R3728:3729 TRresearch.Definitions <> t1:70 var
+binder 3723:3723 <> v:75
+binder 3723:3723 <> v:76
+binder 3723:3723 <> v:77
+binder 3723:3723 <> v:78
+binder 3718:3718 <> x:79
+R3735:3735 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
+R3737:3741 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
+R3755:3756 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 3736:3736 <> v:80
+binder 3736:3736 <> v:81
+binder 3736:3736 <> v:82
+R3742:3748 TRresearch.Definitions <> trunion constr
+R3750:3751 TRresearch.Definitions <> t1:70 var
+R3753:3754 TRresearch.Definitions <> t2:71 var
+binder 3736:3736 <> v:83
+binder 3736:3736 <> v:84
+binder 3736:3736 <> v:85
+binder 3736:3736 <> v:86
+R3763:3763 TRresearch.Definitions <> x:79 var
+R3888:3896 TRresearch.Definitions <> HtUnion_L constr
+R3888:3896 TRresearch.Definitions <> HtUnion_L constr
+R3888:3896 TRresearch.Definitions <> HtUnion_L constr
+def 3934:3941 <> TRUnionR
+R3952:3958 TRresearch.Definitions <> TRTypes ind
+binder 3944:3945 <> t1:87
+binder 3947:3948 <> t2:88
+R3966:3966 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
+R3968:3971 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
+R3974:3974 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 3967:3967 <> v:89
+binder 3967:3967 <> v:90
+binder 3967:3967 <> v:91
+R3972:3973 TRresearch.Definitions <> t2:88 var
+binder 3967:3967 <> v:92
+binder 3967:3967 <> v:93
+binder 3967:3967 <> v:94
+binder 3967:3967 <> v:95
+binder 3962:3962 <> x:96
+R3979:3979 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
+R3981:3985 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
+R3999:4000 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 3980:3980 <> v:97
+binder 3980:3980 <> v:98
+binder 3980:3980 <> v:99
+R3986:3992 TRresearch.Definitions <> trunion constr
+R3994:3995 TRresearch.Definitions <> t1:87 var
+R3997:3998 TRresearch.Definitions <> t2:88 var
+binder 3980:3980 <> v:100
+binder 3980:3980 <> v:101
+binder 3980:3980 <> v:102
+binder 3980:3980 <> v:103
+R4007:4007 TRresearch.Definitions <> x:96 var
+R4132:4140 TRresearch.Definitions <> HtUnion_R constr
+R4132:4140 TRresearch.Definitions <> HtUnion_R constr
+R4132:4140 TRresearch.Definitions <> HtUnion_R constr
+def 4170:4182 <> get_true_prop
+binder 4185:4185 <> T:104
+binder 4189:4189 <> P:105
+binder 4191:4191 <> Q:106
+R4206:4206 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R4208:4210 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R4219:4221 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R4286:4286 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R4211:4218 TRresearch.Definitions <> TRValues ind
+binder 4207:4207 <> v:107
+R4222:4222 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R4234:4238 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R4223:4229 TRresearch.Definitions <> HasType ind
+R4231:4231 TRresearch.Definitions <> v:107 var
+R4233:4233 TRresearch.Definitions <> T:104 var
+R4239:4239 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R4260:4265 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R4285:4285 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R4255:4258 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4241:4244 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R4240:4240 TRresearch.Definitions <> v:107 var
+R4245:4248 TRresearch.Definitions <> Bool constr
+R4250:4254 Coq.Init.Datatypes <> false constr
+R4259:4259 TRresearch.Definitions <> P:105 var
+R4280:4283 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4267:4269 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R4266:4266 TRresearch.Definitions <> v:107 var
+R4270:4273 TRresearch.Definitions <> Bool constr
+R4275:4279 Coq.Init.Datatypes <> false constr
+R4284:4284 TRresearch.Definitions <> Q:106 var
+binder 4202:4202 <> v:108
+def 4336:4349 <> get_false_prop
+binder 4352:4352 <> T:109
+binder 4356:4356 <> P:110
+binder 4358:4358 <> Q:111
+R4373:4373 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R4375:4377 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R4386:4388 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R4453:4453 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R4378:4385 TRresearch.Definitions <> TRValues ind
+binder 4374:4374 <> v:112
+R4389:4389 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R4401:4405 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R4390:4396 TRresearch.Definitions <> HasType ind
+R4398:4398 TRresearch.Definitions <> v:112 var
+R4400:4400 TRresearch.Definitions <> T:109 var
+R4406:4406 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R4427:4432 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R4452:4452 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R4422:4425 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4408:4411 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R4407:4407 TRresearch.Definitions <> v:112 var
+R4412:4415 TRresearch.Definitions <> Bool constr
+R4417:4421 Coq.Init.Datatypes <> false constr
+R4426:4426 TRresearch.Definitions <> P:110 var
+R4447:4450 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4434:4436 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R4433:4433 TRresearch.Definitions <> v:112 var
+R4437:4440 TRresearch.Definitions <> Bool constr
+R4442:4446 Coq.Init.Datatypes <> false constr
+R4451:4451 TRresearch.Definitions <> Q:111 var
+binder 4369:4369 <> v:113
+def 4504:4511 <> get_type
+binder 4514:4514 <> T:114
+binder 4518:4518 <> P:115
+binder 4520:4520 <> Q:116
+R4535:4535 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R4537:4539 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R4548:4550 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R4615:4615 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R4540:4547 TRresearch.Definitions <> TRValues ind
+binder 4536:4536 <> v:117
+R4551:4551 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R4563:4567 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R4552:4558 TRresearch.Definitions <> HasType ind
+R4560:4560 TRresearch.Definitions <> v:117 var
+R4562:4562 TRresearch.Definitions <> T:114 var
+R4568:4568 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R4589:4594 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R4614:4614 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R4584:4587 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4570:4573 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R4569:4569 TRresearch.Definitions <> v:117 var
+R4574:4577 TRresearch.Definitions <> Bool constr
+R4579:4583 Coq.Init.Datatypes <> false constr
+R4588:4588 TRresearch.Definitions <> P:115 var
+R4609:4612 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4596:4598 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R4595:4595 TRresearch.Definitions <> v:117 var
+R4599:4602 TRresearch.Definitions <> Bool constr
+R4604:4608 Coq.Init.Datatypes <> false constr
+R4613:4613 TRresearch.Definitions <> Q:116 var
+binder 4531:4531 <> v:118
+R4620:4626 TRresearch.Definitions <> TRTypes ind
+def 4830:4837 <> top_pair
+R4847:4853 TRresearch.Definitions <> TRTypes ind
+binder 4841:4841 <> S:119
+binder 4843:4843 <> T:120
+R4862:4863 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
+R4865:4869 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
+R4880:4882 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 4864:4864 <> t:121
+binder 4864:4864 <> t:122
+binder 4864:4864 <> t:123
+R4870:4875 TRresearch.Definitions <> trpair constr
+R4877:4877 TRresearch.Definitions <> S:119 var
+R4879:4879 TRresearch.Definitions <> T:120 var
+binder 4864:4864 <> t:124
+binder 4864:4864 <> t:125
+binder 4864:4864 <> t:126
+binder 4864:4864 <> t:127
+binder 4858:4858 <> v:128
+R4887:4888 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
+R4890:4894 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
+R4913:4915 TRresearch.Definitions <> :::'{'_x_'>>'_x_'}' not
+binder 4889:4889 <> t:129
+binder 4889:4889 <> t:130
+binder 4889:4889 <> t:131
+R4895:4900 TRresearch.Definitions <> trpair constr
+R4902:4906 TRresearch.Definitions <> trtop constr
+R4908:4912 TRresearch.Definitions <> trtop constr
+binder 4889:4889 <> t:132
+binder 4889:4889 <> t:133
+binder 4889:4889 <> t:134
+binder 4889:4889 <> t:135
+R4922:4922 TRresearch.Definitions <> v:128 var
+R5114:5121 TRresearch.Definitions <> giveType def
+not 5094:5094 <> :::'<['_x_']>'
+R5167:5170 TRresearch.Definitions <> Pair constr
+not 5151:5151 <> :::'('_x_','_x_')'

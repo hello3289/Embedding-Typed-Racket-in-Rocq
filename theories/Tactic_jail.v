@@ -15,6 +15,7 @@ Ltac inv_trnum :=
   | H : HasType (Pair ?b ?p) trnum |- _ => inversion H
   | H : HasType (Vec _ ?b) trnum |- _ => inversion H
   | H : HasType (List ?l) trnum |- _ => inversion H
+  | H : HasType (Void ?v) trnum |- _ => inversion H
   end.
 Ltac inv_trbool :=
   match goal with
@@ -23,6 +24,7 @@ Ltac inv_trbool :=
   | H : HasType (Pair ?b ?p) trbool |- _ => inversion H
   | H : HasType (Vec _ ?b) trbool |- _ => inversion H
   | H : HasType (List ?l) trbool |- _ => inversion H
+  | H : HasType (Void ?v) trbool |- _ => inversion H
   end.
 Ltac inv_trstr :=
   match goal with
@@ -31,6 +33,7 @@ Ltac inv_trstr :=
   | H : HasType (Pair ?b ?p) trstr |- _ => inversion H
   | H : HasType (Vec _ ?b) trstr |- _ => inversion H
   | H : HasType (List ?l) trstr |- _ => inversion H
+  | H : HasType (Void ?v) trstr |- _ => inversion H
   end.
 Ltac inv_trlist :=
   match goal with
@@ -39,6 +42,7 @@ Ltac inv_trlist :=
   | H : HasType (Str ?b) trlist |- _ => inversion H
   | H : HasType (Pair ?b ?p) trlist |- _ => inversion H
   | H : HasType (Vec _ ?b) trlist |- _ => inversion H
+  | H : HasType (Void ?v) trlist |- _ => inversion H
   end.
 Ltac inv_trvec :=
   match goal with
@@ -47,6 +51,7 @@ Ltac inv_trvec :=
   | H : HasType (Str ?b) (trvec _) |- _ => inversion H
   | H : HasType (Pair ?b ?p) (trvec _) |- _ => inversion H
   | H : HasType (List ?l) (trvec _) |- _ => inversion H
+  | H : HasType (Void ?v) (trvec _) |- _ => inversion H
   end.
 Ltac inv_trpair :=
   match goal with
@@ -55,6 +60,17 @@ Ltac inv_trpair :=
   | H : HasType (Num ?b) (trpair ?x ?y) |- _ => inversion H
   | H : HasType (Vec _ ?b) (trpair ?x ?y) |- _ => inversion H
   | H : HasType (List ?l) (trpair ?x ?y) |- _ => inversion H
+  | H : HasType (Void ?v) (trpair ?x ?y) |- _ => inversion H
+  end.
+
+Ltac inv_trvoid :=
+  match goal with
+  | H : HasType (Bool ?b) trvoid |- _ => inversion H
+  | H : HasType (Str ?b) trvoid |- _ => inversion H
+  | H : HasType (Num ?b) trvoid |- _ => inversion H
+  | H : HasType (Vec _ ?b) trvoid |- _ => inversion H
+  | H : HasType (Pair ?b ?p) trvoid |- _ => inversion H
+  | H : HasType (List ?l) trvoid |- _ => inversion H
   end.
 
 Ltac inv_trtype_false  :=
@@ -182,6 +198,7 @@ Ltac ht_good_hehe :=
   | [ |- HasType _ (trunion _ _) ] => try (apply HtUnion_L; auto; constructor; ht_good_hehe; fail) || apply HtUnion_R; auto; constructor; ht_good_hehe; fail
   | [ H : HasType (Pair ?a ?b) (trpair ?A ?B) |- HasType ?a ?A ] => inversion H; auto
   | [ H : HasType (Pair ?a ?b) (trpair ?A ?B) |- HasType ?b ?B ] => inversion H; auto
+  | [ |- HasType (Void _) trvoid ] => constructor
   end.
 
 (* make tactic that "solves" goals aka it shouldn't make new goals just solve them 

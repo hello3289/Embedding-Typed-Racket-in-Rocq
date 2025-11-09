@@ -6,6 +6,8 @@ Require Import Program.Tactics.
 (************************************************************************)
 (**************** OUR VALUE AND TYPE DEFINITIONS AHHHHHH ****************)
 
+Inductive Void_ := void.
+
 Inductive TRList : Type :=
   | empty
   | some (a : nat) (b : TRList). (* lol *)
@@ -20,7 +22,8 @@ Inductive TRValues : Type :=
   | Str (s : string)
   | Pair  (a : TRValues) (b : TRValues)
   | List (l : TRList)
-  | Vec : forall (n : nat),  ( nat_vec n) -> TRValues.
+  | Vec : forall (n : nat),  (nat_vec n) -> TRValues
+  | Void (v : Void_).
 
 Check (cons 5 (cons 7 nil)).
 Definition len {n} (v : nat_vec n): nat := n.
@@ -32,6 +35,7 @@ Inductive TRTypes : Type :=
   | trnum : TRTypes
   | trbool : TRTypes
   | trstr : TRTypes
+  | trvoid : TRTypes
   | trpair : TRTypes -> TRTypes -> TRTypes
   | trvec : nat -> TRTypes
   | trlist : TRTypes
@@ -40,10 +44,11 @@ Inductive TRTypes : Type :=
 
 
 Inductive HasType : TRValues -> TRTypes -> Prop :=
-  | HtTop     :forall (v : TRValues), HasType v trtop
+  | HtTop     : forall (v : TRValues), HasType v trtop
   | HtNum     : forall (n : nat), HasType (Num n) trnum
   | HtBool    : forall (b : bool), HasType (Bool b) trbool
   | HtStr     : forall (s : string), HasType (Str s) trstr
+  | HtVoid    : forall (v : Void_), HasType (Void v) trvoid
   | HtPair    : forall (t1 t2 : TRValues) (A B : TRTypes) ,  
                   HasType t1 A -> 
                   HasType t2 B -> 
@@ -79,6 +84,7 @@ Definition typeCheck : forall (v : TRValues), {t : TRTypes | HasType v t}.
 refine 
 (fix F (v : TRValues) : {t : TRTypes | HasType v t} :=
     match v return {t | HasType v t} with
+    | Void v => [trvoid]
     | Num n => [trnum]
     | Bool b => [trbool]
     | Str s => [trstr]

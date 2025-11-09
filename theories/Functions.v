@@ -11,7 +11,7 @@ Program Definition add1 (n : {t >> trnum}) : {t >> trnum} :=
    | _r => False_rec _ _
    end.
 
-Program Definition add (n : {v >> trnum}) (m : {v >> trnum}) : {v >> trnum} :=
+Program Definition add_ (n : {v >> trnum}) (m : {v >> trnum}) : {v >> trnum} :=
   match n, m with
   | Num x, Num y => giveType (Num (x + y))
   | _r, _q => False_rec _ _
