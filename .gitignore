@@ -1,5 +1,9 @@
-<<<<<<< HEAD
-.DS_Store
-=======
+*.d
 *.DS_Store
->>>>>>> tactic_help
+*.vos
+*.vok
+*.vo
+*.glob
+*.aux
+*.lia.cache
+CoqMakefile.conf
