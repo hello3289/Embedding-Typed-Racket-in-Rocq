@@ -1,4 +1,4 @@
-From TRresearch Require Import Tactic_jail.
+From TRresearch.Tactics Require Import Tactic_jail.
 From TRresearch Require Import Definitions.
 From TRresearch Require Import StandardFunctions.
 From Stdlib Require Import Strings.String.

@@ -1,5 +1,5 @@
 From TRresearch Require Import Definitions.
-From TRresearch Require Import Lemmas.
+From TRresearch.Lemmas Require Import Lemmas.
 From Stdlib.Strings Require String.
 From Stdlib Require Import Bool.
 

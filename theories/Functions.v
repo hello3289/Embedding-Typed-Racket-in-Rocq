@@ -2,7 +2,9 @@ Set Warnings "-meta-collision".
 Set Warnings "-uniform-inheritance".
 Set Warnings "-ambiguous-paths".
 
-From TRresearch Require Import Tactic_jail.
+Print LoadPath.
+
+From TRresearch.Tactics Require Import Tactic_jail.
 From TRresearch Require Import Definitions.
 From TRresearch Require Import StandardFunctions.
 From Stdlib.Strings Require Import String.

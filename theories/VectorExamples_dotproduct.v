@@ -3,7 +3,7 @@ Set Warnings "-uniform-inheritance".
 Set Warnings "-ambiguous-paths".
 
 From TRresearch Require Import Functions.
-From TRresearch Require Import Tactic_jail.
+From TRresearch.Tactics Require Import Tactic_jail.
 From TRresearch Require Import Definitions.
 From TRresearch Require Import VectorExamples.
 From Stdlib Require Bool.
