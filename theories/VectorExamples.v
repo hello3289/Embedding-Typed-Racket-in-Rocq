@@ -169,7 +169,7 @@ Program Definition vec_product_tr_new {n} (x : {(trvec n)}) : {trnum} :=
   | _r1 => False_rec _ _
   end.
 Next Obligation.
-  intros; simpl; repeat split; try constructor; intro; intro. destruct H; discriminate.
+  intros; simpl. repeat split; try constructor; intro; intro. destruct H; discriminate.
 Defined.
 
 Eval compute in vec_product_tr_new (cons 5 (cons 4 (cons 3 (cons 2 (cons 1 nil))))).

@@ -1,8 +1,9 @@
+Set Warnings "-uniform-inheritance".
+Set Warnings "-ambiguous-paths".
+Set Warnings "-meta-collision".
 From TRresearch Require Import Definitions.
-From Stdlib Require Bool.
-From Stdlib.Strings Require String.
 
-(* trivial lemmas that make solving obligations faster, real annoying *)
+(* "trivial lemmas that make solving obligations faster" real annoying *)
 (* trnum *)
 Lemma bool_not_trnum : forall b, HasType (Bool b) trnum -> False.
 Proof. intros b H; inversion H. Qed.
@@ -100,3 +101,30 @@ Lemma vec_not_trvoid : forall {n} (b : nat_vec n), HasType (Vec n b) trvoid -> F
 Proof. intros n b H; inversion H. Qed.
 Lemma str_not_trvoid : forall b, HasType (Str b) trvoid -> False.
 Proof. intros b H; inversion H. Qed.
+
+(************************)  
+(* "lemmas about trtop" *)  
+Lemma is_top : forall (x : TRValues), HasType x trtop.
+Proof. intros; constructor. Qed.
+
+Lemma is_top_pair : forall (x y : TRValues), HasType (x , y) (U trtop trtop).
+Proof. intros; repeat constructor. Qed.
+
+
+(************************)  
+(* "lemmas about pairs" *)
+Lemma pair_left : forall {A B : TRTypes} {l : TRValues} {a b :TRValues}, 
+  (a, b) = l ->  HasType l (trpair A B) -> 
+  HasType a A.
+Proof. 
+  intros. rewrite <- H in H0. inversion H0. 
+  auto.
+Defined.
+
+Lemma pair_right : forall {A B : TRTypes} {l : TRValues} {a b :TRValues}, 
+  (a, b) = l ->  HasType l (trpair A B) -> 
+  HasType b B.
+Proof. 
+  intros. rewrite <- H in H0. inversion H0. 
+  auto.
+Defined.

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "cleaning" $1
+rm -f -v "$1.vo" "$1.vok" "$1.vos" "$1.glob"

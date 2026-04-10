@@ -2,6 +2,7 @@ From TRresearch Require Import Definitions.
 From TRresearch.Lemmas Require Import Lemmas.
 From Stdlib.Strings Require String.
 From Stdlib Require Import Bool.
+From Corelib Require Import Program.Tactics.
 
 (* i'm dying there is still the "trying to automate my life file" *)
 
@@ -271,6 +272,7 @@ Ltac break_jail n :=
     do_it; try (
       match goal with
       | [ H : ~ HasType _ _ |- _ ] => destruct H
+      | [ H : ~ ~ HasType _ _ |- _ ] => destruct H; intro
       | [ H : ~ (HasType _ _ /\ HasType _ _) |- _ ] => destruct H
       end
     ); pls_destruct_correctly; do_it; try car_cdr_jail; try (
@@ -325,7 +327,7 @@ Ltac make_val val type :=
 
 Ltac make_hypothesis_not_bool val type :=
   let K := fresh "K" in 
-  assert (HasType val type /\ val <> (Bool false)) as ?J by (repeat split; try constructor; try intro K; inversion K).
+  assert (HasType val type /\ val <> (Bool false)) as ?J by (repeat split; try constructor; try (intro K; inversion K)).
 
 
 Ltac inv_trnum_fast :=
@@ -442,3 +444,219 @@ Ltac very_small_jail :=
                               (match goal with 
                               | [ filtered_var := _ |- _ ] => subst filtered_var
                               end).
+
+Ltac false_inversion := 
+  match goal with 
+  | [H : {t : TRValues | (HasType ?val ?type) /\ ?T /\ ?F } |- _ ] => 
+    match goal with 
+    | |- False => let name := H in let val := fresh name in destruct H as [val [?name [?name ?name]]]; destruct val;
+          match type with 
+          | trnum => try inv_trnum_fast
+          | trbool => try inv_trbool_fast
+          | trstr => try inv_trstr_fast
+          | trlist => try inv_trlist_fast
+          | trpair ?x ?y => try inv_trpair_fast
+          | trvec ?n => try inv_trvec_fast
+          | _ => fail "false_inversion " type " match"
+          end; simpl
+    | _ => fail "false_inversion goal match"
+    end
+  end.
+
+Ltac specialize_specific H k := 
+  match k with 
+  | proj1_sig [?v] => 
+    match v with 
+    | Num ?v1 => specialize (H v1) as H; simpl in H
+    | Bool ?v1 => specialize (H v1) as H; simpl in H
+    | Str ?v1 => specialize (H v1) as H; simpl in H
+    | Void ?v1 => specialize (H v1) as H; simpl in H
+    | List ?v1 => specialize (H v1) as H; simpl in H
+    | Vec ?n ?v1 => specialize (H v1) as H; simpl in H
+    | _ => fail "specialize_specific " v " match"
+    end
+  | _ => fail "specialize_specific goal match"
+  end.
+
+Ltac false_specialize_one := 
+  match goal with 
+  | |- False => 
+      match goal with 
+      | H : forall r : ?type, ?tr_r <> ?k |- _  =>
+        specialize_specific H k 
+      | _ => fail "false_specialize_one goal not matched"
+      end
+  | _ => fail "false_specialize_one goal match (not False)"
+  end.
+
+
+Ltac subst_filtered_var := 
+  match goal with 
+  | [ filtered_var := _ |- _ ] => subst filtered_var
+  | _ => fail "subst_filtered_var match fail"
+  end.
+
+Ltac not_what_single := 
+  match goal with 
+    | [ t : TRTypes |- False ] =>
+        match goal with 
+        | [ x : {t} |- False ] =>
+            match goal with 
+                | [ H0 : HasType (proj1_sig x) ?type |- False ] => 
+                    match goal with 
+                    | [ H : forall a : ?type, ?p <> proj1_sig x |- False ] =>  
+                        destruct2 x; destruct x; try simpl in H0; try inv_trtype_false_faster; false_specialize_one; discriminates
+                    end
+                
+            end  
+        end
+    end.
+
+Ltac not_what_single_what := 
+  match goal with 
+        | [ x : {?t} |- False ] =>
+        match goal with 
+        | [ _r : TRValues |- False ] => 
+            match goal with 
+                | [ H0 : _r = proj1_sig x |- False ] =>
+                    match goal with 
+                    | [ H : forall a : ?type, ?p <> _r |- False ] =>
+                        rewrite H0 in H; destruct2 x; destruct x; try inv_trtype_false_faster; false_specialize_one; discriminates
+                    end
+                
+            end  
+        end
+
+    end.
+
+Ltac make_constructor :=
+  match goal with 
+  | |- HasType ?val ?type /\ ?P /\ ?Q => 
+       split; try split; 
+       match goal with 
+       | |- (?H /\ ?F) -> ~(?J) => let name := fresh "H" in intro name; intro; destruct name 
+       | |- (?H /\ ?F) -> ?J => let name := fresh "H" in intro name; destruct name 
+       | |- ?H -> ~(?J) => intro; intro  
+       | |- _ => idtac 
+       end 
+  end.
+
+Ltac simpl_func := 
+  match goal with 
+  | |- (fun t : ?type => ?body ) ?val => simpl 
+  | _ => fail "simpl_func match fail"
+  end.
+
+Ltac rewrite_jail := 
+  match goal with 
+  | [ H : ?r = ?x |- _ ] => rewrite H in *; clear H
+  | _ => fail "rewrite_jail match fail"
+  end.
+
+Ltac false_specialize_two := 
+  match goal with 
+  | |- False => 
+      match goal with 
+      | H : forall r q : ?type, ?p <> proj1_sig [( ?x, ?x2)] |- _  => 
+        specialize (H x x2) as H; simpl in H
+      end
+  end.
+
+Ltac not_what_double := 
+  match goal with 
+    | [ t : TRTypes |- False ] => 
+        match goal with 
+        | [ x : {t} |- False ] => 
+            match goal with 
+            | [ _r : TRValues |- False ] => 
+                match goal with 
+                | [ H0 : HasType (proj1_sig x) ?type |- False ] => 
+                    match goal with 
+                    | [ H : forall a b : TRValues, ?p <> proj1_sig x |- False ] => 
+                        destruct2 x; destruct x; try simpl in H0; try inv_trtype_false_faster; false_specialize_two; discriminates
+                    end
+                end
+            end  
+        end
+    end.
+
+Ltac destructTR x := 
+  destruct x as [?x [?x [?x ?x]]].
+
+Ltac smarter_apply := 
+  match goal with 
+  | |- ?P => 
+      match goal with 
+      | [ H : ?A -> P |- _ ] => apply H 
+      end
+  end.
+
+Ltac idk_man_part2 flag := 
+  match flag with 
+  | false =>
+    match goal with 
+        | [ H : HasType ?p ?trtype /\ ?p <> (Bool false) -> ?P |- _ ] => 
+            match goal with 
+            | [ H1 : P -> ?Q |- _ ] => 
+              let name := fresh "H" in 
+              let a := fresh "a" in 
+              assert (HasType p trtype /\ p <> (Bool false)) as name by (split; auto; intro; inversion name);
+              specialize (H name); specialize (H1 H); destruct H1 as [a [?a [?a ?a]]]; exists a; repeat split; auto
+            end 
+    end
+  | true => 
+     match goal with 
+        | [ H : HasType ?p ?trtype /\ ?p = (Bool false) -> ?P |- _ ] => 
+            match goal with 
+            | [ H1 : P -> ?Q |- _ ] => 
+              let name := fresh "H" in 
+              let a := fresh "a" in 
+              assert (HasType p trtype /\ p = (Bool false)) as name by (split; auto; intro; inversion name);
+              specialize (H name); specialize (H1 H); destruct H1 as [a [?a [?a ?a]]]; exists a; repeat split; auto
+            end 
+    end
+  end.
+
+Ltac destructTR_if_needed := 
+  match goal with 
+  | |- context [ ?P ] =>
+    match goal with 
+    | [ H : { >> ?type & ?A & P } |- _ ] => destructTR H
+    | [ H : { >> ?type & P & ?A } |- _ ] => destructTR H
+    end
+  end.
+
+Ltac subst_definitions := 
+  match goal with 
+  | [ H := ?g |- _ ] => subst H; try subst_definitions
+  end. 
+  
+
+Ltac destruct_trvalue_if_needed := 
+  match goal with 
+  | [ x : TRValues |- _ ] => 
+      match goal with 
+      | [ H : context[ [x] ] |- _ ] => destruct x
+      | |- context [ [x] ] => destruct x
+      end
+  end.
+
+Ltac simpl_hypothesis := 
+  match goal with 
+  | [ T : TRTypes |- _ ] => 
+    match goal with 
+        | [ H0 : HasType ?x T |- _ ] => 
+            match goal with 
+            | [ H : context [ [x] ] |- _ ] => progress (simpl in H)
+            end
+        end 
+  end.
+
+Ltac not_what_double_what := 
+  match goal with 
+    | [ H0 : HasType ?x ?type |- False ] => 
+        match goal with 
+        | [ H : forall a b : TRValues, ?p <> proj1_sig [x] |- False ] => 
+            destruct x; try simpl in H0; try inv_trtype_false_faster; false_specialize_two; discriminates
+        end
+  end.

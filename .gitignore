@@ -7,3 +7,6 @@
 *.aux
 *.lia.cache
 CoqMakefile.conf
+old_files
+.vscode
+*.txt
