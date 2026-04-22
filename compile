@@ -1,3 +1,4 @@
 #!/bin/bash
 
+rocq makefile -f _RocqProject -o CoqMakefile
 make -f CoqMakefile

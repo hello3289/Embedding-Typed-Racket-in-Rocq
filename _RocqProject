@@ -1,2 +1,3 @@
+-arg -allow-rewrite-rules
 -R theories TRresearch
 theories

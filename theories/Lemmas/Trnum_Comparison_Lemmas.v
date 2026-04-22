@@ -23,3 +23,11 @@ Proof. intros. simpl in H. constructor. unfold ltTR; simpl. apply ltTR_B_is_lt. 
 
 Lemma ltTR_B_is_ltTR : forall i n, (Bool true) = (proj1_sig (ltTR_B (Num i) (Num n))) -> ltTR (Num i) (Num n).
 Proof. intros. apply ltTR_B_is_less_than in H. inversion H; auto. Qed.
+
+Lemma le_ident : forall {n : nat}, 
+  leTR (Num n) (Num n).
+Proof. intros; unfold leTR; simpl; lia. Qed.
+
+Lemma eq_ident : forall {n : nat}, 
+  eqTR (Num n) (Num n).
+Proof. intros; unfold eqTR; simpl; lia. Qed.

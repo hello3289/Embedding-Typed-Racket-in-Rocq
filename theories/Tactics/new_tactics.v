@@ -322,3 +322,61 @@ Ltac one_of_union_type :=
     | |- HasType (proj1_sig x) type => destructTR x; repeat (progress find_type x type)
     end
   end.
+
+Ltac invert_Num := 
+  match goal with 
+  | [ H : (Num ?n) = (Num ?m) |- _ ] => inversion H 
+  end.
+
+Ltac make_done type val := 
+  let K := fresh "K" in 
+    assert (K : done type val) by constructor. 
+
+  
+Ltac simpl_proj1_sig :=
+  repeat (progress 
+    match goal with 
+    | [ H : context[ proj1_sig [ ?x ] ] |- _ ] => simpl in H 
+    | |- context[ proj1_sig [ ?x ] ] => simpl
+    end).
+
+Ltac can_form val :=
+  destruct val; try inv_trtype_false_faster.
+
+Ltac immediate_TR := 
+  match goal with 
+  | [ x : {t : _ | HasType t ?type /\ _ /\ _} |- _ ] => 
+    match goal with 
+    | |- HasType (proj1_sig x) type => destructTR x; autoTR 
+    end 
+  | [ x : HasType ?v ?type /\ _ /\ _ |- _ ] => 
+    match goal with 
+    | |- HasType (proj1_sig [v]) type => destruct2 x; autoTR
+    end
+  end.
+
+Ltac destruct_nat := 
+  match goal with 
+  | [ H : forall n : nat, _ <> (Num ?m) |- False ] => idtac m;
+    match goal with 
+    | [ H2 : (Num 0) <> (Num m) |- False ] =>  idtac "there";
+      destruct m; try spec; try discriminates
+    end 
+  end.
+
+Ltac force_unequal :=
+  match goal with 
+  | [ H : ?n = ?m |- _ ] => 
+    match type of n with 
+    | ?A => 
+      match type of m with 
+      | A => fail 
+      | ?B => discriminates
+      end 
+    end 
+  end. 
+
+Ltac destructB := 
+  match goal with 
+  | |- context[ Nat.eqb ?n1 ?n2 ] => destruct (Nat.eqb n1 n2)
+  end.

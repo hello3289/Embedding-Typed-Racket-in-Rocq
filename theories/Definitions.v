@@ -1,5 +1,4 @@
-Require Import Strings.String.
-Require Import Bool.
+From Stdlib Require Import Strings.String Bool.
 Require Import Program.Tactics.
 #[local] Obligation Tactic := try now program_simpl.
 

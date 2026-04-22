@@ -1,13 +1,11 @@
 Set Warnings "-uniform-inheritance".
 Set Warnings "-ambiguous-paths".
 Set Warnings "-meta-collision".
-From TRresearch.Tactics Require Import tactics_all vec_unsafe_ref_none_false_tactic comparison_tactics well_founded_tactic.
+From TRresearch.Tactics Require Import tactics_all comparison_tactics well_founded_tactic.
 From TRresearch Require Import Definitions safe_ref.
 From TRresearch.Functions Require Import Basics Vectors trnum_comparisons.
-From TRresearch.Non_TR_Functions Require Import Vectors.
-From TRresearch.Lemmas Require Import Vec_unsafe_ref_none_false.
 From Stdlib Require Import Strings.String.
-#[local] Obligation Tactic := try ((timeout 1 (time really_simple_start)); (timeout 1 (time new_jail))).
+#[local] Obligation Tactic := try (timeout 1 (time test_jail)).
 
 
 Create HintDb TRHints.
@@ -15,32 +13,24 @@ Create HintDb TRHints.
   Hint Extern 0 => subst_filtered_var : TRHints.
   Hint Extern 0 => simpl_func : TRHints.
   Hint Extern 0 => rewrite_jail' : TRHints.
+  Hint Extern 0 => well_founded_tactic : TRHints.
+  Hint Extern 0 => apply_le_ident : TRHints.
+  Hint Extern 0 => force_unequal : TRHints.
   Hint Constructors HasType : TRHints.
-  Hint Extern 0 => sometimes_things_need_to_be_fast_tracked : TRHints.
+  Hint Constructors less_than : TRHints.
+  Hint Constructors less_than_equal : TRHints.
   Hint Unfold leTR : TRHints.
   Hint Unfold ltTR : TRHints.
-  Hint Constructors less_than_equal : TRHints.
-  Hint Constructors less_than : TRHints.
   Hint Unfold tr_length : TRHints.
-  Hint Extern 1 (ltTR _ _) => repeat (progress get_props) : TRHints.
-  Hint Extern 1 (less_than_equal _ _) => repeat (progress get_props) : TRHints.
-  Hint Extern 2 => lia : TRHints.
-  Hint Extern 0 => well_founded_tactic : TRHints.
   Hint Extern 1 => less_than_equal_0 : TRHints.
+  Hint Extern 1 => immediate_TR : TRHints.
+  Hint Extern 2 => solve_lt_lte : TRHints.
+  Hint Extern 2 => lia : TRHints.
+  Hint Extern 2 => destruct_nat : TRHints.
 
 
 (* the stuff *)
 
-  Ltac destruct_nat := 
-  match goal with 
-  | [ H : forall n : nat, _ <> (Num ?m) |- False ] => idtac m;
-    match goal with 
-    | [ H2 : (Num 0) <> (Num m) |- False ] =>  idtac "there";
-      destruct m; try spec; try discriminates
-    end 
-  end.
-Hint Extern 2 => destruct_nat : TRHints.
-#[local] Obligation Tactic := try fail.
 Program Fixpoint vec_prod_TR {n} 
   (res : {trnum}) 
   (i : {t >> trnum & (less_than_equal t (Num n)) & True}) 
@@ -52,68 +42,20 @@ Program Fixpoint vec_prod_TR {n}
   | Num (S i') => vec_prod_TR (mult res (trvec_ref x i')) (Num i') x
   | _r => False_rec _ _ 
   end.
-Next Obligation.
-  really_simple_start.
-  destructTR i. autoTR.
-Defined. Next Obligation.
 
-  really_simple_start.
-  unfold tr_length.
-  destructTR i; destruct i; try inv_trtype_false_faster.
-  get_props.
-  simpl in Heq_i.
-  inversion Heq_i.
-  rewrite <- H4 in H1.
-  unfold ltTR; simpl.
-  lia.
+Program Definition vec_product_tr_loop {n} 
+  (x : {(trvec n)})
+  (len : {t >> trnum & (less_than_equal t (Num n)) & ~(less_than_equal t (Num n))})
+  (res : { trnum }) : {trnum} :=
+  vec_prod_TR res len x.
 
-Defined. Next Obligation.
-  really_simple_start.
-  destructTR i; destruct i; try inv_trtype_false_faster.
-  get_props.
-  simpl in Heq_i.
-  inversion Heq_i.
-  rewrite <- H6 in H3.
-  constructor.
-  unfold ltTR; simpl.
-  lia.
 
-Defined. Next Obligation.
-    really_simple_start.
-    destructTR i; destruct i; try inv_trtype_false_faster.
-  get_props.
-  simpl in Heq_i.
-  inversion Heq_i.
-  rewrite <- H6 in H3.
-  constructor.
-  unfold leTR; simpl.
-  lia.
-    
-Defined. Next Obligation.
-
-    really_simple_start.
-    destructTR i; destruct i; try inv_trtype_false_faster.
-  get_props.
-  simpl in Heq_i.
-  inversion Heq_i.
-  unfold ltTR; simpl. 
-  subst *.
-  lia.
-
-Defined. Next Obligation.
-  test_jail.
-Defined. Next Obligation.
-  test_jail.
-Defined. Next Obligation.
-  test_jail.
-Defined. Next Obligation.
-  test_jail.
-Defined. Next Obligation.
-  test_jail.
-Defined. Next Obligation.
-  test_jail.
-Defined. Next Obligation.
-  test_jail.
-Defined. Next Obligation.
-  test_jail.
-Defined.
+Program Definition vec_product_tr_new {n} (x : {(trvec n)}) : {trnum} :=
+  match x with 
+  | Vec m1 nv1 => 
+    let loop := vec_product_tr_loop x in 
+      let i := (tr_length x) in 
+        let res := 1 in 
+          loop i res
+  | _r1 => False_rec _ _
+  end.

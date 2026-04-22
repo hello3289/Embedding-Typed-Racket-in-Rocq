@@ -8,8 +8,8 @@ From TRresearch.Lemmas Require Import Lemmas Union_Lemmas.
 
 
 Create HintDb TRHints.
-Hint Immediate pair_left : TRHints.
-Hint Immediate pair_right : TRHints.
+#[local] Hint Immediate pair_left : TRHints.
+#[local] Hint Immediate pair_right : TRHints.
 
 Lemma subsume : forall  {A} (P P' Q Q' : Prop),
   (P -> P') -> (Q -> Q') ->
