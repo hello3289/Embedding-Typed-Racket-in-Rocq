@@ -1,30 +1,25 @@
 Set Warnings "-uniform-inheritance".
 Set Warnings "-ambiguous-paths".
 Set Warnings "-meta-collision".
-From TRresearch.Tactics Require Import tactics_all comparison_tactics well_founded_tactic apply_predicate_lemmas prove_ifTR_branches apply_union_lemmas apply_if_lemmas.
+From TRresearch.Tactics Require Import tactics_all comparison_tactics apply_predicate_lemmas prove_ifTR_branches apply_union_lemmas apply_if_lemmas.
 From TRresearch Require Import Definitions safe_ref.
-From TRresearch.Functions Require Import Basics If Vectors trnum_comparisons.
+From TRresearch.Functions Require Import Basics If Vectors trnum_comparisons trnum_wf.
 From Stdlib Require Import Strings.String.
 #[local] Obligation Tactic := try (timeout 1 (time test_jail)).
 
 
 Create HintDb TRHints.
-  Hint Extern 0 => discriminates : TRHints.
-  Hint Extern 0 => subst_filtered_var : TRHints.
-  Hint Extern 0 => simpl_func : TRHints.
-  Hint Extern 0 => rewrite_jail' : TRHints.
-  Hint Extern 0 => well_founded_tactic : TRHints.
-  Hint Extern 0 => apply_le_ident : TRHints.
-  Hint Extern 0 => force_unequal : TRHints.
-  Hint Extern 1 => less_than_equal_0 : TRHints.
-  Hint Extern 1 => immediate_TR : TRHints.
-  Hint Extern 1 => prove_if_TR_branches : TRHints.
-  Hint Extern 2 => solve_lt_lte : TRHints.
-  Hint Extern 2 => lia : TRHints.
-  Hint Extern 2 => destruct_nat : TRHints.
-  Hint Extern 2 => destructB : TRHints.
-  Hint Constructors HasType : TRHints.
-  Hint Unfold tr_length : TRHints.
+  #[local] Hint Extern 0 => well_founded_tactic : TRHints.
+  #[local] Hint Extern 0 => apply_le_ident : TRHints.
+  #[local] Hint Extern 0 => force_unequal : TRHints.
+  #[local] Hint Extern 1 => less_than_equal_0 : TRHints.
+  #[local] Hint Extern 1 => immediate_TR : TRHints.
+  #[local] Hint Extern 1 => prove_if_TR_branches : TRHints.
+  #[local] Hint Extern 2 => solve_lt_lte : TRHints.
+  #[local] Hint Extern 2 => lia : TRHints.
+  #[local] Hint Extern 2 => destruct_nat : TRHints.
+  #[local] Hint Extern 2 => destructB : TRHints.
+  #[local] Hint Unfold tr_length : TRHints.
 
 
 

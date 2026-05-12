@@ -9,13 +9,6 @@ From Stdlib Require Import Strings.String.
 #[local] Obligation Tactic := try ((timeout 1 (time really_simple_start)); (timeout 1 (time new_jail))).
 
 
-Create HintDb TRHints.
-  Hint Extern 0 => discriminates : TRHints.
-  Hint Extern 0 => subst_filtered_var : TRHints.
-  Hint Extern 0 => simpl_func : TRHints.
-  Hint Extern 0 => rewrite_jail' : TRHints.
-  Hint Constructors HasType : TRHints.
-
 Program Definition trvec_unsafe_ref_tr {n} (x : { (trvec n) }) (m : {trnum}) : option {trnum} :=
   match x with 
   | Vec a v => match m with 

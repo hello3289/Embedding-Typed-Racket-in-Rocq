@@ -12,11 +12,6 @@ From TRresearch.Lemmas Require Import Lemmas.
 (* "Create Hint Database and put in the 0 tactics (annoying that you 
    have to do this every time but oh well)"*)
 Create HintDb TRHints.
-#[local] Hint Extern 0 => discriminates : TRHints.
-#[local] Hint Extern 0 => subst_filtered_var : TRHints.
-#[local] Hint Extern 0 => simpl_func : TRHints.
-#[local] Hint Extern 0 => rewrite_jail' : TRHints.
-#[local] Hint Constructors HasType : TRHints.
 #[local] Hint Immediate is_top : TRHints.
 #[local] Hint Immediate is_top_pair : TRHints.
 

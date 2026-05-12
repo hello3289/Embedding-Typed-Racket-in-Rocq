@@ -1,8 +1,8 @@
-From TRresearch Require Import Definitions.
-From TRresearch.Lemmas Require Import Lemmas.
+From TRresearch Require Import Definitions_base.
 From Stdlib.Strings Require String.
 From Stdlib Require Import Bool.
 From Corelib Require Import Program.Tactics.
+From TRresearch.Lemmas Require Import Lemmas.
 
 (* i'm dying there is still the "trying to automate my life file" *)
 

@@ -1,32 +1,27 @@
 Set Warnings "-uniform-inheritance".
 Set Warnings "-ambiguous-paths".
 Set Warnings "-meta-collision".
-From TRresearch.Tactics Require Import tactics_all comparison_tactics well_founded_tactic.
+From TRresearch.Tactics Require Import tactics_all comparison_tactics.
 From TRresearch Require Import Definitions safe_ref.
-From TRresearch.Functions Require Import Basics Vectors trnum_comparisons.
+From TRresearch.Functions Require Import Basics Vectors trnum_comparisons trnum_wf.
 From Stdlib Require Import Strings.String.
 #[local] Obligation Tactic := try (timeout 1 (time test_jail)).
 
 
 Create HintDb TRHints.
-  Hint Extern 0 => discriminates : TRHints.
-  Hint Extern 0 => subst_filtered_var : TRHints.
-  Hint Extern 0 => simpl_func : TRHints.
-  Hint Extern 0 => rewrite_jail' : TRHints.
-  Hint Extern 0 => well_founded_tactic : TRHints.
-  Hint Extern 0 => apply_le_ident : TRHints.
-  Hint Extern 0 => force_unequal : TRHints.
-  Hint Constructors HasType : TRHints.
-  Hint Constructors less_than : TRHints.
-  Hint Constructors less_than_equal : TRHints.
-  Hint Unfold leTR : TRHints.
-  Hint Unfold ltTR : TRHints.
-  Hint Unfold tr_length : TRHints.
-  Hint Extern 1 => less_than_equal_0 : TRHints.
-  Hint Extern 1 => immediate_TR : TRHints.
-  Hint Extern 2 => solve_lt_lte : TRHints.
-  Hint Extern 2 => lia : TRHints.
-  Hint Extern 2 => destruct_nat : TRHints.
+  #[local] Hint Extern 0 => well_founded_tactic : TRHints.
+  #[local] Hint Extern 0 => apply_le_ident : TRHints.
+  #[local] Hint Extern 0 => force_unequal : TRHints.
+  #[local] Hint Constructors less_than : TRHints.
+  #[local] Hint Constructors less_than_equal : TRHints.
+  #[local] Hint Unfold leTR : TRHints.
+  #[local] Hint Unfold ltTR : TRHints.
+  #[local] Hint Unfold tr_length : TRHints.
+  #[local] Hint Extern 1 => less_than_equal_0 : TRHints.
+  #[local] Hint Extern 1 => immediate_TR : TRHints.
+  #[local] Hint Extern 2 => solve_lt_lte : TRHints.
+  #[local] Hint Extern 2 => lia : TRHints.
+  #[local] Hint Extern 2 => destruct_nat : TRHints.
 
 
 (* the stuff *)

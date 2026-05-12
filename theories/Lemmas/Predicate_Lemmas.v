@@ -12,12 +12,6 @@ From Corelib Require Import Program.Tactics.
    yes they are and I am trying to fix that, which you can view my attempts at in 
    Sadness *)
 
-Create HintDb TRHints.
-#[local] Hint Extern 0 => discriminates : TRHints.
-#[local] Hint Extern 0 => subst_filtered_var : TRHints.
-#[local] Hint Extern 0 => simpl_func : TRHints.
-#[local] Hint Extern 0 => rewrite_jail' : TRHints.
-#[local] Hint Constructors HasType : TRHints.
 
 Lemma is_number_returns_bool : forall {A : TRTypes} (x : {A}), 
   (proj1_sig (is_number x)) = Bool true \/ (proj1_sig (is_number x)) = Bool false.

@@ -8,12 +8,6 @@ From Stdlib Require Import Lia.
 From Corelib Require Import Program.Tactics.
 #[local] Obligation Tactic := try (timeout 1 test_jail).
 
-Create HintDb TRHints.
-    Hint Extern 0 => discriminates : TRHints.
-    Hint Extern 0 => subst_filtered_var : TRHints.
-    Hint Extern 0 => simpl_func : TRHints.
-    Hint Extern 0 => rewrite_jail' : TRHints.
-    Hint Constructors HasType : TRHints.
 
 Lemma notTR_is_bool : forall {P Q} (x : {>> trbool & P & Q}), 
   HasType (proj1_sig (notTR x)) trbool.

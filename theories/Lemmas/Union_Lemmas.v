@@ -6,13 +6,8 @@ From TRresearch Require Import Definitions.
 From TRresearch.Lemmas Require Import Lemmas.
 
 Create HintDb TRHints.
-Hint Extern 0 => discriminates : TRHints.
-Hint Extern 0 => subst_filtered_var : TRHints.
-Hint Extern 0 => simpl_func : TRHints.
-Hint Extern 0 => rewrite_jail' : TRHints.
-Hint Constructors HasType : TRHints.
-Hint Immediate is_top : TRHints.
-Hint Immediate is_top_pair : TRHints.
+  #[local] Hint Immediate is_top : TRHints.
+  #[local] Hint Immediate is_top_pair : TRHints.
 
 Lemma unionL : forall A B (P Q : Prop), {>> A & P & Q} -> {>> (U A B) & P & Q}.
 Proof.

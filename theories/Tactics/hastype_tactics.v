@@ -5,32 +5,6 @@ From TRresearch.Tactics Require Import tactics_all.
 From TRresearch Require Import Definitions If.
 From TRresearch.Lemmas Require Import HasType_lemmas.
 
-Axiom trunion_eq : forall (t : TRTypes), 
-  t = (trunion t t).
-
-Ltac unify_trunion_type type t1 t2 label := 
-  let H0 := fresh "H" in 
-    assert (H0 : type = (trunion type type)) by apply trunion_eq;
-    assert (label : type = (trunion t1 t2)) by ((repeat (rewrite <- H0)); auto).
-  
-
-Ltac apply_if_TR_union_HasType_union :=
-  match goal with 
-  | |- HasType (proj1_sig (if_TR_union ?pred  ?true_branch ?false_branch)) ?type => 
-    match type of true_branch with 
-    | ?P -> {t : TRValues | HasType t ?type1 /\ _ /\ _} => idtac type1;
-      match type of false_branch with 
-      | ?Q -> {t : TRValues | HasType t ?type2 /\ _ /\ _} => idtac type2;
-            let H1 := fresh "H" in 
-              unify_trunion_type type type1 type2 H1;
-              rewrite H1;
-              refine (if_TR_union_HasType_union 
-                        pred 
-                        true_branch 
-                        false_branch)
-      end
-    end
-  end.
 
 Ltac apply_andTR_HasType :=
   match goal with 
@@ -65,3 +39,36 @@ Ltac apply_andTR_NotHasType :=
         end
       end
     end.
+
+Ltac solve_if_TR_union_hastype :=
+    let rec find_single_type H type := 
+      match type of H with 
+      | HasType ?x type => auto
+      | HasType ?x (trunion ?t1 ?t2) => 
+        let new_H1 := fresh "H" in 
+        let new_H2 := fresh "H" in
+        pose proof (hastype_union H) as new_H1;
+        clear H;
+        destruct new_H1 as [new_H2 | new_H2];
+        find_single_type new_H2 type
+      end in 
+      match goal with 
+      | |- HasType (proj1_sig (if_TR_union ?pred ?true_branch ?false_branch)) ?type => 
+        match type of (if_TR_union pred true_branch false_branch) with
+        | {t : TRValues | HasType t ?actual_type /\ _ /\ _ } => idtac actual_type ;
+          let H := fresh "H" in 
+            eassert (HasType (proj1_sig (if_TR_union pred true_branch false_branch)) actual_type) as H by (apply if_TR_union_HasType_union);
+            find_single_type H type
+        end 
+      end.
+
+Ltac solve_if_TR_hastype :=
+  match goal with 
+  | |- HasType (proj1_sig (if_TR_union ?pred ?true_branch ?false_branch)) ?type => 
+    match type of (if_TR_union pred true_branch false_branch) with
+    | {t : TRValues | HasType t ?actual_type /\ _ /\ _ } => idtac actual_type ;
+      let H := fresh "H" in 
+        epose proof ( if_TR_union_HasType_union pred true_branch false_branch) as H;
+        eapply H
+    end 
+  end.

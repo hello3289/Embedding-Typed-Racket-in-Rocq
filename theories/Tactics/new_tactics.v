@@ -2,7 +2,7 @@ Set Warnings "-uniform-inheritance".
 Set Warnings "-ambiguous-paths".
 Set Warnings "-meta-collision".
 From TRresearch.Tactics Require Import Tactic_jail.
-From TRresearch Require Import Definitions.
+From TRresearch Require Import Definitions_base.
 From Corelib Require Import Program.Tactics.
 
 

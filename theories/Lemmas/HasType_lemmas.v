@@ -9,11 +9,20 @@ Lemma if_TR_union_HasType_union : forall {P P' P'' Q Q' Q'' : Prop} {t1 t2 : TRT
   (y : P -> {>> t1 & P' & Q'})
   (z : Q -> {>> t2 & P'' & Q''}),
   HasType (proj1_sig (if_TR_union x y z))
-          (trunion t1 t2).
+          (tr_union t1 t2).
 Proof. intros. destructTR x. destruct x; try inv_trtype_false_faster.
   simpl. destruct b; simpl.
-  - destructTR y; simpl. apply HtUnion_L. auto.
-  - destructTR z; simpl. apply HtUnion_R. auto. (* apply (i_hate_this_shit z0) in z1. *)
+  - destructTR y; simpl. 
+    unfold tr_union.
+    destruct (eqb t1 t2).
+    + auto.
+    + apply HtUnion_L. auto.
+  - destructTR z; simpl.
+    unfold tr_union.
+    remember (eqb t1 t2).
+    destruct b.
+    + apply eqb_true in Heqb. rewrite Heqb. auto.
+    + apply HtUnion_R. auto.
 Qed.
 
 Lemma andTR_HasType_left : forall {A B t1 t2 : TRTypes} {x : {A}} {y : {B}}
@@ -53,4 +62,10 @@ Proof. intros.
   apply x6; repeat split; auto.
   apply x3; repeat split; auto.
   apply x6; repeat split; auto.
+Qed.
+
+Lemma hastype_union {t1 t2 A : TRTypes} {P Q : Prop} 
+  {x : {>> A & P & Q}} (H : HasType (proj1_sig x) (U t1 t2)) : HasType (proj1_sig x) t1 \/ HasType (proj1_sig x) t2.
+  destructTR x.
+  inversion H; auto.
 Qed.

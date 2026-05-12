@@ -1,7 +1,7 @@
 Set Warnings "-uniform-inheritance".
 Set Warnings "-ambiguous-paths".
 Set Warnings "-meta-collision".
-From TRresearch Require Import Definitions.
+From TRresearch Require Import Definitions_base.
 
 (* "trivial lemmas that make solving obligations faster" real annoying *)
 (* trnum *)

@@ -10,12 +10,7 @@ From Stdlib Require Import Strings.String.
 (* "Create Hint Database and put in the 0 tactics (annoying that you 
    have to do this every time but oh well)"*)
 Create HintDb TRHints.
-  Hint Extern 0 => discriminates : TRHints.
-  Hint Extern 0 => subst_filtered_var : TRHints.
-  Hint Extern 0 => simpl_func : TRHints.
-  Hint Extern 0 => rewrite_jail' : TRHints.
-  Hint Extern 1 => apply_trpair : TRHints.
-  Hint Constructors HasType : TRHints.
+  #[local] Hint Extern 1 => apply_trpair : TRHints.
 
 (* "trnum comparisons" *)  
 

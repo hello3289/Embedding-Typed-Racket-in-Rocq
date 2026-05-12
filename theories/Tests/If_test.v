@@ -1,31 +1,30 @@
 Set Warnings "-uniform-inheritance".
 Set Warnings "-ambiguous-paths".
 Set Warnings "-meta-collision".
-From TRresearch.Tactics Require Import tactics_all apply_predicate_lemmas prove_ifTR_branches.
+From TRresearch.Tactics Require Import tactics_all apply_predicate_lemmas prove_ifTR_branches hastype_tactics.
 From TRresearch Require Import Definitions Predicates If Basics.
 From TRresearch.Lemmas Require Import Lemmas Union_Lemmas Predicate_Lemmas.
 From Stdlib Require Import Strings.String.
 #[local] Obligation Tactic := try ((timeout 0 (time really_simple_start)); (timeout 0 (time new_jail))).
 
-(* "HintDb" *)
+(* "HintDb" "the locals here are a bit useless as I have no reason to 
+    believe you'll be importing this file, but just in case " *)
 Create HintDb TRHints.
-    Hint Extern 0 => discriminates : TRHints.
-    Hint Extern 0 => subst_filtered_var : TRHints.
-    Hint Extern 0 => simpl_func : TRHints.
-    Hint Extern 0 => rewrite_jail' : TRHints.
-    Hint Constructors HasType : TRHints.
-    Hint Unfold is_number : TRHints.
-    Hint Unfold get_true_prop : TRHints.
-    Hint Immediate is_top : TRHints.
-    Hint Immediate is_top_pair : TRHints.
-    Hint Immediate pair_left : TRHints.
-    Hint Immediate pair_right : TRHints.
-    Hint Immediate is_number_trbool : TRHints.
-    Hint Immediate is_string_trbool : TRHints.
-    Hint Extern 1 => prove_if_TR_branches : TRHints.
-    Hint Extern 1 => apply_proj1_sig_is_string_true : TRHints.
-    Hint Extern 1 => apply_proj1_sig_is_string_false : TRHints.
-    Hint Extern 0 => unfold_get_true_prop_hypothesis : TRHints.
+    #[local] Hint Unfold is_number : TRHints.
+    #[local] Hint Unfold get_true_prop : TRHints.
+    #[local] Hint Immediate is_top : TRHints.
+    #[local] Hint Immediate is_top_pair : TRHints.
+    #[local] Hint Immediate pair_left : TRHints.
+    #[local] Hint Immediate pair_right : TRHints.
+    #[local] Hint Immediate is_number_trbool : TRHints.
+    #[local] Hint Immediate is_string_trbool : TRHints.
+    #[local] Hint Extern 1 => solve_if_TR_union_hastype : TRHints.
+    #[local] Hint Extern 1 => apply_proj1_sig_is_string_true : TRHints.
+    #[local] Hint Extern 1 => apply_proj1_sig_is_string_false : TRHints.
+    #[local] Hint Extern 0 => unfold_get_true_prop_hypothesis : TRHints.
+    #[local] Hint Extern 1 => apply_andTR_HasType : TRHints.
+    #[local] Hint Extern 1 => apply_andTR_NotHasType : TRHints.
+    #[local] Hint Extern 1 => solve_if_TR_hastype : TRHints.
 Open Scope string_scope.
 
 

@@ -11,12 +11,9 @@ From Stdlib Require Import Strings.String.
 
 
 Create HintDb TRHints.
-  Hint Extern 0 => discriminates : TRHints.
-  Hint Extern 0 => subst_filtered_var : TRHints.
-  Hint Extern 0 => simpl_func : TRHints.
-  Hint Extern 0 => rewrite_jail' : TRHints.
-  Hint Constructors HasType : TRHints.
-  Hint Extern 0 => deal_with_none_trvec : TRHints.
+  #[local] Hint Extern 0 => deal_with_none_trvec : TRHints.
+
+Print HintDb TRHints.
 
 Program Definition trvec_ref_tr {n} (x : { (trvec n) }) (m : {t >> trnum & ((less_than_equal 0 t) /\ (less_than t n)) & True}) : { trnum } :=
   match (trvec_unsafe_ref_tr x m) with 

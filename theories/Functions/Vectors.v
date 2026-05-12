@@ -7,15 +7,6 @@ From TRresearch.Lemmas Require Import Lemmas.
 From TRresearch.Non_TR_Functions Require Import Vectors.
 #[local] Obligation Tactic := try ((timeout 0 test_jail); (timeout 0 new_jail)).
 
-(* "HintDb" *)
-Create HintDb TRHints.
-    Hint Extern 0 => discriminates : TRHints.
-    Hint Extern 0 => subst_filtered_var : TRHints.
-    Hint Extern 0 => simpl_func : TRHints.
-    Hint Extern 0 => rewrite_jail' : TRHints.
-    Hint Constructors HasType : TRHints.
-
-
 
 Notation " {{ f { res } a1 a2 }} " :=
   match a1, a2 with 
