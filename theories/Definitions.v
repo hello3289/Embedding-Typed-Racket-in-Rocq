@@ -1,3 +1,5 @@
+Print LoadPath.
+
 From TRresearch Require Export Definitions_base.
 From TRresearch Require Import tactics_all.
 

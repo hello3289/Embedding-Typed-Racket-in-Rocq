@@ -5,7 +5,7 @@ From TRresearch.Tactics Require Import tactics_all.
 From TRresearch Require Import Definitions Basics trnum_comparisons.
 From TRresearch.Lemmas Require Import Lemmas.
 From TRresearch.Non_TR_Functions Require Import Vectors.
-#[local] Obligation Tactic := try ((timeout 0 test_jail); (timeout 0 new_jail)).
+#[local] Obligation Tactic := try ((timeout 1 test_jail); (timeout 1 new_jail)).
 
 
 Notation " {{ f { res } a1 a2 }} " :=
