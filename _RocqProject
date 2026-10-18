@@ -12,6 +12,9 @@ theories/Examples/Vector_Examples/vec_prod.v
 theories/Examples/Vector_Examples/vec_swap.v
 theories/Examples/If_Examples.v
 theories/FilteringMyLife/Definitions_new.v
+theories/FilteringMyLife/filter.v
+theories/FilteringMyLife/Basic_stuff.v
+theories/FilteringMyLife/Lemmas_new.v
 theories/Functions/Basics.v
 theories/Functions/If.v
 theories/Functions/Predicates.v
