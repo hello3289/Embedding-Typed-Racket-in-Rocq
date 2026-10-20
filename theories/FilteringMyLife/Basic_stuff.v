@@ -21,21 +21,52 @@ Proof.
 Defined.
 
 
-Definition if_TR {A : TRTypes} {P P' Q Q' : Prop} 
+Definition if_TR {A : TRTypes} {P P' P'' Q Q' Q'' : Prop}  
                           (x : {t >> trbool & P & Q})                        
-                          (y : P -> {t >> A & P' & Q'})
-                          (z : Q -> {t >> A & P' & Q'}) : 
-                          {t >> A & P' & Q'}. 
+                          (y : P -> {>> A & P' & Q'})
+                          (z : Q -> {>> A & P'' & Q''}) :
+                          {t >> A & (P' \/ P'') & (Q' \/ Q'')}. 
 Proof. 
   destruct x as [?x [?x [?x ?x]]].
   destruct x; try (exfalso; inversion x0; fail).
-  try destruct b; 
-  try (apply y; apply x1; split; try (auto; discriminate); fail).
-  apply z; apply x2; split; auto.
+  try destruct b. 
+  - assert (J : (Bool true) <> (Bool false)) by (intro H; inversion H).
+    assert (J1 : HasType true trbool /\ Bool true <> Bool false) by (split; auto).
+    specialize (x1 J1).
+    specialize (y x1).
+    destructTR y.
+    eassert (J2 : 
+      ((HasType y A) /\ 
+       (HasType y A /\ y <> Bool false -> P' \/ P'') /\ 
+       (HasType y A /\ y = Bool false -> Q' \/ Q''))).
+       + repeat split; try auto.
+       + exact 
+        (exist (fun t => 
+                HasType t A /\
+                (HasType t A /\ t <> false -> P' \/ P'') /\
+                (HasType t A /\ t = false -> Q' \/ Q''))
+              y
+              J2).
+  - assert (J : (Bool false) = (Bool false)) by constructor.
+    assert (J1 : HasType false trbool /\ Bool false = Bool false) by (split; auto).
+    specialize (x2 J1).
+    specialize (z x2).
+    destructTR z.
+    eassert (J2 : 
+      ((HasType z A) /\ 
+       (HasType z A /\ z <> Bool false -> P' \/ P'') /\ 
+       (HasType z A /\ z = Bool false -> Q' \/ Q''))).
+      + repeat split; try auto.
+      + exact
+        (exist (fun t => 
+                HasType t A /\
+                (HasType t A /\ t <> false -> P' \/ P'') /\
+                (HasType t A /\ t = false -> Q' \/ Q''))
+              z
+              J2).
 Defined.
 
-
-
+(* 
 Definition if_TR_union {A B : TRTypes} {P P' P'' Q Q' Q'' : Prop} 
                           (x : {>> trbool & P & Q})                        
                           (y : P -> {>> A & P' & Q'})
@@ -97,9 +128,10 @@ Proof.
   - apply HtUnion_L; auto.
   - auto.
 Qed.
+*)
 
 Notation " 'ifTR' A B C " := 
-  (if_TR_union A (fun _ => B) (fun _ => C))
+  (if_TR A (fun _ => B) (fun _ => C))
   (at level 0, A at next level, B at next level, C at next level).
 
 
@@ -164,6 +196,27 @@ Defined. Next Obligation.
   intro H; intro J; inversion J; subst *.
   specialize (n t2 t3) as J1; destruct J1; auto. 
 Defined.
+
+(* 
+Program Definition wrong {A : TRTypes} (x : {trtop}) : {trnum} :=
+  @if_TR _ _ _ _ _ _ _ (is_number x)
+        (fun _ => x)
+        (fun _ => (Num 0)).
+Next Obligation. intros; exact True. Defined.
+Next Obligation. intros; exact True. Defined. 
+Next Obligation.
+  repeat split. constructor.
+Defined. Next Obligation.
+  repeat split. destruct (is_number _).
+  destruct a. destruct a. destruct x0; try inversion h0.
+  destruct b.
+  - assert (H : HasType true trbool /\ Bool true <> Bool false). 
+    split. auto. intro. inversion H.
+    specialize (h1 H) as B. simpl. auto.
+  - assert (H : HasType true trbool /\ Bool false = Bool false). 
+    split. constructor. auto.
+    simpl. constructor.
+Defined. *)
 
 Program Definition is_empty {t : TRTypes} (x : {t}) :=
   match x as v return
