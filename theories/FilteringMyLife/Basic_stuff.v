@@ -134,7 +134,9 @@ Notation " 'ifTR' A B C " :=
   (if_TR A (fun _ => B) (fun _ => C))
   (at level 0, A at next level, B at next level, C at next level).
 
-
+Notation " 'ifTR_what' t1 A B C " := 
+  (@if_TR t1 _ _ _ _ _ _ A (fun _ => B) (fun _ => C))
+  (at level 0, t1 at next level, A at next level, B at next level, C at next level).
 
 Program Definition is_number {t : TRTypes} (x : {t}) : 
                   {>> trbool & (HasType x trnum)} :=
@@ -375,4 +377,15 @@ Next Obligation.
 Defined. Next Obligation.
   destruct tail; try inv_trtype_false_faster_2.
   specialize (n l); destruct n. auto.
+Defined.
+
+Program Definition lengthTR {t : TRTypes} (x : {trlist t}) : nat := 
+    match (TRlength x) with 
+    | Num n => n 
+    | _r => False_rec _ _
+    end.
+Next Obligation.
+    destruct (TRlength [x]).
+    destruct a. destruct x0; try inv_trtype_false_faster_2.
+    specialize (n n0). destruct n. auto.
 Defined.

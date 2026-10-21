@@ -15,6 +15,7 @@ theories/FilteringMyLife/Definitions_new.v
 theories/FilteringMyLife/filter.v
 theories/FilteringMyLife/Basic_stuff.v
 theories/FilteringMyLife/Lemmas_new.v
+theories/FilteringMyLife/filter_tactics.v
 theories/Functions/Basics.v
 theories/Functions/If.v
 theories/Functions/Predicates.v
