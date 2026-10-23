@@ -5,7 +5,7 @@ From TRresearch.Tactics Require Import tactics_all apply_predicate_lemmas prove_
 From TRresearch Require Import Definitions Predicates If Basics.
 From TRresearch.Lemmas Require Import Lemmas Union_Lemmas Predicate_Lemmas.
 From Stdlib Require Import Strings.String.
-#[local] Obligation Tactic := try ((timeout 0 (time really_simple_start)); (timeout 0 (time new_jail))).
+#[local] Obligation Tactic := try ((timeout 1 (time really_simple_start)); (timeout 1 (time new_jail))).
 
 (* "HintDb" "the locals here are a bit useless as I have no reason to 
     believe you'll be importing this file, but just in case " *)
