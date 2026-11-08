@@ -13,4 +13,4 @@ In Typed Racket, occurrence typing works via a language of propositions, embedde
 
 ### :hammer: Currently in the works 
 
-Since adding polymorphic lists into the embedding and changing the definition of `if`, many things have broken/need to be updated! So I am currently in the trenches fixing the tactics and syntax issues :horse:
+To write the definition of `filter`, we added polymorphic lists into our embedding! We also updated our definition of `if`, so currently the definition of `filter` and the rest of the examples defined previously are based on two different versions of the encoding (dubbed `Definitions_new.v` and `Definitions_base.v` respectively). Alas, I am working to migrate all of the old examples and tactics to use the newest version of the embedding, which may take a bit :facepunch:
