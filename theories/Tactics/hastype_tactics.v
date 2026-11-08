@@ -40,7 +40,7 @@ Ltac apply_andTR_NotHasType :=
       end
     end.
 
-Ltac solve_if_TR_union_hastype :=
+(* Ltac solve_if_TR_union_hastype :=
     let rec find_single_type H type := 
       match type of H with 
       | HasType ?x type => auto
@@ -71,4 +71,4 @@ Ltac solve_if_TR_hastype :=
         epose proof ( if_TR_union_HasType_union pred true_branch false_branch) as H;
         eapply H
     end 
-  end.
+  end. *)

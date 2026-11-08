@@ -4,7 +4,7 @@ Set Warnings "-meta-collision".
 From TRresearch.Tactics Require Import tactics_all.
 From TRresearch Require Import Definitions If.
 
-Lemma if_TR_union_HasType_union : forall {P P' P'' Q Q' Q'' : Prop} {t1 t2 : TRTypes} 
+(* Lemma if_TR_union_HasType_union : forall {P P' P'' Q Q' Q'' : Prop} {t1 t2 : TRTypes} 
   (x : {>> trbool & P & Q } )
   (y : P -> {>> t1 & P' & Q'})
   (z : Q -> {>> t2 & P'' & Q''}),
@@ -24,7 +24,7 @@ Proof. intros. destructTR x. destruct x; try inv_trtype_false_faster.
     + apply eqb_true in Heqb. rewrite Heqb. auto.
     + apply HtUnion_R. auto.
 Qed.
-
+*)
 Lemma andTR_HasType_left : forall {A B t1 t2 : TRTypes} {x : {A}} {y : {B}}
   {pred1 : (forall x0 : {A}, {>> trbool & (HasType (proj1_sig x0) t1)})}
   {pred2 : (forall y0 : {B}, {>> trbool & (HasType (proj1_sig y0) t2)})},

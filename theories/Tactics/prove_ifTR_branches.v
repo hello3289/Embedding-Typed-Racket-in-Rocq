@@ -9,7 +9,7 @@ From Corelib Require Import Program.Tactics.
 Ltac prove_if_TR_branches := 
   let rec solve_branch := idtac "solve-branch";
     match goal with 
-    | [ x : {?A} |- context[ (if_TR_union _ _ _) ] ] => prove_if_TR_branches
+    | [ x : {?A} |- context[ (if_TR _ _ _) ] ] => prove_if_TR_branches
     | [ x : {?A} |- HasType (proj1_sig _) ?type ] => idtac type "first";
       match goal with 
     | |- context [ x ] => idtac x;
@@ -37,7 +37,7 @@ Ltac prove_if_TR_branches :=
     end 
   in 
   match goal with 
-  | [ x : {?A} |- context[ if_TR_union ?pred ?true_branch ?false_branch ] ] => idtac "matched";
+  | [ x : {?A} |- context[ if_TR ?pred ?true_branch ?false_branch ] ] => idtac "matched";
     destructTR_fresh pred; (* destructs the predicate to get to the boolean *)
     match goal with 
     | [ H3 : HasType ?x1 trbool |- _ ] => idtac "boolean"; destruct x1; try inv_trtype_false_faster; (* actually gets the boolean *)

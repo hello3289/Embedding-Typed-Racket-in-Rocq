@@ -19,27 +19,61 @@ Proof.
   intros.
   destruct H1 as [x [H2 [H3 H4]]].
   econstructor. 
-  make_constructor; eauto.
+  repeat split. eauto. intros. apply (H (H3 H1)). intros. apply (H0 (H4 H1)).
 Defined.
 
-Lemma subsume' : forall  A (P' P'' Q' Q'' : Prop), {>> (A) & P'' & Q''} -> {>> (A) & P' \/ P'' & Q' \/ Q''}.
+Lemma subsume' : forall  A (P' P'' Q' Q'' : Prop), {>> (A) & P'' & Q''} 
+                    -> {>> (A) & P' \/ P'' & Q' \/ Q''}.
 Proof.
   intros. apply subsume with P'' Q''; auto.
 Defined.
 
 
-Definition if_TR {A : TRTypes} {P P' Q Q' : Prop} 
+Definition if_TR {A : TRTypes} {P P' P'' Q Q' Q'' : Prop}  
                           (x : {t >> trbool & P & Q})                        
-                          (y : P -> {t >> A & P' & Q'})
-                          (z : Q -> {t >> A & P' & Q'}) : 
-                          {t >> A & P' & Q'}. (* A union B *)
+                          (y : P -> {>> A & P' & Q'})
+                          (z : Q -> {>> A & P'' & Q''}) :
+                          {t >> A & (P' \/ P'') & (Q' \/ Q'')}. 
 Proof. 
-  destructTR x;
-  destruct x;
-  try destruct b; 
-  try (apply y; apply x1; split; try (auto; discriminate); fail).
-  apply z; apply x2; split; auto.
+  destruct x as [?x [?x [?x ?x]]].
+  destruct x; try (exfalso; inversion x0; fail).
+  try destruct b. 
+  - assert (J : (Bool true) <> (Bool false)) by (intro H; inversion H).
+    assert (J1 : HasType true trbool /\ Bool true <> Bool false) by (split; auto).
+    specialize (x1 J1).
+    specialize (y x1).
+    destructTR y.
+    eassert (J2 : 
+      ((HasType y A) /\ 
+       (HasType y A /\ y <> Bool false -> P' \/ P'') /\ 
+       (HasType y A /\ y = Bool false -> Q' \/ Q''))).
+       + repeat split; try auto.
+       + exact 
+        (exist (fun t => 
+                HasType t A /\
+                (HasType t A /\ t <> false -> P' \/ P'') /\
+                (HasType t A /\ t = false -> Q' \/ Q''))
+              y
+              J2).
+  - assert (J : (Bool false) = (Bool false)) by constructor.
+    assert (J1 : HasType false trbool /\ Bool false = Bool false) by (split; auto).
+    specialize (x2 J1).
+    specialize (z x2).
+    destructTR z.
+    eassert (J2 : 
+      ((HasType z A) /\ 
+       (HasType z A /\ z <> Bool false -> P' \/ P'') /\ 
+       (HasType z A /\ z = Bool false -> Q' \/ Q''))).
+      + repeat split; try auto.
+      + exact
+        (exist (fun t => 
+                HasType t A /\
+                (HasType t A /\ t <> false -> P' \/ P'') /\
+                (HasType t A /\ t = false -> Q' \/ Q''))
+              z
+              J2).
 Defined.
+
 
 Ltac idk_man := 
   match goal with 
@@ -56,7 +90,7 @@ Fixpoint eqb (a b : TRTypes) : bool :=
   | trvoid , trvoid => true 
   | (trpair A B) , (trpair A' B') => andb (eqb A A') (eqb B B')
   | (trvec n) , (trvec n') => (Nat.eqb n n')
-  | trlist , trlist => true 
+  | (trlist A) , (trlist A') => eqb A A' 
   | (trunion A B) , (trunion A' B') => andb (eqb A A') (eqb B B')
   | trtop , trtop => true 
   | _ , _ => false 
@@ -73,6 +107,7 @@ Proof. intros. generalize dependent B.
   induction B; simpl in H; try inversion H; auto.
   induction B; simpl in H; try inversion H; auto.
   induction B; simpl in H; try inversion H; auto.
+
   destruct B; simpl in H; try inversion H; auto.
     specialize (IHA1 B1).
     specialize (IHA2 B2).
@@ -84,7 +119,9 @@ Proof. intros. generalize dependent B.
     rewrite IHA1. rewrite IHA2. auto.
   destruct B; simpl in H; try inversion H; auto.
   symmetry in H. apply (PeanoNat.Nat.eqb_eq _ _) in H. rewrite H; auto.
+
   destruct B; simpl in H; try inversion H; auto.
+    specialize (IHA B H). rewrite IHA. auto.
   destruct B; simpl in H; try inversion H; auto.
     specialize (IHA1 B1).
     specialize (IHA2 B2).
@@ -101,7 +138,7 @@ Qed.
 Eval compute in tr_union trnum trnum.
 Eval compute in tr_union trnum trstr.
 
-Definition if_TR_union {A B : TRTypes} {P P' P'' Q Q' Q'' : Prop} 
+(* Definition if_TR_union {A B : TRTypes} {P P' P'' Q Q' Q'' : Prop} 
                           (x : {>> trbool & P & Q})                        
                           (y : P -> {>> A & P' & Q'})
                           (z : Q -> {>> B & P'' & Q''}) : 
@@ -161,7 +198,7 @@ Proof.
   destruct b.
   - apply HtUnion_L; auto.
   - auto.
-Qed.
+Qed. *)
 
 
 Program Definition notTR {P Q : Prop} (x : {>> trbool & P & Q}) : {>> trbool & Q & P} :=
@@ -175,24 +212,28 @@ Program Definition notTR {P Q : Prop} (x : {>> trbool & P & Q}) : {>> trbool & Q
 Notation " 'ifTR' < 'second' > A B C " := 
   (let P := (get_true_prop A) in
     (let P' := (get_true_prop B) in
-      (@if_TR _ P 
+      (@if_TR _ 
+              P  
               (P /\ P') 
-              (~P) 
-              (~(P /\ P')) 
+              False (* P /\ ~P *)
+              _ 
+              (P /\ (~P'))
+              (~P) (* ~P /\ ~P *)
               A (fun _ => B) (fun _ => giveType C)))) 
-  (at level 0, A at next level, 
-  B at next level, C at next level).
+  (at level 0, A at next level, B at next level).
 
 Notation " 'ifTR' < 'third' > A B C " := 
   (let P := (get_true_prop A) in
-    (let P' := (get_true_prop C) in 
-      (@if_TR _ P 
-             (P \/ P') 
-             (~P) 
-             (~(P \/ P')) 
-             A (fun _ => B) (fun _ => C)))) 
-  (at level 0, A at next level, 
-  B at next level, C at next level).
+    (let P' := (get_true_prop C) in
+      (@if_TR trbool 
+              P 
+              P (* P /\ P *)
+              ((~P) /\ P') 
+              _ 
+              False (* P /\ ~P *)
+              ((~P) /\ (~P')) 
+              A (fun _ => B) (fun _ => C)))) 
+  (at level 0, A at next level, B at next level).
 
 Notation " 'ifTR' < 'all' > A B C " := 
   (let P := (get_true_prop A) in
@@ -206,7 +247,7 @@ Notation " 'ifTR' < 'all' > A B C " :=
   (at level 0, A at next level, B at next level, C at next level).  
 
 Notation " 'ifTR' A B C " := 
-  (if_TR_union A (fun _ => B) (fun _ => C))
+  (if_TR A (fun _ => B) (fun _ => C))
   (at level 0, A at next level, B at next level, C at next level). 
  
 

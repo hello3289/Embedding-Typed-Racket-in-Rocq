@@ -61,18 +61,18 @@ Lemma void_not_trpair : forall b {x y}, HasType (Void b) (trpair x y) -> False.
 Proof. intros b x y H; inversion H. Qed.
 
 (* trlist *)
-Lemma bool_not_trlist : forall b, HasType (Bool b) trlist -> False.
-Proof. intros b H; inversion H. Qed.
-Lemma num_not_trlist : forall b, HasType (Num b) trlist -> False.
-Proof. intros b H; inversion H. Qed.
-Lemma pair_not_trlist : forall b p, HasType (Pair b p) trlist -> False.
-Proof. intros b p H; inversion H. Qed.
-Lemma str_not_trlist : forall b, HasType (Str b) trlist -> False.
-Proof. intros b H; inversion H. Qed.
-Lemma vec_not_trlist : forall {n} (b : nat_vec n), HasType (Vec n b) trlist -> False.
-Proof. intros n b H; inversion H. Qed.
-Lemma void_not_trlist : forall b, HasType (Void b) trlist -> False.
-Proof. intros b H; inversion H. Qed.
+Lemma bool_not_trlist : forall b A, HasType (Bool b) (trlist A) -> False.
+Proof. intros b A H; inversion H. Qed.
+Lemma num_not_trlist : forall b A, HasType (Num b) (trlist A) -> False.
+Proof. intros b A H; inversion H. Qed.
+Lemma pair_not_trlist : forall b p A, HasType (Pair b p) (trlist A) -> False.
+Proof. intros b p A H; inversion H. Qed.
+Lemma str_not_trlist : forall b A, HasType (Str b) (trlist A) -> False.
+Proof. intros b A H; inversion H. Qed.
+Lemma vec_not_trlist : forall {n} (b : nat_vec n) A, HasType (Vec n b) (trlist A) -> False.
+Proof. intros n b A H; inversion H. Qed.
+Lemma void_not_trlist : forall b A, HasType (Void b) (trlist A) -> False.
+Proof. intros b A H; inversion H. Qed.
 
 (* trvec *)
 Lemma bool_not_trvec : forall b {n}, HasType (Bool b) (trvec n) -> False.

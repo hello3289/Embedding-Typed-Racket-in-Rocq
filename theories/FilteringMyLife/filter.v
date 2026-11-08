@@ -7,6 +7,8 @@ From TRresearch Require Import Lemmas_new.
 From Corelib Require Import Lists.ListDef.
 Require Import Program.Tactics.
 From Corelib Require Import Program.Wf.
+From Stdlib Require Import Arith.Wf_nat.
+
 
 (* "HintDb" *)
 Create HintDb TRHints.

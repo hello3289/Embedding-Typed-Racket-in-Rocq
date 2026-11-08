@@ -10,7 +10,8 @@ From TRresearch.Lemmas Require Import Lemmas.
 (********************** HasType FALSE INVERSIONS AH *********************)
 (* looks at hypothesis for a false "HasType" to invert *)
 
-Ltac inv_trnum_fast_2 :=
+Ltac inv_trnum_fast :=
+  exfalso;
   match goal with
   | H : HasType (Bool ?b) trnum |- _ => apply (bool_not_trnum b H)
   | H : HasType (Str ?b) trnum |- _ => apply (str_not_trnum b H)
@@ -20,7 +21,8 @@ Ltac inv_trnum_fast_2 :=
   | H : HasType (Void ?v) trnum |- _ => apply (void_not_trnum v H)
   end.
 
-Ltac inv_trbool_fast_2 :=
+Ltac inv_trbool_fast :=
+  exfalso;
   match goal with
   | H : HasType (Num ?b) trbool |- _ => apply (num_not_trbool b H)
   | H : HasType (Str ?b) trbool |- _ => apply (str_not_trbool b H)
@@ -30,7 +32,8 @@ Ltac inv_trbool_fast_2 :=
   | H : HasType (Void ?v) trbool |- _ => apply (void_not_trbool v H)
   end.
 
-Ltac inv_trstr_fast_2 :=
+Ltac inv_trstr_fast :=
+  exfalso;
   match goal with
   | H : HasType (Bool ?b) trstr |- _ => apply (bool_not_trstr b H)
   | H : HasType (Num ?b) trstr |- _ => apply (num_not_trstr b H)
@@ -40,7 +43,8 @@ Ltac inv_trstr_fast_2 :=
   | H : HasType (Void ?v) trstr |- _ => apply (void_not_trstr v H)
   end.
 
-Ltac inv_trpair_fast_2 :=
+Ltac inv_trpair_fast :=
+  exfalso;
   match goal with
   | H : HasType (Bool ?b) (trpair ?x ?y) |- _ => apply (bool_not_trpair b H)
   | H : HasType (Str ?b) (trpair ?x ?y) |- _ => apply (str_not_trpair b H)
@@ -50,7 +54,8 @@ Ltac inv_trpair_fast_2 :=
   | H : HasType (Void ?v) (trpair ?x ?y) |- _ => apply (void_not_trpair v H)
   end.
 
-Ltac inv_trlist_fast_2 :=
+Ltac inv_trlist_fast :=
+  exfalso;
   match goal with
   | H : HasType (Bool ?b) trlist |- _ => apply (bool_not_trlist b H)
   | H : HasType (Str ?b) trlist |- _ => apply (str_not_trlist b H)
@@ -60,7 +65,8 @@ Ltac inv_trlist_fast_2 :=
   | H : HasType (Void ?v) trlist |- _ => apply (void_not_trlist v H)
   end.
 
-Ltac inv_trvec_fast_2 :=
+Ltac inv_trvec_fast :=
+  exfalso;
   match goal with
   | H : HasType (Bool ?b) (trvec _) |- _ => apply (bool_not_trvec b H)
   | H : HasType (Str ?b) (trvec _) |- _ => apply (str_not_trvec b H)
@@ -70,7 +76,8 @@ Ltac inv_trvec_fast_2 :=
   | H : HasType (Void ?v) (trvec _) |- _ => apply (void_not_trvec v H)
   end.
 
-Ltac inv_trvoid_fast_2 :=
+Ltac inv_trvoid_fast :=
+  exfalso;
   match goal with
   | H : HasType (Bool ?b) trvoid |- _ => apply (bool_not_trvoid b H)
   | H : HasType (Str ?b) trvoid |- _ => apply (str_not_trvoid b H)
@@ -80,9 +87,15 @@ Ltac inv_trvoid_fast_2 :=
   | H : HasType (Num ?v) trvoid |- _ => apply (num_not_trvoid v H)
   end.
 
+  
+
+Ltac inv_trtype_false_faster  :=
+  try inv_trnum_fast; try inv_trbool_fast; try inv_trstr_fast; 
+  try inv_trpair_fast; try inv_trvec_fast; try inv_trlist_fast; fail.
+
 Ltac inv_trtype_false_faster_2  :=
-  exfalso; try inv_trnum_fast_2; try inv_trbool_fast_2; try inv_trstr_fast_2; 
-  try inv_trpair_fast_2; try inv_trvec_fast_2; try inv_trlist_fast_2; fail.
+  exfalso; inv_trtype_false_faster.
+
 
 (************************************************************************)
 (********************** START_JAIL AHHHHHHHHHHHHHH **********************)
@@ -196,6 +209,7 @@ Ltac unequal_false :=
   end; auto.
 
 (* if conclusion is a "properly" formed HasType, call constructor *)
+(* add List? *)
 Ltac ht_good_hehe :=
   match goal with
   | [ |- HasType _ trtop ] => constructor
@@ -329,87 +343,6 @@ Ltac make_hypothesis_not_bool val type :=
   let K := fresh "K" in 
   assert (HasType val type /\ val <> (Bool false)) as ?J by (repeat split; try constructor; try (intro K; inversion K)).
 
-
-Ltac inv_trnum_fast :=
-  exfalso;
-  match goal with
-  | H : HasType (Bool ?b) trnum |- _ => apply (bool_not_trnum b H)
-  | H : HasType (Str ?b) trnum |- _ => apply (str_not_trnum b H)
-  | H : HasType (Pair ?b ?p) trnum |- _ => apply (pair_not_trnum b p H)
-  | H : HasType (Vec _ ?b) trnum |- _ => apply (vec_not_trnum b H)
-  | H : HasType (List ?l) trnum |- _ => apply (list_not_trnum l H)
-  | H : HasType (Void ?v) trnum |- _ => apply (void_not_trnum v H)
-  end.
-
-Ltac inv_trbool_fast :=
-  exfalso;
-  match goal with
-  | H : HasType (Num ?b) trbool |- _ => apply (num_not_trbool b H)
-  | H : HasType (Str ?b) trbool |- _ => apply (str_not_trbool b H)
-  | H : HasType (Pair ?b ?p) trbool |- _ => apply (pair_not_trbool b p H)
-  | H : HasType (Vec _ ?b) trbool |- _ => apply (vec_not_trbool b H)
-  | H : HasType (List ?l) trbool |- _ => apply (list_not_trbool l H)
-  | H : HasType (Void ?v) trbool |- _ => apply (void_not_trbool v H)
-  end.
-
-Ltac inv_trstr_fast :=
-  exfalso;
-  match goal with
-  | H : HasType (Bool ?b) trstr |- _ => apply (bool_not_trstr b H)
-  | H : HasType (Num ?b) trstr |- _ => apply (num_not_trstr b H)
-  | H : HasType (Pair ?b ?p) trstr |- _ => apply (pair_not_trstr b p H)
-  | H : HasType (Vec _ ?b) trstr |- _ => apply (vec_not_trstr b H)
-  | H : HasType (List ?l) trstr |- _ => apply (list_not_trstr l H)
-  | H : HasType (Void ?v) trstr |- _ => apply (void_not_trstr v H)
-  end.
-
-Ltac inv_trpair_fast :=
-  exfalso;
-  match goal with
-  | H : HasType (Bool ?b) (trpair ?x ?y) |- _ => apply (bool_not_trpair b H)
-  | H : HasType (Str ?b) (trpair ?x ?y) |- _ => apply (str_not_trpair b H)
-  | H : HasType (Num ?b) (trpair ?x ?y) |- _ => apply (num_not_trpair b H)
-  | H : HasType (Vec _ ?b) (trpair ?x ?y) |- _ => apply (vec_not_trpair b H)
-  | H : HasType (List ?l) (trpair ?x ?y) |- _ => apply (list_not_trpair l H)
-  | H : HasType (Void ?v) (trpair ?x ?y) |- _ => apply (void_not_trpair v H)
-  end.
-
-Ltac inv_trlist_fast :=
-  exfalso;
-  match goal with
-  | H : HasType (Bool ?b) trlist |- _ => apply (bool_not_trlist b H)
-  | H : HasType (Str ?b) trlist |- _ => apply (str_not_trlist b H)
-  | H : HasType (Pair ?b ?p) trlist |- _ => apply (pair_not_trlist b p H)
-  | H : HasType (Vec _ ?b) trlist |- _ => apply (vec_not_trlist b H)
-  | H : HasType (Num ?l) trlist |- _ => apply (num_not_trlist l H)
-  | H : HasType (Void ?v) trlist |- _ => apply (void_not_trlist v H)
-  end.
-
-Ltac inv_trvec_fast :=
-  exfalso;
-  match goal with
-  | H : HasType (Bool ?b) (trvec _) |- _ => apply (bool_not_trvec b H)
-  | H : HasType (Str ?b) (trvec _) |- _ => apply (str_not_trvec b H)
-  | H : HasType (Pair ?b ?p) (trvec _) |- _ => apply (pair_not_trvec b p H)
-  | H : HasType (Num ?b) (trvec _) |- _ => apply (num_not_trvec b H)
-  | H : HasType (List ?l) (trvec _) |- _ => apply (list_not_trvec l H)
-  | H : HasType (Void ?v) (trvec _) |- _ => apply (void_not_trvec v H)
-  end.
-
-Ltac inv_trvoid_fast :=
-  exfalso;
-  match goal with
-  | H : HasType (Bool ?b) trvoid |- _ => apply (bool_not_trvoid b H)
-  | H : HasType (Str ?b) trvoid |- _ => apply (str_not_trvoid b H)
-  | H : HasType (Pair ?b ?p) trvoid |- _ => apply (pair_not_trvoid b p H)
-  | H : HasType (Vec _ ?b) trvoid |- _ => apply (vec_not_trvoid b H)
-  | H : HasType (List ?l) trvoid |- _ => apply (list_not_trvoid l H)
-  | H : HasType (Num ?v) trvoid |- _ => apply (num_not_trvoid v H)
-  end.
-
-Ltac inv_trtype_false_faster  :=
-  try inv_trnum_fast; try inv_trbool_fast; try inv_trstr_fast; 
-  try inv_trpair_fast; try inv_trvec_fast; try inv_trlist_fast; fail.
 
 
 Ltac find_destruct := 

@@ -27,7 +27,7 @@ Create HintDb TRHints.
     #[local] Hint Extern 1 => apply_notTR_is_bool : TRHints.
     #[local] Hint Extern 1 => apply_notTR_bool_true_is_false : TRHints. 
     #[local] Hint Extern 1 => apply_notTR_bool_false_is_true : TRHints.
-    #[local] Hint Extern 1 => solve_if_TR_hastype : TRHints.
+    (* #[local] Hint Extern 1 => solve_if_TR_hastype : TRHints. *)
 Open Scope string_scope.
 
 (* some of these overlap with the tests in If_test... *)
@@ -54,7 +54,7 @@ Eval compute in ex2_test2.
 (********************** EXAMPLE 4 AHHHHHHHHHHHHHHH **********************)
 
 Program Definition ex4 {t : TRTypes} (x : {t}) : {trnum} :=
-  ifTR (orTR (is_number x) (is_string x))
+  ifTR (orTR_2 (is_number x) (is_string x))
        (ex2 x)
        0.
 
@@ -65,10 +65,28 @@ Eval compute in ex4 true.
 (************************************************************************)
 (********************** EXAMPLE 5 AHHHHHHHHHHHHHHH **********************)
 
+#[local] Obligation Tactic := try fail.
+
+
 Program Definition ex5 {t r : TRTypes} (x : {t}) (y : {r}) : {trnum} :=
-  ifTR  (andTR (is_number x) (is_string y))
+  ifTR (andTR (is_number x) (is_string y))
            (sum x (strlen y))
            0.
+Next Obligation.
+  really_simple_start.
+Defined. Next Obligation. 
+  really_simple_start.
+Defined. Next Obligation.
+  start_jail. repeat split.
+  destruct o. destruct H. auto.
+  exfalso; auto.
+Defined. Next Obligation.
+  start_jail. repeat split.
+  destruct o. destruct H. auto.
+  exfalso; auto.
+Defined. Next Obligation. 
+  really_simple_start.
+Defined.
 
 Eval compute in ex5 5 "hi".
 Eval compute in ex5 5 8.
@@ -83,6 +101,21 @@ Program Definition ex7 {t r : TRTypes} (x : {t}) (y : {r}) : {trnum} :=
     (ifTR < second > (is_number x) (is_string y) false)
     (sum x (strlen y))
     0).
+Next Obligation.
+  really_simple_start.
+Defined. Next Obligation. 
+  really_simple_start.
+Defined. Next Obligation.
+  start_jail. repeat split.
+  destruct o. destruct H. auto.
+  exfalso; auto.
+Defined. Next Obligation.
+  start_jail. repeat split.
+  destruct o. destruct H. auto.
+  exfalso; auto.
+Defined. Next Obligation. 
+  really_simple_start.
+Defined.
 
 Eval compute in ex7 6 "hello".
 
@@ -92,12 +125,55 @@ Eval compute in ex7 6 "hello".
 Program Definition orTest {A : TRTypes} (x : {A}) : 
     {>> trbool & ((HasType x trnum) \/ (HasType x trstr))} :=
     orTR (is_number x) (is_string x).
+Next Obligation. 
+  really_simple_start.
+  unfold get_true_prop in y. destruct x. destruct x; simpl in y; try inv_trtype_false_faster.
+  simpl in H0. discriminate.
+Defined. Next Obligation.
+  intros. simpl. repeat split.
+  - apply is_string_trbool.
+  - intro. subst P. destruct H. unfold get_true_prop in H0. 
+    destruct n; auto.
+  - destruct H. subst P'. destruct x; destruct x; simpl in H0; try (destruct H0; auto; fail).
+    unfold get_true_prop; constructor.
+  - intro. subst P. unfold_get_true_prop_hypothesis. destruct n; auto.
+  - intro. subst P'. destruct H. unfold_get_true_prop_hypothesis.
+    destruct x; destruct x; simpl in H0; try inv_trtype_false_faster.
+    simpl in H1. discriminate.
+Defined. Next Obligation.
+  intros. simpl. repeat split.
+  - destruct (if_TR _ _ _). destruct a; auto.
+  - intro. destruct H. destruct (if_TR _ _ _) in H0. destruct a; destruct x0; try inv_trtype_false_faster.
+    destruct b; destruct a.
+    + simpl in H0. assert (J : HasType (Bool true) trbool /\ (Bool true) <> (Bool false)) by (split; auto).
+      specialize (o J). subst P; subst P'.
+      destruct o. left; auto. destruct H1; right; auto.
+    + simpl in H0; destruct H0; auto.
+  - intro. intro. destruct H. destruct (if_TR _ _ _) in H1.
+    destruct a; destruct x0; try inv_trtype_false_faster.
+    destruct b.
+    + inversion H1.
+    + destruct a. assert (J : HasType (Bool false) trbool /\ (Bool false) = (Bool false)) by (split; auto).
+      specialize (o0 J) as K. destruct K. auto. destruct H2. subst P; subst P'.
+      destruct H0. destruct H2; auto. destruct H3; auto.
+Defined.
+
+
+  
+      
+
 
 Program Definition ex8 {t : TRTypes} (x : {t}) :=
   orTest x.
 
 Program Definition ex8_test {t : TRTypes} (x : {t}) : {trnum} :=
   (ifTR (ex8 x) (ex2 x) 0).
+Next Obligation.
+  simpl. intros; repeat split. destruct o.
+  apply HtUnion_R. auto. apply HtUnion_L; auto.
+Defined. Next Obligation.
+  intros. repeat split. destruct (if_TR _ _ _). destruct a; auto.
+Defined.
 
 Eval compute in ex8 6.
 Eval compute in ex8_test 6.
