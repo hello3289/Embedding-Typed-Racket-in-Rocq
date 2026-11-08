@@ -1,3 +1,14 @@
+## :sparkles: Embedding Typed Racket in Rocq
+Research for a fun time
+
+--
+
 This research demonstrates that the core of Typed Racket, a type system for the Racket language designed to accommodate the idioms of existing untyped Racket programs, can be shallowly embedded in Rocq, preserving the types and idioms that Typed Racket programmers expect. This works for existing examples of occurrence typing, Typed Racket’s key feature that allows variables to be given distinct types at different occurrences based on the presence of conditional tests.
 
 In Typed Racket, occurrence typing works via a language of propositions, embedded in types. We express these propositions directly as Rocq propositions, with specific propositions for claims about the types of specific terms. Additionally, we encode the combination of types and propositions that makes Typed Racket work with Rocq subset types, and use the Program feature to collect and discharge the accompanying proof obligations. We define a collection of tactics which automatically solve these obligations, allowing most Typed Racket programs to be written with no user proof code.
+
+--
+
+### :hammer: Currently in the works 
+
+Since adding polymorphic lists into the embedding and changing the definition of if, many things have broken/need to be updated! So I am currently in the trenches fixing the tactics and syntax issues :horse:
