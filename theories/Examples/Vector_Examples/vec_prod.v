@@ -37,6 +37,13 @@ Program Fixpoint vec_prod_TR {n}
   | Num (S i') => vec_prod_TR (mult res (trvec_ref x i')) (Num i') x
   | _r => False_rec _ _ 
   end.
+Next Obligation. (* here? *)
+  constructor. 
+  assert (HasType (Num n2) trnum /\ (Num n2) <> (Bool false)) by (split; auto; intro J; inversion J).
+  specialize (i1 H1) as K.
+  inversion K. subst *. unfold leTR in H4; simpl in H4.
+  unfold ltTR; simpl. inversion Heq_i. lia.
+Defined.
 
 Program Definition vec_product_tr_loop {n} 
   (x : {(trvec n)})

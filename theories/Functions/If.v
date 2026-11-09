@@ -208,42 +208,22 @@ Program Definition notTR {P Q : Prop} (x : {>> trbool & P & Q}) : {>> trbool & Q
   end.
 
 (* "Notations" *)
-(* one day i will make these notations into one... *)
-Notation " 'ifTR' < 'second' > A B C " := 
-  (let P := (get_true_prop A) in
-    (let P' := (get_true_prop B) in
-      (@if_TR _ 
-              P  
-              (P /\ P') 
-              False (* P /\ ~P *)
-              _ 
-              (P /\ (~P'))
-              (~P) (* ~P /\ ~P *)
-              A (fun _ => B) (fun _ => giveType C)))) 
-  (at level 0, A at next level, B at next level).
-
-Notation " 'ifTR' < 'third' > A B C " := 
-  (let P := (get_true_prop A) in
-    (let P' := (get_true_prop C) in
-      (@if_TR trbool 
-              P 
-              P (* P /\ P *)
-              ((~P) /\ P') 
-              _ 
-              False (* P /\ ~P *)
-              ((~P) /\ (~P')) 
-              A (fun _ => B) (fun _ => C)))) 
-  (at level 0, A at next level, B at next level).
 
 Notation " 'ifTR' < 'all' > A B C " := 
-  (let P := (get_true_prop A) in
-    (let Q := (get_true_prop B) in
-      (let R := (get_true_prop C) in 
-        (@if_TR trbool P (* hmm *)
-              ((P /\ Q) \/ R) 
-              (~P) 
-              (~((P /\ Q) \/ R)) 
-              A (fun _ => B) (fun _ => C))))) 
+  (let P   := (get_true_prop A) in
+  (let P'  := (get_true_prop B) in
+  (let P'' := (get_true_prop C) in 
+  (let Q   := (get_false_prop A) in 
+  (let Q'  := (get_false_prop B) in 
+  (let Q'' := (get_false_prop C) in 
+    (@if_TR trbool 
+          P 
+          (P /\ P')
+          (Q /\ P'')
+          Q 
+          (P /\ Q')
+          (Q /\ Q'') 
+          A (fun _ => B) (fun _ => (giveType C))))))))) 
   (at level 0, A at next level, B at next level, C at next level).  
 
 Notation " 'ifTR' A B C " := 
@@ -255,11 +235,11 @@ Notation " 'condTR' [ A B ] [ C D ] [ 'else' E ]" :=
   (ifTR A B (ifTR C D E)) (A at level 0, C at next level, E at next level).
 
 Notation " 'orTR' A B " :=
-  (ifTR < third > A A B)
+  (ifTR < all > A A B)
   (at level 10, A at next level, B at next level).
 
 Notation " 'andTR' A B " :=
-  (ifTR < second > A B A) 
+  (ifTR < all > A B A) 
   (at level 10, A at next level, B at next level).
 
 

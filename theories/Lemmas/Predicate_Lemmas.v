@@ -68,3 +68,11 @@ Lemma proj1_sig_is_number_false : forall  {A : TRTypes} (x : {A}),
   HasType (proj1_sig x) trnum -> 
   False.
 Proof. intros. test_jail. Qed.
+
+Lemma is_bool_trbool : forall {A : TRTypes} {x : {A}},
+  HasType (proj1_sig (is_bool x)) trbool.
+Proof. 
+  intros. 
+  destruct (is_bool _) as [?a [here ?a]].
+  auto.
+Qed. 

@@ -5,27 +5,27 @@ From Stdlib Require Import Lia.
 Require Import Program.Wf.
 
 Fixpoint append_vec {n m} (x : nat_vec n) (y : nat_vec m) : nat_vec (n + m) :=
-  match x with
-  | nil => y
-  | cons n' v => (cons n' (append_vec v y))
+  match x in nat_vec n' return nat_vec (n' + m) with 
+  | vec_nil => y
+  | vec_cons n' v => (vec_cons n' (append_vec v y))
   end.
 
 Program Definition head_vec (n : nat) (x : nat_vec (S n)) : nat :=
   (match x in (nat_vec n0) return (n0 = S n -> nat) with
-    | nil => fun H : 0 = S n => False_rec _ _
-    | @cons n0 x0 nv1 => fun H : S n0 = S n => x0
+    | vec_nil => fun H : 0 = S n => False_rec _ _
+    | @vec_cons n0 x0 nv1 => fun H : S n0 = S n => x0
     end) eq_refl.
 
 Program Definition tail_vec (n : nat) (x : nat_vec (S n)) : (nat_vec n) :=
   (match x in (nat_vec n0) return (n0 = S n -> nat_vec n) with
-    | nil => fun H : 0 = S n => False_rec _ _ 
-    | @cons n0 x0 nv1 => fun H : S n0 = S n => nv1
+    | vec_nil => fun H : 0 = S n => False_rec _ _ 
+    | @vec_cons n0 x0 nv1 => fun H : S n0 = S n => nv1
     end) eq_refl.
 
 Fixpoint vec_unsafe_ref {n} (v : nat_vec n) (i : nat) : option nat :=
   match v with 
-  | nil => None
-  | cons x v' => match i with 
+  | vec_nil => None
+  | vec_cons x v' => match i with 
                  | 0 => Some x 
                  | S i' => vec_unsafe_ref v' i'
                  end

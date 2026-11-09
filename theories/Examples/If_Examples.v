@@ -7,26 +7,260 @@ From TRresearch.Lemmas Require Import Lemmas Union_Lemmas Predicate_Lemmas.
 From Stdlib Require Import Strings.String.
 #[local] Obligation Tactic := try ((timeout 1 (time really_simple_start)); (timeout 1 (time new_jail))).
 
+Ltac unfold_get_false_prop_hypothesis := 
+  match goal with 
+  | [ H : get_false_prop _ |- _ ] => unfold get_false_prop in H 
+  end.
+
+Ltac not_A_A := 
+  match goal with 
+  | [ H : ?A |- _] => 
+    match goal with 
+    | [ H1 : ~A |- _ ] => destruct H1; auto 
+    end 
+  | [ H : get_true_prop ?A |- _ ] => 
+    match goal with 
+    | [ H1 : get_false_prop ?A |- _ ] => 
+      unfold get_true_prop in H; 
+      unfold get_false_prop in H1; 
+      try not_A_A
+    end
+  | [ H : get_false_prop ?A |- _ ] => 
+    match goal with 
+    | [ H1 : get_true_prop ?A |- _ ] => 
+      unfold get_true_prop in H; 
+      unfold get_false_prop in H1; 
+      try not_A_A
+    end
+  end.
+
+Lemma is_number_false_not_number : 
+  forall {t} (x : {t}),
+  proj1_sig (is_number x) = (Bool false) -> 
+  ~ HasType (proj1_sig x) trnum.
+Proof.
+  intros. intro. 
+  destruct x; destruct x; simpl in H0; try inv_trtype_false_faster.
+  simpl in H. discriminate.
+Qed.
+
+Ltac apply_is_number_false_not_number := 
+  match goal with 
+  | |- ~ HasType (proj1_sig ?x) trnum => 
+    match goal with 
+    | [ H : proj1_sig (is_number x) = (Bool false) |- _ ] => 
+       apply (is_number_false_not_number _ H) 
+    end 
+  end.
+
+Ltac solve_if_TR_hastype := 
+    match goal with 
+    | |- (fun t : TRValues => HasType t _ /\ _ /\ _ ) (proj1_sig (if_TR _ _ _)) => 
+          destruct (if_TR _ _ _)
+    end; simpl;
+    match goal with 
+    | |- HasType ?a ?t /\ ?p /\ ?q => repeat split;
+      match goal with
+      | [ H : HasType a t /\ _ /\ _ |- _ ] => destruct H; auto
+      end
+    end; try (intuition; fail).
+
+Definition get_true_prop_func {T : TRTypes} {P Q A : Prop} (v : A -> { t >> T & P & Q }) : Prop.
+Proof.
+  exact P.
+Defined.
+
+Definition get_false_prop_func {T} {P Q A : Prop} (v : A -> { t >> T & P & Q }) : Prop.
+Proof. 
+  exact Q.
+Defined.
+
+Notation " 'ifTR' < T > A B C " := 
+  (let P   := (get_true_prop A) in
+  (let Q   := (get_false_prop A) in 
+  (let P'  := (get_true_prop_func (fun _ : P => B)) in (* need to do this for the Rocq type checker *)
+  (let Q'  := (get_false_prop_func (fun _ : P => B)) in 
+  (let P'' := (get_true_prop_func (fun _ : Q => C)) in 
+  (let Q'' := (get_false_prop_func (fun _ : Q => C)) in 
+    (@if_TR T 
+          P 
+          (P /\ P')
+          (Q /\ P'')
+          Q 
+          (P /\ Q')
+          (Q /\ Q'') 
+          A (fun _ => B) (fun _ => C)))))))) 
+  (at level 0, T at next level, A at next level, B at next level, C at next level).  
+
+Lemma is_top : 
+  forall {t} (x : {t}),
+  HasType (proj1_sig x) trtop.
+Proof. constructor. Qed.
+
+
+Lemma car_is_number : 
+  forall {A B} (p : {trpair A B}),
+  proj1_sig (is_number (car p)) <> false -> 
+  HasType (proj1_sig p) (trpair trnum B).
+Proof. test_jail.
+  destruct (is_number _) in H.
+  destruct a. destruct x; try inv_trtype_false_faster.
+  destruct b. test_jail. inversion p0.
+  constructor; auto.
+  test_jail. 
+Qed.
+
+
+Lemma car_is_not_number : 
+  forall {A B} (p : {trpair A B}),
+  proj1_sig (is_number (car p)) = false -> 
+  HasType (proj1_sig p) (trpair trnum B) -> 
+  False.
+Proof. test_jail.
+  destruct (is_number _) in H.
+  destruct a. destruct x; try inv_trtype_false_faster.
+  destruct b. test_jail. destruct a. test_jail.
+  inversion H0. intuition.
+Qed.
+
+Lemma car_is_string : 
+  forall {A B} (p : {trpair A B}),
+  proj1_sig (is_string (car p)) <> false -> 
+  HasType (proj1_sig p) (trpair trstr B).
+Proof. test_jail.
+  destruct (is_string _) in H.
+  destruct a. destruct x; try inv_trtype_false_faster.
+  destruct b. test_jail. inversion p0.
+  constructor; auto.
+  test_jail. 
+Qed.
+
+Lemma car_is_not_string : 
+  forall {A B} (p : {trpair A B}),
+  proj1_sig (is_string (car p)) = false -> 
+  HasType (proj1_sig p) (trpair trstr B) -> 
+  False.
+Proof. test_jail.
+  destruct (is_string _) in H.
+  destruct a. destruct x; try inv_trtype_false_faster.
+  destruct b. test_jail. destruct a. test_jail.
+  inversion H0. intuition.
+Qed.
+
+Lemma car_is_bool : 
+  forall {A B} (p : {trpair A B}),
+  proj1_sig (is_bool (car p)) <> false -> 
+  HasType (proj1_sig p) (trpair trbool B).
+Proof. test_jail.
+  destruct (is_bool _) in H.
+  destruct a. destruct x; try inv_trtype_false_faster.
+  destruct b. test_jail. inversion p0.
+  constructor; auto.
+  test_jail. 
+Qed.
+
+Lemma car_is_not_bool : 
+  forall {A B} (p : {trpair A B}),
+  proj1_sig (is_bool (car p)) = false -> 
+  HasType (proj1_sig p) (trpair trbool B) -> 
+  False.
+Proof. test_jail.
+  destruct (is_bool _) in H.
+  destruct a. destruct x; try inv_trtype_false_faster.
+  destruct b. test_jail. destruct a. test_jail.
+  inversion H0. intuition.
+Qed.
+
+Lemma car_cdr_type_pair : 
+  forall {A B C D} (p : {trpair A B}),
+  HasType (proj1_sig (car p)) C -> 
+  HasType (proj1_sig (cdr p)) D -> 
+  HasType (proj1_sig p) (trpair C D).
+Proof. 
+  intros. destructTR p. destruct p; try inv_trtype_false_faster.
+  simpl in H; simpl in H0.
+  constructor; auto.
+Qed.
+
+Ltac apply_car_is_not_number := 
+  match goal with 
+  | [ H : proj1_sig (is_number (car ?p)) = Bool false |- _ ] => 
+    match goal with 
+    | [ H1 : HasType (proj1_sig p) (trpair trnum ?B) |- _ ] => 
+      apply (car_is_not_number p H H1)
+    end 
+  | [ H : proj1_sig (is_bool (car ?p)) = Bool false |- _ ] => 
+    match goal with 
+    | [ H1 : HasType (proj1_sig p) (trpair trbool ?B) |- _ ] => 
+      apply (car_is_not_bool p H H1)
+    end 
+  | [ H : proj1_sig (is_string (car ?p)) = Bool false |- _ ] => 
+    match goal with 
+    | [ H1 : HasType (proj1_sig p) (trpair trstr ?B) |- _ ] => 
+      apply (car_is_not_string p H H1)
+    end 
+  end.
+
+
+  Ltac apply_car_cdr_type_pair := 
+  match goal with 
+  | [ H : HasType (proj1_sig (car ?p)) ?A |- _ ] => 
+    match goal with 
+    | [ H1 : HasType (proj1_sig (cdr p)) ?B |- _ ] => 
+      match goal with 
+      | |- HasType (proj1_sig p) (trpair A B) => 
+        apply (car_cdr_type_pair p H H1)
+      end 
+    end 
+  end.
+
+Program Definition false_val : {>> trbool & False & True}.
+  econstructor. constructor. exact (HtBool false).
+  repeat split. intro. destruct H as [?H ?H]. destruct H0; auto.
+Defined.
+
+Ltac false_prop := 
+  match goal with 
+  | [ H : get_true_prop false_val |- _ ] => 
+    exfalso; auto 
+  end.
+
 (* "HintDb" *)
 Create HintDb TRHints.
     #[local] Hint Unfold is_number : TRHints.
     #[local] Hint Unfold get_true_prop : TRHints.
+    #[local] Hint Unfold get_false_prop : TRHints.
+    #[local] Hint Unfold get_true_prop_func : TRHints.
+    #[local] Hint Unfold get_false_prop_func : TRHints.
     #[local] Hint Immediate is_top : TRHints.
     #[local] Hint Immediate is_top_pair : TRHints.
     #[local] Hint Immediate pair_left : TRHints.
     #[local] Hint Immediate pair_right : TRHints.
     #[local] Hint Immediate is_number_trbool : TRHints.
     #[local] Hint Immediate is_string_trbool : TRHints.
+    #[local] Hint Immediate is_bool_trbool : TRHints.
+    #[local] Hint Immediate car_is_bool : TRHints.
+    #[local] Hint Immediate car_is_number : TRHints.
+    #[local] Hint Immediate car_is_string : TRHints.
     #[local] Hint Extern 1 => prove_if_TR_branches : TRHints.
     #[local] Hint Extern 1 => apply_proj1_sig_is_string_true : TRHints.
     #[local] Hint Extern 1 => apply_proj1_sig_is_string_false : TRHints.
     #[local] Hint Extern 1 => apply_proj1_sig_is_number_true : TRHints.
     #[local] Hint Extern 0 => unfold_get_true_prop_hypothesis : TRHints.
+    #[local] Hint Extern 0 => unfold_get_false_prop_hypothesis : TRHints.
     #[local] Hint Extern 1 => apply_union_not : TRHints.
     #[local] Hint Extern 1 => apply_not_either_union : TRHints.
     #[local] Hint Extern 1 => apply_notTR_is_bool : TRHints.
     #[local] Hint Extern 1 => apply_notTR_bool_true_is_false : TRHints. 
     #[local] Hint Extern 1 => apply_notTR_bool_false_is_true : TRHints.
+    #[local] Hint Extern 1 => not_A_A : TRHints.
+    #[local] Hint Extern 1 => apply_is_number_false_not_number : TRHints.
+    #[local] Hint Extern 0 => solve_if_TR_hastype : TRHints.
+    #[local] Hint Extern 1 => apply_car_is_not_number : TRHints.
+    #[local] Hint Extern 1 => apply_car_cdr_type_pair : TRHints.
+    #[local] Hint Extern 1 => false_prop : TRHints.
+    #[local] Hint Constructors HasType : TRHints.
+
     (* #[local] Hint Extern 1 => solve_if_TR_hastype : TRHints. *)
 Open Scope string_scope.
 
@@ -54,7 +288,7 @@ Eval compute in ex2_test2.
 (********************** EXAMPLE 4 AHHHHHHHHHHHHHHH **********************)
 
 Program Definition ex4 {t : TRTypes} (x : {t}) : {trnum} :=
-  ifTR (orTR_2 (is_number x) (is_string x))
+  ifTR (orTR (is_number x) (is_string x))
        (ex2 x)
        0.
 
@@ -65,28 +299,13 @@ Eval compute in ex4 true.
 (************************************************************************)
 (********************** EXAMPLE 5 AHHHHHHHHHHHHHHH **********************)
 
-#[local] Obligation Tactic := try fail.
+
 
 
 Program Definition ex5 {t r : TRTypes} (x : {t}) (y : {r}) : {trnum} :=
   ifTR (andTR (is_number x) (is_string y))
            (sum x (strlen y))
            0.
-Next Obligation.
-  really_simple_start.
-Defined. Next Obligation. 
-  really_simple_start.
-Defined. Next Obligation.
-  start_jail. repeat split.
-  destruct o. destruct H. auto.
-  exfalso; auto.
-Defined. Next Obligation.
-  start_jail. repeat split.
-  destruct o. destruct H. auto.
-  exfalso; auto.
-Defined. Next Obligation. 
-  really_simple_start.
-Defined.
 
 Eval compute in ex5 5 "hi".
 Eval compute in ex5 5 8.
@@ -98,69 +317,20 @@ Eval compute in ex5 true false.
 
 Program Definition ex7 {t r : TRTypes} (x : {t}) (y : {r}) : {trnum} :=
   (ifTR 
-    (ifTR < second > (is_number x) (is_string y) false)
+    (ifTR < all > (is_number x) (is_string y) false_val)
     (sum x (strlen y))
     0).
-Next Obligation.
-  really_simple_start.
-Defined. Next Obligation. 
-  really_simple_start.
-Defined. Next Obligation.
-  start_jail. repeat split.
-  destruct o. destruct H. auto.
-  exfalso; auto.
-Defined. Next Obligation.
-  start_jail. repeat split.
-  destruct o. destruct H. auto.
-  exfalso; auto.
-Defined. Next Obligation. 
-  really_simple_start.
-Defined.
 
 Eval compute in ex7 6 "hello".
 
 (************************************************************************)
 (********************** EXAMPLE 8 AHHHHHHHHHHHHHHH **********************)
 
+
+
 Program Definition orTest {A : TRTypes} (x : {A}) : 
     {>> trbool & ((HasType x trnum) \/ (HasType x trstr))} :=
     orTR (is_number x) (is_string x).
-Next Obligation. 
-  really_simple_start.
-  unfold get_true_prop in y. destruct x. destruct x; simpl in y; try inv_trtype_false_faster.
-  simpl in H0. discriminate.
-Defined. Next Obligation.
-  intros. simpl. repeat split.
-  - apply is_string_trbool.
-  - intro. subst P. destruct H. unfold get_true_prop in H0. 
-    destruct n; auto.
-  - destruct H. subst P'. destruct x; destruct x; simpl in H0; try (destruct H0; auto; fail).
-    unfold get_true_prop; constructor.
-  - intro. subst P. unfold_get_true_prop_hypothesis. destruct n; auto.
-  - intro. subst P'. destruct H. unfold_get_true_prop_hypothesis.
-    destruct x; destruct x; simpl in H0; try inv_trtype_false_faster.
-    simpl in H1. discriminate.
-Defined. Next Obligation.
-  intros. simpl. repeat split.
-  - destruct (if_TR _ _ _). destruct a; auto.
-  - intro. destruct H. destruct (if_TR _ _ _) in H0. destruct a; destruct x0; try inv_trtype_false_faster.
-    destruct b; destruct a.
-    + simpl in H0. assert (J : HasType (Bool true) trbool /\ (Bool true) <> (Bool false)) by (split; auto).
-      specialize (o J). subst P; subst P'.
-      destruct o. left; auto. destruct H1; right; auto.
-    + simpl in H0; destruct H0; auto.
-  - intro. intro. destruct H. destruct (if_TR _ _ _) in H1.
-    destruct a; destruct x0; try inv_trtype_false_faster.
-    destruct b.
-    + inversion H1.
-    + destruct a. assert (J : HasType (Bool false) trbool /\ (Bool false) = (Bool false)) by (split; auto).
-      specialize (o0 J) as K. destruct K. auto. destruct H2. subst P; subst P'.
-      destruct H0. destruct H2; auto. destruct H3; auto.
-Defined.
-
-
-  
-      
 
 
 Program Definition ex8 {t : TRTypes} (x : {t}) :=
@@ -168,12 +338,6 @@ Program Definition ex8 {t : TRTypes} (x : {t}) :=
 
 Program Definition ex8_test {t : TRTypes} (x : {t}) : {trnum} :=
   (ifTR (ex8 x) (ex2 x) 0).
-Next Obligation.
-  simpl. intros; repeat split. destruct o.
-  apply HtUnion_R. auto. apply HtUnion_L; auto.
-Defined. Next Obligation.
-  intros. repeat split. destruct (if_TR _ _ _). destruct a; auto.
-Defined.
 
 Eval compute in ex8 6.
 Eval compute in ex8_test 6.
@@ -188,7 +352,7 @@ Eval compute in ex8_test true.
 Program Definition ex9 {t : TRTypes} (x : {t}) : {trnum} :=
   (ifTR 
     (let p := (is_number x) in 
-      (ifTR < third > p p (is_string x)))
+      (ifTR < all > p p (is_string x)))
     (ex2 x) 
     0).
 
@@ -233,6 +397,7 @@ Program Definition ex12_string {A B : TRTypes} (p : {trpair A B}) :
   {t >> trbool & (HasType p (trpair trstr B))} :=
   (is_string (car p)).
 
+
 Program Definition ex12_boolean {A B : TRTypes} (p : {trpair A B}) : 
   {t >> trbool & (HasType p (trpair trbool B))} :=
   (is_bool (car p)).
@@ -240,9 +405,25 @@ Program Definition ex12_boolean {A B : TRTypes} (p : {trpair A B}) :
 (************************************************************************)
 (********************** MORE EXAMPLES AHHHHHHHHHHH **********************)
 
+#[local] Obligation Tactic := try fail.
+
 Program Definition if_more_ex1 {t r : TRTypes} (x : {t}) (y : {r}) 
-         : {t >> trbool & ((HasType x trnum) /\ (HasType y trstr) \/ (HasType x trstr))} :=
+         : {t >> trbool & (((HasType x trnum) /\ (HasType y trstr)) \/ (HasType x trstr))} :=
   (ifTR < all > (is_number x) (is_string y) (is_string x)).
+Next Obligation.
+  really_simple_start.
+Defined. Next Obligation.
+  really_simple_start.
+Defined. Next Obligation. (* here *)
+  intros. solve_if_TR_hastype. intuition.
+  subst P; subst Q; subst Q''; subst Q'.
+  unfold_get_true_prop_hypothesis; unfold_get_false_prop_hypothesis.
+
+  destruct x. destruct x; simpl in H2; simpl in H1; try inv_trtype_false_faster.
+
+Defined.
+    
+#[local] Obligation Tactic := try ((timeout 1 (time really_simple_start)); (timeout 1 (time new_jail))).
 
 Program Definition more_ex2 {t r : TRTypes} (x : {t}) (y : {r}) : {trnum} :=
   (ifTR (if_more_ex1 x y) 
@@ -252,7 +433,9 @@ Program Definition more_ex2 {t r : TRTypes} (x : {t}) (y : {r}) : {trnum} :=
 Program Definition more_ex3 {t r : TRTypes} (x : {t}) (y : {r}) : {trnum} :=
   (ifTR (if_more_ex1 x y) 
     (ifTR (is_string x) (strlen x) (sum x (strlen y)))
-    (ifTR (is_number x) (add1 x) 54)). 
+    (ifTR (is_number x) (add1 x) 54)).
+
+
 
 (************************************************************************)
 (********************** EXAMPLES NOT AHHHHHHHHHHHHHHH *******************)
@@ -288,8 +471,9 @@ Program Definition car_add {t r : TRTypes} (p : {(trpair t r)}) : {trnum} :=
 Eval compute in (car_add ("hi", 9)).
 Eval compute in (car_add (18, 4)).
 
+
 Program Definition pos_success {t : TRTypes} (x : {t}) : {trtop} :=
-  (ifTR (is_string x) (strlen x) x).
+  ifTR < trtop > (is_string x) (strlen x) x.
 
 Eval compute in (pos_success "potatoes").
 Eval compute in (pos_success 8).
@@ -302,12 +486,15 @@ Program Definition neg_success (x : {U trstr trnum}) : {trnum} :=
 Program Definition neg_succ_test1 := (neg_success <["hi"]>).
 Program Definition neg_succ_test2 := (neg_success <[7]>).
 
-Eval compute in neg_succ_test1.
 Eval compute in neg_succ_test2.
+Eval compute in neg_succ_test1.
+
+    
 
 Program Definition is_strnum {t : TRTypes} (x : {t}) : 
      {t >> trbool & ((HasType x trstr) \/ (HasType x trnum))} :=
   (orTR (is_string x) (is_number x)).
+
 
 Program Definition f (x : {U trstr trnum}) : {trnum} :=
   ifTR (is_number x) (add1 x) (strlen x).
@@ -325,10 +512,23 @@ Eval compute in g2_test1.
 Eval compute in g2_test2.
 Eval compute in g2_test3.
 
+#[local] Obligation Tactic := try fail.
+
 Program Definition h (x : {U trstr (U trnum trbool)}) : {trnum} :=
   ifTR (andTR (notTR (is_bool x)) (notTR (is_number x)))
        (strlen x)
        0.
+Next Obligation.
+  really_simple_start. test_jail. (* here *)
+Defined. Next Obligation.
+  really_simple_start.
+Defined. Next Obligation.
+  really_simple_start.
+Defined. Next Obligation.
+  really_simple_start.
+Defined.
+
+#[local] Obligation Tactic := try ((timeout 1 (time really_simple_start)); (timeout 1 (time new_jail))).
 
 Program Definition h_test1 := h <["potatoes"]>.
 Program Definition h_test2 := h <[5]>.
@@ -338,9 +538,7 @@ Eval compute in h_test1.
 Eval compute in h_test2.
 Eval compute in h_test3.
 
-(* i am a bit confused as to why adding this hint before the previous
-  example causes the tactics to run extremely slow, so I'm putting this
-  here instead *)
+
 Hint Extern 1 => one_of_union_type : TRHints.
 
 Program Definition f2 (x : {U trstr (U trnum trbool)}) : {trnum} :=

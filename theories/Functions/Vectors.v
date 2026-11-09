@@ -28,8 +28,11 @@ Program Definition append_tr {n m} (x : { (trvec n) }) (y : { (trvec m) }) : { (
   | _r1, _r2 => False_rec _ _
   end.
 
-Eval compute in append_tr (cons 4 (cons 5 nil)) (cons 9 nil).
-Eval compute in append_tr (cons 4 (cons 5 nil)) (append_vec (cons 9 nil) (cons 8 (cons 3 nil))).
+Eval compute in append_tr (vec_cons 4 (vec_cons 5 vec_nil)) 
+                          (vec_cons 9 vec_nil).
+Eval compute in append_tr (vec_cons 4 (vec_cons 5 vec_nil)) 
+                          (append_vec (vec_cons 9 vec_nil) 
+                                      (vec_cons 8 (vec_cons 3 vec_nil))).
 
 
 Program Definition head_tr {n} (x : { (trvec (S n)) }) : { trnum } :=
@@ -38,7 +41,7 @@ Program Definition head_tr {n} (x : { (trvec (S n)) }) : { trnum } :=
   | _r => False_rec _ _
   end.
 
-Eval compute in (head_tr (cons 5 (cons 9 nil))).
+Eval compute in (head_tr (vec_cons 5 (vec_cons 9 vec_nil))).
 
 Program Definition tail_tr {n} (x : {(trvec (S n))}) : {(trvec n)} :=
   match x with 
@@ -46,12 +49,12 @@ Program Definition tail_tr {n} (x : {(trvec (S n))}) : {(trvec n)} :=
   | _r => False_rec _ _
   end.
 
-Eval compute in tail_tr (cons 9 (cons 5 (cons 4 nil))).
+Eval compute in tail_tr (vec_cons 9 (vec_cons 5 (vec_cons 4 vec_nil))).
 
 Program Definition tr_length {n} (x : { (trvec n) }) : { trnum } := 
   n.
 
-Eval compute in tr_length (cons 1 (cons 5 nil)).
+Eval compute in tr_length (vec_cons 1 (vec_cons 5 vec_nil)).
 
 Program Definition vec_setTR {n} 
   (x : {(trvec n)}) 

@@ -16,5 +16,6 @@ Ltac apply_union_not :=
   | [ x : {trunion ?A ?B} |- _ ] => 
     match goal with 
     | |- HasType (proj1_sig x) A => eapply union_not_right; eauto with TRHints
+    | |- HasType (proj1_sig x) B => eapply union_not_left; eauto with TRHints
     end 
   end.

@@ -219,7 +219,12 @@ Ltac specialize_booleans :=
   end.
 
 Ltac really_simple_start := 
-  try intros; simpl;
+  try intros; 
+  match goal with 
+  | |- (fun t : TRValues => HasType t _ /\ _ /\ _ ) (proj1_sig (_ _ _ _)) => (* really scuffed lol *)
+    try auto with TRHints 
+  | _ => simpl 
+  end;
   repeat subst_definition';
   repeat rewrite_jail';
   conclusion_jail;

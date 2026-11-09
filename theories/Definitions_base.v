@@ -12,13 +12,13 @@ Inductive nat_vec : nat -> Type :=
   | vec_nil : nat_vec O
   | vec_cons : forall {n : nat} , nat -> (nat_vec n) -> nat_vec (S n).
 
-  Inductive TRValues : Type := 
-  | Num (n : nat)
-  | Bool (b : bool)
-  | Str (s : string)
-  | Pair  (a : TRValues) (b : TRValues)
-  | List (l : list TRValues)
-  | Vec : forall (n : nat),  (nat_vec n) -> TRValues
+Inductive TRValues : Type := 
+| Num (n : nat)
+| Bool (b : bool)
+| Str (s : string)
+| Pair  (a : TRValues) (b : TRValues)
+| List (l : list TRValues)
+| Vec : forall (n : nat),  (nat_vec n) -> TRValues
   | Void (v : Void_).
 
 Check List (Num 5 :: Str "hi" :: nil).
