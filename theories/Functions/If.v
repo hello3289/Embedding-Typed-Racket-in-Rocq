@@ -226,6 +226,24 @@ Notation " 'ifTR' < 'all' > A B C " :=
           A (fun _ => B) (fun _ => (giveType C))))))))) 
   (at level 0, A at next level, B at next level, C at next level).  
 
+Notation " 'ifTR' < T > A B C " := 
+  (let P   := (get_true_prop A) in
+  (let Q   := (get_false_prop A) in 
+  (let P'  := (get_true_prop_func (fun _ : P => B)) in (* need to do this for the Rocq type checker *)
+  (let Q'  := (get_false_prop_func (fun _ : P => B)) in 
+  (let P'' := (get_true_prop_func (fun _ : Q => C)) in 
+  (let Q'' := (get_false_prop_func (fun _ : Q => C)) in 
+    (@if_TR T 
+          P 
+          (P /\ P')
+          (Q /\ P'')
+          Q 
+          (P /\ Q')
+          (Q /\ Q'') 
+          A (fun _ => B) (fun _ => C)))))))) 
+  (at level 0, T at next level, A at next level, B at next level, C at next level).  
+
+
 Notation " 'ifTR' A B C " := 
   (if_TR A (fun _ => B) (fun _ => C))
   (at level 0, A at next level, B at next level, C at next level). 

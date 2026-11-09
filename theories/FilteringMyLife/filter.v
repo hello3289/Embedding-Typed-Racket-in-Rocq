@@ -1,5 +1,5 @@
 Set Warnings "-ambiguous-paths".
-From TRresearch Require Import Definitions_new.
+From TRresearch Require Import Definitions_base Predicates.
 From TRresearch Require Import Basic_stuff.
 From TRresearch Require Import filter_tactics.
 Require Import Program.Tactics.

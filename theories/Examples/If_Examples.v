@@ -65,32 +65,6 @@ Ltac solve_if_TR_hastype :=
       end
     end; try (intuition; fail).
 
-Definition get_true_prop_func {T : TRTypes} {P Q A : Prop} (v : A -> { t >> T & P & Q }) : Prop.
-Proof.
-  exact P.
-Defined.
-
-Definition get_false_prop_func {T} {P Q A : Prop} (v : A -> { t >> T & P & Q }) : Prop.
-Proof. 
-  exact Q.
-Defined.
-
-Notation " 'ifTR' < T > A B C " := 
-  (let P   := (get_true_prop A) in
-  (let Q   := (get_false_prop A) in 
-  (let P'  := (get_true_prop_func (fun _ : P => B)) in (* need to do this for the Rocq type checker *)
-  (let Q'  := (get_false_prop_func (fun _ : P => B)) in 
-  (let P'' := (get_true_prop_func (fun _ : Q => C)) in 
-  (let Q'' := (get_false_prop_func (fun _ : Q => C)) in 
-    (@if_TR T 
-          P 
-          (P /\ P')
-          (Q /\ P'')
-          Q 
-          (P /\ Q')
-          (Q /\ Q'') 
-          A (fun _ => B) (fun _ => C)))))))) 
-  (at level 0, T at next level, A at next level, B at next level, C at next level).  
 
 Lemma is_top : 
   forall {t} (x : {t}),

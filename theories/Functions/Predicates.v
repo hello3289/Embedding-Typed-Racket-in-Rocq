@@ -8,12 +8,30 @@ From TRresearch.Lemmas Require Import Lemmas.
 (* if writing other predicates causes issues, change this to "try fail" 
   and use "Solve All Obligations with test_jail" instead *)
 
+Ltac exists_hypothesis := 
+  match goal with 
+  | [ H : exists _, _ |- _ ] => destruct H; exists_hypothesis
+  | _ => idtac 
+  end.
+
+Ltac give_exists := 
+    match goal with 
+    | [ x : ?A |- _ ] => 
+      match goal with 
+      | |- exists (j : A), _ => 
+        match goal with 
+        | |- context[ x ] => exists x 
+        end
+      end 
+    end.
 
 (* "Create Hint Database and put in the 0 tactics (annoying that you 
    have to do this every time but oh well)"*)
 Create HintDb TRHints.
 #[local] Hint Immediate is_top : TRHints.
 #[local] Hint Immediate is_top_pair : TRHints.
+#[local] Hint Extern 1 => exists_hypothesis : TRHints. 
+#[local] Hint Extern 1 => give_exists : TRHints.
 
 
 Print HintDb TRHints.
@@ -47,3 +65,20 @@ Program Definition is_pair {t : TRTypes} (x : {t}) :
   | _r => Bool false
   end.
 
+Program Definition is_empty {t : TRTypes} (x : {t}) :=
+  match x as v return
+  {>> trbool & (v = List nil /\ HasType v (trlist trtop))} (* can make this (forall a : TRTypes, HasType v (trlist a))?*)
+  with
+  | List nil => Bool true 
+  | _r => Bool false 
+  end.
+
+
+Program Definition is_cons {t : TRTypes} (x : {t}) :=
+  match x as v return
+  {>> trbool & (exists (head : TRValues) (tail : list TRValues),
+                   (v = List (head :: tail)))}
+  with
+  | List (x :: l) => Bool true 
+  | _r => Bool false 
+  end.

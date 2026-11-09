@@ -256,6 +256,16 @@ Proof.
     exact T.
 Defined.
 
+Definition get_true_prop_func {T : TRTypes} {P Q A : Prop} (v : A -> { t >> T & P & Q }) : Prop.
+Proof.
+  exact P.
+Defined.
+
+Definition get_false_prop_func {T} {P Q A : Prop} (v : A -> { t >> T & P & Q }) : Prop.
+Proof. 
+  exact Q.
+Defined.
+
 (************************************************************************)
 (*********************** TWO MORE NOTATIONS AHHH ************************)
 
