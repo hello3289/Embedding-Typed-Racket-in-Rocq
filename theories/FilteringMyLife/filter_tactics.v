@@ -121,18 +121,18 @@ Ltac destruct_specific :=
     end.
 
 
-      Ltac falsities := 
-        match goal with 
-        | [ H : _ = Bool false |- False ] => try inversion H 
-        end.
-      Ltac simpl_goals := 
-        match goal with 
-        | [ H : _ /\ _ |- _ ] => destruct H 
-        end.
-      Ltac negation_intro := 
-        match goal with 
-        | |- ~ ?n => intro 
-        end.
+Ltac falsities := 
+match goal with 
+| [ H : _ = Bool false |- False ] => try inversion H 
+end.
+Ltac simpl_goals := 
+match goal with 
+| [ H : _ /\ _ |- _ ] => destruct H 
+end.
+Ltac negation_intro := 
+match goal with 
+| |- ~ ?n => intro 
+end.
 
 Ltac trtop_all := 
         match goal with 

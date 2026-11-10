@@ -1,16 +1,20 @@
 Set Warnings "-ambiguous-paths".
-From TRresearch Require Import Definitions_base.
-From TRresearch Require Import Lemmas_new.
-From TRresearch Require Import If Predicates.
+From TRresearch Require Import Definitions.
+From TRresearch Require Import If Predicates tactics_all Basic_stuff_tactics.
 From Corelib Require Import Lists.ListDef.
 Require Import Program.Tactics.
+#[local] Obligation Tactic := try really_simple_start; try new_jail; try auto with TRHints.
+Set Warnings "-meta-collision".
+
+(******** "Hint Database" ********)
+Create HintDb TRHints.
+    #[local] Hint Extern 1 => list_false : TRHints. 
+    #[local] Hint Extern 1 => first_type : TRHints.
+    #[local] Hint Extern 1 => rest_type : TRHints.
+    #[local] Hint Extern 1 => first_rest_type : TRHints.
 
 
-Notation " 'ifTR_what' t1 A B C " := 
-  (@if_TR t1 _ _ _ _ _ _ A (fun _ => B) (fun _ => C))
-  (at level 0, t1 at next level, A at next level, B at next level, C at next level).
-
-
+(******** "Basic Functions for Lists " ********)
 
 Program Definition TRcar {t : TRTypes} 
   (x : {v >> (trlist t) & 
@@ -20,22 +24,6 @@ Program Definition TRcar {t : TRTypes}
   | List (h :: t) => h 
   | _r => False_rec _ _ 
   end.
-Next Obligation.
-  repeat split. inversion h0. inversion H1. auto.
-Defined. Next Obligation. 
-  destruct x; try inv_trtype_false_faster_2.
-  destruct l.
-  - assert (H : HasType (List nil) (trlist t) /\ List nil <> false). split; try constructor.
-    constructor. intro. inversion H.
-    specialize (e H). destruct e. destruct H0. inversion H0.
-  - specialize (n t0 l). destruct n; auto.
-Defined. 
-
-Program Definition getListType {t : TRTypes} (x : {trlist t}) : TRTypes := 
-  t.
-
-Notation " 'car' L" := (@TRcar (getListType L) L) (at level 0, L at next level).
-
 
 Program Definition TRcdr {t : TRTypes} 
   (x : {v >> (trlist t) & 
@@ -45,31 +33,6 @@ Program Definition TRcdr {t : TRTypes}
   | List (h :: t) => List t
   | _r => False_rec _ _ 
   end.
-Next Obligation.
-  repeat split. inversion h0. inversion H1. auto. 
-  constructor. auto.
-Defined. Next Obligation.
-  destruct x; try inv_trtype_false_faster_2.
-  destruct l.
-  - assert (H : HasType (List nil) (trlist t) /\ List nil <> false). split; try constructor.
-    constructor. intro. inversion H.
-    specialize (e H). destruct e. destruct H0. inversion H0.
-  - specialize (n t0 l). destruct n; auto.
-Defined.
-
-Notation " 'cdr' L" := (@TRcdr (getListType L) L) (at level 0, L at next level).
-
-
-Program Definition TRlength {t : TRTypes}
-  (x : {trlist t}) : {trnum} :=
-  match x with 
-  | List l => length l 
-  | _r => False_rec _ _ 
-  end.
-Next Obligation.
-  destruct x; try inv_trtype_false_faster_2.
-  specialize (n l); destruct n. auto.
-Defined.
 
 Program Definition TRcons {t : TRTypes}
   (head : {t})
@@ -80,21 +43,41 @@ Program Definition TRcons {t : TRTypes}
          | _r => False_rec _ _ 
          end 
   end.
-Next Obligation.
-  repeat split.
-  constructor. constructor. auto. inversion h. auto.
-Defined. Next Obligation.
-  destruct tail; try inv_trtype_false_faster_2.
-  specialize (n l); destruct n. auto.
-Defined.
 
-Program Definition lengthTR {t : TRTypes} (x : {trlist t}) : nat := 
-    match (TRlength x) with 
-    | Num n => n 
-    | _r => False_rec _ _
+Program Definition TRlength {t : TRTypes}
+  (x : {trlist t}) : {trnum} :=
+  match x with 
+  | List l => length l 
+  | _r => False_rec _ _ 
+  end.
+
+(******** "length of TRList to Rocq nat" ********)
+
+Ltac destruct_trlength := 
+    match goal with 
+    | [ H : context[ TRlength _ ] |- _ ] => 
+        let a1 := fresh "a" in 
+        let a2 := fresh "a" in 
+        let a3 := fresh "a" in 
+        destruct (TRlength _) as [a1 [a2 a3]]
     end.
-Next Obligation.
-    destruct (TRlength [x]).
-    destruct a. destruct x0; try inv_trtype_false_faster_2.
-    specialize (n n0). destruct n. auto.
-Defined.
+
+(* a bit annoying to use a different tactic here but eh *)
+#[local] Obligation Tactic := try really_simple_start; try destruct_trlength; try new_jail.
+Program Definition lengthTR {t : TRTypes} (x : {trlist t}) : nat := 
+  match (TRlength x) with 
+  | Num n => n 
+  | _r => False_rec _ _
+  end.
+
+(******** "Notations" ********)
+
+Program Definition getListType {t : TRTypes} (x : {trlist t}) : TRTypes :=  t.
+
+Notation " 'ifTR' t1 A B C " := 
+  (@if_TR t1 _ _ _ _ _ _ A (fun _ => B) (fun _ => C))
+  (at level 0, t1 at next level, A at next level, B at next level, C at next level).
+
+Notation " 'car' L" := (@TRcar (getListType L) L) (at level 0, L at next level).
+
+Notation " 'cdr' L" := (@TRcdr (getListType L) L) (at level 0, L at next level).

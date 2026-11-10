@@ -75,13 +75,6 @@ Proof.
 Defined.
 
 
-Ltac idk_man := 
-  match goal with 
-  | [ b : bool |- _ ] => destruct b; (apply unionL; idk_man_part2 false; fail) + (apply unionR; idk_man_part2 true)
-  | [ n : ?type |- _ ] =>  
-      apply unionL; idk_man_part2 false
-  end.
-
 Fixpoint eqb (a b : TRTypes) : bool := 
   match a , b with 
   | trnum , trnum => true 
@@ -137,69 +130,6 @@ Qed.
 
 Eval compute in tr_union trnum trnum.
 Eval compute in tr_union trnum trstr.
-
-(* Definition if_TR_union {A B : TRTypes} {P P' P'' Q Q' Q'' : Prop} 
-                          (x : {>> trbool & P & Q})                        
-                          (y : P -> {>> A & P' & Q'})
-                          (z : Q -> {>> B & P'' & Q''}) : 
-                          {>> (tr_union A B) & (P' \/ P'') & (Q' \/ Q'')}.
-Proof.
-  destructTR x.
-  destruct x; try inv_trtype_false_faster.
-  destruct b.
-  - assert (J : (Bool true) <> (Bool false)) by (intro H; inversion H).
-    assert (J1 : HasType true trbool /\ Bool true <> Bool false) by (split; auto).
-    specialize (x1 J1).
-    specialize (y x1).
-    destructTR y.
-    eassert (J2 : 
-      ((HasType y (tr_union A B)) /\ 
-       (HasType y (tr_union A B) /\ y <> Bool false -> P' \/ P'') /\ 
-       (HasType y (tr_union A B) /\ y = Bool false -> Q' \/ Q''))).
-      + repeat split.
-        unfold tr_union. destruct (eqb A B); try apply HtUnion_L; auto.
-        all : (intro; left; apply y1 + apply y2; split; destruct H; auto).
-      + exact 
-        (exist (fun t => 
-                HasType t (tr_union A B) /\
-                (HasType t (tr_union A B) /\ t <> false -> P' \/ P'') /\
-                (HasType t (tr_union A B) /\ t = false -> Q' \/ Q''))
-              y
-              J2).
-  - assert (J : (Bool false) = (Bool false)) by autoTR.
-    assert (J1 : HasType false trbool /\ Bool false = Bool false) by (split; auto).
-    specialize (x2 J1).
-    specialize (z x2).
-    destructTR z.
-    eassert (J2 : 
-      ((HasType z (tr_union A B)) /\ 
-       (HasType z (tr_union A B) /\ z <> Bool false -> P' \/ P'') /\ 
-       (HasType z (tr_union A B) /\ z = Bool false -> Q' \/ Q''))).
-      + repeat split.
-        unfold tr_union. remember (eqb A B). 
-        destruct b. apply eqb_true in Heqb. rewrite Heqb.
-        auto.
-        try apply HtUnion_R; auto.
-        all : (intro; right; apply z1 + apply z2; split; destruct H; auto).
-      + exact 
-        (exist (fun t => 
-                HasType t (tr_union A B) /\
-                (HasType t (tr_union A B) /\ t <> false -> P' \/ P'') /\
-                (HasType t (tr_union A B) /\ t = false -> Q' \/ Q''))
-              z
-              J2).
-Defined.
-
-Lemma tr_union_subsume: forall {a A B}, HasType a (tr_union A B) -> HasType a (trunion A B).
-Proof.
-  intros.
-  unfold tr_union in H.
-  remember (eqb A B).
-  destruct b.
-  - apply HtUnion_L; auto.
-  - auto.
-Qed. *)
-
 
 Program Definition notTR {P Q : Prop} (x : {>> trbool & P & Q}) : {>> trbool & Q & P} :=
   match x with

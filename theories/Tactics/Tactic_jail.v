@@ -57,12 +57,12 @@ Ltac inv_trpair_fast :=
 Ltac inv_trlist_fast :=
   exfalso;
   match goal with
-  | H : HasType (Bool ?b) trlist |- _ => apply (bool_not_trlist b H)
-  | H : HasType (Str ?b) trlist |- _ => apply (str_not_trlist b H)
-  | H : HasType (Pair ?b ?p) trlist |- _ => apply (pair_not_trlist b p H)
-  | H : HasType (Vec _ ?b) trlist |- _ => apply (vec_not_trlist b H)
-  | H : HasType (Num ?l) trlist |- _ => apply (num_not_trlist l H)
-  | H : HasType (Void ?v) trlist |- _ => apply (void_not_trlist v H)
+  | H : HasType (Bool ?b) (trlist ?A) |- _ => apply (bool_not_trlist b A H)
+  | H : HasType (Str ?b) (trlist ?A) |- _ => apply (str_not_trlist b A H)
+  | H : HasType (Pair ?b ?p) (trlist ?A) |- _ => apply (pair_not_trlist b p A H)
+  | H : HasType (Vec _ ?b) (trlist ?A) |- _ => apply (vec_not_trlist b A H)
+  | H : HasType (Num ?l) (trlist ?A) |- _ => apply (num_not_trlist l A H)
+  | H : HasType (Void ?v) (trlist ?A) |- _ => apply (void_not_trlist v A H)
   end.
 
 Ltac inv_trvec_fast :=
@@ -106,8 +106,8 @@ Ltac inv_trtype_false_faster_2  :=
    repeat 
    (match goal with
    | [ H : { ?t } |- _ ] => destruct H as [H [?H [?H ?H]]]
-   | [ H : { t >> ?t & ?P } |- _ ] => destruct H as [H [?H [?H ?H]]]
-   | [ H : { t >> ?t & ?P & ?Q} |- _ ] => destruct H as [H [?H [?H ?H]]]
+   | [ H : { super_large_french_fries >> ?t & ?P } |- _ ] => destruct H as [H [?H [?H ?H]]]
+   | [ H : { super_large_french_fries >> ?t & ?P & ?Q} |- _ ] => destruct H as [H [?H [?H ?H]]]
    end); subst.
 
 (* i don't know why i can't do subst *? *)

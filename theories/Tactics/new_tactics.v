@@ -221,7 +221,7 @@ Ltac specialize_booleans :=
 Ltac really_simple_start := 
   try intros; 
   match goal with 
-  | |- (fun t : TRValues => HasType t _ /\ _ /\ _ ) (proj1_sig (_ _ _ _)) => (* really scuffed lol *)
+  | |- (fun super_large_french_fries : TRValues => HasType super_large_french_fries _ /\ _ /\ _ ) (proj1_sig (_ _ _ _)) => (* really scuffed lol *)
     try auto with TRHints 
   | _ => simpl 
   end;
@@ -385,3 +385,20 @@ Ltac destructB :=
   match goal with 
   | |- context[ Nat.eqb ?n1 ?n2 ] => destruct (Nat.eqb n1 n2)
   end.
+
+Ltac exists_hypothesis := 
+  match goal with 
+  | [ H : exists _, _ |- _ ] => destruct H; exists_hypothesis
+  | _ => idtac 
+  end.
+
+Ltac give_exists := 
+    match goal with 
+    | [ x : ?A |- _ ] => 
+      match goal with 
+      | |- exists (j : A), _ => 
+        match goal with 
+        | |- context[ x ] => exists x 
+        end
+      end 
+    end.

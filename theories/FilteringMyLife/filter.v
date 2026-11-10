@@ -24,6 +24,7 @@ Create HintDb TRHints.
     #[local] Hint Extern 1 => destruct_inside_hastype : TRHints.
     #[local] Hint Extern 1 => tr_union_union : TRHints.
 
+
 Program Definition TRcons_new {t1 t2 : TRTypes}
   (head : TRValues)
   (H : (HasType head t1))
@@ -44,7 +45,6 @@ Defined.
 Notation " 'cons' A B " := (@TRcons_new _ _ A _ B) (at level 0, A at next level, B at next level).
 
 
-
 #[local] Obligation Tactic := try (trtactic; fail); 
                               try (program_simpl; fail);
                               try fail.
@@ -52,9 +52,9 @@ Program Fixpoint filterTR {A B : TRTypes}
     (pred : forall (x : {trtop}), {>> trbool & (HasType x B)}) (* A instead of trtop? *)
     (l : {trlist A})
     {measure (lengthTR l)} : {trlist B} := 
-ifTR_what (trlist B) (is_empty l)
+ifTR (trlist B) (is_empty l)
     (List nil) 
-    (ifTR_what (trlist B) 
+    (ifTR (trlist B) 
             (pred (car l)) 
             (cons (car l) (filterTR pred (cdr l)))
             (filterTR pred (cdr l))).
